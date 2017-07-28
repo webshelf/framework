@@ -62,18 +62,6 @@ class PluginManager
     }
 
     /**
-     * The array to be stored in the plugin manager.
-     *
-     * @param $plugin Plugin
-     * @return array
-     * @internal param array $array
-     */
-    public function pluginArray($plugin)
-    {
-        return ['name'=>$plugin->name(), 'version'=>$plugin->version(), 'icon'=>$plugin->icon(), 'status'=>$plugin->isEnabled(), 'url' => url('/admin/'.$plugin->name())];
-    }
-
-    /**
      * Return all the application loaded plugins.
      *
      * @return array
@@ -97,22 +85,6 @@ class PluginManager
         }
 
         return $this->enabled;
-    }
-
-    /**
-     * Check if plugin is viewable (booleans)
-     * or return all viewable plugins by default.
-     *
-     * @param null $plugin
-     * @return array|bool
-     */
-    public function viewable($plugin = null)
-    {
-        if ($plugin != null) {
-            return $this->checkViewable($this->getPlugin($plugin), true);
-        }
-
-        return $this->viewable;
     }
 
     /**
@@ -142,11 +114,6 @@ class PluginManager
         return array_key_exists($plugin_name, $this->enabled);
     }
 
-    public function hasLoaded()
-    {
-        return count($this->all()) ? true : false;
-    }
-
     /**
      * Get the loaded plugin from the array.
      *
@@ -160,7 +127,7 @@ class PluginManager
             return $this->all()[$plugin_name];
         }
 
-        throw new \Exception('Cannot get plugin that does not exist.');
+        throw new \Exception(sprintf('Cannot load the plugin (%s) as it does not exist.', $plugin_name));
     }
 
     /**
@@ -173,11 +140,6 @@ class PluginManager
     private function checkStatus($plugin, $status)
     {
         return $plugin['enabled'] === $status;
-    }
-
-    private function checkViewable($plugin, $status)
-    {
-        return $plugin['viewable'] === $status;
     }
 
     /**
