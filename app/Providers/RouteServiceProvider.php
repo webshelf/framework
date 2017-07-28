@@ -51,9 +51,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
+        // these are hardcoded created.
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+
+        // these are dynamically created.
+        // the namespace is handled by the plugin helper.
+        Route::middleware('web')
+            ->group(base_path('routes/plugin.php'));
     }
 
     /**

@@ -1,0 +1,1 @@
+<a class="{{ $menu['active'] }}" href="{{ url($menu['link']) }}">{{ $menu['title'] }}</a>

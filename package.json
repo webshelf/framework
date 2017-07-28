@@ -17,5 +17,11 @@
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
     "vue": "^2.1.10"
+  },
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "pace": "0.0.4",
+    "summernote": "^0.8.2",
+    "wowjs": "^1.1.3"
   }
 }

@@ -6,8 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "laravel/tinker": "~1.0",
+        "league/glide": "^1.2",
+        "facebook/graph-sdk": "^5.2",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "spatie/laravel-analytics": "^2.4",
+        "barryvdh/laravel-elfinder": "^0.3.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -15,6 +19,10 @@
         "phpunit/phpunit": "~5.7"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/Global.php",
+            "app/Helpers/Plugins.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"
@@ -37,10 +45,12 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan elfinder:publish",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan elfinder:publish",
             "php artisan optimize"
         ]
     },

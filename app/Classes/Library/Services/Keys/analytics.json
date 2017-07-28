@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "stellar-code-144022",
+  "private_key_id": "16e29b1187c701267d3e569d0e36ca42fe910ee7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcNVXgVE8+CVx7\n9iW7oI+ilZFgkYoR+NnHUfUlqWA4qSL1YvIQOu6uxbuTsnShb2BxBLlX2/A+4P0j\n2oVr0tE07WKqkCQkooWslPYtL3qOM31H/cjgTBehVCMDx9ZgTEL9l+LBM2Wf+XAk\neogUjTiWA6OJdsVkpW2S0LIb0lDV87/jlKpHqMjq13yKmxV3sBIHGpHv0rYaxIm5\nJRFcAdq4B8j70705ttersP6XG7M8E/Nt4/q91NvdvjG4u8DnaqZjR77YSrQvJAyX\nmSEMcvyWPb9MB99C8gvJ7YFpstqIsvBdkuBuXirdvFhYRtSiHMJc51BB/seu+kTZ\no2EotZWbAgMBAAECggEAW4sqO6BNHDcSOxdiv5V197sdinFgb+3deuD+AMdFO49r\njFEjOP3AeS4qIoF3tk/2PeWd1O5w2fiygTuD60+OCS2BICH+/HU+T4iwyIRFl2Z3\naiRBf6k4Q/Rx3LpVWPP4YnOLkNvVF65v2QDyFNE6MzgIs/ul7LjCAUNKzeEwPGGF\nUdyAmMD+DqLr17TXjP7oqcKYzh7duulmoGWOEj4/2DdaypkcbeZbsmMvQ3puPH5K\noaXNzxNHbmK27obDllEQ0OK9toLqpTuEeMI+1yq5psvRZgeVLwJrH2Ommv3wAji2\n1Rh6xz8iSG5g+MTqRRZFRNHAVPxxMOtpW+H1hxeQ4QKBgQDKEulqRkCpUEG6yeLh\nPoD6gQguwep0ErATo/RcYku0LebUN/NK/Sh1IdVTb5gZISOmIXa1DymV6gho8AuX\nhHz62yD/PdWNjJowaIz7oXFxcEqF1WwnpIkGCf8wPIjXruqf9bJdZV72s3FUewhD\nQhVGZdfYabTROWQ/ToaxtWLf0QKBgQDF5QbDfIpU8XnYbKuZEOo2oH3v+AhYrqfF\nVGXEeVUxvbfO/gpFkj+nwRa7xFPYjeoJHIM+wfi6pXM23nI5vHsmaOZnIZGcgXoO\n61rhkwPUvO7KZ5I1/ebzs3KzHUG4W0fdInzRShQ1scpjoejIgv/PV7WXFmz+wxZ/\nEpeG4lsFqwKBgBCgHbQws4E6qS3FDnWZvuLdWt799Vw3bWUwSBqRu8jHPgaX09yH\nl5yLfBGxTMJEh7pTZoDfDnzXFHoNxeZhcCbzgHN/kuJifw0cjPzm+35pzrfUJ2Hb\nl6p3iBdf46JbMdKXVGV6waVqfhiFRtjBxx5Tor6bc9UC88yBmXNliQ0BAoGAFDN2\n50m1TUqBJ6igM7XYUs87S93D7FmX4rrk0JOaMMOvGcAxCD0Ppm49hdlavcZu15ND\niop+e38cLcOzYVVuNNOMgYaZuKI29YLs+g3p3DOVJLBB6qUKiGIPGV2pMcqPoXE9\n0JeBTKHjiRwkCSPmPSI09UFiyvbbOwmI0koVBJUCgYEApOULSXEY/LZdSF1W70Z8\nKAA7f7Y3S6tSvlxeo+dGVwW019gZWLBya0obt0Nmz4er4K6JzjbUYoRhuM9I4Gij\nSW0M9ihyKZKuoFBdoGkd+zBV5RJQF0q0RQi6hIG5HgXTxeqsqBzziN4dkFFiqcPX\nnDr60gb6yGFjC+lxz+seeg8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "coffeebreakcmsapi@stellar-code-144022.iam.gserviceaccount.com",
+  "client_id": "110168292715471979276",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/coffeebreakcmsapi%40stellar-code-144022.iam.gserviceaccount.com"
+}

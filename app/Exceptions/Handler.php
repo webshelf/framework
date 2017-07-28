@@ -2,9 +2,13 @@
 
 namespace App\Exceptions;
 
+use PDOException;
+use App\Http\Controllers\ErrorController;
+use App\Model\Role;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -27,7 +31,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -38,20 +42,46 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+
+        if ($exception instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $exception);
+        }
+
+        if ($exception instanceof EngineBootException) {
+            dd('We are actively working on the server configurations, please wait..');
+        }
+
+        if ($this->isDeveloper() == true) {
+            return parent::render($request, $exception);
+        }
+
+        if ($this->hasDisabledSite()) {
+            return ErrorController::maintenance();
+        }
+
+        if ($exception instanceof NotFoundHttpException) {
+            return ErrorController::unknown();
+        }
+
+        if ($exception instanceof PDOException) {
+            return ErrorController::database();
+        }
+
+
+        return ErrorController::developer();
     }
 
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -61,5 +91,28 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest(route('login'));
+    }
+
+    /**
+     * See if the site has been disabled by the tenant for maintenance errors.
+     *
+     * @return bool
+     */
+    private function hasDisabledSite()
+    {
+        return settings()->getValue('enable_website') == false;
+    }
+
+    /**
+     * Check that the current user is a developer
+     *
+     * @return bool
+     */
+    private function isDeveloper()
+    {
+        if(auth()->check() == false)
+            return false;
+
+        return account()->hasRole(Role::SUPERUSER);
     }
 }
