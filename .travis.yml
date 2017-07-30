@@ -20,17 +20,17 @@
     "travis_retry composer self-update",
     "composer install --dev",
     "php artisan migrate --force",
+
   ],
   "install": [
     "if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-dist --no-suggest; fi",
     "if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi",
     "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
   ],
-  "after_script":
-    "php vendor/bin/codacycoverage clover build/logs/clover.xml",
-  notifications:
-    "slack": "webshelf:ZLh2j0rMeHbQ68YgoqhLKnT5",
+
+  notifications: "slack": "webshelf:ZLh2j0rMeHbQ68YgoqhLKnT5",
   "script": "vendor/bin/phpunit",
+  "after_script": "php vendor/bin/codacycoverage clover path/to/clover.xml",
   "global_env": "setup=basic",
   "group": "stable",
   "dist": "trusty",
