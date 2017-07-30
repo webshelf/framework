@@ -30,7 +30,7 @@
 
   "notifications": "slack: webshelf:ZLh2j0rMeHbQ68YgoqhLKnT5",
   "script": "vendor/bin/phpunit",
-  "after_script": "php vendor/bin/codacycoverage clover path/to/clover.xml",
+  "after_script": "php vendor/bin/codacycoverage",
   "global_env": "setup=basic",
   "group": "stable",
   "dist": "trusty",
