@@ -27,7 +27,7 @@
     "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
   ],
   "after_script":
-    "php vendor/bin/codacycoverage clover build/logs/clover.xml"
+    "php vendor/bin/codacycoverage clover build/logs/clover.xml",
   notifications:
     "slack": "webshelf:ZLh2j0rMeHbQ68YgoqhLKnT5",
   "script": "vendor/bin/phpunit",
