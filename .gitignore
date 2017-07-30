@@ -8,6 +8,7 @@
 /public/fonts/
 /public/js/
 /public/packages/
+/public/mix-manifest.json
 /storage/*.key
 /storage/google
 /vendor
