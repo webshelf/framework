@@ -16,8 +16,8 @@
     "redis-server"
   ],
   "before_install": [
-    "npm -i | php -i | grep xdebug",
-    "npm install | npm run dev",
+    "php -i | grep xdebug",
+    "npm install",
     "mysql -e 'CREATE DATABASE IF NOT EXISTS webshelf;'",
     "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini",
     "printf \"\\n\" | pecl install -f redis",
