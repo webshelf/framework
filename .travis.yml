@@ -29,7 +29,7 @@
     "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
   ],
   "after_success": [
-    "git push -u https://github.com/webshelf/pull-tests.git",
+    "if [$TRAVIS_BRANCH == 'develop'] then git push -u https://github.com/webshelf/pull-tests.git HEAD:master",
   ],
   "script": "vendor/bin/phpunit --coverage-clover build/logs/clover.xml",
   "after_script": "php vendor/bin/codacycoverage clover",
