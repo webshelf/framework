@@ -50,7 +50,6 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'visibility' => 'public',
             'root'   => base_path().'/public',
         ],
 

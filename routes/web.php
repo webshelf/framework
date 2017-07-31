@@ -25,6 +25,7 @@
     Route::get('/admin/accounts/register', ['as' => 'RegisterAccount',     'uses' => 'AccountsController@register']);
     Route::get('/admin/accounts/verify/{account_id}', ['as' => 'AccountVerify',       'uses' => 'AccountsController@verify']);
     Route::get('/admin/accounts/{email}', ['as' => 'AccountProfile',      'uses' => 'AccountsController@profile']);
+    Route::get('/admin/filemanager', ['as' => 'FileManager', 'uses' => 'FileManagerController@load']);
 
     Route::post('/admin/login', ['as' => 'AuthLogin',           'uses' => 'AuthController@login']);
     Route::post('/admin/settings/save', ['as' => 'SaveSettings',        'uses' => 'SettingsController@save']);

@@ -92,6 +92,9 @@ class PopupQueue
      */
     public function exist()
     {
+        if(!$this->session)
+            return false;
+
         return $this->session()->has(self::sessionVar);
     }
 

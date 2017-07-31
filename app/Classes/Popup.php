@@ -159,6 +159,8 @@ class Popup
         if (property_exists($this, $property)) {
             return $this->$property;
         }
+
+        return false;
     }
 
     public function getSerial()

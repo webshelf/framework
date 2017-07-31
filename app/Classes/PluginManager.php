@@ -159,4 +159,21 @@ class PluginManager
 
         return $this;
     }
+
+    /**
+     * Check if plugin is viewable (booleans)
+     * or return all viewable plugins by default.
+     *
+     * @param null $plugin
+     * @return array|bool
+     */
+    public function viewable($plugin = null)
+    {
+        if ($plugin != null) {
+            return $this->checkViewable($this->getPlugin($plugin), true);
+        }
+
+        return $this->viewable;
+    }
+
 }

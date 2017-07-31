@@ -15,18 +15,18 @@ class ViewServiceProvider extends ServiceProvider
     public function register()
     {
         /*
-         * Load the dashboard blade files for request creation.
+         * Load the dashboard/admin blade files for views creation.
          */
-        $this->loadViewsFrom(resource_path('views/backend'), 'dashboard');
+        $this->loadViewsFrom(resource_path('admin/views'), 'dashboard');
 
         /*
-         * Load the websites blade files for request creation.
+         * Load the websites frontend blade files for views creation.
          */
         $this->loadViewsFrom(resource_path('views'), 'website');
 
         /*
          * Errors can be overwritten by the front end website, default to dashboard errors.
          */
-        $this->loadViewsFrom([resource_path('views/errors'), resource_path('views/backend/errors')], 'errors');
+        $this->loadViewsFrom([resource_path('views/errors'), resource_path('admin/views/errors')], 'errors');
     }
 }
