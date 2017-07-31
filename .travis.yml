@@ -4,16 +4,20 @@
   "sudo": false,
   "cache": {
     "directories": [
-      "$HOME/.composer/cache"
+      "$HOME/.composer/cache",
+      "node_modules",
     ]
   },
+  node_js:
+    "3",
   "services": [
     "mysql",
     "memcached",
     "redis-server"
   ],
   "before_install": [
-    "php -i | grep xdebug",
+    "npm -i | php -i | grep xdebug",
+    "npm install && npm run dev",
     "mysql -e 'CREATE DATABASE IF NOT EXISTS webshelf;'",
     "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini",
     "printf \"\\n\" | pecl install -f redis",
@@ -28,6 +32,7 @@
     "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
   ],
 
+  "language": "node_js",
   "notifications": "slack: webshelf:ZLh2j0rMeHbQ68YgoqhLKnT5",
   "script": "vendor/bin/phpunit --coverage-clover build/logs/clover.xml",
   "after_script": "php vendor/bin/codacycoverage clover",
