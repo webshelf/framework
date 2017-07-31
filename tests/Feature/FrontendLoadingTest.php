@@ -12,65 +12,43 @@ use Tests\TestCase;
 
 class FrontendLoadingTest extends TestCase
 {
-
     /**
      * @test
      */
-    public function homepage_should_be_viewable()
+    public function view_index_page()
     {
         settings()->add('enable_website', true);
 
-        $this->call('GET', '/')
-            ->assertSee('/')
-            ->assertStatus(200)
-            ->assertViewHas('page');
+        $this->call('GET', '/')->assertStatus(200)->assertViewHas('page');
+    }
 
-        $this->assertDatabaseHas('pages', ['slug' => 'index']);
-        $this->assertDatabaseHas('menus', ['slug' => 'index']);
+    /**
+     * @test
+     *
+     * Does not require website status to show.
+     */
+    public function view_sitemap_page()
+    {
+        $this->call('GET', '/sitemap.xml')->assertStatus(200)->assertSee('urlset');
     }
 
     /**
      * @test
      */
-    public function unknown_pages_are_handled_by_404()
+    public function view_404_error_page()
     {
         settings()->add('enable_website', true);
 
-        $this->call('GET', '/unknown-page-test')
-            ->assertStatus(404)
-            ->assertViewHas('page');
+        $this->call('GET', '/unknown-page-test')->assertStatus(404)->assertViewHas('page');
     }
 
     /**
      * @test
      */
-    public function maintenance_pages_are_handled_by_503()
+    public function view_503_error_page()
     {
         settings()->add('enable_website', false);
 
-        $this->call('GET', '/')
-            ->assertStatus(503)
-            ->assertViewHas('page');
-    }
-
-    /**
-     * @test
-     */
-    public function sitemap_xml_should_always_be_viewable()
-    {
-        $this->call('GET', '/sitemap.xml')
-            ->assertStatus(200)
-            ->assertSee('urlset');
-    }
-    
-    /**
-     * @test
-     */
-    public function dashboard_should_redirect_to_login()
-    {
-        $this->call('GET', '/admin')
-            ->assertStatus(302)
-            ->assertSee('/admin/login')
-            ->assertSee('Redirecting');
+        $this->call('GET', '/')->assertStatus(503) ->assertViewHas('page');
     }
 }
