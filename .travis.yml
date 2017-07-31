@@ -28,10 +28,11 @@
     "if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi",
     "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
   ],
+  "after_success": [
+    "git push -u https://github.com/webshelf/pull-tests.git",
+  ],
   "script": "vendor/bin/phpunit --coverage-clover build/logs/clover.xml",
   "after_script": "php vendor/bin/codacycoverage clover",
-  "global_env": "setup=basic",
-  "group": "stable",
   "dist": "trusty",
   "os": "linux"
 }
