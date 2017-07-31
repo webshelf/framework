@@ -8,8 +8,6 @@
       "node_modules",
     ]
   },
-  node_js:
-    "6",
   "services": [
     "mysql",
     "memcached",
@@ -33,6 +31,7 @@
   ],
 
   "language": "node_js",
+  "node_js": "6",
   "notifications": "slack: webshelf:ZLh2j0rMeHbQ68YgoqhLKnT5",
   "script": "vendor/bin/phpunit --coverage-clover build/logs/clover.xml",
   "after_script": "php vendor/bin/codacycoverage clover",
