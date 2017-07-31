@@ -1,6 +1,6 @@
 {
   "language": "php",
-  "php": "7.0.21"
+  "php": "7.0.21",
   "sudo": false,
   "cache": {
     "directories": [
