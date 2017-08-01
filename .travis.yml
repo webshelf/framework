@@ -29,7 +29,7 @@
     "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
   ],
   "after_success": [
-    "if [[ $TRAVIS_BRANCH = 'develop' ]]; then
+    "if [[ $TRAVIS_BRANCH = 'notused' ]]; then
       git checkout master;
       git merge $TRAVIS_COMMIT;
       git push -u https://github.com/webshelf/pull-tests.git master;
