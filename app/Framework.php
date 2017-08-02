@@ -92,6 +92,9 @@ class Framework
      */
     public function isLatestRelease()
     {
-        return ($this->currentRelease() >= $this->latestRelease());
+        if(app()->isLocal())
+            return true;
+
+        return ($this->currentRelease() != $this->latestRelease());
     }
 }
