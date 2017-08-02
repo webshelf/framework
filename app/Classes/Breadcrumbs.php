@@ -14,13 +14,6 @@ namespace App\Classes;
 class Breadcrumbs
 {
     /**
-     * Should we limit the amount of crumbs we product on the crumb array.
-     *
-     * @var bool
-     */
-    private $limit = false;
-
-    /**
      * Stored crumbs are placed in an array for use on blade template.
      *
      * @var array
@@ -63,7 +56,7 @@ class Breadcrumbs
 
             $lastLink = end($sublinks);
 
-            foreach ($sublinks as $key => $link) {
+            foreach ($sublinks as $link) {
                 $url = ($base_url .= '/'.strtolower($link));
                 $title = ucwords(str_replace($this->characters['find'], $this->characters['replace'], $link));
 
