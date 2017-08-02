@@ -29,6 +29,16 @@
     }
 
     /**
+     * Return the webshelf framework version.
+     *
+     * @return App\Framework
+     */
+    function framework()
+    {
+        return app(App\Framework::class);
+    }
+
+    /**
      * @return \App\Classes\PopupQueue
      */
     function popups()

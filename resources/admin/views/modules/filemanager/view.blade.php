@@ -1,11 +1,11 @@
 @extends('dashboard::frame')
 
+@section('title')
+    <h1>File Management System</h1>
+@endsection
+
 @section('information')
-    <p>
-        The most vital part of being found on the world wide web, is a sitemap that tells the world what you have to offer.
-        <br>
-        Your application gives you the power to choose what you want search engines to see, while automatically generating data from your content.
-    </p>
+    <p> Manage and control the images and media stored on your web application servers or previous assets your website uses. </p>
 @endsection
 
 @section('content')

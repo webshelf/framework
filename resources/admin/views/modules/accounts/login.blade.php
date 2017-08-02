@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ settings()->getDefault('site_name') ?: config('engine.name') }} | Admin Login</title>
+    <title>{{ settings()->getDefault('site_name') ?: framework()->packageName() }} | Admin Login</title>
 
     <!-- Include all compiled css -->
     <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">

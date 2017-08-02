@@ -15,17 +15,18 @@ class Github
     /**
      * Get the latest release version.
      *
+     * @param string $repository
      * @return string
      */
-    public static function latestReleaseVersion()
+    public static function latestReleaseVersion(string $repository)
     {
-        return Cache::remember('github_version', 20, function () {
+        return Cache::remember('github_version', 20, function () use ($repository) {
             try {
                 $agent = ['http' => ['method' => 'GET', 'header' => ['User-Agent: PHP']]];
 
                 $stream = stream_context_create($agent);
 
-                $releases = json_decode(file_get_contents('https://api.github.com/repos/marky291/webshelf/tags', false, $stream));
+                $releases = json_decode(file_get_contents('https://api.github.com/repos/'. $repository .'/tags', false, $stream));
 
                 return $releases[0]->name;
             } catch (\ErrorException $e) {

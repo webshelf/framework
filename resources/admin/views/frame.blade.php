@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ App\Framework::PACKAGE }} v{{ App\Framework::VERSION  }}</title>
+        <title>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }}</title>
 
         <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
         <link href="{{ mix('assets/dashboard.css') }}" rel="stylesheet">
@@ -66,7 +66,7 @@
 
             <div class="application-logo">
 
-                <h1>{{ App\Framework::PACKAGE }} v{{ App\Framework::VERSION  }} Beta</h1>
+                <h1>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }} Beta</h1>
 
             </div>
 
@@ -200,10 +200,10 @@
 
 					<br>
 
-                                    @if((App\Classes\Library\Services\Github::latestReleaseVersion() == App\Framework::VERSION) || (App\Classes\Library\Services\Github::latestReleaseVersion() == ""))
+                                    @if(framework()->isLatestRelease())
                                         <span style="font-size: 12px; color:#c4d15a;">You have the latest version!</span>
                                     @else
-                                        <span style="font-size: 12px; color:#FFA500;">A new version is available! [{{ App\Classes\Library\Services\Github::latestReleaseVersion() }}]</span>
+                                        <span style="font-size: 12px; color:#FFA500;">A new version is available!</span>
                                     @endif
 
                                 </small>
@@ -322,12 +322,12 @@
 
                                 <li>
 
-                                    <div class="tile {{ $breadcrumbs->contain('filemanager', 3) ? 'active open' : null }}">
+                                    <div class="tile {{ $breadcrumbs->contain('accounts', 3) ? 'active open' : null }}">
 
-                                        <a href="{{ route('FileManager') }}">
-                                            <i class="fa fa-cogs icon" aria-hidden="true"></i>
+                                        <a href="{{ url('/admin/accounts') }}">
+                                            <i class="fa fa-users icon" aria-hidden="true"></i>
 
-                                            <span class="title">FileManager</span>
+                                            <span class="title">Accounts</span>
 
                                             <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
 
@@ -339,12 +339,12 @@
 
                                 <li>
 
-                                    <div class="tile {{ $breadcrumbs->contain('accounts', 3) ? 'active open' : null }}">
+                                    <div class="tile {{ $breadcrumbs->contain('filemanager', 3) ? 'active open' : null }}">
 
-                                        <a href="{{ url('/admin/accounts') }}">
-                                            <i class="fa fa-users icon" aria-hidden="true"></i>
+                                        <a href="{{ route('FileManager') }}">
+                                            <i class="fa fa-microchip icon" aria-hidden="true"></i>
 
-                                            <span class="title">Accounts</span>
+                                            <span class="title">FileManager</span>
 
                                             <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
 
@@ -363,8 +363,7 @@
                     <div class="foot">
 
                         <p>
-                            Current Version : {{ App\Framework::VERSION }} <br>
-                            Github Version. : {{ App\Classes\Library\Services\Github::latestReleaseVersion() ?: 'unknown' }}
+                            <!-- EMPTY -->
                         </p>
 
                     </div>

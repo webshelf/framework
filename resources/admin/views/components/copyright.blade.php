@@ -1,6 +1,6 @@
 
 <div class="copyright" id="powered-by">
 
-    <a href="{{ App\Framework::WEBSITE }}" title="Version {{ App\Framework::VERSION }}"> Powered By {{ App\Framework::PACKAGE }} v{{ App\Framework::VERSION }}</a>
+    <a href="{{ framework()->websiteUrl() }}" title="Version {{ framework()->currentRelease() }}"> Powered By {{ framework()->packageName() }} v{{ framework()->currentRelease() }}</a>
 
 </div>

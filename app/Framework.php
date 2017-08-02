@@ -8,6 +8,8 @@
 
 namespace App;
 
+use App\Classes\Library\Services\Github;
+
 /**
  * Class Framework.
  */
@@ -18,21 +20,21 @@ class Framework
      *
      * @return string
      */
-    const PACKAGE = 'Webshelf LTD.';
+    private $package = 'Webshelf LTD.';
 
     /**
      * The framework version number.
      *
      * @return string
      */
-    const VERSION = '2.0.0';
+    private $version = '2.1.0';
 
     /**
      * The framework application website.
      *
      * @return string
      */
-    const WEBSITE = '#';
+    private $website = '#';
 
     /**
      * The applications github repository.
@@ -40,5 +42,56 @@ class Framework
      *
      * @return string
      */
-    const GITHUB = 'marky291/webshelf';
+    private $repository = 'webshelf/framework';
+
+
+    /**
+     * Get the package name, this is in case it ever changes.
+     *
+     * @return string
+     */
+    public function packageName()
+    {
+        return $this->package ?: 'unknown';
+    }
+
+    /**
+     * Get the website url address that users can visit.
+     *
+     * @return string
+     */
+    public function websiteUrl()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Get the latest version of the current webshelf app.
+     *
+     * @return string
+     */
+    public function currentRelease()
+    {
+        return $this->version ?: 'unknown';
+    }
+
+    /**
+     * Get the latest github release for version checking.
+     *
+     * @return string
+     */
+    public function latestRelease()
+    {
+        return Github::latestReleaseVersion($this->repository) ?: 'unknown';
+    }
+
+    /**
+     * Check if the framework is updated to the latest version.
+     *
+     * @return bool
+     */
+    public function isLatestRelease()
+    {
+        return ($this->currentRelease() >= $this->latestRelease());
+    }
 }
