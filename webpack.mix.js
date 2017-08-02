@@ -11,8 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/frontend.js', 'public/js')
-    .sass('resources/assets/sass/frontend.scss', 'public/css')
+mix.js('resources/assets/js/frontend.js', 'public/assets/')
+    .sass('resources/assets/sass/frontend.scss', 'public/assets/')
     .version();
 
 /*
@@ -27,11 +27,11 @@ mix.js('resources/assets/js/frontend.js', 'public/js')
 */
 
 mix.copyDirectory('resources/admin/package', 'public/packages/webshelf');
-mix.copyDirectory('resources/admin/images', 'public/images/backend');
+mix.copyDirectory('resources/admin/images', 'public/packages/webshelf/images/');
 
 mix
-    .js('resources/admin/assets/js/backend.js', 'public/js')
-    .sass('resources/admin/assets/sass/backend.scss', 'public/css')
+    .js('resources/admin/assets/js/backend.js', 'public/assets/')
+    .sass('resources/admin/assets/sass/backend.scss', 'public/assets/')
     .version();
 
 mix.combine([
@@ -46,7 +46,7 @@ mix.combine([
     'resources/admin/assets/legacy/pace.min.css',
     'resources/admin/assets/legacy/dashboard.css',
     'app/plugins/**/*.css'
-],  'public/css/dashboard.css').version();
+],  'public/assets/dashboard.css').version();
 
 mix.combine([
     'node_modules/jquery/dist/jquery.js',
@@ -64,4 +64,4 @@ mix.combine([
     'resources/admin/assets/legacy/webshelf-buttons.js',
     'resources/admin/assets/legacy/pace.min.js',
     'app/plugins/**/*.js'
-], 'public/js/dashboard.js').version();
+], 'public/assets/dashboard.js').version();

@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ mix('css/frontend.css') }}" rel="stylesheet">
+    <link href="{{ mix('assets/frontend.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ mix('js/frontend.js') }}"></script>
+    <script src="{{ mix('assets/frontend.js') }}"></script>
 
     <style>
         html, body {

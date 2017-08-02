@@ -1,8 +1,8 @@
 {
-    "/js/frontend.js": "/js/frontend.js?id=948364f1aa01a5cb8bf1",
-    "/css/frontend.css": "/css/frontend.css?id=441ac2b98e9b68c87e38",
-    "/css/backend.css": "/css/backend.css?id=a034695b0a3dd932b910",
-    "/js/backend.js": "/js/backend.js?id=827ab2ef6adab9c7791c",
-    "/css/dashboard.css": "/css/dashboard.css?id=01abce620630b4a179fa",
-    "/js/dashboard.js": "/js/dashboard.js?id=fc8793350f745c05b0a8"
+    "/assets/frontend.js": "/assets/frontend.js?id=948364f1aa01a5cb8bf1",
+    "/assets/frontend.css": "/assets/frontend.css?id=441ac2b98e9b68c87e38",
+    "/assets/backend.css": "/assets/backend.css?id=a034695b0a3dd932b910",
+    "/assets/backend.js": "/assets/backend.js?id=827ab2ef6adab9c7791c",
+    "/assets/dashboard.css": "/assets/dashboard.css?id=01abce620630b4a179fa",
+    "/assets/dashboard.js": "/assets/dashboard.js?id=fc8793350f745c05b0a8"
 }

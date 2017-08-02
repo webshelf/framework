@@ -9,9 +9,9 @@
 
         <title>{{ App\Framework::PACKAGE }} v{{ App\Framework::VERSION  }}</title>
 
-        <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
-        <link href="{{ mix('css/dashboard.css') }}" rel="stylesheet">
-        <script src="{{ mix('js/dashboard.js') }}"></script>
+        <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
+        <link href="{{ mix('assets/dashboard.css') }}" rel="stylesheet">
+        <script src="{{ mix('assets/dashboard.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('packages/webshelf/tinymce/tinymce.min.js') }}"></script>
 
@@ -49,7 +49,7 @@
                     tools: {title: 'Tools', items: 'spellchecker code'}
                 },
                 content_css: [
-                    "{{ mix('css/frontend.css') }}",
+                    "{{ mix('assets/frontend.css') }}",
                     "//www.tinymce.com/css/codepen.min.css"
                 ],
                 file_browser_callback : elFinderBrowser
@@ -188,7 +188,7 @@
 
                             <div class="logo">
 
-                                <img src="{{ asset('images/backend/logo.png') }}" style="height: 50px; width: 50px; display:block;">
+                                <img src="{{ asset('packages/webshelf/images/logo.png') }}" style="height: 50px; width: 50px; display:block;">
 
                             </div>
 

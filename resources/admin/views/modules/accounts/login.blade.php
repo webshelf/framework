@@ -9,8 +9,8 @@
     <title>{{ settings()->getDefault('site_name') ?: config('engine.name') }} | Admin Login</title>
 
     <!-- Include all compiled css -->
-    <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
-    <script src="{{ mix('js/backend.js') }}"></script>
+    <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
+    <script src="{{ mix('assets/backend.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 </head>
@@ -25,7 +25,7 @@
 
     body {
         background: #eeeeee;
-        background: url({{ asset('images/backend/authenticate.png') }});
+        background: url({{ asset('packages/webshelf/images/authenticate.png') }});
         background-repeat: no-repeat;
         background-size: cover;
     }
