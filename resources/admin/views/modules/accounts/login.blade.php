@@ -8,8 +8,6 @@
 
     <title>{{ settings()->getDefault('site_name') ?: config('engine.name') }} | Admin Login</title>
 
-    <script>window.Laravel =  {!! json_encode(['csrfToken' => csrf_token()]) !!}</script>
-
     <!-- Include all compiled css -->
     <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
     <script src="{{ mix('js/backend.js') }}"></script>
@@ -27,7 +25,7 @@
 
     body {
         background: #eeeeee;
-        background: url({{ asset('uploads/backend/authenticate.png') }});
+        background: url({{ asset('images/backend/authenticate.png') }});
         background-repeat: no-repeat;
         background-size: cover;
     }

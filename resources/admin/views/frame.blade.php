@@ -188,7 +188,7 @@
 
                             <div class="logo">
 
-                                <img src="{{ asset('uploads/logo.png') }}" style="height: 50px; width: 50px; display:block;">
+                                <img src="{{ asset('images/backend/logo.png') }}" style="height: 50px; width: 50px; display:block;">
 
                             </div>
 

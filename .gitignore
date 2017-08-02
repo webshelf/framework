@@ -3,12 +3,6 @@
 /public/hot
 /public/storage
 /public/.tmb/
-/public/images/
-/public/css/
-/public/fonts/
-/public/js/
-/public/packages/
-/public/mix-manifest.json
 /storage/*.key
 /storage/google
 /vendor
