@@ -39,6 +39,6 @@ class ActivityRepository
      */
     public function all() : Collection
     {
-        return $this->model->get();
+        return $this->model->orderByDesc('created_at')->get();
     }
 }
