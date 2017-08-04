@@ -20,7 +20,7 @@ class Framework
      *
      * @return string
      */
-    private $package = 'Webshelf LTD.';
+    private $package = 'Webshelf';
 
     /**
      * The framework version number.
