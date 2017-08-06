@@ -159,15 +159,22 @@
 
 @section('javascript')
     <script>
-        Morris.Bar({
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
             element: 'page-views',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
             data: [
-                @foreach($visitors as $visitor)
-                    { date: '{{ (string)$visitor['month'] }}', value: {{ (int)$visitor['users'] }} },
-                @endforeach
+            @foreach($visitors as $visitor)
+                { date: '{{ (string)$visitor['month'] }}', users: '{{ (int)$visitor['users'] }}' },
+            @endforeach
             ],
+            // The name of the data record attribute that contains x-values.
             xkey: 'date',
-            ykeys: ['value'],
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['users'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
             labels: ['Users']
         });
     </script>
