@@ -138,7 +138,10 @@ class AdminController extends PluginEngine implements RouteableInterface
         }
 
         if (count($page->menus) >= 1) {
-            return response()->json(['status' => false, 'message' => 'To safeguard the integrity of your site, please remove linked menus first.']);
+            foreach($page->menus as $menu)
+            {
+                $menu->trash();
+            }
         }
 
         $page->delete();
