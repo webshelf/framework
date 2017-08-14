@@ -469,17 +469,6 @@ header nav ul li a:hover, header nav ul li a:active, header nav ul li a:focus {
 }
 
 /*Datatables & Bootstrap style override end.*/
-#view .form-group label {
-    width:15%;
-    font-weight: 400;
-    text-align: right;
-}
-#view .form-group > div {
-    width:85%;
-}
-#view .form-group input, #view .form-group select {
-    width:600px;
-}
 #nav-sidebar .heading {
     padding:25px 15px 10px;
 }
@@ -573,9 +562,6 @@ header nav ul li a:hover, header nav ul li a:active, header nav ul li a:focus {
 .form-body {
     padding:40px 20px;
 }
-.form-group input {
-    border-radius: 0;
-}
 .content .page-panel#view .content#editor {
     padding:0;
 }
@@ -615,26 +601,44 @@ header nav ul li a:hover, header nav ul li a:active, header nav ul li a:focus {
     font-weight:300;
 }
 .editable-click, a.editable-click, a.editable-click:hover {
-    cursor: pointer;
-}
-.form-control.error {
-    border: 1px solid red;
-}
-/*Validation rules and styles.*/
-.form .validation-error {
-    display:block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    color:red;
-}
-.form-group.error input{
-    border:1px solid red;
-}
-.form-group.error {
-    color:red;
+  cursor: pointer;
 }
 
 /*Notifications CSS*/
 #toast-container .toast {
     width:256px;
+}
+
+
+/**
+    NEW STYLES.
+ */
+
+.background {
+
+  background: url('../../images/authenticate.png') no-repeat;
+  background-size: cover;
+
+  #login-box {
+    margin: 0 0 0 72%;
+    width: 400px;
+    height: 100vh;
+    display: flex;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+
+    .login-information {
+      font-size:21px;
+    }
+
+    form {
+      align-self: center;
+      margin: auto;
+
+      .login-poweredBy {
+        font-size: 12px;
+        color: grey;
+      }
+    }
+  }
 }

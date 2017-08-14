@@ -15,8 +15,21 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
+//Vue.component('example', require('./components/Example.vue'));
 
-// const app = new Vue({
-//     el: '#app'
+// new Vue({
+//     el: '#app-login',
+//     data: {
+//         email: {
+//             value: '',
+//             status: false,
+//         },
+//         password: {
+//             value: '',
+//             status: false,
+//         }
+//     },
+//     // define methods under the `methods` object
+//     methods: {
+//     }
 // });

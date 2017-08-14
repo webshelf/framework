@@ -26,6 +26,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+
         $this->validate($request, [
             'email' => 'required',
             'password' => 'required',
@@ -45,7 +46,7 @@ class AuthController extends Controller
         }
 
         // on login failure.
-        return redirect()->intended(route('login'))->withErrors(['message' => 'Incorrect email or password entry']);
+        return redirect()->intended(route('login'))->withErrors(['message' => 'Incorrect email or password.']);
     }
 
     /**

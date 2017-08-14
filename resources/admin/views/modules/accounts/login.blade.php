@@ -1,117 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
 
-    <title>{{ settings()->getDefault('site_name') ?: framework()->packageName() }} | Admin Login</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta id="token" name="csrf-token" content="{!! csrf_token() !!}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Include all compiled css -->
-    <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
-    <script src="{{ mix('assets/backend.js') }}"></script>
+        <title>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }}</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-</head>
+        <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
 
-<body>
+    </head>
 
-<script>
-    new WOW().init();
-</script>
+    <body>
 
-<style>
+        <div class="background">
 
-    body {
-        background: #eeeeee;
-        background: url({{ asset('packages/webshelf/images/authenticate.png') }});
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+            <div class="container">
 
-    h1 {
-        color: rgb(46,46,46);
-        font-size: 20px;
-        padding: 20px 0;
-        border-bottom: 1px solid #D8D8DA;
-        margin-bottom: 20px;
-        font-weight: normal;
-    }
+                <div class="alignment" id="login-box">
 
-    #wrapper {
-        text-align: center;
-        margin:auto;
-        width:480px;
-        margin-top:250px;
-        background-color: white;
-        border-radius: 5px;
-        border: 1px solid #cccccc;
-    }
+                    <form id="app-login" action="{{ route('AuthLogin') }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="login-information">
+                            Log in to your account
+                        </div>
+                        <hr style="margin-bottom: 25px;">
+                        @if($errors->first('message'))<small><div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div></small>@endif
+                        <div class="form-group">
+                            <span class="icon-envelope"></span>
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input v-model="email.value" name="email" type="email" class="form-control" id="emailInput" placeholder="Enter email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input v-model="password.value" name="password" type="password" class="form-control" id="passwordInput" placeholder="Password" required>
+                            <small id="passwordHelp" class="form-text text-muted">Encrypted with the latest technology.</small>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label align-middle">
+                                <input type="checkbox" class="form-check-input">
+                                Remember me
+                            </label>
+                            <button type="submit" class="btn btn-primary float-right">Login</button>
+                        </div>
+                        <hr style="margin-top:35px">
+                        <div class="login-poweredBy">
+                            Powered by {{ framework()->packageName() }} v{{ framework()->currentRelease() }}
+                        </div>
+                    </form>
 
-    .login-container {
-        margin: auto;
-        width: 480px;
-        padding: 5px 90px 30px 90px;
-    }
-
-    .login-container .actions {
-        width:300px;
-    }
-
-    .alert {
-        padding:10px;
-    }
-    .alert-danger ul {
-        padding: 0;
-        list-style: none;
-    }
-
-</style>
-
-<div id="wrapper" class="wow fadeInDown">
-    <div class="login-container">
-        <h1>
-           {{ settings()->getDefault('site_name') }}
-        </h1>
-
-        <div class="actions">
-            <form action="{{ route('AuthLogin') }}" method="post">
-                {!! csrf_field() !!}
-
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <div class="form-group row">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span><input class="form-control" name="email" placeholder="Username or Email" type="text">
-                    </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-lock"></i></span><input class="form-control" name="password" placeholder="Password" type="password">
-                    </div>
-                </div>
+            </div>
 
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log in" style="margin-bottom: 20px; background-color:#337ab7;">
-
-            </form>
         </div>
 
-        @include('dashboard::components.copyright')
+        <script src="{{ mix('assets/backend.js') }}"></script>
 
-    </div>
-
-</div>
-
-</body>
+    </body>
 
 </html>
