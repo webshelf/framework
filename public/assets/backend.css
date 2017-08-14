@@ -15637,6 +15637,11 @@ a.editable-click:hover {
   width: 256px;
 }
 
+.dropdown-toggle::after {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
 /**
     NEW STYLES.
  */

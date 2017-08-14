@@ -91,7 +91,6 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Add new data to your website">
                                 <p>Create</p>
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 @if(plugins()->hasPlugin('pages')) <li><a href="{{ route('CreatePage') }}">New Page</a></li> @endif
@@ -115,10 +114,10 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </form>
                         </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Help & Guides">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="#">Help coming Soon...</a></li>
@@ -132,7 +131,6 @@
                                 {{--@if($notification_count >= 1)--}}
                                     {{--<span class="badge badge-default"> {{ $notification_count }}</span>--}}
                                 {{--@endif--}}
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="#">Notifications coming Soon...</a></li>
@@ -149,7 +147,6 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Settings">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{{ route('settings') }}">System settings</a></li>
@@ -160,7 +157,6 @@
                                 <i class="fa profile-image small" aria-hidden="true">
                                     <img src="{{ account()->gravatarImageUrl() }}" width="24" height="24" alt="profile image">
                                 </i>
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{{ route('AccountProfile', account()->email()) }}">My Profile</a></li>
