@@ -1,0 +1,19 @@
+diff a/resources/admin/assets/sass/_backend.scss b/resources/admin/assets/sass/_backend.scss	(rejected hunks)
+@@ -469,17 +469,6 @@
+ }
+ 
+ /*Datatables & Bootstrap style override end.*/
+-#view .form-group label {
+-    width:15%;
+-    font-weight: 400;
+-    text-align: right;
+-}
+-#view .form-group > div {
+-    width:85%;
+-}
+-#view .form-group input, #view .form-group select {
+-    width:600px;
+-}
+ #nav-sidebar .heading {
+     padding:25px 15px 10px;
+ }

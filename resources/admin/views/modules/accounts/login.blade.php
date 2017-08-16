@@ -45,7 +45,7 @@
                                 <input type="checkbox" class="form-check-input">
                                 Remember me
                             </label>
-                            <button type="submit" class="btn btn-primary float-right">Login</button>
+                            <button type="submit" class="btn btn-primary float-right" style="float:right">Login</button>
                         </div>
                         <hr style="margin-top:35px">
                         <div class="login-poweredBy">
