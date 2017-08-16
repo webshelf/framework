@@ -32,10 +32,9 @@ class DashboardController extends Controller
      * whenever any class is going to show the dashboard to
      * the user.
      *
-     * DashboardController constructor.
-     * @param Breadcrumbs $breadcrumbs
+     * DashboardController constructor
      */
-    public function __construct(Breadcrumbs $breadcrumbs)
+    public function __construct()
     {
         $this->authentication = $this->middleware('auth');
     }

@@ -30,13 +30,10 @@ class AdminController extends PluginEngine implements RouteableInterface
 
     /**
      * AdminController constructor.
-     * @param Breadcrumbs $breadcrumbs
      * @param PageRepository $pages
      */
-    public function __construct(Breadcrumbs $breadcrumbs, PageRepository $pages)
+    public function __construct(PageRepository $pages)
     {
-        parent::__construct($breadcrumbs);
-
         $this->pages = $pages;
     }
 
