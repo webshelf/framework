@@ -40,4 +40,4 @@
     */
     Route::get('/admin/login')  ->uses('AuthController@form')           ->name('login');
     Route::post('/admin/login') ->uses('AuthController@login')          ->name('AuthLogin');
-    Route::get('/admin/logout') ->uses('AuthController@logout')         ->name('AuthLogout')    ->middleware('auth');
+    Route::get('/admin/logout') ->uses('AuthController@logout')         ->name('AuthLogout');

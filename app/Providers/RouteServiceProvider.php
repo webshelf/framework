@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapModulesRoutes();
 
-        //
+        //  dd((app(\Illuminate\Routing\Router::class))->getRoutes());
     }
 
     /**
@@ -80,7 +80,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapPluginRoutes()
     {
-        Route::middleware('web')->group(base_path('routes/plugin.php'));
+        Route::middleware(['web', 'auth'])->group(base_path('routes/plugin.php'));
     }
 
     /**
@@ -101,10 +101,10 @@ class RouteServiceProvider extends ServiceProvider
             $frontendRoute = base_path(sprintf('app/modules/%s/routes/frontend.php', $module['title']));
 
             // Frontend are routes that can be accessed by visitors.
-            Route::middleware('web')->namespace($namespace)->group($frontendRoute);
+            Route::middleware(['web'])->namespace($namespace)->group($frontendRoute);
 
             // Backend are routes that can only be accessed to those with access.
-            Route::middleware('web', 'auth')->namespace($namespace)->group($backendRoute);
+            Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);
         }
     }
 }
