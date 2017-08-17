@@ -6,9 +6,11 @@
  * Time: 17:59.
  */
 
-namespace App\Http\Controllers;
+namespace App\Modules\Sitemap;
 
+use App\Http\Controllers\DashboardController;
 use App\Model\Plugin;
+use App\Modules\ModuleEngine;
 use Illuminate\Contracts\View\View;
 use App\Classes\SitemapGenerator;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,11 +18,11 @@ use App\Classes\Repositories\PluginRepository;
 use App\Classes\Interfaces\SitemappableInterface;
 
 /**
- * Class SitemapController.
+ * Class Controller.
  *
  * Generate the site content sitemap.xml for SEO.
  */
-class SitemapController extends Controller
+class Controller extends ModuleEngine
 {
     /**
      * @var PluginRepository
@@ -33,15 +35,13 @@ class SitemapController extends Controller
     private $sitemap;
 
     /**
-     * SitemapController constructor.
+     * Controller constructor.
      *
      * @param SitemapGenerator $sitemap
      * @param PluginRepository $plugins
      */
     public function __construct(SitemapGenerator $sitemap, PluginRepository $plugins)
     {
-        $this->middleware('auth', ['only' => 'iframe']);
-
         $this->sitemap = $sitemap;
 
         $this->plugins = $plugins;
@@ -61,7 +61,7 @@ class SitemapController extends Controller
         // get and create an array of all the sitemaps to be loaded
         // send to the view for display.
 
-        return $dashboard->view()->make('dashboard::modules.sitemap.iframe')->with('sitemaps', $this->sitemap->generateArray());
+        return $dashboard->view()->make('modules::sitemap.blade.iframe')->with('sitemaps', $this->sitemap->generateArray());
     }
 
     /**

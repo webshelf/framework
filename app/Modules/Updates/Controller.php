@@ -6,15 +6,17 @@
  * Time: 21:36.
  */
 
-namespace App\Http\Controllers;
+namespace App\Modules\Updates;
 
 use App\Classes\Breadcrumbs;
 use App\Classes\Repositories\MigrationRepository;
+use App\Http\Controllers\DashboardController;
+use App\Modules\ModuleEngine;
 
 /**
- * Class UpdatesController.
+ * Class Controller.
  */
-class UpdatesController extends DashboardController
+class Controller extends ModuleEngine
 {
     /**
      * @var MigrationRepository
@@ -22,14 +24,11 @@ class UpdatesController extends DashboardController
     private $migrations;
 
     /**
-     * UpdatesController constructor.
-     * @param Breadcrumbs $breadcrumbs
+     * Controller constructor.
      * @param MigrationRepository $migrations
      */
-    public function __construct(Breadcrumbs $breadcrumbs, MigrationRepository $migrations)
+    public function __construct(MigrationRepository $migrations)
     {
-        parent::__construct($breadcrumbs);
-
         $this->migrations = $migrations;
     }
 
@@ -38,6 +37,6 @@ class UpdatesController extends DashboardController
      */
     public function index()
     {
-        return $this->view()->make('dashboard::modules.updates.view')->with('migrations', $this->migrations->all());
+        return $this->make('view')->with('migrations', $this->migrations->all());
     }
 }

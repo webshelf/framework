@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Exception;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Symfony\Component\Routing\Router;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,8 +26,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -39,6 +40,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapPluginRoutes();
+
+        $this->mapModulesRoutes();
+
         //
     }
 
@@ -51,15 +56,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        // these are hardcoded created.
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
-
-        // these are dynamically created.
-        // the namespace is handled by the plugin helper.
-        Route::middleware('web')
-            ->group(base_path('routes/plugin.php'));
+        Route::middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
     }
 
     /**
@@ -71,9 +68,43 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+        Route::prefix('api')->middleware('api')->namespace($this->namespace)->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the backend routes for the application.
+     *
+     * Plugins have dynamic creation of web vs admin.
+     *
+     * @return void
+     */
+    protected function mapPluginRoutes()
+    {
+        Route::middleware('web')->group(base_path('routes/plugin.php'));
+    }
+
+    /**
+     * Define the backend routes for the application.0
+
+     * Modules are loaded as modularity.
+     *
+     * @return void
+     */
+    protected function mapModulesRoutes()
+    {
+        foreach(config('modules') as $module)
+        {
+            $namespace = sprintf('App\Modules\%s', $module['title']);
+
+            $backendRoute = base_path(sprintf('app/modules/%s/routes/backend.php', $module['title']));
+
+            $frontendRoute = base_path(sprintf('app/modules/%s/routes/frontend.php', $module['title']));
+
+            // Frontend are routes that can be accessed by visitors.
+            Route::middleware('web')->namespace($namespace)->group($frontendRoute);
+
+            // Backend are routes that can only be accessed to those with access.
+            Route::middleware('web')->namespace($namespace)->group($backendRoute);
+        }
     }
 }

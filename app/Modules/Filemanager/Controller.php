@@ -6,14 +6,17 @@
  * Time: 22:00
  */
 
-namespace App\Http\Controllers;
+namespace App\Modules\Filemanager;
+
+use App\Http\Controllers\DashboardController;
+use App\Modules\ModuleEngine;
 
 /**
- * Class FileManagerController
+ * Class Controller
  *
  * @package App\Http\Controllers
  */
-class FileManagerController extends DashboardController
+class Controller extends ModuleEngine
 {
 
     /**
@@ -21,6 +24,6 @@ class FileManagerController extends DashboardController
      */
     public function load()
     {
-        return $this->view()->make('dashboard::modules.filemanager.view');
+        return $this->make('view');
     }
 }

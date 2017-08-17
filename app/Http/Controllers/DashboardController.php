@@ -22,22 +22,6 @@ use App\Classes\Repositories\ActivityRepository;
  */
 class DashboardController extends Controller
 {
-    /**
-     * @var \Illuminate\Routing\ControllerMiddlewareOptions
-     */
-    protected $authentication;
-
-    /**
-     * This is the dashboard controller, this should be used
-     * whenever any class is going to show the dashboard to
-     * the user.
-     *
-     * DashboardController constructor
-     */
-    public function __construct()
-    {
-        $this->authentication = $this->middleware('auth');
-    }
 
     /**
      * This should be used when a dashboard view is rendered.

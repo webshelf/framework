@@ -6,15 +6,16 @@
  * Time: 18:04.
  */
 
-namespace App\Http\Controllers;
+namespace App\Modules\Image;
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use App\Classes\ImageUploader;
 
 /**
- * Class ImageController.
+ * Class Controller.
  */
-class ImageController extends DashboardController
+class Controller extends DashboardController
 {
     // upload image path absolute to website public folder.
     private $upload_dir = 'uploads/';

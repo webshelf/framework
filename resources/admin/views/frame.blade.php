@@ -262,93 +262,29 @@
                                 @endforeach
 
                                 <li class="heading">
-                                    <h3>Application</h3>
+                                    <h3>Modules</h3>
                                 </li>
 
-                                <li>
+                                @foreach(config('modules') as $module)
 
-                                    <div class="tile {{ $breadcrumbs->contain('updates', 3) ? 'active open' : null }}">
+                                    <li>
 
-                                        <a href="{{ url('/admin/updates') }}">
-                                            <i class="fa fa-history icon" aria-hidden="true"></i>
+                                        <div class="tile {{ $breadcrumbs->contain($module['title'], 3) ? 'active open' : null }}">
 
-                                            <span class="title">Updates</span>
+                                            <a href="{{ url($module['url']) }}">
+                                                <i class="{{ $module['icon'] }} icon" aria-hidden="true"></i>
 
-                                            <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
+                                                <span class="title">{{ $module['title'] }}</span>
 
-                                        </a>
+                                                <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
 
-                                    </div>
+                                            </a>
 
-                                </li>
+                                        </div>
 
-                                <li>
+                                    </li>
 
-                                    <div class="tile {{ $breadcrumbs->contain('sitemap', 3) ? 'active open' : null }}">
-
-                                        <a href="{{ url('/admin/sitemap') }}">
-                                            <i class="fa fa-sitemap icon" aria-hidden="true"></i>
-
-                                            <span class="title">Sitemap</span>
-
-                                            <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </li>
-
-                                <li>
-
-                                    <div class="tile {{ $breadcrumbs->contain('settings', 3) ? 'active open' : null }}">
-
-                                        <a href="{{ url('/admin/settings') }}">
-                                            <i class="fa fa-cogs icon" aria-hidden="true"></i>
-
-                                            <span class="title">Setings</span>
-
-                                            <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </li>
-
-                                <li>
-
-                                    <div class="tile {{ $breadcrumbs->contain('accounts', 3) ? 'active open' : null }}">
-
-                                        <a href="{{ url('/admin/accounts') }}">
-                                            <i class="fa fa-users icon" aria-hidden="true"></i>
-
-                                            <span class="title">Accounts</span>
-
-                                            <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </li>
-
-                                <li>
-
-                                    <div class="tile {{ $breadcrumbs->contain('filemanager', 3) ? 'active open' : null }}">
-
-                                        <a href="{{ route('FileManager') }}">
-                                            <i class="fa fa-microchip icon" aria-hidden="true"></i>
-
-                                            <span class="title">FileManager</span>
-
-                                            <i class="fa fa-angle-left icon right" aria-hidden="true"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </li>
+                                @endforeach
 
                             </ul>
 

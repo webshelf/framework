@@ -6,16 +6,18 @@
  * Time: 17:32.
  */
 
-namespace App\Http\Controllers;
+namespace App\Modules\Settings;
 
 use App\Classes\Breadcrumbs;
+use App\Http\Controllers\DashboardController;
+use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
 use App\Classes\Repositories\SettingsRepository;
 
 /**
- * Class SettingsController.
+ * Class Controller.
  */
-class SettingsController extends DashboardController
+class Controller extends ModuleEngine
 {
     /**
      * @var SettingsRepository
@@ -23,14 +25,11 @@ class SettingsController extends DashboardController
     private $settings;
 
     /**
-     * SettingsController constructor.
-     * @param Breadcrumbs $breadcrumbs
+     * Controller constructor.
      * @param SettingsRepository $settings
      */
-    public function __construct(Breadcrumbs $breadcrumbs, SettingsRepository $settings)
+    public function __construct(SettingsRepository $settings)
     {
-        parent::__construct($breadcrumbs);
-
         $this->settings = $settings;
     }
 
@@ -44,7 +43,7 @@ class SettingsController extends DashboardController
      */
     public function edit()
     {
-        return $this->view()->make('dashboard::modules.settings.edit');
+        return $this->make('edit');
     }
 
     public function save(Request $request)

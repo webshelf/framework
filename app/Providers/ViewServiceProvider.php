@@ -25,6 +25,11 @@ class ViewServiceProvider extends ServiceProvider
         $this->loadViewsFrom(resource_path('views'), 'website');
 
         /*
+         * Load the module view blade files dynamically.
+         */
+        $this->loadViewsFrom(base_path('app/modules'), 'modules');
+
+        /*
          * Errors can be overwritten by the front end website, default to dashboard errors.
          */
         $this->loadViewsFrom([resource_path('views/errors'), resource_path('admin/views/errors')], 'errors');

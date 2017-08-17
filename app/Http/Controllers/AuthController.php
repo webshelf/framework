@@ -69,7 +69,7 @@ class AuthController extends Controller
      */
     public function form()
     {
-        return view()->make('dashboard::modules.accounts.login');
+        return view()->make('dashboard::login');
     }
 
     /**

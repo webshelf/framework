@@ -6,8 +6,10 @@
  * Time: 20:13.
  */
 
-namespace App\Http\Controllers;
+namespace App\Modules\Accounts;
 
+use App\Http\Controllers\DashboardController;
+use App\Modules\ModuleEngine;
 use DB as Database;
 use App\Classes\Email;
 use App\Classes\Popup;
@@ -19,9 +21,9 @@ use App\Classes\Repositories\RoleRepository;
 use App\Classes\Repositories\AccountRepository;
 
 /**
- * Class AccountsController.
+ * Class Controller.
  */
-class AccountsController extends DashboardController
+class Controller extends ModuleEngine
 {
     /**
      * @var AccountRepository
@@ -39,16 +41,11 @@ class AccountsController extends DashboardController
      * the user.
      *
      * DashboardController constructor.
-     * @param Breadcrumbs $breadcrumbs
      * @param AccountRepository $accounts
      * @param RoleRepository $roles
      */
-    public function __construct(Breadcrumbs $breadcrumbs, AccountRepository $accounts, RoleRepository $roles)
+    public function __construct(AccountRepository $accounts, RoleRepository $roles)
     {
-        parent::__construct($breadcrumbs);
-
-        $this->middleware('auth');
-
         $this->accounts = $accounts;
 
         $this->roles = $roles;
@@ -59,7 +56,7 @@ class AccountsController extends DashboardController
      */
     public function index()
     {
-        return $this->view()->make('dashboard::modules.accounts.index')->with('accounts', $this->accounts->all());
+        return $this->make('index')->with('accounts', $this->accounts->all());
     }
 
     /**
@@ -67,7 +64,7 @@ class AccountsController extends DashboardController
      */
     public function register()
     {
-        return $this->view()->make('dashboard::modules.accounts.register')->with('roles', $this->roles->whereRolesGreaterOrEqualToMyAccount());
+        return $this->make('register')->with('roles', $this->roles->whereRolesGreaterOrEqualToMyAccount());
     }
 
     /**
@@ -151,7 +148,7 @@ class AccountsController extends DashboardController
         }
 
         if ($account->forename() == '' || $account->surname() == '' || $account->password() == '') {
-            return view()->make('email.view::register.verification')->with('account', $account);
+            return $this->make('verification')->with('account', $account);
         }
 
         $account->setVerified(true)->save();
@@ -222,7 +219,7 @@ class AccountsController extends DashboardController
         }
 
         if (! is_null($account)) {
-            return $this->view()->make('dashboard::modules.accounts.profile')->with('account', $account)->with('roles', $this->roles->whereRolesGreaterOrEqualToMyAccount());
+            return $this->make('profile')->with('account', $account)->with('roles', $this->roles->whereRolesGreaterOrEqualToMyAccount());
         }
 
         // let the user know the account couldn't be loaded and redirect back to dashboard.
