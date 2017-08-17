@@ -104,7 +104,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')->namespace($namespace)->group($frontendRoute);
 
             // Backend are routes that can only be accessed to those with access.
-            Route::middleware('web')->namespace($namespace)->group($backendRoute);
+            Route::middleware('web', 'auth')->namespace($namespace)->group($backendRoute);
         }
     }
 }

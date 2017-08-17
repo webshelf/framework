@@ -49,7 +49,7 @@ class PageController extends Controller
      */
     public function view()
     {
-        return $this->load((new FrontPageModel($this->currentPage)));
+        return $this->index((new FrontPageModel($this->currentPage)));
     }
 
     /**
@@ -65,7 +65,7 @@ class PageController extends Controller
      * @param FrontPage $page
      * @return \Illuminate\Http\Response|mixed|\Symfony\Component\HttpFoundation\Response
      */
-    private function load(FrontPage $page)
+    private function index(FrontPage $page)
     {
         // if the current route is the homepage.
         // we should return the homepage view.

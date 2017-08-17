@@ -42,7 +42,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @internal param Facebook $facebook
      */
-    public function overview(Analytics $analytics)
+    public function index(Analytics $analytics)
     {
         return $this->view()->make('dashboard::overview')->with('fb_messages', Facebook::loadPostsFrom('183404672136705', 5))->with('products', plugins()->all())->with('interactions', app(ActivityRepository::class)->all())->with('visitors', $analytics->fetchVisitorsByMonth(Period::days(150))->sortBy('users'));
     }

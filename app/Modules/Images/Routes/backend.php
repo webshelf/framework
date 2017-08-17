@@ -19,3 +19,4 @@
 
     // Post Requests.
     // ==================================================================================
+    // Route::post('/admin/upload/image/{path?}', ['as' => 'ImageUpload',         'uses' => 'Controller@ajaxSingleUpload']);

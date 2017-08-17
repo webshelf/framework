@@ -9,7 +9,7 @@ use App\Classes\Repositories\PluginRepository;
 /**
  * Class PluginEngine.
  */
-abstract class PluginEngine extends DashboardController
+abstract class PluginEngine
 {
     /**
      * @var
@@ -29,7 +29,7 @@ abstract class PluginEngine extends DashboardController
 
         view()->share('plugin', $this->pluginData());
 
-        return $this->view()->make($this->pluginName().'::'.$template);
+        return view()->make($this->pluginName().'::'.$template);
     }
 
     /**
