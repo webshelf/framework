@@ -9,7 +9,7 @@
 namespace App\Modules;
 
 
-class ModuleEngine
+abstract class ModuleEngine
 {
 
     /**

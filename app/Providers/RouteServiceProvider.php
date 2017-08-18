@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Model\Plugin;
 use Exception;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -76,11 +77,24 @@ class RouteServiceProvider extends ServiceProvider
      *
      * Plugins have dynamic creation of web vs admin.
      *
+     "
      * @return void
      */
     protected function mapPluginRoutes()
     {
-        Route::middleware(['web', 'auth'])->group(base_path('routes/plugin.php'));
+        /** @var Plugin $plugin */
+        foreach (plugins()->enabled() as $plugin)
+        {
+            $namepsace = sprintf('App\Plugins\%s', $plugin->name());
+
+            $backendRoute = base_path(sprintf('app/plugins/%s/routes/backend.php', $plugin->name()));
+
+            $frontendRoute = base_path(sprintf('app/plugins/%s/routes/frontend.php', $plugin->name()));
+
+            Route::middleware(['web'])->namespace($namepsace)->group($frontendRoute);
+
+            Route::middleware(['web', 'auth'])->namespace($namepsace)->group($backendRoute);
+        }
     }
 
     /**

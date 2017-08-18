@@ -11,11 +11,12 @@ namespace App\Modules\Sitemap;
 use App\Http\Controllers\DashboardController;
 use App\Model\Plugin;
 use App\Modules\ModuleEngine;
+use App\Plugins\News\FrontendController;
 use Illuminate\Contracts\View\View;
 use App\Classes\SitemapGenerator;
 use Illuminate\Database\Eloquent\Collection;
 use App\Classes\Repositories\PluginRepository;
-use App\Classes\Interfaces\SitemappableInterface;
+use App\Classes\Interfaces\Sitemap;
 
 /**
  * Class Controller.
@@ -77,13 +78,19 @@ class Controller extends ModuleEngine
 
     private function loadPluginSitemaps(Collection $plugins)
     {
-        /** @var Plugin $plugin */
-        foreach ($plugins as $plugin) {
-            $controller = userPluginController($plugin->name(), null, true);
 
-            if (class_exists($controller)) {
-                if (userPluginController($plugin->name()) instanceof SitemappableInterface) {
-                    $this->sitemap(userPluginController($plugin->name()));
+        /** @var Plugin $plugin */
+        foreach ($plugins as $plugin)
+        {
+            $classLocation = sprintf('App\Plugins\%s\FrontendController', $plugin->name());
+
+            if (class_exists($classLocation))
+            {
+                $class = new $classLocation;
+
+                if ($class instanceof Sitemap)
+                {
+                    $this->sitemap($class);
                 }
             }
         }
@@ -92,10 +99,10 @@ class Controller extends ModuleEngine
     /**
      * Get the plugin sitemap function and its contents.
      *
-     * @param SitemappableInterface $plugin
+     * @param Sitemap $plugin
      * @return bool|mixed
      */
-    private function sitemap(SitemappableInterface $plugin)
+    private function sitemap(Sitemap $plugin)
     {
         return $plugin->sitemap($this->sitemap);
     }

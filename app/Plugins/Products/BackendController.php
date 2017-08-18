@@ -8,18 +8,14 @@
 
 namespace App\Plugins\Products;
 
-use App\Model\Plugin;
-use Illuminate\Routing\Router;
-use App\Classes\Breadcrumbs;
 use App\Plugins\PluginEngine;
-use App\Classes\Interfaces\RouteableInterface;
 use App\Classes\Repositories\PluginRepository;
 use App\Classes\Interfaces\InstallableInterface;
 
 /**
  * Class AdminController.
  */
-class AdminController extends PluginEngine implements RouteableInterface
+class BackendController extends PluginEngine
 {
     private $products;
 
@@ -33,7 +29,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      */
     public function index()
     {
-        return $this->blade('index')->with('products', plugins()->all());
+        return $this->make('index')->with('products', plugins()->all());
     }
 
     /**
@@ -67,21 +63,5 @@ class AdminController extends PluginEngine implements RouteableInterface
         }
 
         return redirect()->intended(route('ProductIndex'));
-    }
-
-    /**
-     * Routes required for the plugin to operate correctly.
-     * These define all available urls that require Auth, or not.
-     * These are loaded on application boot time and may be cached.
-     *
-     * @param Router $router
-     * @return mixed
-     */
-    public function routes(Router $router)
-    {
-        $router->get('/admin/products', ['as'=>'ProductIndex', 'uses'=>adminPluginController('products', 'index')]);
-        $router->get('/admin/products/{plugin}/status', ['as'=>'ProductStatus', 'uses'=>adminPluginController('products', 'ProductStatus')]);
-
-        return $router;
     }
 }

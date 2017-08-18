@@ -8,12 +8,12 @@
 
 namespace App\Plugins\Carousels;
 
-use App\Classes\Interfaces\FeedableInterface;
+use App\Plugins\PluginEngine;
 
 /**
  * Class UserController.
  */
-class UserController implements FeedableInterface
+class FrontendController extends PluginEngine
 {
     /**
      * Feeds are data that will be attached to a page loading

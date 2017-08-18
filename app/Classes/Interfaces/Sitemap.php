@@ -13,11 +13,11 @@ use App\Classes\SitemapGenerator;
 /**
  * Interface SitemappableInterface.
  */
-interface SitemappableInterface
+interface Sitemap
 {
     /**
      * The sitemap function allows plugins to quickly and effectively
-     * create and store new content for the SEO Sitemap Controller.
+     * show their content for search engines in a modular way.
      *
      * @param SitemapGenerator $sitemap
      * @return SitemapGenerator

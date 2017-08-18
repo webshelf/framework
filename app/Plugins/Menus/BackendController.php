@@ -25,7 +25,7 @@ use App\Classes\Interfaces\RouteableInterface;
 /**
  * Class Controller.
  */
-class AdminController extends PluginEngine implements RouteableInterface
+class BackendController extends PluginEngine
 {
     /**
      * @var MenuRepository
@@ -55,7 +55,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      */
     public function index()
     {
-        return $this->blade('index')->with('menus', $this->menus->allByPriorityOrder())->with('pages', $this->pages->allPagesWithoutMenusAndEditable())->with('submenu_group', $this->menus->allSubmenusByPriorityOrderAndGrouped());
+        return $this->make('index')->with('menus', $this->menus->allByPriorityOrder())->with('pages', $this->pages->allPagesWithoutMenusAndEditable())->with('submenu_group', $this->menus->allSubmenusByPriorityOrderAndGrouped());
     }
 
     /**
@@ -63,7 +63,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      */
     public function create()
     {
-        return $this->blade('create')->with('submenus', $this->menus->listAllMenusNotRequired())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
+        return $this->make('create')->with('submenus', $this->menus->listAllMenusNotRequired())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
     }
 
     /**
@@ -240,7 +240,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function make(Request $request, Menu $menu)
+    public function store(Request $request, Menu $menu)
     {
         $request['slug'] = str_slug($request['title']);
 
@@ -372,29 +372,5 @@ class AdminController extends PluginEngine implements RouteableInterface
         $menu->save();
 
         return redirect()->route('menus');
-    }
-
-    /**
-     * Routes required for the plugin to operate correctly.
-     * These define all available urls that require Auth, or not.
-     * These are loaded on application boot time and may be cached.
-     *
-     * @param Router $router
-     * @return mixed
-     */
-    public function routes(Router $router)
-    {
-        $router->get('/admin/menus/', ['as' => 'menus',      'uses' => adminPluginController('menus', 'index')]);
-
-        $router->get('/admin/menus/create', ['as' => 'CreateMenu', 'uses' => adminPluginController('menus', 'create')]);
-        $router->post('/admin/menus/make', ['as' => 'MakeMenu',   'uses' => adminPluginController('menus', 'make')]);
-        $router->post('/admin/menus/attach', ['as' => 'AttachMenu', 'uses' => adminPluginController('menus', 'attach')]);
-        $router->post('/admin/menus/page', ['as' => 'PageMenu',   'uses' => adminPluginController('menus', 'page')]);
-
-        $router->post('/admin/menus/order', ['as' => 'UpdateOrder', 'uses' => adminPluginController('menus', 'ajax_order')]);
-        $router->post('/admin/menus/update', ['as' => 'UpdateMenu',  'uses' => adminPluginController('menus', 'ajax_update')]);
-        $router->post('/admin/menus/delete/{id}', ['as' => 'DeleteMenu',  'uses' => adminPluginController('menus', 'ajax_delete')]);
-
-        return $router;
     }
 }

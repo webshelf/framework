@@ -73,6 +73,8 @@ class Handler extends ExceptionHandler
             return ErrorController::database();
         }
 
+        dd($exception);
+
         return parent::render($request, $exception);
     }
 

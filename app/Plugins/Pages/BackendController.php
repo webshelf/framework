@@ -11,17 +11,14 @@ namespace App\Plugins\Pages;
 use App\Model\Page;
 use App\Classes\Popup;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Router;
-use App\Classes\Breadcrumbs;
 use App\Plugins\PluginEngine;
 use Illuminate\Contracts\View\View;
 use App\Classes\Repositories\PageRepository;
-use App\Classes\Interfaces\RouteableInterface;
 
 /**
  * Class Controller.
  */
-class AdminController extends PluginEngine implements RouteableInterface
+class BackendController extends PluginEngine
 {
     /**
      * @var PageRepository
@@ -44,7 +41,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      */
     public function index()
     {
-        return $this->blade('index')->with('pages', $this->pages->all());
+        return $this->make('index')->with('pages', $this->pages->all());
     }
 
     /**
@@ -55,7 +52,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      */
     public function edit($name)
     {
-        return $this->blade('form')->with('page', $this->pages->whereName($name));
+        return $this->make('form')->with('page', $this->pages->whereName($name));
     }
 
     /**
@@ -65,7 +62,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      */
     public function create()
     {
-        return $this->blade('form');
+        return $this->make('form');
     }
 
     /**
@@ -75,7 +72,7 @@ class AdminController extends PluginEngine implements RouteableInterface
      * @param Page $page
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function make(Request $request, Page $page)
+    public function store(Request $request, Page $page)
     {
         $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
 
@@ -163,25 +160,5 @@ class AdminController extends PluginEngine implements RouteableInterface
         $request['enabled'] ? $page->enablePage() : null;
 
         return $page;
-    }
-
-    /**
-     * Routes required for the plugin to operate correctly.
-     * These define all available urls that require Auth, or not.
-     * These are loaded on application boot time and may be cached.
-     *
-     * @param Router $router
-     * @return mixed
-     */
-    public function routes(Router $router)
-    {
-        $router->get('/admin/pages/', ['as' => 'pages',      'uses' => adminPluginController('pages', 'index')]);
-        $router->get('/admin/pages/edit/{name}', ['as' => 'EditPage',   'uses' => adminPluginController('pages', 'edit')]);
-        $router->post('/admin/pages/save/{name}', ['as' => 'SavePage',   'uses' => adminPluginController('pages', 'save')]);
-        $router->get('/admin/pages/create', ['as' => 'CreatePage', 'uses' => adminPluginController('pages', 'create')]);
-        $router->post('/admin/pages/make', ['as' => 'MakePage',   'uses' => adminPluginController('pages', 'make')]);
-        $router->post('/admin/pages/delete/{name}', ['as' => 'DeletePage', 'uses' => adminPluginController('pages', 'delete')]);
-
-        return $router;
     }
 }

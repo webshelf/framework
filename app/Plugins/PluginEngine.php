@@ -3,33 +3,44 @@
 namespace App\Plugins;
 
 use App\Model\Plugin;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Controller;
 use App\Classes\Repositories\PluginRepository;
 
 /**
  * Class PluginEngine.
  */
-abstract class PluginEngine
+abstract class PluginEngine extends Controller
 {
     /**
-     * @var
+     * Return the stored module name.
+     *
+     * @return string
      */
-    private $plugin_name;
+    private $pluginName;
 
     /**
-     * Return a view that is in the same directory as the plugin.
+     * Locate the blade template from the modules folder.
      *
-     * @param $template
+     * @param string $blade_template
      * @return \Illuminate\Contracts\View\View
-     * @internal param $blade_template
      */
-    protected function blade($template)
+    public function make(string $blade_template)
     {
-        $this->addPluginViewLocation();
+        return view()->make(sprintf('plugins::%s.blade.%s', $this->pluginName(), $blade_template));
+    }
 
-        view()->share('plugin', $this->pluginData());
+    /**
+     * Get the module name by checking the class name location.
+     *
+     * @return mixed
+     */
+    private function pluginName()
+    {
+        if($this->pluginName)
+            return $this->pluginName;
 
-        return view()->make($this->pluginName().'::'.$template);
+        return $this->pluginName = explode('\\', get_class($this))[2];
+
     }
 
     /**
@@ -41,54 +52,16 @@ abstract class PluginEngine
      */
     protected function redirect($blade_template)
     {
-        $this->addPluginViewLocation();
-
         return redirect()->intended($this->pluginName().'::'.$blade_template);
     }
 
     /**
-     * The the plugins name.
+     * @todo what does this do and document it.
      *
-     * @return string
+     * @return Plugin|array|\stdClass
      */
-    private function pluginName()
-    {
-        return $this->plugin_name ?: $this->explodeDirName();
-    }
-
-    /**
-     * Plugin name by way of the folder, hacky huh ? O>O.
-     */
-    private function explodeDirName()
-    {
-        $name = explode('\\', get_class($this));
-
-        return $this->plugin_name = $name['2'];
-    }
-
-    /**
-     * Add the plugins views to the list of views for loading.
-     *
-     * No point sorting this as an array since we only visit one place at a time.
-     */
-    private function addPluginViewLocation()
-    {
-        view()->addNamespace($this->pluginName(), (__DIR__.'/'.$this->pluginName()));
-    }
-
     protected function pluginData()
     {
         return (new PluginRepository(new Plugin))->whereName($this->pluginName());
-    }
-
-    /**
-     * Return the self classes method namespaced.
-     *
-     * @param string $method
-     * @return string
-     */
-    protected function method(string $method)
-    {
-        return adminPluginController($this->pluginName(), $method);
     }
 }

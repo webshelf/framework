@@ -14,20 +14,17 @@ use App\Model\Page;
 use App\Model\Plugin;
 use App\Model\Article;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Router;
-use App\Classes\Breadcrumbs;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use App\Classes\Interfaces\RouteableInterface;
 use App\Classes\Repositories\ArticleRepository;
 use App\Classes\Interfaces\InstallableInterface;
-use App\Plugins\Menus\AdminController as MenuController;
+use App\Plugins\Menus\BackendController as MenuController;
 
 /**
  * Class Controller.
  */
-class AdminController extends PluginEngine implements RouteableInterface, InstallableInterface
+class BackendController extends PluginEngine implements InstallableInterface
 {
     private $articles;
 
@@ -43,7 +40,7 @@ class AdminController extends PluginEngine implements RouteableInterface, Instal
      */
     public function index()
     {
-        return $this->blade('index')->with('articles', $this->articles->all());
+        return $this->make('index')->with('articles', $this->articles->all());
     }
 
     /**
@@ -53,7 +50,7 @@ class AdminController extends PluginEngine implements RouteableInterface, Instal
      */
     public function create()
     {
-        return $this->blade('create');
+        return $this->make('create');
     }
 
     /**
@@ -99,7 +96,7 @@ class AdminController extends PluginEngine implements RouteableInterface, Instal
      */
     public function edit($slug)
     {
-        return $this->blade('edit')->with('article', $this->articles->whereSlug($slug));
+        return $this->make('edit')->with('article', $this->articles->whereSlug($slug));
     }
 
     /**
@@ -130,23 +127,6 @@ class AdminController extends PluginEngine implements RouteableInterface, Instal
         $article->modifier()->associate(account())->save();
 
         return redirect()->intended(route('news'));
-    }
-
-    /**
-     * Routes required for the plugin to operate correctly.
-     * These define all available urls that require Auth, or not.
-     * These are loaded on application boot time and may be cached.
-     *
-     * @param Router $router
-     * @return mixed
-     */
-    public function routes(Router $router)
-    {
-        $router->get('/admin/news/', ['as' =>'news',       'uses' => adminPluginController('news', 'index')]);
-        $router->get('/admin/news/create', ['as' =>'CreateNews', 'uses' => adminPluginController('news', 'create')]);
-        $router->post('/admin/news/store', ['as' =>'StoreNews',  'uses' => adminPluginController('news', 'store')]);
-        $router->get('/edit/news/{slug}', ['as' =>'EditNews',   'uses' => adminPluginController('news', 'edit')]);
-        $router->post('/edit/news/{slug}', ['as' =>'UpdateNews', 'uses' => adminPluginController('news', 'update')]);
     }
 
     /**

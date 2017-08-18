@@ -2,17 +2,15 @@
 
 namespace App\Plugins\Facebook;
 
-/*
- * Created by PhpStorm.
- * User: Mark
- * Date: 03/10/2016
- * Time: 21:53
- */
-use App\Http\Controllers\Controller;
 use App\Classes\Library\Services\Facebook;
-use App\Classes\Interfaces\FeedableInterface;
+use App\Plugins\PluginEngine;
 
-class UserController extends Controller implements FeedableInterface
+/**
+ * Class FrontendController
+ *
+ * @package App\Plugins\Facebook
+ */
+class FrontendController extends PluginEngine
 {
     /**
      * Feeds if enabled should be sent

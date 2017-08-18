@@ -8,6 +8,7 @@
 
 namespace App\Plugins\News;
 
+use App\Plugins\PluginEngine;
 use Illuminate\Routing\Router;
 use App\Classes\SitemapGenerator;
 use App\Http\Controllers\Controller;
@@ -15,14 +16,14 @@ use App\Classes\Repositories\PageRepository;
 use App\Classes\Interfaces\FeedableInterface;
 use App\Classes\Interfaces\RouteableInterface;
 use App\Classes\Repositories\ArticleRepository;
-use App\Classes\Interfaces\SitemappableInterface;
+use App\Classes\Interfaces\Sitemap;
 
 /**
  * Class UserController.
  *
  * News controller loads front end view for the user.
  */
-class UserController extends Controller implements RouteableInterface, SitemappableInterface, FeedableInterface
+class FrontendController extends PluginEngine implements Sitemap, FeedableInterface
 {
     /**
      * @param FrontPageLoader $load
@@ -34,19 +35,6 @@ class UserController extends Controller implements RouteableInterface, Sitemappa
     public function index(FrontPageLoader $load, PageRepository $page, ArticleRepository $news)
     {
         return $load->model($page->whereName('news'))->with('news.articles', $news->paginateEnabled(7))->loadNormal(true)->view('index');
-    }
-
-    /**
-     * Routes required for the plugin to operate correctly.
-     * These define all available urls that require Auth, or not.
-     * These are loaded on application boot time and may be cached.
-     *
-     * @param Router $router
-     * @return mixed
-     */
-    public function routes(Router $router)
-    {
-        return $router;
     }
 
     /**

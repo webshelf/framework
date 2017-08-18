@@ -21,8 +21,7 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/Global.php",
-            "app/Helpers/Plugins.php"
+            "app/Helpers/Global.php"
         ],
         "classmap": [
             "database/seeds",
