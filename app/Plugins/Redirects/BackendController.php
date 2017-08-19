@@ -49,7 +49,7 @@ class BackendController extends PluginEngine
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function make()
+    public function store()
     {
         return $this->blade('make')->with('pages', app(PageRepository::class)->makeList());
     }

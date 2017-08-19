@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Model\Plugin;
-use Exception;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Symfony\Component\Debug\Exception\FatalThrowableError;
-use Symfony\Component\Routing\Router;
 
+/**
+ * Class RouteServiceProvider
+ *
+ * @package App\Providers
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -85,15 +87,15 @@ class RouteServiceProvider extends ServiceProvider
         /** @var Plugin $plugin */
         foreach (plugins()->enabled() as $plugin)
         {
-            $namepsace = sprintf('App\Plugins\%s', $plugin->name());
+            $namespace = sprintf('App\Plugins\%s', $plugin->name());
 
             $backendRoute = base_path(sprintf('app/plugins/%s/routes/backend.php', $plugin->name()));
 
             $frontendRoute = base_path(sprintf('app/plugins/%s/routes/frontend.php', $plugin->name()));
 
-            Route::middleware(['web'])->namespace($namepsace)->group($frontendRoute);
+            Route::middleware(['web'])->namespace($namespace)->group($frontendRoute);
 
-            Route::middleware(['web', 'auth'])->namespace($namepsace)->group($backendRoute);
+            Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);
         }
     }
 

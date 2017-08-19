@@ -16,7 +16,7 @@
     // Get Requests.
     // ==================================================================================
     Route::get('/admin/redirects', ['as'   => 'redirects',         'uses'=>adminPluginController('redirects', 'index')]);
-    Route::get('/admin/redirects/make', ['as'   => 'MakeRedirect',      'uses'=>adminPluginController('redirects', 'make')]);
+    Route::get('/admin/redirects/make', ['as'   => 'MakeRedirect',      'uses'=>adminPluginController('redirects', 'store')]);
     Route::post('/admin/redirects/create', ['as'   => 'CreateRedirect',    'uses'=>adminPluginController('redirects', 'create')]);
     Route::post('/admin/redirect/delete/{id}', ['uses'=> adminPluginController('redirects', 'ajaxDeleteID')]);
 

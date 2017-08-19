@@ -18,9 +18,9 @@
             $('#elfinder').elfinder({
                 customData: {
                     lang: 'end',
-                    _token: '<?= csrf_token() ?>'
+                    _token: '{{ csrf_token() }}'
                 },
-                url : '<?= route("elfinder.connector") ?>'  // connector URL
+                url : '{{ route("elfinder.connector") }}'  // connector URL
             });
         });
     </script>
