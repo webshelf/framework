@@ -175,5 +175,4 @@ class PluginManager
 
         return $this->viewable;
     }
-
 }

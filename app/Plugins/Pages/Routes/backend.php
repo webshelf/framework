@@ -14,4 +14,3 @@
     */
 
     Route::resource('admin/pages', 'BackendController', ['as' => 'admin']);
-

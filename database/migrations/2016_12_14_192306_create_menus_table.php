@@ -1,9 +1,7 @@
 <?php
 
-use App\Model\Menu;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Classes\Repositories\AccountRepository;
 
 class CreateMenusTable extends Migration
 {

@@ -1,10 +1,10 @@
 <?php
 
-use App\Model\Account;
 use App\Model\Menu;
-use Illuminate\Database\Seeder;
 use App\Model\Page;
 use App\Model\Role;
+use App\Model\Account;
+use Illuminate\Database\Seeder;
 
 class FrameworkTableSeeder extends Seeder
 {
@@ -28,8 +28,8 @@ class FrameworkTableSeeder extends Seeder
     private function seedHomepagePage()
     {
         $page = new Page();
-        $page->slug = "index";
-        $page->seo_title = "Homepage";
+        $page->slug = 'index';
+        $page->seo_title = 'Homepage';
         $page->sitemap = true;
         $page->enabled = true;
         $page->editable = false;
@@ -39,10 +39,10 @@ class FrameworkTableSeeder extends Seeder
     private function seedSuperAccount()
     {
         $account = new Account;
-        $account->email = "marky360@live.ie";
+        $account->email = 'marky360@live.ie';
         $account->password = '$2y$10$h0HdLs5rqQmTFOZWbw596OsP0yXYxc8RILEKDO7oCrwQnSXt5EAJq';
-        $account->forename = "Mark";
-        $account->surname = "Hester";
+        $account->forename = 'Mark';
+        $account->surname = 'Hester';
         $account->verified = true;
         $account->role_id = Role::SUPERUSER;
         $account->save();

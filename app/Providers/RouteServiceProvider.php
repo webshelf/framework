@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**
- * Class RouteServiceProvider
- *
- * @package App\Providers
+ * Class RouteServiceProvider.
  */
 class RouteServiceProvider extends ServiceProvider
 {
@@ -79,14 +77,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * Plugins have dynamic creation of web vs admin.
      *
-     "
+     * "
      * @return void
      */
     protected function mapPluginRoutes()
     {
         /** @var Plugin $plugin */
-        foreach (plugins()->enabled() as $plugin)
-        {
+        foreach (plugins()->enabled() as $plugin) {
             $namespace = sprintf('App\Plugins\%s', $plugin->name());
 
             $backendRoute = base_path(sprintf('app/plugins/%s/routes/backend.php', $plugin->name()));
@@ -100,16 +97,15 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the backend routes for the application.0
-
+     * Define the backend routes for the application.0.
+     *
      * Modules are loaded as modularity.
      *
      * @return void
      */
     protected function mapModulesRoutes()
     {
-        foreach(config('modules') as $module)
-        {
+        foreach (config('modules') as $module) {
             $namespace = sprintf('App\Modules\%s', $module['title']);
 
             $backendRoute = base_path(sprintf('app/modules/%s/routes/backend.php', $module['title']));

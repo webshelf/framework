@@ -3,12 +3,12 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Classes\Interfaces\ActivityInterface;
 use OwenIt\Auditing\Auditable;
-use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use App\Classes\Interfaces\ActivityInterface;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * Class Pages.
@@ -24,8 +24,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property string $seo_title
  * @property string $seo_description
  * @property string $seo_keywords
- * @property boolean $sitemap
- * @property boolean $enabled
+ * @property bool $sitemap
+ * @property bool $enabled
  * @property string $plugin
  * @property int $editable
  * @property int $creator_id
@@ -38,7 +38,6 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 class Page extends EloquentModel implements ActivityInterface, AuditableContract
 {
     use SoftDeletes;
-
     use Auditable;
 
     protected $table = 'pages';
