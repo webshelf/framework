@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 24/08/2017
- * Time: 16:40
+ * Time: 16:40.
  */
 
 namespace Tests\Plugin;
@@ -12,7 +12,6 @@ use Tests\TestCase;
 
 class PagePluginTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -24,5 +23,4 @@ class PagePluginTest extends TestCase
 
         dd($response->isSuccessful());
     }
-
 }

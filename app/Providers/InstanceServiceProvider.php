@@ -8,8 +8,8 @@ use App\Model\Setting;
 use App\Classes\PluginManager;
 use App\Classes\SettingsManager;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
 use App\Exceptions\EngineBootException;
+use Illuminate\Support\ServiceProvider;
 use App\Classes\Repositories\PluginRepository;
 use App\Classes\Repositories\SettingsRepository;
 
