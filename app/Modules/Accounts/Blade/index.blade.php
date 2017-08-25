@@ -45,23 +45,23 @@
 
             @foreach($accounts as $account)
 
-                @if($account->isVerified(true))
+                @if($account->verified == true)
 
                     <tr>
 
-                    <td><a href="{{ route('AccountProfile', $account->email()) }}">{{ $account->fullName() }}</a></td>
+                    <td><a href="{{ route('AccountProfile', $account->email) }}">{{ $account->fullName() }}</a></td>
 
-                    <td>{{ strtolower($account->email()) }}</td>
+                    <td>{{ strtolower($account->email) }}</td>
 
                     <td>{{ $account->role->title() }}</td>
 
-                    <td>{{ $account->loginCount() }}</td>
+                    <td>{{ $account->login_count }}</td>
 
-                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" title="Last logged in {{ $account->lastLogin() ? $account->lastLogin()->diffForHumans() : 'Never'}}">{{ $account->lastLogin() ? $account->lastLogin()->format('F dS Y') : 'Never'}}</a></td>
+                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" title="Last logged in {{ $account->lastLogin ? $account->lastLogin->diffForHumans() : 'Never'}}">{{ $account->lastLogin ? $account->lastLogin->format('F dS Y') : 'Never'}}</a></td>
 
-                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" title="Account created {{ $account->createdAt()->diffForHumans() }}">{{ $account->createdAt()->format('F dS Y') }}</a></td>
+                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" title="Account created {{ $account->created_at->diffForHumans() }}">{{ $account->created_at->format('F dS Y') }}</a></td>
 
-                    <td>{!! bool2Status($account->isVerified(true), 'Verified', 'Unverified') !!}</td>
+                    <td>{!! bool2Status($account->verified, 'Verified', 'Unverified') !!}</td>
 
                     </tr>
 
@@ -69,19 +69,19 @@
 
                     <tr>
 
-                    <td>{{ $account->forename() != '' ? $account->fullName() : 'Unassigned'}}</td>
+                    <td>{{ $account->forename != '' ? $account->fullName() : 'Unassigned'}}</td>
 
-                    <td>{{ strtolower($account->email()) }}</td>
+                    <td>{{ strtolower($account->email) }}</td>
 
                     <td>{{ $account->role->title() }}</td>
 
-                    <td>{{ $account->loginCount() }}</td>
+                    <td>{{ $account->login_count }}</td>
 
                     <td>Never</td>
 
-                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" title="Account created {{ $account->createdAt()->diffForHumans() }}">{{ $account->createdAt()->format('F dS Y') }}</a></td>
+                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" title="Account created {{ $account->created_at->diffForHumans() }}">{{ $account->created_at->format('F dS Y') }}</a></td>
 
-                    <td>{!! bool2Status($account->isVerified(true), 'Verified', 'Unverified') !!}</td>
+                    <td>{!! bool2Status($account->verified, 'Verified', 'Unverified') !!}</td>
 
                     </tr>
 

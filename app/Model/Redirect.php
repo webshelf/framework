@@ -9,6 +9,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Redirect.
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Page toPage
  * @property Page fromPage
  */
-class Redirect extends Engine
+class Redirect extends EloquentModel
 {
     use SoftDeletes;
 

@@ -30,16 +30,6 @@ class CreatePagesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Auth::login(app(AccountRepository::class)->whereID(1));
-
-        $page = new Page;
-        $page->setSlug('index');
-        $page->setSeoTitle('Homepage');
-        $page->setSitemap(true);
-        $page->setEnabled(true);
-        $page->setEditable(false);
-        $page->withoutTracking()->save();
     }
 
     /**

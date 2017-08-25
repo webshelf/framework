@@ -34,4 +34,14 @@ abstract class TestCase extends BaseTestCase
 
         $this->call('GET', $url)->assertStatus(200);
     }
+
+    /**
+     * Login using the test account on the database.
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable
+     */
+    protected function login()
+    {
+        return auth()->loginUsingId(1);
+    }
 }

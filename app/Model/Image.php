@@ -9,11 +9,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Image.
  */
-class Image extends Engine
+class Image extends EloquentModel
 {
     use SoftDeletes;
 

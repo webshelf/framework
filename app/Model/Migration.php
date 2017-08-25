@@ -8,10 +8,12 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+
 /**
- * Class Dalm.
+ * Class Migrations.
  */
-class Migration extends Engine
+class Migration extends EloquentModel
 {
     protected $table = 'updates';
 

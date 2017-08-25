@@ -8,10 +8,12 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+
 /**
  * Class Setting.
  */
-class Setting extends Engine
+class Setting extends EloquentModel
 {
     protected $table = 'settings';
 

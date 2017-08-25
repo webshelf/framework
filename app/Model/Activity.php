@@ -10,13 +10,14 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Classes\Interfaces\ActivityInterface;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Activity.
  *
  * @method ActivityInterface $activity
  */
-class Activity extends Engine
+class Activity extends EloquentModel
 {
     /**
      * The table where this activity model is stored.

@@ -37,7 +37,7 @@ class AuthController extends Controller
         if (auth()->attempt($credentials, $request->has('remember'))) {
 
             // log login activity.
-            $this->logAgentInformation();
+            $this->trackAccountLogin(account());
 
             // track login activity.?
 
@@ -57,7 +57,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        \Auth::logout();
+        auth()->logout();
 
         return redirect()->intended(route('login'));
     }
@@ -76,18 +76,16 @@ class AuthController extends Controller
      * Sometimes we need to verify login entries.
      * Here we will assign all the fields and logs.
      *
-     * @return Account
+     * @return boolean
      */
-    public function logAgentInformation()
+    public function trackAccountLogin(Account $account)
     {
-        account()->incrementLoginCount(1);
+        $account->login_count++;
 
-        account()->setIpAddress(request()->getClientIp());
+        $account->ip_address = request()->getClientIp();
 
-        account()->setLastLogin(Carbon::now());
+        $account->last_login = Carbon::now();
 
-        account()->save();
-
-        return account();
+        return $account->save();
     }
 }

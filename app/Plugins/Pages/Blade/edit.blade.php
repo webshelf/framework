@@ -21,14 +21,10 @@
     $sitemap_checkbox   = $editing ? (old('sitemap_checkbox') ?: ($page->isSitemap() ? 'checked' : null))  : (old('sitemap_checkbox') ?: 'checked');
     $enabled_checkbox   = $editing ? (old('enabled_checkbox') ?: ($page->isEnabled() ? 'checked' : null))  : (old('enabled_checkbox') ?: 'checked');
 
-    // SPECIFIC FORM ATTRIBUTES.
-    $form   = $editing ? [ 'route' => route('SavePage', ['name'=>$page->slug()])]
-                       : [ 'route' => route('MakePage')];
 @endphp
 
 @section('tools')
 
-    @if($editing == true)
         <button data-remodal-target="modal" class="button" type="button"><i class="fa fa-trash-o"></i> Delete</button>
         <div class="remodal" data-remodal-id="modal">
             <button data-remodal-action="close" class="remodal-close"></button>
@@ -38,11 +34,8 @@
             </p>
             <br>
             <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
-            <button data-remodal-action="confirm" id="btn-delete" data-request="{{ url(sprintf('/admin/pages/delete/%s', $page->slug())) }}" data-redirect="{{ url('admin/pages') }}" class="remodal-confirm">Confirm</button>
+            <button data-remodal-action="confirm" id="btn-delete" data-request="{{ route('admin.pages.destroy', ['name' => $page->seo_title]) }}" data-redirect="{{ url('admin/pages') }}" class="remodal-confirm">Confirm</button>
         </div>
-    @else
-        No Tools Available
-    @endif
 
 @endsection
 
@@ -71,8 +64,10 @@
 
         <div class="form-box blue">
 
-            <form action="{{ $form['route'] }}" method="POST" id="form">
-            {{ csrf_field() }}
+            <form method="POST" action="{{ route('admin.pages.update', ["name"=>$page->slug()]) }}" id="form">
+
+                <input type="hidden" name="_method" value="PATCH">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="tab-content">
 
@@ -173,7 +168,7 @@
                                         <div class="form-group row">
                                             <label class="control-label col-md-3">Content</label>
                                             <div class="col-xs-10">
-                                                <div class="content" id="editor" {{ $plugin->option('editor_width') ? 'style=width:' . $plugin->option('editor_width') . 'px' : null }}>
+                                                <div class="content" id="editor">
                                                     <textarea id="tinymce-textarea" name="content">{{ $content }}</textarea>
                                                 </div>
                                             </div>

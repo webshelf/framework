@@ -15,6 +15,9 @@ use App\Classes\Breadcrumbs;
 class BreadcrumbsTest extends TestCase
 {
 
+    /**
+     * @test
+     */
     public function test_breadcrumbs_match_expected_crumb_size()
     {
         // Setup the breadcrumb class for testing.
@@ -29,6 +32,7 @@ class BreadcrumbsTest extends TestCase
     }
 
     /**
+     * @test
      * @expectedException Exception
      */
     public function test_duplicate_breadcrumb_generation()
@@ -39,6 +43,9 @@ class BreadcrumbsTest extends TestCase
         $breadcrumbs->fromAbsoluteUrl('http://domain.com/example/crumbs');
     }
 
+    /**
+     * @test
+     */
     public function test_breadcrumbs_can_check_if_contains()
     {
         $breadcrumbs = new Breadcrumbs();
@@ -50,6 +57,9 @@ class BreadcrumbsTest extends TestCase
         $this->assertFalse($breadcrumbs->contain('example', 3));
     }
 
+    /**
+     * @test
+     */
     public function test_breadcrumbs_can_be_removed()
     {
         $breadcrumbs = new Breadcrumbs();
@@ -59,6 +69,9 @@ class BreadcrumbsTest extends TestCase
         $this->assertCount(2, $breadcrumbs->crumbs());
     }
 
+    /**
+     * @test
+     */
     public function test_crumb_names_can_be_altered()
     {
         $breadcrumbs = new Breadcrumbs();

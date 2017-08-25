@@ -9,11 +9,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class News.
  */
-class Article extends Engine
+class Article extends EloquentModel
 {
     protected $table = 'articles';
 

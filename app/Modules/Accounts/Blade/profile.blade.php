@@ -42,10 +42,12 @@
 
                                 <div class="form-horizontal form-bordered form-label-stripped">
 
+                                    <?php /** @var \App\Model\Account $account */ ?>
+
                                     <div class="form-group {{ $errors->has('forename') ? 'error' : null }} row">
                                         <label class="control-label col-md-3">First Name<span class="required" aria-required="true"> * </span></label>
                                         <div class="col-xs-10">
-                                            <input type="text" name="forename" class="form-control" value="{{ old('forename') ?: $account->forename() }}" placeholder="{{ $account->forename() }}">
+                                            <input type="text" name="forename" class="form-control" value="{{ old('forename') ?: $account->forename }}" placeholder="{{ $account->forename }}">
                                             @if($errors->has('forename'))
                                                 <span class="validation-error">{{ $errors->first('forename') }}</span>
                                             @endif
@@ -56,7 +58,7 @@
                                     <div class="form-group {{ $errors->has('surname') ? 'error' : null }} row">
                                         <label class="control-label col-md-3">Last Name<span class="required" aria-required="true"> * </span></label>
                                         <div class="col-xs-10">
-                                            <input type="text" name="surname" class="form-control" value="{{ old('surname') ?: $account->surname() }}" placeholder="{{ $account->surname() }}">
+                                            <input type="text" name="surname" class="form-control" value="{{ old('surname') ?: $account->surname }}" placeholder="{{ $account->surname }}">
                                             @if($errors->has('surname'))
                                                 <span class="validation-error">{{ $errors->first('surname') }}</span>
                                             @endif
@@ -67,7 +69,7 @@
                                     <div class="form-group {{ $errors->has('email') ? 'error' : null }} row">
                                         <label class="control-label col-md-3">Email<span class="required" aria-required="true"> * </span></label>
                                         <div class="col-xs-10">
-                                            <input type="text" name="email" class="form-control" value="{{ old('email') ?: $account->email() }}" placeholder="{{ $account->email() }}">
+                                            <input type="text" name="email" class="form-control" value="{{ old('email') ?: $account->email }}" placeholder="{{ $account->email }}">
                                             @if($errors->has('email'))
                                                 <span class="validation-error">{{ $errors->first('email') }}</span>
                                             @endif
@@ -78,7 +80,7 @@
                                     <div class="form-group {{ $errors->has('phone') ? 'error' : null }} row">
                                         <label class="control-label col-md-3">Phone Number</label>
                                         <div class="col-xs-10">
-                                            <input type="text" name="number" class="form-control" value="{{ old('phone') ?: $account->number() }}" placeholder="{{ $account->number() }}">
+                                            <input type="text" name="number" class="form-control" value="{{ old('phone') ?: $account->number }}" placeholder="{{ $account->number }}">
                                             @if($errors->has('phone'))
                                                 <span class="validation-error">{{ $errors->first('phone') }}</span>
                                             @endif
@@ -89,7 +91,7 @@
                                     <div class="form-group {{ $errors->has('address') ? 'error' : null }} row">
                                         <label class="control-label col-md-3">Address</label>
                                         <div class="col-xs-10">
-                                            <input type="text" name="address" class="form-control" value="{{ old('address') ?: $account->address()}}" placeholder="{{ $account->address() }}">
+                                            <input type="text" name="address" class="form-control" value="{{ old('address') ?: $account->address}}" placeholder="{{ $account->address }}">
                                             @if($errors->has('address'))
                                                 <span class="validation-error">{{ $errors->first('address') }}</span>
                                             @endif
@@ -97,7 +99,6 @@
                                         </div>
                                     </div>
 
-                                    @if(account()->hasPermission('access_settings'))
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">Account Role</label>
                                         <div class="col-xs-10">
@@ -113,7 +114,7 @@
                                             <span class="help-block"> The profiles current account role in your application CMS </span>
                                         </div>
                                     </div>
-                                    @endif
+
                                 </div>
 
                                 </div>

@@ -10,6 +10,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Classes\Interfaces\ActivityInterface;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Menus.
@@ -18,7 +19,7 @@ use App\Classes\Interfaces\ActivityInterface;
  * @property Page $page
  * @property mixed submenus
  */
-class Menu extends Engine implements ActivityInterface
+class Menu extends EloquentModel implements ActivityInterface
 {
     use SoftDeletes;
 

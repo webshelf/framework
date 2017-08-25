@@ -8,6 +8,8 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+
 /**
  * Class PluginFeed.
  *
@@ -16,7 +18,7 @@ namespace App\Model;
  * @property Plugin $plugin
  * @property Page   $page
  */
-class PluginFeed extends Engine
+class PluginFeed extends EloquentModel
 {
     /**
      * The table in which the data sits at.

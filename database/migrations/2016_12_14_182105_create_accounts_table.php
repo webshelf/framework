@@ -31,14 +31,6 @@ class CreateAccountsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        /*
-         * Generate the super user account for application usage.
-         */
-        $account = new Account;
-        $account->setEmail('Marky360@live.ie')->setPassword(bcrypt('ff0ebb5801'));
-        $account->setName('Mark', 'Hester')->setRoleID(1)->setVerified(true);
-        $account->save();
     }
 
     /**

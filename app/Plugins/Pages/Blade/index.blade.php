@@ -16,6 +16,20 @@
                 'iDisplayLength': 25
             });
         });
+
+        $("a#form-delete").click(function(event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            $.ajax({
+                url: href,
+                type: 'post',
+                data: { _method:"DELETE", _token: "{{ csrf_token() }}" },
+                complete: function(){
+                    location.reload();
+                }
+            });
+        });
+
     </script>
 
 @endsection
@@ -23,7 +37,6 @@
 @section('content')
 
     <div class="table-panel border light">
-
 
         <table id="table-datatables" class="table table-striped table-bordered table-hover row-border order-column">
 
@@ -34,7 +47,7 @@
                 <th>Modified</th>
                 <th>Status</th>
                 <th>Sitemap</th>
-                <th>Menu</th>
+                <th>Action</th>
                 <th>Creator</th>
             </tr>
             </thead>
@@ -42,15 +55,15 @@
             <tbody>
             @foreach($pages as $page)
                 <tr>
-                    <td><a href="{{ route('EditPage', ["name"=>$page->slug()]) }}" name="{{ $page->seoTitle() }}" title="Manage, Review & Revise this page">{{ $page->seoTitle() }}</a></td>
+                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug()]) }}" name="{{ $page->seoTitle() }}" title="Manage, Review & Revise this page">{{ $page->seoTitle() }}</a></td>
                     <td><a style="color: #00A000" href="{{ makeUrl($page) }}" title="View the page on your website '{{ ucwords($page->seoTitle()) }}'" target="_blank">{{ makeUrl($page) }}</a></td>
-                    <td><a href="{{ route('EditPage', ["name"=>$page->slug()]) }}" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $page->updatedAt()->diffForHumans() }}">{{ $page->updatedAt()->format('F dS Y') }}</a></td>
+                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug()]) }}" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $page->updatedAt()->diffForHumans() }}">{{ $page->updatedAt()->format('F dS Y') }}</a></td>
                     <td title="Allow the public to view this page, or keep it private">{!! bool2Status($page->isEnabled(),'Published', 'Private') !!}</td>
                     <td title="The status on which this should appear for google search">{!! bool2Status($page->isSitemap(), 'Enabled', 'Disabled') !!}</td>
-                    <td title="Pages that have a parent menu element for users to click">{!! bool2Status((count($page->menus) >= 1), 'Active', 'Inactive' ) !!}</td>
+                    <td><a href="{{ route('admin.pages.edit', $page->slug) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a href="{{ route('admin.pages.destroy', $page->slug) }}" id="form-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                     <td>
                         <i class="fa profile-image small" aria-hidden="true">
-                            <img src="{{$page->creator->gravatarImageUrl() }}" width="24" height="24" alt="profile image">
+                            <img src="{{$page->creator->makeGravatarImage() }}" width="24" height="24" alt="profile image">
                         </i>
                         <span class="margin-left-medium">{{ $page->creator->fullName() }} [{{ $page->creator->role->title() }}]</span>
                     </td>

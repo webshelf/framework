@@ -8,10 +8,12 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+
 /**
  * Class PluginOption.
  */
-class PluginOption extends Engine
+class PluginOption extends EloquentModel
 {
     protected $table = 'plugin_options';
 

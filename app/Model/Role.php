@@ -9,11 +9,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Role.
  */
-class Role extends Engine
+class Role extends EloquentModel
 {
     use SoftDeletes;
 

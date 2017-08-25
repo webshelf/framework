@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }}</title>
 
         <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
@@ -93,10 +94,9 @@
                                 <p>Create</p>
                             </a>
                             <ul class="dropdown-menu">
-                                @if(plugins()->hasPlugin('pages')) <li><a href="{{ route('CreatePage') }}">New Page</a></li> @endif
+                                @if(plugins()->hasPlugin('pages')) <li><a href="{{ route('admin.pages.create') }}">New Page</a></li> @endif
                                 @if(plugins()->hasPlugin('menus')) <li><a href="{{ route('CreateMenu') }}">New Menu</a></li> @endif
                                 @if(plugins()->hasPlugin('redirects')) <li><a href="{{ route('MakeRedirect') }}">New Redirect</a></li> @endif
-                                @if(account()->hasRole(App\Model\Role::ADMINISTRATOR))<li><a href="{{ route('RegisterAccount') }}">New Account</a></li>@endif
                             </ul>
                         </li>
 
@@ -123,7 +123,7 @@
                                 <li><a href="#">Help coming Soon...</a></li>
                             </ul>
                         </li>
-                        @if(account()->hasRole(App\Model\Role::ADMINISTRATOR))
+                        @if(account()->hasRole(\App\Model\Role::SUPERUSER))
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Notifications">
                                 <i class="fa fa-bell" aria-hidden="true"></i>
@@ -155,11 +155,11 @@
                         <li id="avatar" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Account profile for {{ account()->fullName() }} [{{ account()->role->title() }}]">
                                 <i class="fa profile-image small" aria-hidden="true">
-                                    <img src="{{ account()->gravatarImageUrl() }}" width="24" height="24" alt="profile image">
+                                    <img src="{{ account()->makeGravatarImage() }}" width="24" height="24" alt="profile image">
                                 </i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{{ route('AccountProfile', account()->email()) }}">My Profile</a></li>
+                                <li><a href="#">My Profile</a></li>
                                 <li><a href="{{ route('AuthLogout') }}">Log out</a></li>
                             </ul>
                         </li>

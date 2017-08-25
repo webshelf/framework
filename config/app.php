@@ -168,7 +168,9 @@ return [
          * Framework Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Dusk\DuskServiceProvider::class,
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
+        OwenIt\Auditing\AuditingServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +232,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];

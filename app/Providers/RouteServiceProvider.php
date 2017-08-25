@@ -93,7 +93,7 @@ class RouteServiceProvider extends ServiceProvider
 
             $frontendRoute = base_path(sprintf('app/plugins/%s/routes/frontend.php', $plugin->name()));
 
-            Route::middleware(['web'])->namespace($namespace)->group($frontendRoute);
+            Route::middleware(['web'])->group($frontendRoute);
 
             Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);
         }
@@ -117,7 +117,7 @@ class RouteServiceProvider extends ServiceProvider
             $frontendRoute = base_path(sprintf('app/modules/%s/routes/frontend.php', $module['title']));
 
             // Frontend are routes that can be accessed by visitors.
-            Route::middleware(['web'])->namespace($namespace)->group($frontendRoute);
+            Route::middleware(['web'])->group($frontendRoute);
 
             // Backend are routes that can only be accessed to those with access.
             Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);

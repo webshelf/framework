@@ -30,19 +30,6 @@ class CreateMenusTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Auth::login(app(AccountRepository::class)->whereID(1));
-
-        $menu = new Menu;
-        $menu->setSlug('index');
-        $menu->setTitle('Homepage');
-        $menu->setTarget('_self');
-        $menu->setOrderID(1);
-        $menu->setPageID(1);
-        $menu->setEnabled(true);
-        $menu->setRequired(true);
-        $menu->setCreatorID(1);
-        $menu->withoutTracking()->save();
     }
 
     /**

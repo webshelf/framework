@@ -9,6 +9,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Carousel.
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Account creator
  * @property Account editor
  */
-class Carousel extends Engine
+class Carousel extends EloquentModel
 {
     use SoftDeletes;
 

@@ -8,10 +8,12 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+
 /**
  * Class Permission.
  */
-class Permission extends Engine
+class Permission extends EloquentModel
 {
     protected $table = 'permissions';
 

@@ -2,18 +2,44 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Classes\Interfaces\ActivityInterface;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Pages.
  *
  * @property Account getPublisher
  * @property Redirect redirect
+ * @property HasMany $menus
+ *
+ * @property int $id
+ * @property string $slug
+ * @property string $content
+ * @property string $banner
+ * @property string $seo_title
+ * @property string $seo_description
+ * @property string $seo_keywords
+ * @property boolean $sitemap
+ * @property boolean $enabled
+ * @property string $plugin
+ * @property int $editable
+ * @property int $creator_id
+ * @property int $editor_id
+ *
+ * @property Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
-class Page extends Engine implements ActivityInterface
+class Page extends EloquentModel implements ActivityInterface, AuditableContract
 {
     use SoftDeletes;
+
+    use Auditable;
 
     protected $table = 'pages';
 

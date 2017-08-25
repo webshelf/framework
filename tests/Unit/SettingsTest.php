@@ -29,6 +29,9 @@ class SettingsTest extends TestCase
         $this->settings = new SettingsManager;
     }
 
+    /**
+     * @test
+     */
     public function test_settings_can_be_added()
     {
         $this->settings->add('PHPUnit Test', true);
@@ -36,6 +39,9 @@ class SettingsTest extends TestCase
         $this->assertEquals(true, $this->settings->getValue('PHPUnit Test'));
     }
 
+    /**
+     * @test
+     */
     public function test_settings_can_be_modified()
     {
         $this->settings->add('PHPUnit Test', true);
@@ -45,6 +51,9 @@ class SettingsTest extends TestCase
         $this->assertEquals(false, $this->settings->getValue('PHPUnit Test'));
     }
 
+    /**
+     * @test
+     */
     public function test_settings_can_be_removed()
     {
         $this->settings->add('PHPUnit Test', true);
@@ -54,6 +63,9 @@ class SettingsTest extends TestCase
         $this->assertFalse($this->settings->has('PHPUnit Test'));
     }
 
+    /**
+     * @test
+     */
     public function test_settings_can_return_its_shadow_value()
     {
         $this->settings->add('PHPUnit Test', 'default', 'shadow');
@@ -61,6 +73,9 @@ class SettingsTest extends TestCase
         $this->assertEquals('shadow', $this->settings->getShadow('PHPUnit Test'));
     }
 
+    /**
+     * @test
+     */
     public function test_settings_can_return_a_default_key()
     {
         $this->settings->add('Default', 'Default',  null);
@@ -72,6 +87,9 @@ class SettingsTest extends TestCase
         $this->assertEquals('Default', $this->settings->getDefault('Value'));
     }
 
+    /**
+     * @test
+     */
     public function test_settings_can_add_a_collection_of_model_settings()
     {
         $collection = collect([
