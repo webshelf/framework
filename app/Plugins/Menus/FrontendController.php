@@ -11,9 +11,7 @@ namespace App\Plugins\Menus;
 use App\Plugins\PluginEngine;
 
 /**
- * Class FrontendController
- *
- * @package App\Plugins\Menus
+ * Class FrontendController.
  */
 class FrontendController extends PluginEngine
 {

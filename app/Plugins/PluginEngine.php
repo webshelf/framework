@@ -36,11 +36,11 @@ abstract class PluginEngine extends Controller
      */
     private function pluginName()
     {
-        if($this->pluginName)
+        if ($this->pluginName) {
             return $this->pluginName;
+        }
 
         return $this->pluginName = explode('\\', get_class($this))[2];
-
     }
 
     /**

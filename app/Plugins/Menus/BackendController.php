@@ -13,14 +13,11 @@ use App\Model\Menu;
 use App\Model\Page;
 use App\Classes\Popup;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Router;
-use League\Flysystem\Exception;
-use App\Classes\Breadcrumbs;
 use App\Plugins\PluginEngine;
-use Illuminate\Database\Eloquent\Collection;
+use League\Flysystem\Exception;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use App\Classes\Interfaces\RouteableInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class Controller.
@@ -44,7 +41,6 @@ class BackendController extends PluginEngine
      */
     public function __construct(MenuRepository $menus, PageRepository $pages)
     {
-
         $this->menus = $menus;
 
         $this->pages = $pages;

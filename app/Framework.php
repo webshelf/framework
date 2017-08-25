@@ -44,7 +44,6 @@ class Framework
      */
     private $repository = 'webshelf/framework';
 
-
     /**
      * Get the package name, this is in case it ever changes.
      *
@@ -92,9 +91,10 @@ class Framework
      */
     public function isLatestRelease()
     {
-        if(app()->isLocal())
+        if (app()->isLocal()) {
             return true;
+        }
 
-        return ($this->currentRelease() != $this->latestRelease());
+        return $this->currentRelease() != $this->latestRelease();
     }
 }
