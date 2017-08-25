@@ -15,7 +15,7 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/updates')        ->uses('Controller@index')      ->name('updates');
+    Route::get('/admin/updates')->uses('Controller@index')->name('updates');
 
     // Post Requests.
     // ==================================================================================

@@ -9,7 +9,6 @@
 namespace App\Http\Controllers;
 
 use Spatie\Analytics\Period;
-use App\Classes\Breadcrumbs;
 use App\Classes\Library\Services\Facebook;
 use App\Classes\Library\Services\Analytics;
 use App\Classes\Repositories\ActivityRepository;
@@ -22,7 +21,6 @@ use App\Classes\Repositories\ActivityRepository;
  */
 class DashboardController extends Controller
 {
-
     /**
      * This should be used when a dashboard view is rendered.
      * This will assign the global variables that are required for the dashboard to function correctly.
