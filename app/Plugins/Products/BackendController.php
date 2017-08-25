@@ -17,8 +17,15 @@ use App\Classes\Interfaces\InstallableInterface;
  */
 class BackendController extends PluginEngine
 {
+    /**
+     * @var PluginRepository
+     */
     private $products;
 
+    /**
+     * BackendController constructor.
+     * @param PluginRepository $plugins
+     */
     public function __construct(PluginRepository $plugins)
     {
         $this->products = $plugins;
