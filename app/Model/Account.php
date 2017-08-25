@@ -9,9 +9,9 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -42,13 +42,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $verified
  * @property int $login_count
  * @property string $ip_address
- *
- * @package App\Model
  */
 class Account extends Authenticatable
 {
-
-    /**
+    /*
      * Soft Delete trait
      */
     use SoftDeletes;
@@ -74,11 +71,11 @@ class Account extends Authenticatable
      */
     public function fullName()
     {
-        return $this->forename . ' ' . $this->surname;
+        return $this->forename.' '.$this->surname;
     }
 
     /**
-     * Check if the user has the role
+     * Check if the user has the role.
      * @info Role::groups.
      *
      * @param int $role_id
@@ -144,5 +141,4 @@ class Account extends Authenticatable
 
         return $this->hasMany(Redirect::class, 'creator_id', 'id');
     }
-
 }

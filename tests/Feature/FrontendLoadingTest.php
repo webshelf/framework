@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Mark
  * Date: 02/02/2017
- * Time: 18:38
+ * Time: 18:38.
  */
 
 namespace Tests\Feature;
@@ -49,6 +49,6 @@ class FrontendLoadingTest extends TestCase
     {
         settings()->add('enable_website', false);
 
-        $this->call('GET', '/')->assertStatus(503) ->assertViewHas('page');
+        $this->call('GET', '/')->assertStatus(503)->assertViewHas('page');
     }
 }

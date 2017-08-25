@@ -15,7 +15,7 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/filemanager')        ->uses('Controller@load')       ->name('FileManager');
+    Route::get('/admin/filemanager')->uses('Controller@load')->name('FileManager');
 
     // Post Requests.
     // ==================================================================================

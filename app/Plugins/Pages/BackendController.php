@@ -8,10 +8,10 @@
 
 namespace App\Plugins\Pages;
 
-use Illuminate\Support\Facades\DB;
 use App\Model\Menu;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
+use Illuminate\Support\Facades\DB;
 use App\Classes\Repositories\PageRepository;
 
 /**
@@ -94,14 +94,14 @@ class BackendController extends PluginEngine
     public function update(Request $request, string $name)
     {
         $page = $this->repository->whereName($name);
-        $page->seo_title       = $request['title'];
-        $page->slug            = str_slug($request['slug']) ?: str_slug($page->seo_title);
-        $page->creator_id      = $request['creator'] ?: account()->id;
-        $page->seo_keywords    = $request['keywords'];
+        $page->seo_title = $request['title'];
+        $page->slug = str_slug($request['slug']) ?: str_slug($page->seo_title);
+        $page->creator_id = $request['creator'] ?: account()->id;
+        $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
-        $page->content         = $request['content'];
-        $page->sitemap         = $request['sitemap'] ? true : false;
-        $page->enabled         = $request['enabled'] ? true : false;
+        $page->content = $request['content'];
+        $page->sitemap = $request['sitemap'] ? true : false;
+        $page->enabled = $request['enabled'] ? true : false;
         $page->saveOrFail();
 
         return redirect()->route('admin.pages.index');
@@ -117,10 +117,9 @@ class BackendController extends PluginEngine
     {
         $page = $this->repository->whereName($name);
 
-        DB::transaction(function () use ($page)
-        {
-            $page->menus->each(function($menu) {
-                /** @var Menu $menu */
+        DB::transaction(function () use ($page) {
+            $page->menus->each(function ($menu) {
+                /* @var Menu $menu */
                 $menu->delete();
             });
 
@@ -129,10 +128,10 @@ class BackendController extends PluginEngine
 
         $page->delete();
 
-
         return redirect()->route('admin.pages.index');
     }
-//
+
+    //
 //    /**
 //     * Show a list of all the pages.
 //     *

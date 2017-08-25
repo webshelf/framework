@@ -8,8 +8,6 @@
 
 namespace App\Modules\Settings;
 
-use App\Classes\Breadcrumbs;
-use App\Http\Controllers\DashboardController;
 use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
 use App\Classes\Repositories\SettingsRepository;
