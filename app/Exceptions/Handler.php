@@ -2,10 +2,10 @@
 
 namespace App\Exceptions;
 
-use PDOException;
-use App\Http\Controllers\ErrorController;
-use App\Model\Role;
 use Exception;
+use PDOException;
+use App\Model\Role;
+use App\Http\Controllers\ErrorController;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -48,7 +48,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
         if ($exception instanceof AuthenticationException) {
             return $this->unauthenticated($request, $exception);
         }
@@ -103,14 +102,15 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Check that the current user is a developer
+     * Check that the current user is a developer.
      *
      * @return bool
      */
     private function isDeveloper()
     {
-        if(auth()->check() == false)
+        if (auth()->check() == false) {
             return false;
+        }
 
         return account()->hasRole(Role::SUPERUSER);
     }

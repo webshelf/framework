@@ -15,7 +15,7 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/sitemap')        ->uses('Controller@iframe')     ->name('sitemap.iframe');
+    Route::get('/admin/sitemap')->uses('Controller@iframe')->name('sitemap.iframe');
 
     // Post Requests.
     // ==================================================================================

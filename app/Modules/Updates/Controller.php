@@ -8,10 +8,8 @@
 
 namespace App\Modules\Updates;
 
-use App\Classes\Breadcrumbs;
-use App\Classes\Repositories\MigrationRepository;
-use App\Http\Controllers\DashboardController;
 use App\Modules\ModuleEngine;
+use App\Classes\Repositories\MigrationRepository;
 
 /**
  * Class Controller.

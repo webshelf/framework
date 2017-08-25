@@ -26,7 +26,7 @@ class Github
 
                 $stream = stream_context_create($agent);
 
-                $releases = json_decode(file_get_contents('https://api.github.com/repos/'. $repository .'/tags', false, $stream));
+                $releases = json_decode(file_get_contents('https://api.github.com/repos/'.$repository.'/tags', false, $stream));
 
                 return $releases[0]->name;
             } catch (\ErrorException $e) {

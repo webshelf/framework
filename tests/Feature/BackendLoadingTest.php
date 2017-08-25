@@ -3,14 +3,13 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 29/07/2017
- * Time: 00:03
+ * Time: 00:03.
  */
 
 namespace Tests\Feature;
 
-use App\Model\Account;
-use Illuminate\Foundation\Auth\User;
 use Tests\TestCase;
+use Illuminate\Foundation\Auth\User;
 
 class BackendLoadingTest extends TestCase
 {

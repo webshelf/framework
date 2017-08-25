@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 17/08/2017
- * Time: 15:38
+ * Time: 15:38.
  */
 
 namespace App\Modules;
 
-
 abstract class ModuleEngine
 {
-
     /**
      * Return the stored module name.
      *
@@ -37,11 +35,10 @@ abstract class ModuleEngine
      */
     private function moduleName()
     {
-        if($this->moduleName)
+        if ($this->moduleName) {
             return $this->moduleName;
+        }
 
         return $this->moduleName = explode('\\', get_class($this))[2];
-
     }
-
 }

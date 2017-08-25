@@ -9,8 +9,8 @@
 namespace App\Plugins\Redirects;
 
 use App\Classes\Popup;
-use Illuminate\Http\Request;
 use App\Model\Redirect;
+use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Repositories\RedirectRepository;
