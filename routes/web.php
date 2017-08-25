@@ -14,7 +14,7 @@
     | contains the "web" middleware group. Now create something great!
     |
     */
-    Route::get('/')             ->uses('PageController@index')          ->name('index');
+    Route::get('/')->uses('PageController@index')->name('index');
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@
     | contains the "web" middleware group. Now create something great!
     |
     */
-    Route::get('/admin')        ->uses('DashboardController@index')     ->name('dashboard')     ->middleware('auth');
+    Route::get('/admin')->uses('DashboardController@index')->name('dashboard')->middleware('auth');
 
     /*
     |--------------------------------------------------------------------------
@@ -38,6 +38,6 @@
     | contains the "web" middleware group. Now create something great!
     |
     */
-    Route::get('/admin/login')  ->uses('AuthController@form')           ->name('login');
-    Route::post('/admin/login') ->uses('AuthController@login')          ->name('AuthLogin');
-    Route::get('/admin/logout') ->uses('AuthController@logout')         ->name('AuthLogout');
+    Route::get('/admin/login')->uses('AuthController@form')->name('login');
+    Route::post('/admin/login')->uses('AuthController@login')->name('AuthLogin');
+    Route::get('/admin/logout')->uses('AuthController@logout')->name('AuthLogout');

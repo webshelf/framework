@@ -8,9 +8,9 @@
 
 namespace App\Modules\Image;
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use App\Classes\ImageUploader;
+use App\Http\Controllers\DashboardController;
 
 /**
  * Class Controller.

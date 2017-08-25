@@ -9,14 +9,12 @@
 namespace App\Plugins\News;
 
 use App\Plugins\PluginEngine;
-use Illuminate\Routing\Router;
 use App\Classes\SitemapGenerator;
+use App\Classes\Interfaces\Sitemap;
 use App\Http\Controllers\Controller;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Interfaces\FeedableInterface;
-use App\Classes\Interfaces\RouteableInterface;
 use App\Classes\Repositories\ArticleRepository;
-use App\Classes\Interfaces\Sitemap;
 
 /**
  * Class UserController.

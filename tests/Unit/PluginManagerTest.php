@@ -2,12 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Model\Plugin;
 use Tests\TestCase;
+use App\Model\Plugin;
 use App\Classes\PluginManager;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PluginManagerTest extends TestCase
 {

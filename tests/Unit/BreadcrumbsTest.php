@@ -10,11 +10,10 @@ use App\Classes\Breadcrumbs;
  * Created by PhpStorm.
  * User: Mark
  * Date: 14/09/2016
- * Time: 16:14
+ * Time: 16:14.
  */
 class BreadcrumbsTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -52,8 +51,8 @@ class BreadcrumbsTest extends TestCase
 
         $breadcrumbs->fromAbsoluteUrl('http://domain.com/example/crumbs/duplicate/example');
 
-        $this->assertTrue ($breadcrumbs->contain('example'));
-        $this->assertTrue ($breadcrumbs->contain('crumbs', 3));
+        $this->assertTrue($breadcrumbs->contain('example'));
+        $this->assertTrue($breadcrumbs->contain('crumbs', 3));
         $this->assertFalse($breadcrumbs->contain('example', 3));
     }
 

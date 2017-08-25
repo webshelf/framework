@@ -6,9 +6,7 @@ use App\Plugins\PluginEngine;
 use App\Classes\Library\Services\Facebook;
 
 /**
- * Class BackendController
- *
- * @package App\Plugins\Facebook
+ * Class BackendController.
  */
 class BackendController extends PluginEngine
 {

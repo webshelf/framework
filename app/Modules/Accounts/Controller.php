@@ -8,16 +8,13 @@
 
 namespace App\Modules\Accounts;
 
-use App\Http\Controllers\DashboardController;
-use App\Modules\ModuleEngine;
-use DB as Database;
 use App\Classes\Email;
 use App\Classes\Popup;
 use App\Model\Account;
-use Illuminate\Http\Request;
-use App\Classes\Breadcrumbs;
+use App\Modules\ModuleEngine;
 use Illuminate\Contracts\View\View;
 use App\Classes\Repositories\RoleRepository;
+use App\Http\Controllers\DashboardController;
 use App\Classes\Repositories\AccountRepository;
 
 /**

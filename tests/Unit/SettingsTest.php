@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 10/12/2016
- * Time: 22:45
+ * Time: 22:45.
  */
 
 namespace Tests\Unit;
@@ -78,12 +78,12 @@ class SettingsTest extends TestCase
      */
     public function test_settings_can_return_a_default_key()
     {
-        $this->settings->add('Default', 'Default',  null);
-        $this->settings->add('Shadow',   null,     'Shadow');
-        $this->settings->add('Value',   'Default', 'Shadow');
+        $this->settings->add('Default', 'Default', null);
+        $this->settings->add('Shadow', null, 'Shadow');
+        $this->settings->add('Value', 'Default', 'Shadow');
 
         $this->assertEquals('Default', $this->settings->getDefault('Default'));
-        $this->assertEquals('Shadow',  $this->settings->getDefault('Shadow'));
+        $this->assertEquals('Shadow', $this->settings->getDefault('Shadow'));
         $this->assertEquals('Default', $this->settings->getDefault('Value'));
     }
 
@@ -104,5 +104,4 @@ class SettingsTest extends TestCase
 
         $this->assertEquals(5, $this->settings->count());
     }
-
 }

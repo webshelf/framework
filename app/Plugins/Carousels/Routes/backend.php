@@ -15,8 +15,7 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('admin/carousels')       ->uses('BackendController@index');
+    Route::get('admin/carousels')->uses('BackendController@index');
 
     // Post Requests.
     // ==================================================================================
-

@@ -8,11 +8,11 @@
 
 namespace App\Plugins\Pages;
 
-use App\Classes\Interfaces\Sitemap;
-use App\Classes\Repositories\PageRepository;
-use App\Classes\SitemapGenerator;
 use App\Model\Page;
 use App\Plugins\PluginEngine;
+use App\Classes\SitemapGenerator;
+use App\Classes\Interfaces\Sitemap;
+use App\Classes\Repositories\PageRepository;
 
 /**
  * Class UserController.
@@ -38,5 +38,4 @@ class FrontendController extends PluginEngine implements Sitemap
 
         return $sitemap;
     }
-
 }
