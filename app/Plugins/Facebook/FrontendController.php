@@ -2,13 +2,11 @@
 
 namespace App\Plugins\Facebook;
 
-use App\Classes\Library\Services\Facebook;
 use App\Plugins\PluginEngine;
+use App\Classes\Library\Services\Facebook;
 
 /**
- * Class FrontendController
- *
- * @package App\Plugins\Facebook
+ * Class FrontendController.
  */
 class FrontendController extends PluginEngine
 {

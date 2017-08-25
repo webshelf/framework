@@ -26,7 +26,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
         $this->validate($request, [
             'email' => 'required',
             'password' => 'required',
@@ -76,7 +75,7 @@ class AuthController extends Controller
      * Sometimes we need to verify login entries.
      * Here we will assign all the fields and logs.
      *
-     * @return boolean
+     * @return bool
      */
     public function trackAccountLogin(Account $account)
     {

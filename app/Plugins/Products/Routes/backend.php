@@ -15,9 +15,8 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/products')                       ->uses('BackendController@index')       ->name('ProductIndex');
-    Route::get('/admin/products/{plugin}/status')       ->uses('BackendController@index')       ->name('ProductStatus');
+    Route::get('/admin/products')->uses('BackendController@index')->name('ProductIndex');
+    Route::get('/admin/products/{plugin}/status')->uses('BackendController@index')->name('ProductStatus');
 
     // Post Requests.
     // ==================================================================================
-

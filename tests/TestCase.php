@@ -10,11 +10,13 @@ abstract class TestCase extends BaseTestCase
 
     protected function visit(string $url, int $status = null, string $redirect = null)
     {
-        if($status)
-            if($status == 302)
+        if ($status) {
+            if ($status == 302) {
                 return $this->call('GET', $url)->assertStatus($status)->assertSee($redirect);
-            else
+            } else {
                 return $this->call('GET', $url)->assertStatus($status);
+            }
+        }
 
         return $this->call('GET', $url);
     }
@@ -24,7 +26,6 @@ abstract class TestCase extends BaseTestCase
      *
      * Unauthenticated users should be redirected to login.
      * Authenticated users should be allowed to view the page.
-     *
      */
     protected function dashboardAccessTest(string $url)
     {

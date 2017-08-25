@@ -8,9 +8,9 @@
 
 namespace App\Providers;
 
+use App\Composer\BreadcrumbComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Composer\BreadcrumbComposer;
 
 class ComposerServiceProvider extends ServiceProvider
 {

@@ -8,15 +8,14 @@
 
 namespace App\Modules\Sitemap;
 
-use App\Http\Controllers\DashboardController;
 use App\Model\Plugin;
 use App\Modules\ModuleEngine;
-use App\Plugins\News\FrontendController;
-use Illuminate\Contracts\View\View;
 use App\Classes\SitemapGenerator;
-use Illuminate\Database\Eloquent\Collection;
-use App\Classes\Repositories\PluginRepository;
 use App\Classes\Interfaces\Sitemap;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use App\Http\Controllers\DashboardController;
+use App\Classes\Repositories\PluginRepository;
 
 /**
  * Class Controller.
@@ -80,16 +79,13 @@ class Controller extends ModuleEngine
     {
 
         /** @var Plugin $plugin */
-        foreach ($plugins as $plugin)
-        {
+        foreach ($plugins as $plugin) {
             $classLocation = sprintf('App\Plugins\%s\FrontendController', $plugin->name());
 
-            if (class_exists($classLocation))
-            {
+            if (class_exists($classLocation)) {
                 $class = new $classLocation;
 
-                if ($class instanceof Sitemap)
-                {
+                if ($class instanceof Sitemap) {
                     $this->sitemap($class);
                 }
             }
