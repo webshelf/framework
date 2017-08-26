@@ -9,6 +9,7 @@
 namespace App\Plugins\Pages;
 
 use App\Model\Menu;
+use App\Model\Page;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use Illuminate\Support\Facades\DB;
@@ -54,23 +55,36 @@ class BackendController extends PluginEngine
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param Page $page
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Page $page)
     {
-        //
+        $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
+
+        $page->seo_title = $request['title'];
+        $page->slug = str_slug($request['slug']) ?: str_slug($page->seo_title);
+        $page->creator_id = $request['creator'] ?: account()->id;
+        $page->seo_keywords = $request['keywords'];
+        $page->seo_description = $request['description'];
+        $page->content = $request['content'];
+        $page->sitemap = $request['sitemap'] ? true : false;
+        $page->enabled = $request['enabled'] ? true : false;
+        $page->saveOrFail();
+
+        return redirect()->route('admin.pages.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param string $name
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return bool
      */
     public function show(string $name)
     {
-        //
+        return false;
     }
 
     /**
@@ -94,6 +108,9 @@ class BackendController extends PluginEngine
     public function update(Request $request, string $name)
     {
         $page = $this->repository->whereName($name);
+
+        $this->validate($request, ['title'=>'required|min:3|max:255|unique:pages,seo_title,'.$page->id.',id,deleted_at,NULL']);
+
         $page->seo_title = $request['title'];
         $page->slug = str_slug($request['slug']) ?: str_slug($page->seo_title);
         $page->creator_id = $request['creator'] ?: account()->id;

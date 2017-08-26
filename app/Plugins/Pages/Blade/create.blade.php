@@ -147,14 +147,14 @@
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">Sitemap</label>
                                         <div class="col-xs-10">
-                                            <input type="checkbox" data-on-text="True" data-off-text="False" name="sitemap" class="make-switch" {{ old('sitemap_checkbox') }} data-size="small">
+                                            <input type="checkbox" checked data-on-text="True" data-off-text="False" name="sitemap" class="make-switch" {{ old('sitemap_checkbox') }} data-size="small">
                                             <span class="help-block"> Allow this page to create a listing for website search browsers. </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">Privacy</label>
                                         <div class="col-xs-10">
-                                            <input type="checkbox" {{ old('enabled_checkbox') }} data-toggle="toggle" data-on="Public" data-off="Private" data-onstyle="success" data-offstyle="danger" name="enabled">
+                                            <input type="checkbox" checked data-toggle="toggle" data-on="Public" data-off="Private" data-onstyle="success" data-offstyle="danger" name="enabled">
                                             <span class="help-block">Set the privacy of the page and who can view it. </span>
                                         </div>
                                     </div>

@@ -155,12 +155,6 @@
 
                                     </div>
 
-                                    <div class="tools">
-
-                                        @yield('tools')
-
-                                    </div>
-
                                 </div>
 
                                 <div class="form-body">
