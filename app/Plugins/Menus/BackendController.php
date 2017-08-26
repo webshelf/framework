@@ -184,13 +184,13 @@ class BackendController extends PluginEngine
      */
     public function reorderRowsFromCollection(Collection $collection = null)
     {
-        $sorted = $collection->sortBy('order_id');
+        $menus = $collection->sortBy('order_id');
 
         $order = 1;
 
-        /** @var Menu $model */
-        foreach ($sorted as $model) {
-            $model->setOrderID($order)->save();
+        /** @var Menu $menu */
+        foreach ($menus as $menu) {
+            $menu->setOrderID($order)->save();
 
             $order += 1;
         }
