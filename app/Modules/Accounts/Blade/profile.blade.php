@@ -20,7 +20,7 @@
 
             <form action="{{ route('UpdateAccount') }}" method="POST" id="form"> {{ csrf_field() }}
 
-                <input hidden name="account_id" value="{{ encrypt($account->id()) }}">
+                <input hidden name="account_id" value="{{ encrypt($account->id) }}">
 
                 <div class="tab-content">
 

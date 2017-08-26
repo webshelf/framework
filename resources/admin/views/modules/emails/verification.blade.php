@@ -74,7 +74,7 @@
         <div class="actions">
             <form action="{{ route('UpdateAccount') }}" method="post">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                <input type="hidden" name="account_id" value="{{ encrypt($account->id()) }}">
+                <input type="hidden" name="account_id" value="{{ encrypt($account->id) }}">
 
                 @if($account->forename() == '')
                 <div class="form-group row">

@@ -190,7 +190,7 @@ class BackendController extends PluginEngine
 
         /** @var Menu $model */
         foreach ($sorted as $model) {
-            $model->setOrderID($order)->withoutTracking()->save();
+            $model->setOrderID($order)->save();
 
             $order += 1;
         }
@@ -254,7 +254,7 @@ class BackendController extends PluginEngine
             $menu->setSlug(str_slug($request['title']));
             $menu->setTarget($request['target']);
             $menu->setEnabled($request['enabled'] ?? false);
-            $menu->setCreatorID(account()->id());
+            $menu->setCreatorID(account()->id);
             $this->attachSubmenuIfExists($request, $menu);
             $page->menus()->save($menu);
             if ($request['submenu_id']) {
@@ -270,7 +270,7 @@ class BackendController extends PluginEngine
             $menu->setSlug(str_slug($request['title']));
             $menu->setTarget($request['target']);
             $menu->setEnabled($request['enabled']);
-            $menu->setCreatorID(account()->id());
+            $menu->setCreatorID(account()->id);
             $menu->setLink($request['external_link']);
             $this->attachSubmenuIfExists($request, $menu);
             $menu->save();
