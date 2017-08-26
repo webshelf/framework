@@ -18,7 +18,7 @@
 
     Route::get('/admin/menus')->uses('BackendController@index')->name('menus');
     Route::get('/admin/menus/create')->uses('BackendController@create')->name('CreateMenu');
-    Route::get('/admin/menus/make')->uses('BackendController@store')->name('MakeMenu');
+    Route::post('/admin/menus/make')->uses('BackendController@store')->name('MakeMenu');
     Route::get('/admin/menus/page')->uses('BackendController@page')->name('PageMenu');
 
     Route::post('/admin/menus/order')->uses('BackendController@ajax_order')->name('UpdateOrder');
