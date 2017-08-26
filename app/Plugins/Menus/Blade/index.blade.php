@@ -6,7 +6,7 @@
 @section('information')
     <p>Menus are the heart of any website, menu navigation allows users to find the content they want with ease <br>
         A drag and drop interface allows you to manage row reordering with ease, moving the position column.<br>
-        You must be aware that to create a menu with a linked page, you must first create the page. <a href="{{ route('CreatePage') }}">Click here to create one now</a></p>
+        You must be aware that to create a menu with a linked page, you must first create the page. <a href="{{ route('admin.pages.create') }}">Click here to create one now</a></p>
 @endsection
 
 @section('javascript')
