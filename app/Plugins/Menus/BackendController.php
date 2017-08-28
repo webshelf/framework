@@ -224,7 +224,7 @@ class BackendController extends PluginEngine
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return response()->json(['success'=>false, 'message'=>'Changes could not be transacted.']);
+            return response()->json(['success'=>false, 'message'=>'Changes could not be saved.']);
         }
 
         return response()->json(['success'=>true, 'message'=>'Your changes to the row orders have been saved.']);
