@@ -29,16 +29,24 @@
                         </div>
                         <hr style="margin-bottom: 25px;">
                         @if($errors->first('message'))<small><div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div></small>@endif
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('email') ? 'error' : null }} row">
                             <span class="icon-envelope"></span>
                             <label for="exampleInputEmail1">Email address</label>
                             <input v-model="email.value" name="email" type="email" class="form-control" id="emailInput" placeholder="Enter email" required>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            @if($errors->has('title'))
+                                <span class="validation-error">{{ $errors->first('email') }}</span>
+                            @else
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            @endif
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('password') ? 'error' : null }} row">
                             <label for="exampleInputPassword1">Password</label>
                             <input v-model="password.value" name="password" type="password" class="form-control" id="passwordInput" placeholder="Password" required>
-                            <small id="passwordHelp" class="form-text text-muted">Encrypted with the latest technology.</small>
+                            @if($errors->has('title'))
+                                <span class="validation-error">{{ $errors->first('email') }}</span>
+                            @else
+                                <small id="passwordHelp" class="form-text text-muted">Encrypted with the latest technology.</small>
+                            @endif
                         </div>
                         <div class="form-check">
                             <label class="form-check-label align-middle">
