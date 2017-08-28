@@ -3,6 +3,7 @@
 /public/hot
 /public/storage
 /public/.tmb/
+/public/packages/
 /storage/*.key
 /storage/google
 /vendor
