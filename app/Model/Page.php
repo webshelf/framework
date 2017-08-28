@@ -2,13 +2,13 @@
 
 namespace App\Model;
 
+use App\Classes\Interfaces\AuditInterface;
 use Carbon\Carbon;
 use OwenIt\Auditing\Auditable;
 use App\Classes\Interfaces\ActivityInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * Class Pages.
@@ -35,7 +35,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Page extends EloquentModel implements ActivityInterface, AuditableContract
+class Page extends EloquentModel implements ActivityInterface, AuditInterface
 {
     use SoftDeletes;
     use Auditable;
@@ -385,5 +385,15 @@ class Page extends EloquentModel implements ActivityInterface, AuditableContract
     public function setCreatorID(int $integer)
     {
         return $this->setAttribute('creator_id', $integer);
+    }
+
+    /**
+     * Generate a link for the audit log.
+     *
+     * @return string
+     */
+    public function auditTitle()
+    {
+        return $this->seo_title;
     }
 }

@@ -42,11 +42,9 @@ class DashboardController extends Controller
      */
     public function index(Analytics $analytics)
     {
-        $audits = Audit::all();
-        foreach($audits as $audit)
-        {
-            var_dump($audit->getMetadata());
-        }
+        $audits = \App\Model\Audit::first();
+
+        dd($audits->auditable()->first());
 
         exit();
 
