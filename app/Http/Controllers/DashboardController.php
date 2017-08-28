@@ -8,10 +8,10 @@
 
 namespace App\Http\Controllers;
 
+use OwenIt\Auditing\Models\Audit;
 use Spatie\Analytics\Period;
 use App\Classes\Library\Services\Facebook;
 use App\Classes\Library\Services\Analytics;
-use App\Classes\Repositories\ActivityRepository;
 
 /**
  * Class AdminController.
@@ -42,6 +42,18 @@ class DashboardController extends Controller
      */
     public function index(Analytics $analytics)
     {
-        return $this->view()->make('dashboard::overview')->with('fb_messages', Facebook::loadPostsFrom('183404672136705', 5))->with('products', plugins()->all())->with('interactions', app(ActivityRepository::class)->all())->with('visitors', $analytics->fetchVisitorsByMonth(Period::days(150))->sortBy('users'));
+        $audits = Audit::all();
+        foreach($audits as $audit)
+        {
+            var_dump($audit->getMetadata());
+        }
+
+        exit();
+
+        $products = plugins()->all();
+        $facebook_posts = Facebook::loadPostsFrom('183404672136705', 5);
+        $unique_visitors = $analytics->fetchVisitorsByMonth(Period::days(150))->sortBy('users');
+
+        return view('dashboard::overview')->with(['fb_messages'=>$facebook_posts, 'products'=>$products, 'visitors'=>$unique_visitors]);
     }
 }
