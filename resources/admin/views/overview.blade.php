@@ -74,37 +74,37 @@
 
                     <div class="feed">
 
-                        @foreach($interactions as $interaction)
+                        {{--@foreach($interactions as $interaction)--}}
 
-                            <div class="col">
+                            {{--<div class="col">--}}
 
-                            <div class="date">{{ $interaction->getCreatedAt()->diffForHumans() }}</div>
+                            {{--<div class="date">{{ $interaction->getCreatedAt()->diffForHumans() }}</div>--}}
 
-                            @if($interaction->isInteraction(App\Model\Activity::$interactions['created']))
+                            {{--@if($interaction->isInteraction(App\Model\Activity::$interactions['created']))--}}
 
-                                    @if($interaction->activity->trashed())
-                                        <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> created the {{ $interaction->activity_name() }} <span style="text-decoration: line-through">{!!  ucfirst($interaction->title()) !!}</span></div>
-                                    @else
-                                        <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> created the {{ $interaction->activity_name() }} <span style="color:#0c82dc">{!!  $interaction->link() ? '<a href="'.$interaction->link().'">'. ucfirst($interaction->title()).'</a>' : ucfirst($interaction->title()) !!}</span></div>
-                                    @endif
+                                    {{--@if($interaction->activity->trashed())--}}
+                                        {{--<div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> created the {{ $interaction->activity_name() }} <span style="text-decoration: line-through">{!!  ucfirst($interaction->title()) !!}</span></div>--}}
+                                    {{--@else--}}
+                                        {{--<div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> created the {{ $interaction->activity_name() }} <span style="color:#0c82dc">{!!  $interaction->link() ? '<a href="'.$interaction->link().'">'. ucfirst($interaction->title()).'</a>' : ucfirst($interaction->title()) !!}</span></div>--}}
+                                    {{--@endif--}}
 
-                                @elseif ($interaction->isInteraction(App\Model\Activity::$interactions['deleted']))
+                                {{--@elseif ($interaction->isInteraction(App\Model\Activity::$interactions['deleted']))--}}
 
-                                    <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> removed the {{ $interaction->activity_name() }} <span style="color:#0c82dc;"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Removed objects cannot be viewed">{!!  ucfirst($interaction->title()) !!}</a></span></div>
+                                    {{--<div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> removed the {{ $interaction->activity_name() }} <span style="color:#0c82dc;"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Removed objects cannot be viewed">{!!  ucfirst($interaction->title()) !!}</a></span></div>--}}
 
-                                @elseif($interaction->isInteraction(App\Model\Activity::$interactions['modified']))
+                                {{--@elseif($interaction->isInteraction(App\Model\Activity::$interactions['modified']))--}}
 
-                                    @if($interaction->activity->trashed())
-                                        <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> updated the {{ $interaction->activity_name() }} <span style="text-decoration: line-through">{!!  ucfirst($interaction->title()) !!}</span></div>
-                                    @else
-                                        <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> updated the {{ $interaction->activity_name() }} <span style="color:#0c82dc">{!!  $interaction->link() ? '<a href="'.$interaction->link().'">'. ucfirst($interaction->title()).'</a>' : ucfirst($interaction->title()) !!}</span></div>
-                                    @endif
+                                    {{--@if($interaction->activity->trashed())--}}
+                                        {{--<div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> updated the {{ $interaction->activity_name() }} <span style="text-decoration: line-through">{!!  ucfirst($interaction->title()) !!}</span></div>--}}
+                                    {{--@else--}}
+                                        {{--<div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $interaction->account->fullName() }}</span> updated the {{ $interaction->activity_name() }} <span style="color:#0c82dc">{!!  $interaction->link() ? '<a href="'.$interaction->link().'">'. ucfirst($interaction->title()).'</a>' : ucfirst($interaction->title()) !!}</span></div>--}}
+                                    {{--@endif--}}
 
-                                @endif
+                                {{--@endif--}}
 
-                            </div>
+                            {{--</div>--}}
 
-                        @endforeach
+                        {{--@endforeach--}}
 
                     </div>
 

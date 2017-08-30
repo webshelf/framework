@@ -49,7 +49,7 @@ class FrontPageMenu
      */
     public function isCurrentPageMenu(Menu $menu)
     {
-        return ($menu->page->slug() == currentURI()) ? true : false;
+        return ($menu->page->slug == currentURI()) ? true : false;
     }
 
     /**

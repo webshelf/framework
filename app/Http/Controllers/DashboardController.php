@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\AuditTrail;
 use OwenIt\Auditing\Models\Audit;
 use Spatie\Analytics\Period;
 use App\Classes\Library\Services\Facebook;
@@ -42,12 +43,6 @@ class DashboardController extends Controller
      */
     public function index(Analytics $analytics)
     {
-        $audits = \App\Model\Audit::first();
-
-        dd($audits->auditable()->first());
-
-        exit();
-
         $products = plugins()->all();
         $facebook_posts = Facebook::loadPostsFrom('183404672136705', 5);
         $unique_visitors = $analytics->fetchVisitorsByMonth(Period::days(150))->sortBy('users');

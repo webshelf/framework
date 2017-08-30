@@ -24,6 +24,22 @@ class BackendLoadingTest extends TestCase
     /**
      * @test
      */
+    public function view_pages_plugin_page()
+    {
+        $this->dashboardAccessTest('/admin/pages');
+    }
+
+    /**
+     * @test
+     */
+    public function view_menus_plugin_page()
+    {
+        $this->dashboardAccessTest('/admin/menus');
+    }
+
+    /**
+     * @test
+     */
     public function view_updates_module_page()
     {
         $this->dashboardAccessTest('/admin/updates');
