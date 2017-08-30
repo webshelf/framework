@@ -5,15 +5,12 @@ namespace App\Model;
 use OwenIt\Auditing\Models\Audit as Auditing;
 
 /**
- * Class Audit
- *
- * @package App
+ * Class Audit.
  */
 class Audit extends Auditing
 {
-
     public function test()
     {
-        return $this->belongsTo($this->getAttribute('auditable_type'),'auditable_id','id');
+        return $this->belongsTo($this->getAttribute('auditable_type'), 'auditable_id', 'id');
     }
 }

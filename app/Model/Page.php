@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\AuditInterface;
 use Carbon\Carbon;
 use OwenIt\Auditing\Auditable;
+use App\Classes\Interfaces\AuditInterface;
 use App\Classes\Interfaces\ActivityInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
