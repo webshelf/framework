@@ -8,8 +8,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\AuditTrail;
-use OwenIt\Auditing\Models\Audit;
 use Spatie\Analytics\Period;
 use App\Classes\Library\Services\Facebook;
 use App\Classes\Library\Services\Analytics;

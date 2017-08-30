@@ -2,12 +2,12 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\AuditInterface;
 use Carbon\Carbon;
+use App\Classes\Interfaces\AuditInterface;
 use OwenIt\Auditing\Models\Audit as Auditing;
 
 /**
- * Class Audit
+ * Class Audit.
  *
  * @property int $id
  * @property int $user_id
@@ -24,17 +24,14 @@ use OwenIt\Auditing\Models\Audit as Auditing;
  *
  * @property Account $user
  * @property AuditInterface $auditable
- *
- * @package App
  */
 class Audit extends Auditing
 {
-
     public function action()
     {
         switch ($this->event) {
             case 'created': return 'created a new'; break;
-            case 'deleted': return 'has deleted';   break;
+            case 'deleted': return 'has deleted'; break;
         }
     }
 
