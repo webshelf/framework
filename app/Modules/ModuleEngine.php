@@ -8,7 +8,14 @@
 
 namespace App\Modules;
 
-abstract class ModuleEngine
+use App\Http\Controllers\Controller;
+
+/**
+ * Class ModuleEngine
+ *
+ * @package App\Modules
+ */
+abstract class ModuleEngine extends Controller
 {
     /**
      * Return the stored module name.
