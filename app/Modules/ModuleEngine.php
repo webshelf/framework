@@ -11,9 +11,7 @@ namespace App\Modules;
 use App\Http\Controllers\Controller;
 
 /**
- * Class ModuleEngine
- *
- * @package App\Modules
+ * Class ModuleEngine.
  */
 abstract class ModuleEngine extends Controller
 {
