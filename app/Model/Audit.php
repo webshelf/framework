@@ -32,6 +32,7 @@ class Audit extends Auditing
         switch ($this->event) {
             case 'created': return 'created the'; break;
             case 'deleted': return 'deleted the'; break;
+            case 'updated': return 'updated the'; break;
         }
 
         return false;
