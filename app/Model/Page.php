@@ -5,7 +5,6 @@ namespace App\Model;
 use Carbon\Carbon;
 use OwenIt\Auditing\Auditable;
 use App\Classes\Interfaces\AuditInterface;
-use App\Classes\Interfaces\ActivityInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -35,7 +34,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Page extends EloquentModel implements ActivityInterface, AuditInterface
+class Page extends EloquentModel implements AuditInterface
 {
     use SoftDeletes;
     use Auditable;
@@ -279,26 +278,6 @@ class Page extends EloquentModel implements ActivityInterface, AuditInterface
         $this->setAttribute('editable', $boolean ?: null);
 
         return $this;
-    }
-
-    /**
-     * Logs will display the activity title that was interacted with.
-     *
-     * @return  string  -  Title of the activity that should be shown on logs.
-     */
-    public function feed_title()
-    {
-        return $this->seoTitle();
-    }
-
-    /**
-     * Logs will create an activity link to allow the user to edit upon click.
-     *
-     * @return  string  -  Url link that activity will be redirected to.
-     */
-    public function feed_url()
-    {
-        return url("admin/pages/edit/{$this->slug()}");
     }
 
     public function setSitemap($boolean)

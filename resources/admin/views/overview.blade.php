@@ -87,7 +87,7 @@
                                 </div>
 
                         @endforeach
-                        
+
                         {{--@foreach($interactions as $interaction)--}}
 
                             {{--<div class="col">--}}

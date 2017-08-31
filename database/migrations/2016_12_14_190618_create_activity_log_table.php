@@ -1,6 +1,5 @@
 <?php
 
-use App\Model\Activity;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -22,20 +21,6 @@ class CreateActivityLogTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        $activity = new Activity;
-        $activity->setAccount(1);
-        $activity->setInteractionID(3);
-        $activity->setActivityID(1);
-        $activity->setActivityType('page');
-        $activity->save();
-
-        $activity = new Activity;
-        $activity->setAccount(1);
-        $activity->setInteractionID(3);
-        $activity->setActivityID(1);
-        $activity->setActivityType('menu');
-        $activity->save();
     }
 
     /**

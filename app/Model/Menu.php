@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Page $page
  * @property mixed submenus
  */
-class Menu extends EloquentModel implements ActivityInterface
+class Menu extends EloquentModel
 {
     use SoftDeletes;
 
@@ -311,26 +311,6 @@ class Menu extends EloquentModel implements ActivityInterface
         }
 
         return $this->getAttribute('link') ? true : false;
-    }
-
-    /**
-     * Logs will display the activity title that was interacted with.
-     *
-     * @return  string  -  Title of the activity that should be shown on logs.
-     */
-    public function feed_title()
-    {
-        return $this->title();
-    }
-
-    /**
-     * Logs will create an activity link to allow the user to edit upon click.
-     *
-     * @return  string  -  Url link that activity will be redirected to.
-     */
-    public function feed_url()
-    {
-        return false;
     }
 
     /**
