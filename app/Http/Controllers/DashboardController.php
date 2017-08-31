@@ -8,9 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use Spatie\Analytics\Period;
 use App\Classes\Library\Services\Facebook;
-use App\Classes\Library\Services\Analytics;
 use App\Classes\Repositories\AuditRepository;
 
 /**
@@ -36,17 +34,15 @@ class DashboardController extends Controller
     /**
      * Basic overview of the website, here its the dashboard panel.
      *
-     * @param Analytics $analytics
      * @return \Illuminate\Contracts\View\View
      * @internal param Facebook $facebook
      */
-    public function index(Analytics $analytics)
+    public function index()
     {
         $products = plugins()->all();
         $audits = AuditRepository::all();
         $facebook_posts = Facebook::loadPostsFrom('183404672136705', 5);
-        $unique_visitors = $analytics->fetchVisitorsByMonth(Period::days(150))->sortBy('users');
 
-        return view('dashboard::overview')->with(['fb_messages'=>$facebook_posts, 'products'=>$products, 'visitors'=>$unique_visitors, 'audits'=>$audits]);
+        return view('dashboard::overview')->with(['fb_messages'=>$facebook_posts, 'products'=>$products, 'audits'=>$audits]);
     }
 }

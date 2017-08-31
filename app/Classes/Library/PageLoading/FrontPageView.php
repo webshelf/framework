@@ -88,10 +88,6 @@ class FrontPageView
             return response()->view('errors::'.$template, ['page' => $data->toArray()], $response);
         }
 
-        if (view()->exists('errors::'.$template)) {
-            return response()->view('errors::'.$template, ['page' => $data->toArray()], $response);
-        }
-
         throw new \Exception('Unable to locate the view the error handler should use : '.$template);
     }
 }

@@ -165,11 +165,15 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Framework Providers...
          */
+<<<<<<< .merge_file_a01440
+        Laravel\Tinker\TinkerServiceProvider::class,
         Laravel\Dusk\DuskServiceProvider::class,
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
+=======
+>>>>>>> .merge_file_a05364
 
         /*
          * Application Service Providers...
@@ -179,10 +183,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-
-        /*
-         * Webshelf Service Providers...
-         */
         App\Providers\InstanceServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
