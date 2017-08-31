@@ -8,10 +8,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Repositories\AuditRepository;
 use Spatie\Analytics\Period;
 use App\Classes\Library\Services\Facebook;
 use App\Classes\Library\Services\Analytics;
+use App\Classes\Repositories\AuditRepository;
 
 /**
  * Class AdminController.

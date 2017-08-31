@@ -8,7 +8,6 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\ActivityInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/08/2017
- * Time: 16:22
+ * Time: 16:22.
  */
 
 namespace App\Classes\Repositories;
@@ -11,9 +11,7 @@ namespace App\Classes\Repositories;
 use App\Model\Audit;
 
 /**
- * Class AuditRepository
- *
- * @package App\Classes\Repositories
+ * Class AuditRepository.
  */
 class AuditRepository extends Audit
 {
