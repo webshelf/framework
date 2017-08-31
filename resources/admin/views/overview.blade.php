@@ -74,6 +74,20 @@
 
                     <div class="feed">
 
+                        @foreach ($audits as $audit)
+
+                            <?php /** @var \App\Model\Audit $audit */ ?>
+
+                                <div class="col">
+
+                                    <div class="date">{{ $audit->created_at->diffForHumans() }}</div>
+
+                                    <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $audit->user->fullName() }}</span> {{ $audit->action() }} {{ $audit->model() }} <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a></div>
+
+                                </div>
+
+                        @endforeach
+                        
                         {{--@foreach($interactions as $interaction)--}}
 
                             {{--<div class="col">--}}

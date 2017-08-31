@@ -396,4 +396,14 @@ class Page extends EloquentModel implements ActivityInterface, AuditInterface
     {
         return $this->seo_title;
     }
+
+    /**
+     * Generate a url to the audited data.
+     *
+     * @return mixed
+     */
+    public function auditUrl()
+    {
+        return route('admin.pages.edit', $this->slug);
+    }
 }

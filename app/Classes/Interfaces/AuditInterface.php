@@ -18,4 +18,11 @@ interface AuditInterface extends AuditableContract
      * @return string
      */
     public function auditTitle();
+
+    /**
+     * Generate a url to the audited data.
+     *
+     * @return mixed
+     */
+    public function auditUrl();
 }

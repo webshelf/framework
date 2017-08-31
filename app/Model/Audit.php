@@ -30,9 +30,11 @@ class Audit extends Auditing
     public function action()
     {
         switch ($this->event) {
-            case 'created': return 'created a new'; break;
-            case 'deleted': return 'has deleted'; break;
+            case 'created': return 'deleted the'; break;
+            case 'deleted': return 'created the'; break;
         }
+
+        return false;
     }
 
     public function model()
