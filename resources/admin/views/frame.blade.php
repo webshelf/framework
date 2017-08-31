@@ -236,7 +236,7 @@
                                 </li>
 
                                 <li class="heading">
-                                    <h3>Products</h3>
+                                    <h3>Plugins</h3>
                                 </li>
 
                                 @foreach(plugins()->viewable() as $plugin)
