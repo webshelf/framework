@@ -4,9 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use PDOException;
-use App\Model\Role;
 use App\Http\Controllers\ErrorController;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
