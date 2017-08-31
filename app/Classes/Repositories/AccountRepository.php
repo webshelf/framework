@@ -15,40 +15,15 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class AccountRepository.
  */
-class AccountRepository
+class AccountRepository extends Account
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Account $model
-     */
-    public function __construct(Account $model)
-    {
-        $this->model = $model;
-    }
-
-    /**
-     * Return a collection of all accounts.
-     */
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
-
     /**
      * @param int $integer
      * @return Account|array|\stdClass
      */
     public function whereID(int $integer) : Account
     {
-        return $this->model->where('id', $integer)->first();
+        return $this->where('id', $integer)->first();
     }
 
     /**
@@ -57,6 +32,6 @@ class AccountRepository
      */
     public function whereEmail(string $string) : Account
     {
-        return $this->model->where('email', $string)->first();
+        return $this->where('email', $string)->first();
     }
 }
