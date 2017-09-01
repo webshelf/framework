@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property string $seo_title
  * @property string $seo_description
  * @property string $seo_keywords
+ * @property int $views
  * @property bool $sitemap
  * @property bool $enabled
  * @property string $plugin
@@ -384,5 +385,15 @@ class Page extends EloquentModel implements AuditInterface
     public function auditUrl()
     {
         return route('admin.pages.edit', $this->slug);
+    }
+
+    /**
+     * Increment the view count of the page.
+     *
+     * @return int
+     */
+    public function incrementViews()
+    {
+        return $this->views = $this->views + 1;
     }
 }
