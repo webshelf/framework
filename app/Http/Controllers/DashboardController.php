@@ -34,13 +34,14 @@ class DashboardController extends Controller
     /**
      * Basic overview of the website, here its the dashboard panel.
      *
+     * @param AuditRepository $auditRepository
      * @return \Illuminate\Contracts\View\View
      * @internal param Facebook $facebook
      */
-    public function index()
+    public function index(AuditRepository $auditRepository)
     {
         $products = plugins()->all();
-        $audits = AuditRepository::all();
+        $audits = $auditRepository->all();
         $facebook_posts = Facebook::loadPostsFrom('183404672136705', 5);
 
         return view('dashboard::overview')->with(['fb_messages'=>$facebook_posts, 'products'=>$products, 'audits'=>$audits]);
