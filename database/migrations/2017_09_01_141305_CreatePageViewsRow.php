@@ -13,8 +13,8 @@ class CreatePageViewsRow extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function(Blueprint $table){
-           $table->integer('views')->after('seo_keywords')->default(0);
+        Schema::table('pages', function (Blueprint $table) {
+            $table->integer('views')->after('seo_keywords')->default(0);
         });
     }
 

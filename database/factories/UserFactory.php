@@ -25,7 +25,6 @@ $factory->define(\App\Model\Account::class, function (Faker $faker) {
 });
 
 $factory->define(\App\Model\Page::class, function (Faker $faker) {
-
     $title = $faker->sentence(5);
 
     return [
@@ -42,4 +41,3 @@ $factory->define(\App\Model\Page::class, function (Faker $faker) {
         'creator_id' => 1,
     ];
 });
-
