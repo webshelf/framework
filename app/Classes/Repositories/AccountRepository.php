@@ -9,8 +9,6 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Account;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class AccountRepository.

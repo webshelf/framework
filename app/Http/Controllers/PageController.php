@@ -10,12 +10,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PageWasVisited;
 use App\Model\Page;
+use App\Events\PageWasVisited;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoading\FrontPage;
 use App\Classes\Library\PageLoading\Loader\FrontPageModel;
-use App\Plugins\Pages\Events\PageWasViewed;
 
 /**
  * Class PageController.
