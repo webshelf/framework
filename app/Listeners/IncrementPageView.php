@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\PageWasVisited;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class IncrementPageView implements ShouldQueue
