@@ -27,7 +27,6 @@ use OwenIt\Auditing\Models\Audit as Auditing;
  */
 class Audit extends Auditing
 {
-
     public function afterActionVerb()
     {
         switch ($this->event) {
