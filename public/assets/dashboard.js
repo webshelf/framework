@@ -35737,7 +35737,7 @@ $(document).ready(function () {
         var request = $(this).data("request");
         var redirect = $(this).data("redirect");
 
-        $.post(request, {'_token': $('meta[name="csrf-token"]').attr('content')})
+        $.post(request, {'type':'delete', '_token': $('meta[name="csrf-token"]').attr('content')})
 
         .done(function(response)
         {

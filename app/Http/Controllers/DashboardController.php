@@ -41,7 +41,7 @@ class DashboardController extends Controller
     public function index(AuditRepository $auditRepository)
     {
         $products = plugins()->all();
-        $audits = $auditRepository->all();
+        $audits = $auditRepository->all()->sortByDesc('created_at');
         $facebook_posts = Facebook::loadPostsFrom('183404672136705', 5);
 
         return view('dashboard::overview')->with(['fb_messages'=>$facebook_posts, 'products'=>$products, 'audits'=>$audits]);

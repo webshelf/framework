@@ -8641,7 +8641,7 @@ header nav ul li a:hover, header nav ul li a:active, header nav ul li a:focus {
 #dashboard .activity .feed {
     padding:15px;
     display:flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     max-height: 500px;
     overflow-y: scroll;
 }
