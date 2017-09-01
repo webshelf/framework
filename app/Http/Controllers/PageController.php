@@ -10,10 +10,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PageWasVisited;
 use App\Model\Page;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoading\FrontPage;
 use App\Classes\Library\PageLoading\Loader\FrontPageModel;
+use App\Plugins\Pages\Events\PageWasViewed;
 
 /**
  * Class PageController.
@@ -67,6 +69,10 @@ class PageController extends Controller
      */
     private function load(FrontPage $page)
     {
+        // we keep track of the hits on pages.
+        // we let the event handler manage this.
+        event(new PageWasVisited($this->currentPage));
+
         // if the current route is the homepage.
         // we should return the homepage view.
         if (currentURI() == 'index') {
