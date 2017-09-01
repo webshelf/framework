@@ -82,7 +82,11 @@
 
                                     <div class="date">{{ $audit->created_at->diffForHumans() }}</div>
 
-                                    <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $audit->user->fullName() }}</span> {{ $audit->action() }} {{ $audit->model() }} <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a></div>
+                                    @if (! $audit->user)
+                                        <div class="text"><a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a> {{ $audit->beforeActionVerb() }} by the CMS.</div>
+                                    @else
+                                        <div class="text"><span style="font-weight: 400; color:#0c82dc;">{{ $audit->user->fullName() }}</span> {{ $audit->afterActionVerb() }} {{ $audit->model() }} <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a></div>
+                                    @endif
 
                                 </div>
 
