@@ -30,7 +30,7 @@ abstract class ModuleEngine extends Controller
      */
     public function make(string $blade_template)
     {
-        return view()->make(sprintf('modules::%s.blade.%s', $this->moduleName(), $blade_template));
+        return view()->make(sprintf('modules::%s.Blade.%s', $this->moduleName(), $blade_template));
     }
 
     /**

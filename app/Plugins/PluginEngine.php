@@ -26,7 +26,7 @@ abstract class PluginEngine extends Controller
      */
     public function make(string $blade_template)
     {
-        return view()->make(sprintf('plugins::%s.blade.%s', $this->pluginName(), $blade_template));
+        return view()->make(sprintf('plugins::%s.Blade.%s', $this->pluginName(), $blade_template));
     }
 
     /**
