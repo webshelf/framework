@@ -37,14 +37,40 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  */
 class Page extends EloquentModel implements AuditInterface
 {
+    /**
+     * Laravel Deleting.
+     * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
+     */
     use SoftDeletes;
+
+    /**
+     * Laravel Audits.
+     * @ http://www.laravel-auditing.com
+     */
     use Auditable;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'pages';
 
-    protected $softDeletes = true;
-
+    /**
+     * The table date columns, casted to Carbon.
+     *
+     * @var array
+     */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * Attributes to exclude from the Audit.
+     *
+     * @var array
+     */
+    protected $auditExclude = [
+        'views',
+    ];
 
     /**
      * ==========================================================.
