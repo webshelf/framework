@@ -51,6 +51,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception->getCode() == 500)
+        {
+            dd($exception->getMessage());
+        }
+        
         if ($this->hasDisabledSite()) {
             return ErrorController::maintenance();
         }
