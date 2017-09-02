@@ -61,7 +61,7 @@ class Controller extends ModuleEngine
         // get and create an array of all the sitemaps to be loaded
         // send to the view for display.
 
-        return $dashboard->view()->make('modules::sitemap.blade.iframe')->with('sitemaps', $this->sitemap->generateArray());
+        return $dashboard->view()->make('modules::Sitemap.Blade.iframe')->with('sitemaps', $this->sitemap->generateArray());
     }
 
     /**
