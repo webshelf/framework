@@ -84,11 +84,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         /** @var Plugin $plugin */
         foreach (plugins()->enabled() as $plugin) {
-            $namespace = sprintf('App\Plugins\%s', $plugin->name());
 
-            $backendRoute = base_path(sprintf('app/Plugins/%s/Routes/backend.php', $plugin->name()));
+            $plugin_name = ucfirst($plugin->name());
 
-            $frontendRoute = base_path(sprintf('app/Plugins/%s/Routes/frontend.php', $plugin->name()));
+            $namespace = sprintf('App\Plugins\%s', $plugin_name);
+
+            $backendRoute = base_path(sprintf('app/Plugins/%s/Routes/backend.php', $plugin_name));
+
+            $frontendRoute = base_path(sprintf('app/Plugins/%s/Routes/frontend.php', $plugin_name));
 
             Route::middleware(['web'])->group($frontendRoute);
 
@@ -106,11 +109,14 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapModulesRoutes()
     {
         foreach (config('modules') as $module) {
+
+            $module_name = ucfirst($module['title']);
+
             $namespace = sprintf('  App\Modules\%s', $module['title']);
 
-            $backendRoute = base_path(sprintf('app/Modules/%s/Routes/backend.php', $module['title']));
+            $backendRoute = base_path(sprintf('app/Modules/%s/Routes/backend.php', $module_name));
 
-            $frontendRoute = base_path(sprintf('app/Modules/%s/Routes/frontend.php', $module['title']));
+            $frontendRoute = base_path(sprintf('app/Modules/%s/Routes/frontend.php', $module_name));
 
             // Frontend are routes that can be accessed by visitors.
             Route::middleware(['web'])->group($frontendRoute);
