@@ -110,7 +110,7 @@ class RouteServiceProvider extends ServiceProvider
         foreach (config('modules') as $module) {
             $module_name = ucfirst($module['title']);
 
-            $namespace = sprintf('  App\Modules\%s', $module['title']);
+            $namespace = sprintf('App\Modules\%s', $module['title']);
 
             $backendRoute = base_path(sprintf('app/Modules/%s/Routes/backend.php', $module_name));
 
