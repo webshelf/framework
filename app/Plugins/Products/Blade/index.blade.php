@@ -30,7 +30,7 @@
             <th>Product Name</th>
             <th>Product Version</th>
             <th>Product Status</th>
-            @if(account()->hasRole(App\Model\Role::ADMINISTRATOR))
+            @if(account()->hasRole(App\Model\Role::SUPERUSER))
                 <th>Dev. Action</th>
             @endif
         </tr>
@@ -46,7 +46,7 @@
                 <td>{{ ucfirst($product->name()) }}</td>
                 <td>{{ $product->version() }}</td>
                 <td>{!! bool2Status($product->isEnabled(), 'Enabled', 'Disabled') !!}</td>
-                @if(account()->hasRole(App\Model\Role::ADMINISTRATOR))
+                @if(account()->hasRole(App\Model\Role::SUPERUSER))
                     @if($product->isEnabled())
                         <td><a href="{{ route('ProductStatus', $product->name()) }}">Disable</a></td>
                     @else
