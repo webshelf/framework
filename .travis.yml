@@ -20,8 +20,9 @@
     "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini",
     "printf \"\\n\" | pecl install -f redis",
     "travis_retry composer self-update",
-    "composer install --dev",
-    "php artisan migrate --force",
+    "composer install",
+    "php artisan migrate",
+    "php artisan db:seed --class=FrameworkTableSeeder",
   ],
   "install": [
     "if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-dist --no-suggest; fi",
