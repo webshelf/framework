@@ -45,6 +45,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapModulesRoutes();
 
+        \Log::useFiles('php://stderr');
+
         //  dd((app(\Illuminate\Routing\Router::class))->getRoutes());
     }
 
