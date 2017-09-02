@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use PDOException;
 use App\Http\Controllers\ErrorController;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -51,11 +52,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception->getCode() == 500)
-        {
-            dd($exception->getMessage());
-        }
-        
         if ($this->hasDisabledSite()) {
             return ErrorController::maintenance();
         }
@@ -67,6 +63,12 @@ class Handler extends ExceptionHandler
         if ($exception instanceof PDOException) {
             return ErrorController::database();
         }
+
+        if ($exception instanceof AuthenticationException) {
+            return parent::render($request, $exception);
+        }
+
+        echo $exception->getMessage();
 
         return parent::render($request, $exception);
     }
