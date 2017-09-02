@@ -18,6 +18,7 @@ sudo: false
 
 cache:
   directories:
+    - node_modules
     - $HOME/.composer/cache
 
 services:
@@ -27,6 +28,8 @@ services:
 
 before_install:
   - phpenv config-rm xdebug.ini || true
+  - npm install && npm run dev
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS webshelf;'
   - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - printf "\n" | pecl install -f redis
   - travis_retry composer self-update
