@@ -1,7 +1,13 @@
-## About Webshelf
+## Webshelf Modular CMS.
+This is the source of the webshelf CMS, A modular content management system for professionals.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/32371156b37446dca1cf46d1823c98fd)](https://www.codacy.com/app/marky291/framework?utm_source=github.com&utm_medium=referral&utm_content=webshelf/framework&utm_campaign=badger)
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/32371156b37446dca1cf46d1823c98fd)](https://www.codacy.com/app/marky291/framework?utm_source=github.com&utm_medium=referral&utm_content=webshelf/framework&utm_campaign=Badge_Coverage)
-
+## Status
 [![Build Status](https://travis-ci.org/webshelf/framework.svg?branch=master)](https://travis-ci.org/webshelf/framework)
+[![StyleCI](https://styleci.io/repos/98642084/shield?branch=master)](https://styleci.io/repos/98642084)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dd235c87507340e19a9b5c6304327470)](https://www.codacy.com/app/marky291/framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=webshelf/framework&amp;utm_campaign=Badge_Grade)
+
+## Documentation
+Webshelf CMS, is a modular content management system platform that allows the frontend developer professional freedom, using any launguage they desire to build their pages, data is then created and pushed to the frontend from the dashboard as a single array of data, allowing expressive, intuitaive and clear implementations of frontend pages and syntax.
+
+## Plugins & Modules
+They key to Webshelf is the design of modularity, the ability to switch out what you dont require for things you do in a clear and precise way, to aid this we offer a modules (system plugins) & plugins (personal plugins) that can easily implement and push new data for usage on the frontend.
