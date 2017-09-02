@@ -61,7 +61,7 @@ class Controller extends ModuleEngine
         // get and create an array of all the sitemaps to be loaded
         // send to the view for display.
 
-        RETURN $this->make('iframe')->with('sitemaps', $this->sitemap->generateArray());
+        return $this->make('iframe')->with('sitemaps', $this->sitemap->generateArray());
     }
 
     /**
