@@ -27,12 +27,12 @@ class ViewServiceProvider extends ServiceProvider
         /*
          * Load the module view blade files dynamically.
          */
-        $this->loadViewsFrom(base_path('app/modules'), 'modules');
+        $this->loadViewsFrom(base_path('app/Modules'), 'modules');
 
         /*
          * Load the plugins view blade files dynamically.
          */
-        $this->loadViewsFrom(base_path('app/plugins'), 'plugins');
+        $this->loadViewsFrom(base_path('app/Plugins'), 'plugins');
 
         /*
          * Errors can be overwritten by the front end website, default to dashboard errors.
