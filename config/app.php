@@ -167,9 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Dusk\DuskServiceProvider::class,
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
-        OwenIt\Auditing\AuditingServiceProvider::class,
 
         /*
          * Application Service Providers...
