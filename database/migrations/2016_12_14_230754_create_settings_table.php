@@ -70,6 +70,7 @@ class CreateSettingsTable extends Migration
 
         $setting = new Setting;
         $setting->setKey('enable_website');
+        $setting->setValue(true);
         $setting->save();
 
         $setting = new Setting;
