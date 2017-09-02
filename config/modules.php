@@ -36,7 +36,7 @@ return [
     ],
 
     [
-        'title'   => 'FileManager',
+        'title'   => 'Filemanager',
         'icon'    => 'fa fa-microchip',
         'url'     => 'admin/filemanager',
     ],
