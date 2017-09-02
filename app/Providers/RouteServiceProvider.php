@@ -84,7 +84,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         /** @var Plugin $plugin */
         foreach (plugins()->enabled() as $plugin) {
-
             $plugin_name = ucfirst($plugin->name());
 
             $namespace = sprintf('App\Plugins\%s', $plugin_name);
@@ -109,7 +108,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapModulesRoutes()
     {
         foreach (config('modules') as $module) {
-
             $module_name = ucfirst($module['title']);
 
             $namespace = sprintf('  App\Modules\%s', $module['title']);

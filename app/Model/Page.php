@@ -37,13 +37,12 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  */
 class Page extends EloquentModel implements AuditInterface
 {
-    /**
+    /*
      * Laravel Deleting.
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
-    /**
+    /*
      * Laravel Audits.
      * @ http://www.laravel-auditing.com
      */
