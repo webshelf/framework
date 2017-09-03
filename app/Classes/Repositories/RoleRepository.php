@@ -9,7 +9,6 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Role;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -17,7 +16,6 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class RoleRepository extends Role
 {
-
     /**
      * @param int $integer
      * @return Role|array|null|\stdClass

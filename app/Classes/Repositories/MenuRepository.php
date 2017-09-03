@@ -9,9 +9,7 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class MenuRepository.
@@ -20,7 +18,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class MenuRepository extends Menu
 {
-
     public function whereID(int $integer) : Menu
     {
         return $this->where('id', $integer)->first();

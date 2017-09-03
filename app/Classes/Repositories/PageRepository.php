@@ -9,10 +9,7 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Page;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PageRepository.
@@ -21,7 +18,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class PageRepository extends Page
 {
-
     public function whereID(int $integer)
     {
         return $this->where('id', $integer)->first();

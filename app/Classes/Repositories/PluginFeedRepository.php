@@ -8,17 +8,14 @@
 
 namespace App\Classes\Repositories;
 
-use App\Model\Plugin;
 use App\Model\PluginFeed;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PluginFeedRepository.
  */
 class PluginFeedRepository extends PluginFeed
 {
-
     /**
      * Broadcasts are plugins to be displayed to all front
      * end pages of the front end site.

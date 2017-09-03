@@ -9,15 +9,12 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Redirect;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class RedirectRepository.
  */
 class RedirectRepository extends Redirect
 {
-
     /**
      * @param int $integer
      * @return Redirect|array|\stdClass
