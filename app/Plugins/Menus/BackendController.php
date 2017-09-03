@@ -165,7 +165,7 @@ class BackendController extends PluginEngine
              * DO NOT CHANGE THE SLUG OF REQUIRED ITEMS, SINCE
              * THE APPLICATION USES THE SLUG TO RETRIEVE THE ITEM.
              */
-            if (!$menu->required && $request['name'] == 'title') {
+            if (! $menu->required && $request['name'] == 'title') {
                 $menu->slug = ($request['title']);
             }
             $menu->$method($request['value'])->save();
@@ -272,7 +272,7 @@ class BackendController extends PluginEngine
             $menu->slug = (str_slug($request['title']));
             $menu->target = ($request['target']);
             $menu->enabled = $request['enabled'] ? true : false;
-            $menu->creator_id =(account()->id);
+            $menu->creator_id = (account()->id);
             $menu->link = ($request['external_link']);
             $this->attachSubmenuIfExists($request, $menu);
             $menu->save();
