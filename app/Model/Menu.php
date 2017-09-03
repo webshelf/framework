@@ -18,8 +18,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property string $target
  * @property int $menu_id
  * @property int $order_id
- * @property boolean $enabled
- * @property boolean $required
+ * @property bool $enabled
+ * @property bool $required
  * @property int $creator_id
  * @property int $editor_id
  *
