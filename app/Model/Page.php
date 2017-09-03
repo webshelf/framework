@@ -3,9 +3,9 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use OwenIt\Auditing\Auditable;
 use App\Classes\Interfaces\AuditInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -83,7 +83,7 @@ class Page extends EloquentModel implements AuditInterface
     }
 
     /**
-     * A page can have many menus. (Polymorphic)
+     * A page can have many menus. (Polymorphic).
      *
      * @return Collection|HasMany
      */
@@ -93,7 +93,7 @@ class Page extends EloquentModel implements AuditInterface
     }
 
     /**
-     * A page can have many menus. (Polymorphic)
+     * A page can have many menus. (Polymorphic).
      *
      * @return Menu|\Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -111,7 +111,6 @@ class Page extends EloquentModel implements AuditInterface
     {
         return $this->hasOne(Redirect::class, 'from', 'id');
     }
-
 
     /**
      * Get the creator model of the eloquent model.
