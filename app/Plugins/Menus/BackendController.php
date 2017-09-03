@@ -75,11 +75,11 @@ class BackendController extends PluginEngine
             /** @var Menu $menu */
             $menu = $this->menus->whereID($id);
 
-            if ($menu->isRequirement(true)) {
+            if ($menu->required) {
                 return response()->json(['success' => false, 'message' => 'You cannot remove application bound menus']);
             }
 
-            $menu_id = $menu->id();
+            $menu_id = $menu->id;
 
             $menu->submenus()->delete();
 
@@ -165,10 +165,9 @@ class BackendController extends PluginEngine
              * DO NOT CHANGE THE SLUG OF REQUIRED ITEMS, SINCE
              * THE APPLICATION USES THE SLUG TO RETRIEVE THE ITEM.
              */
-            if ($menu->isRequirement(false) && $request['name'] == 'title') {
-                $menu->setSlug($request['title']);
+            if (! $menu->required && $request['name'] == 'title') {
+                $menu->slug = ($request['title']);
             }
-
             $menu->$method($request['value'])->save();
         } catch (Exception $e) {
             return response()->json(['error' => ['message' => 'Some strange error has occurred.']]);
@@ -190,8 +189,8 @@ class BackendController extends PluginEngine
 
         /** @var Menu $menu */
         foreach ($menus as $menu) {
-            $menu->setOrderID($order)->save();
-
+            $menu->order_id = $order;
+            $menu->save();
             $order += 1;
         }
 
@@ -217,7 +216,9 @@ class BackendController extends PluginEngine
                 $slug = $array['slug'];
                 $new_value = $array['n'];
 
-                ($this->menus->whereName($slug))->setOrderID($new_value)->save();
+                $menu = $this->menus->whereName($slug);
+                $menu->order_id = $new_value;
+                $menu->save();
             }
 
             DB::commit();
@@ -250,11 +251,12 @@ class BackendController extends PluginEngine
         if ($this->isInternalPageCreation($request)) {
             /** @var Page $page */
             $page = $this->pages->whereID($request['page_id']);
-            $menu->setTitle($request['title']);
-            $menu->setSlug(str_slug($request['title']));
-            $menu->setTarget($request['target']);
-            $menu->setEnabled($request['enabled'] ?? false);
-            $menu->setCreatorID(account()->id);
+
+            $menu->title = ($request['title']);
+            $menu->slug = (str_slug($request['title']));
+            $menu->target = ($request['target']);
+            $menu->enabled = $request['enabled'] ? true : false;
+            $menu->creator_id = (account()->id);
             $this->attachSubmenuIfExists($request, $menu);
             $page->menus()->save($menu);
             if ($request['submenu_id']) {
@@ -266,12 +268,12 @@ class BackendController extends PluginEngine
             return redirect()->route('menus');
         } elseif ($this->isExternalPageCreation($request)) {
             $this->validate($request, ['external_link'=>'url']);
-            $menu->setTitle($request['title']);
-            $menu->setSlug(str_slug($request['title']));
-            $menu->setTarget($request['target']);
-            $menu->setEnabled($request['enabled']);
-            $menu->setCreatorID(account()->id);
-            $menu->setLink($request['external_link']);
+            $menu->title = ($request['title']);
+            $menu->slug = (str_slug($request['title']));
+            $menu->target = ($request['target']);
+            $menu->enabled = $request['enabled'] ? true : false;
+            $menu->creator_id = (account()->id);
+            $menu->link = ($request['external_link']);
             $this->attachSubmenuIfExists($request, $menu);
             $menu->save();
             if ($request['submenu_id']) {
@@ -299,9 +301,10 @@ class BackendController extends PluginEngine
     private function attachSubmenuIfExists(Request $request, Menu $menu)
     {
         if ($request['submenu_id']) {
+            /** @var Menu $submenu */
             $submenu = $this->menus->whereID($request['submenu_id']);
 
-            $menu->setSubmenuID($submenu->id());
+            $menu->menu_id = ($submenu->id);
         }
 
         return $menu;
@@ -344,7 +347,11 @@ class BackendController extends PluginEngine
         /** @var Menu $menu */
         $menu = $this->menus->whereID($request['menu_id']);
 
-        $menu->submenus()->save((new Menu)->setTitle($page->seoTitle())->setLink(url(str_slug($page->seoTitle())))->setEnabled(true));
+        $model = new Menu;
+        $model->title = ucfirst($page->seo_title);
+        $model->link = url(str_slug(ucfirst($page->seo_title)));
+        $model->enabled = true;
+        $menu->submenus()->save($model);
 
         return redirect()->route('menus');
     }
@@ -362,9 +369,9 @@ class BackendController extends PluginEngine
         $page = $this->pages->whereID($request['page_id']);
 
         $menu = new Menu;
-        $menu->setLink(url($page->slug()));
-        $menu->setTitle($page->seoTitle());
-        $menu->setEnabled(true);
+        $menu->link = (url($page->slug));
+        $menu->title = ($page->seo_title);
+        $menu->enabled = true;
         $menu->save();
 
         return redirect()->route('menus');

@@ -13,12 +13,7 @@
     |
     */
 
-    // Get Requests.
-    // ==================================================================================
-    Route::get('/admin/redirects', ['as'   => 'redirects',         'uses'=>adminPluginController('redirects', 'index')]);
-    Route::get('/admin/redirects/make', ['as'   => 'MakeRedirect',      'uses'=>adminPluginController('redirects', 'store')]);
-    Route::post('/admin/redirects/create', ['as'   => 'CreateRedirect',    'uses'=>adminPluginController('redirects', 'create')]);
-    Route::post('/admin/redirect/delete/{id}', ['uses'=> adminPluginController('redirects', 'ajaxDeleteID')]);
-
-    // Post Requests.
-    // ==================================================================================
+    Route::get('/admin/redirects')->uses('BackendController@index')->name('redirects');
+    Route::get('/admin/redirects/make')->uses('BackendController@store')->name('MakeRedirect');
+    Route::post('/admin/redirects/create')->uses('BackendController@created')->name('CreateRedirect');
+    Route::post('/admin/redirect/delete/{id}')->uses('BackendController@ajaxDeleteID');

@@ -33,7 +33,7 @@ class FrontendController extends PluginEngine implements Sitemap
 
         /** @var Page $page */
         foreach ($repository->whereSitemap() as $page) {
-            $sitemap->store(makeUrl($page), $page->updatedAt(), 'daily', '1.0');
+            $sitemap->store(makeUrl($page), $page->updated_at, 'daily', '1.0');
         }
 
         return $sitemap;

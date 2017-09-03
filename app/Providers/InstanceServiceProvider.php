@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Exception;
-use App\Model\Plugin;
-use App\Model\Setting;
 use App\Classes\PluginManager;
 use App\Classes\SettingsManager;
 use Illuminate\Foundation\Application;
@@ -43,7 +41,7 @@ class InstanceServiceProvider extends ServiceProvider
     {
         $this->app->singleton(SettingsManager::class, function () {
             try {
-                return (new SettingsManager)->collect((new SettingsRepository(new Setting))->all());
+                return (new SettingsManager)->collect(SettingsRepository::all());
             } catch (Exception $e) {
                 if ($this->app->runningInConsole()) {
                     return new SettingsManager;
@@ -58,7 +56,7 @@ class InstanceServiceProvider extends ServiceProvider
     {
         $this->app->singleton(PluginManager::class, function () {
             try {
-                return (new PluginManager)->collect((new PluginRepository(new Plugin))->all());
+                return (new PluginManager)->collect(PluginRepository::all());
             } catch (Exception $e) {
                 if ($this->app->runningInConsole()) {
                     return new PluginManager;

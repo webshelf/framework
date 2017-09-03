@@ -3,9 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Auth\AuthenticationException;
 use PDOException;
 use App\Http\Controllers\ErrorController;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -67,8 +67,6 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthenticationException) {
             return parent::render($request, $exception);
         }
-
-        echo $exception->getMessage();
 
         return parent::render($request, $exception);
     }

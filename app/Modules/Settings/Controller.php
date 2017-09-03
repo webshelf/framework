@@ -48,7 +48,7 @@ class Controller extends ModuleEngine
     {
         if ($request['setting.string']) {
             foreach ($request['setting.string'] as $key => $value) {
-                ($this->settings->whereKey($key))->setValue($value ?: null)->save();
+                ($this->settings->firstKey($key))->setValue($value ?: null)->save();
             }
         }
 
@@ -58,12 +58,12 @@ class Controller extends ModuleEngine
                     $value = 1;
                 }
 
-                ($this->settings->whereKey($key))->setValue($value ?: null)->save();
+                ($this->settings->firstKey($key))->setValue($value ?: null)->save();
             }
         }
         if ($request['setting.select']) {
             foreach ($request['setting.select'] as $key => $value) {
-                ($this->settings->whereKey($key))->setValue($value ?: null)->save();
+                ($this->settings->firstKey($key))->setValue($value ?: null)->save();
             }
         }
 

@@ -12,6 +12,22 @@
 @section('javascript')
 
     <script>
+        $("a.row_delete").click(function(event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            alert('clicked');
+            $.ajax({
+                url: href,
+                type: 'post',
+                data: { _token: "{{ csrf_token() }}" },
+                complete: function(){
+                    location.reload();
+                }
+            });
+        });
+    </script>
+
+    <script>
 
         $(document).ready(function(){
 
@@ -83,10 +99,10 @@
                     title: 'Change the attached page data',
                     source: [
                             @foreach($pages as $page)
-                            @if($page->isEnabled())
-                        {value:"{{ $page->id() }}", text: "{{ ucwords($page->seoTitle()) }}"},
+                            @if($page->enabled)
+                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }}"},
                             @else
-                        {value:"{{ $page->id() }}", text: "{{ ucwords($page->seoTitle()) }} - Unpublished"},
+                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }} - Unpublished"},
                         @endif
                         @endforeach
                     ],
@@ -115,6 +131,9 @@
 @endsection
 
 @section('content')
+
+    <?php /** @var \App\Model\Page $page */ ?>
+    <?php /** @var \App\Model\Menu $menu */ ?>
 
     <style>
 
@@ -197,7 +216,7 @@
                 @foreach($menus as $menu)
 
                     @if($menu->page)
-                        @if($menu->page->isEnabled() == false)
+                        @if($menu->page->enabled == false)
                             <tr role="row" class="odd" style="background-color: #FFF2F2">
                         @endif
                     @else
@@ -205,17 +224,17 @@
                             @endif
 
 
-                            @if($menu->isRequirement())
+                            @if($menu->required)
 
                                 <td>
-                                    {{ $menu->orderID() }}
+                                    {{ $menu->order_id }}
                                 </td>
                                 <td>
-                                    <a id="title-{{ $menu->id() }}" data-slug="{{ $menu->slug() }}" data-name="title" data-type="text" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->title() }}</a>
+                                    <a id="title-{{ $menu->id }}" data-slug="{{ $menu->slug }}" data-name="title" data-type="text" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{{ $menu->title }}</a>
                                 </td>
 
                                 <td>
-                                    {{ $menu->pageTitle() }}
+                                    {{ $menu->page->seo_title }}
                                 </td>
 
                                 <td>
@@ -223,15 +242,15 @@
                                 </td>
 
                                 <td>
-                                    {{ $menu->target() }}
+                                    {{ $menu->target }}
                                 </td>
 
                                 <td>
-                                    {!! bool2Status($menu->isEnabled(),'Published', 'Private') !!}
+                                    {!! bool2Status($menu->enabled,'Published', 'Private') !!}
                                 </td>
 
                                 <td>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $menu->updatedAt()->diffForHumans() }}">{{ $menu->updatedAt()->format('F dS Y') }}</a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $menu->updated_at->diffForHumans() }}">{{ $menu->updated_at->format('F dS Y') }}</a>
                                 </td>
 
                                 <td>
@@ -241,54 +260,44 @@
                             @else {{-- IF MENU IS NOT APPLICATION REQUIRED, AND USER CREATED.--}}
 
                             <td>
-                                {{ $menu->orderID() }}
+                                {{ $menu->order_id }}
                             </td>
                             <td>
-                                <a id="title-{{ $menu->id() }}" data-slug="{{ $menu->slug() }}" data-name="title" data-type="text" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->title() }}</a>
+                                <a id="title-{{ $menu->id }}" data-slug="{{ $menu->slug }}" data-name="title" data-type="text" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{{ $menu->title }}</a>
                             </td>
 
                             <td>
-                                @if($menu->isExternal(false))
-                                    @if($menu->page->isEnabled() == false)
-                                        <a style='color: red' id="page-{{ $menu->id() }}" data-name="PageID" data-value="{{ $menu->page->id() }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->pageTitle() }} - Unpublished</a>
+                                @if(!$menu->link)
+                                    @if($menu->page->enabled == false)
+                                        <a style='color: red' id="page-{{ $menu->id }}" data-name="PageID" data-value="{{ $menu->page->id }}" data-type="select" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{{ $menu->page->seo_title }} - Unpublished</a>
                                     @else
-                                        <a id="page-{{ $menu->id() }}" data-name="PageID" data-value="{{ $menu->page->id() }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->pageTitle() }}</a>
+                                        <a id="page-{{ $menu->id }}" data-name="PageID" data-value="{{ $menu->page->id }}" data-type="select" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{{ $menu->page->seo_title }}</a>
                                     @endif
                                 @endif
                             </td>
 
                             <td>
-                                @if($menu->isExternal(true))
-                                    <a id='link-{{ $menu->id() }}' data-name="link" data-type="text" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->link() }}</a>
+                                @if($menu->link)
+                                    <a id='link-{{ $menu->id }}' data-name="link" data-type="text" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{{ $menu->link() }}</a>
                                 @else
                                     <a href="{{ makeUrl($menu->page) }}" target="_blank" title="Click to view : {{ makeUrl($menu->page) }}"><span style="color: #00A000">{{ makeUrl($menu->page) }}</span></a>
                                 @endif
                             </td>
 
                             <td>
-                                <a id="target-{{ $menu->id() }}" data-name="target" data-value="{{ $menu->target() }}" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->target() }}</a>
+                                <a id="target-{{ $menu->id }}" data-name="target" data-value="{{ $menu->target }}" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{{ $menu->target }}</a>
                             </td>
 
                             <td>
-                                <a id="status-{{ $menu->id() }}" data-name="status" data-value="{{ $menu->isEnabled() }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{!! bool2Status( $menu->isEnabled(), 'Published', 'Private') !!}</a>
+                                <a id="status-{{ $menu->id }}" data-name="status" data-value="{{ $menu->enabled }}" data-type="select" data-pk="{{ $menu->id }}" data-url="/admin/menus/update">{!! bool2Status( $menu->enabled, 'Published', 'Private') !!}</a>
                             </td>
 
                             <td>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $menu->updatedAt()->diffForHumans() }}">{{ $menu->updatedAt()->format('F dS Y') }}</a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $menu->updated_at->diffForHumans() }}">{{ $menu->updated_at->format('F dS Y') }}</a>
                             </td>
 
                             <td>
-                                <a href="#" data-remodal-target="{{$menu->id()}}" style="color:red" type="button">Delete</a>
-                                <div class="remodal" data-remodal-id="{{$menu->id()}}">
-                                    <button data-remodal-action="close" class="remodal-close"></button>
-                                    <h1>Deleting Menu : {{ $menu->title() }}</h1>
-                                    <p>
-                                        This will remove all attached menu pages if they exist including itself, are you sure you want this?
-                                    </p>
-                                    <br>
-                                    <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
-                                    <button data-remodal-action="confirm" v-on:click="ajaxDelete('{{ url('/admin/menus/delete/'.$menu->id()) }}', '{{ route('menus') }}')" class="remodal-confirm">Confirm</button>
-                                </div>
+                                <a class="row_delete" href="{{ url('/admin/menus/delete/'.$menu->id) }}" style="color:red" type="button">Delete</a>
                             </td>
                             @endif
 
@@ -377,7 +386,7 @@
 
             <div class="table-panel border light">
 
-                <div class="title"><span class="green">Submenu</span> - {{$submenus[0]->parent->title()}}</div>
+                <div class="title"><span class="green">Submenu</span> - {{$submenus[0]->parent->title}}</div>
 
                 <table id="table-datatables" class="table table-striped table-bordered table-hover row-border order-column submenu-{{$key}}" cellpadding="0" cellspacing="0" style="width: 100%">
 
@@ -398,7 +407,7 @@
                         @foreach($submenus as $submenu)
 
 
-                            @if($submenu->isExternal(false) && $submenu->page->isEnabled() == false)
+                            @if($submenu->isExternal(false) && $submenu->page->enabled == false)
                                 <tr role="row" class="odd" style="background-color: #FFF2F2">
                             @else
                                 <tr role="row" class="odd">
@@ -413,10 +422,10 @@
                                     <td>
 
                                         @if($submenu->isExternal(false))
-                                            @if($submenu->page->isEnabled() == false)
-                                                <a style='color:red' id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id() }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }} - Unpublished</a>
+                                            @if($submenu->page->enabled == false)
+                                                <a style='color:red' id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }} - Unpublished</a>
                                             @else
-                                                <a id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id() }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }}</a>
+                                                <a id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }}</a>
                                             @endif
                                         @endif
 
@@ -435,21 +444,11 @@
                                         <a id="status-{{ $submenu->id() }}" data-name="status" data-value="{{ $submenu->isEnabled() }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{!! bool2Status( $submenu->isEnabled()) !!}</a>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $menu->updatedAt()->diffForHumans() }}">{{ $menu->updatedAt()->format('F dS Y') }}</a>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $menu->updated_at->diffForHumans() }}">{{ $menu->updated_at->format('F dS Y') }}</a>
                                     </td>
                                     <td>
                                         @if($submenu->slug() != 'index')
-                                            <a href="#" data-remodal-target="{{$submenu->id()}}" style="color:red" type="button">Delete</a>
-                                            <div class="remodal" data-remodal-id="{{$submenu->id()}}">
-                                                <button data-remodal-action="close" class="remodal-close"></button>
-                                                <h1>Deleting Menu : {{ $submenu->title() }}</h1>
-                                                <p>
-                                                    This will remove all attached menu pages if they exist including itself, are you sure you want this?
-                                                </p>
-                                                <br>
-                                                <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
-                                                <button data-remodal-action="confirm" v-on:click="ajaxDelete('{{ url('/admin/menus/delete/'.$submenu->id()) }}', '{{ route('menus') }}')" class="remodal-confirm">Confirm</button>
-                                            </div>
+                                            <a class="row_delete" href="{{ url('/admin/menus/delete/'.$menu->id) }}" style="color:red" type="button">Delete</a>
                                         @else
                                             Cannot Delete
                                         @endif

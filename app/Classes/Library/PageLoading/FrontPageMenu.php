@@ -62,11 +62,11 @@ class FrontPageMenu
     public function collect(Menu $menu, $status = false)
     {
         return [
-            'title'    => $menu->title(),
+            'title'    => $menu->title,
             'link'     => makeSlug($menu->page),
-            'icon'     => $menu->icon(),
-            'order'    => $menu->orderId(),
-            'target'   => $menu->target(),
+            'icon'     => $menu->icon,
+            'order'    => $menu->order_id,
+            'target'   => $menu->target,
             'active'   => $status ? 'active' : 'inactive',
             'submenu'  => [],
         ];
@@ -88,7 +88,7 @@ class FrontPageMenu
                     $menu_status = true;
                 }
 
-                $submenus->put($submenu->title(), $this->collect($submenu, $status));
+                $submenus->put($submenu->title, $this->collect($submenu, $status));
             }
 
             if (! $menu_status) {
@@ -99,7 +99,7 @@ class FrontPageMenu
                 $this->currentSubmenu = $submenus->sortBy('order')->toArray();
             }
 
-            $this->collection->put($menu->title(), array_merge($this->collect($menu, $menu_status), ['submenu' => $submenus->sortBy('order')->toArray()] ?? []));
+            $this->collection->put($menu->title, array_merge($this->collect($menu, $menu_status), ['submenu' => $submenus->sortBy('order')->toArray()] ?? []));
         }
 
         return $this;

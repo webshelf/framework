@@ -13,15 +13,9 @@
     |
     */
 
-    // Get Requests.
-    // ==================================================================================
-
     /** @var App\Classes\Repositories\RedirectRepository $repository */
     $repository = app(App\Classes\Repositories\RedirectRepository::class);
 
     foreach ($this->redirects->all() as $redirect) {
         Route::get($redirect->from(), 'App\Http\Controllers\PageController@redirect');
     }
-
-    // Post Requests.
-    // ==================================================================================

@@ -10,93 +10,72 @@ namespace App\Classes\Repositories;
 
 use App\Model\Menu;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class MenuRepository.
+ *
+ * @method Menu withTrashed
  */
-class MenuRepository
+class MenuRepository extends Menu
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Menu $model
-     */
-    public function __construct(Menu $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
-
     public function whereID(int $integer) : Menu
     {
-        return $this->model->where('id', $integer)->first();
+        return $this->where('id', $integer)->first();
     }
 
     public function restoreTrashedPlugin($plugin_name)
     {
-        return $this->model->withTrashed()->where('slug', $plugin_name)->restore();
+        return $this->withTrashed()->where('slug', $plugin_name)->restore();
     }
 
     public function allByPriorityOrder()
     {
-        return $this->model->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
+        return $this->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
     }
 
     public function allByRowOrder()
     {
-        return $this->model->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
+        return $this->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
     }
 
     public function listAllMenusNotRequired()
     {
-        return $this->model->whereNull('required')->pluck('title', 'id');
+        return $this->whereNull('required')->pluck('title', 'id');
     }
 
     public function makeList()
     {
-        return $this->model->pluck('title', 'id');
+        return $this->pluck('title', 'id');
     }
 
     public function listWhereInternal()
     {
-        return $this->model->whereNotNull('page_id')->whereNull('menu_id')->pluck('title', 'id');
+        return $this->whereNotNull('page_id')->whereNull('menu_id')->pluck('title', 'id');
     }
 
     public function submenusWhereID($integer)
     {
-        return $this->model->where('menu_id', $integer)->get();
+        return $this->where('menu_id', $integer)->get();
     }
 
     public function allMenus()
     {
-        return $this->model->whereNull('menu_id')->get();
+        return $this->whereNull('menu_id')->get();
     }
 
     public function allMenusWhereID($integer)
     {
-        return $this->model->where('menu_id', $integer)->get();
+        return $this->where('menu_id', $integer)->get();
     }
 
     public function allSubmenus()
     {
-        return $this->model->whereNotNull('menu_id')->get();
+        return $this->whereNotNull('menu_id')->get();
     }
 
     public function allSubmenusByPriorityOrderAndGrouped()
     {
-        return$this->model->whereNotNull('menu_id')->orderBy('order_id', 'asc')->get()->groupBy('menu_id');
+        return$this->whereNotNull('menu_id')->orderBy('order_id', 'asc')->get()->groupBy('menu_id');
     }
 
     /**
@@ -105,7 +84,7 @@ class MenuRepository
      */
     public function whereName($string)
     {
-        return $this->model->where('slug', $string)->first();
+        return $this->where('slug', $string)->first();
     }
 
     /**
@@ -113,7 +92,7 @@ class MenuRepository
      */
     public function whereFrontEndMenu() : Collection
     {
-        return $this->model->whereNull('menu_id')->where('enabled', true)->orderBy('order_id', 'asc')->with('submenus')->get();
+        return $this->whereNull('menu_id')->where('enabled', true)->orderBy('order_id', 'asc')->with('submenus')->get();
     }
 
     /**
@@ -121,7 +100,7 @@ class MenuRepository
      */
     public function allSubmenusOfMenuID(int $integer) : Collection
     {
-        return $this->model->where('menu_id', $integer)->where('enabled', true)->orderBy('order_id', 'asc')->get();
+        return $this->where('menu_id', $integer)->where('enabled', true)->orderBy('order_id', 'asc')->get();
     }
 
     /**
@@ -129,6 +108,6 @@ class MenuRepository
      */
     public function allGlobalMenusWithSubmenus()
     {
-        return $this->model->whereNull('menu_id')->where('enabled', true)->with('page')->orderBy('order_id', 'asc')->get();
+        return $this->whereNull('menu_id')->where('enabled', true)->with('page')->orderBy('order_id', 'asc')->get();
     }
 }

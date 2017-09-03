@@ -55,11 +55,11 @@
             <tbody>
             @foreach($pages as $page)
                 <tr>
-                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug()]) }}" name="{{ $page->seoTitle() }}" title="Manage, Review & Revise this page">{{ $page->seoTitle() }}</a></td>
-                    <td><a style="color: #00A000" href="{{ makeUrl($page) }}" title="View the page on your website '{{ ucwords($page->seoTitle()) }}'" target="_blank">{{ makeUrl($page) }}</a></td>
-                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug()]) }}" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $page->updatedAt()->diffForHumans() }}">{{ $page->updatedAt()->format('F dS Y') }}</a></td>
-                    <td title="Allow the public to view this page, or keep it private">{!! bool2Status($page->isEnabled(),'Published', 'Private') !!}</td>
-                    <td title="The status on which this should appear for google search">{!! bool2Status($page->isSitemap(), 'Enabled', 'Disabled') !!}</td>
+                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}" name="{{ $page->seo_title }}" title="Manage, Review & Revise this page">{{ $page->seo_title }}</a></td>
+                    <td><a style="color: #00A000" href="{{ makeUrl($page) }}" title="View the page on your website '{{ ucwords($page->seo_title) }}'" target="_blank">{{ makeUrl($page) }}</a></td>
+                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $page->updated_at->diffForHumans() }}">{{ $page->updated_at->format('F dS Y') }}</a></td>
+                    <td title="Allow the public to view this page, or keep it private">{!! bool2Status($page->enabled,'Published', 'Private') !!}</td>
+                    <td title="The status on which this should appear for google search">{!! bool2Status($page->sitemap, 'Enabled', 'Disabled') !!}</td>
                     <td><a href="{{ route('admin.pages.edit', $page->slug) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> @if($page->editable)<a href="{{ route('admin.pages.destroy', $page->slug) }}" id="form-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>@endif</td>
                     <td>
                         <i class="fa profile-image small" aria-hidden="true">

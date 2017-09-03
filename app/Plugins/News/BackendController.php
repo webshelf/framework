@@ -142,30 +142,29 @@ class BackendController extends PluginEngine implements InstallableInterface
             $menu = new Menu;
 
             \DB::transaction(function () use ($page, $menu, $plugin) {
-                $account_id = account()->id();
 
                 /* @var Plugin $plugin */
                 $plugin->setInstalled(true);
                 $plugin->save();
 
                 /* @var Page $page */
-                $page->setSlug('news');
-                $page->setSeoTitle('News');
-                $page->setPlugin('news');
-                $page->setEditable(false);
-                $page->setEnabled(true);
-                $page->setSitemap(true);
-                $page->setCreatorID($account_id);
+                $page->slug = 'news';
+                $page->seo_title = 'News';
+                $page->plugin = 'News';
+                $page->editable = false;
+                $page->enabled = true;
+                $page->sitemap = true;
+                $page->creator_id = account()->id;
                 $page->save();
 
                 /* @var Menu $menu */
-                $menu->setSlug(str_slug(strtolower($plugin->name())));
-                $menu->setTitle('News');
-                $menu->setTarget('_self');
-                $menu->setRequired(true);
-                $menu->setCreatorID($account_id);
-                $menu->setPageID($page->id());
-                $menu->setStatus(true);
+                $menu->slug = (str_slug(strtolower($plugin->name())));
+                $menu->title = ('News');
+                $menu->target = ('_self');
+                $menu->required = (true);
+                $menu->creator_id = (account()->id);
+                $menu->page_id = ($page->id);
+                $menu->enabled = (true);
                 $menu->save();
 
                 (app(MenuController::class))->reorderRowsFromCollection(app(MenuRepository::class)->allMenus());

@@ -8,38 +8,14 @@
 
 namespace App\Classes\Repositories;
 
-use App\Model\Plugin;
 use App\Model\PluginFeed;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PluginFeedRepository.
  */
-class PluginFeedRepository
+class PluginFeedRepository extends PluginFeed
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Plugin $model
-     */
-    public function __construct(Plugin $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
-
     /**
      * Broadcasts are plugins to be displayed to all front
      * end pages of the front end site.
@@ -48,7 +24,7 @@ class PluginFeedRepository
      */
     public function broadcasts()
     {
-        return $this->model->whereNull('page_id')->get();
+        return $this->whereNull('page_id')->get();
     }
 
     /**
@@ -57,7 +33,7 @@ class PluginFeedRepository
      */
     public function wherePageID($integer)
     {
-        return $this->model->where('page_id', $integer)->get();
+        return $this->where('page_id', $integer)->get();
     }
 
     /**
@@ -66,6 +42,6 @@ class PluginFeedRepository
      */
     public function loadFeedsForPageID($integer)
     {
-        return $this->model->where('page_id', $integer)->orWhere('page_id', null)->get();
+        return $this->where('page_id', $integer)->orWhere('page_id', null)->get();
     }
 }

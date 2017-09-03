@@ -78,6 +78,8 @@
 
                             <?php /** @var \App\Model\Audit $audit */ ?>
 
+                                @if ($audit->auditable)
+
                                 <div class="col">
 
                                     <div class="date">{{ $audit->created_at->diffForHumans() }}</div>
@@ -89,6 +91,8 @@
                                     @endif
 
                                 </div>
+
+                                @endif
 
                         @endforeach
 

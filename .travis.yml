@@ -1,43 +1,46 @@
-{
-  "language": "php",
-  "php": "7.1.5",
-  "sudo": false,
-  "cache": {
-    "directories": [
-      "$HOME/.composer/cache",
-      "node_modules",
-    ]
-  },
-  "services": [
-    "mysql",
-    "memcached",
-    "redis-server"
-  ],
-  "before_install": [
-    "php -i | grep xdebug",
-    "npm install && npm run dev",
-    "mysql -e 'CREATE DATABASE IF NOT EXISTS webshelf;'",
-    "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini",
-    "printf \"\\n\" | pecl install -f redis",
-    "travis_retry composer self-update",
-    "composer install",
-    "php artisan migrate",
-    "php artisan db:seed --class=FrameworkTableSeeder",
-  ],
-  "install": [
-    "if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-dist --no-suggest; fi",
-    "if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi",
-    "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
-  ],
-  "after_success": [
-    "if [[ $TRAVIS_BRANCH = 'notused' ]]; then
-      git checkout master;
-      git merge $TRAVIS_COMMIT;
-      git push -u https://github.com/webshelf/pull-tests.git master;
-    fi",
-  ],
-  "script": "vendor/bin/phpunit --coverage-clover build/logs/clover.xml",
-  "after_script": "php vendor/bin/codacycoverage clover",
-  "dist": "trusty",
-  "os": "linux"
-}
+language: php
+
+env:
+  global:
+    - setup=stable
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1.5
+    - php: 7.1.5
+      env: setup=lowest
+    - php: 7.2
+    - php: 7.2
+      env: setup=lowest
+
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+    - $HOME/.composer/cache
+
+services:
+  - mysql
+  - memcached
+  - redis-server
+
+before_install:
+  - phpenv config-rm xdebug.ini || true
+  - npm install && npm run dev
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS webshelf;'
+  - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - printf "\n" | pecl install -f redis
+  - travis_retry composer self-update
+  - composer install
+  - php artisan migrate
+  - php artisan db:seed --class=FrameworkTableSeeder
+
+install:
+  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
+  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+
+script: vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script: php vendor/bin/codacycoverage clover

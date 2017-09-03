@@ -4,6 +4,7 @@ This is the source of the webshelf CMS, A modular content management system for 
 ## Status
 [![Build Status](https://travis-ci.org/webshelf/framework.svg?branch=master)](https://travis-ci.org/webshelf/framework)
 [![StyleCI](https://styleci.io/repos/98642084/shield?branch=master)](https://styleci.io/repos/98642084)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webshelf/framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webshelf/framework/?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dd235c87507340e19a9b5c6304327470)](https://www.codacy.com/app/marky291/framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=webshelf/framework&amp;utm_campaign=Badge_Grade)
 
 ## Documentation

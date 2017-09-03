@@ -9,53 +9,29 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Setting;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class SettingsRepository.
  */
-class SettingsRepository
+class SettingsRepository extends Setting
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Setting $model
-     */
-    public function __construct(Setting $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
-
     /**
      * Return a single model where the integer matches.
      *
      * @param $integer
-     * @return array|\stdClass|Setting
+     * @return SettingsRepository|array|\Illuminate\Database\Eloquent\Model
      */
     public function whereID(int $integer)
     {
-        return $this->model->where('id', $integer)->first();
+        return $this->where('id', $integer)->first();
     }
 
     /**
      * @param string $string
-     * @return Setting|array|null|\stdClass
+     * @return Setting
      */
-    public function whereKey(string $string) : Setting
+    public function firstKey(string $string)
     {
-        return $this->model->where('key', $string)->first();
+        return $this->where('key', $string)->first();
     }
 }
