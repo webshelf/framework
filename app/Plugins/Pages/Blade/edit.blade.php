@@ -25,22 +25,6 @@
 
 @endphp
 
-@section('tools')
-
-        <button data-remodal-target="modal" class="button" type="button"><i class="fa fa-trash-o"></i> Delete</button>
-        <div class="remodal" data-remodal-id="modal">
-            <button data-remodal-action="close" class="remodal-close"></button>
-            <h1>Deleting Page : {{ $page->seo_title }}</h1>
-            <p>
-                Are you sure you want to remove this page, you will not be able to recover it once deleted.
-            </p>
-            <br>
-            <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
-            <button data-remodal-action="confirm" id="btn-delete" data-request="{{ route('admin.pages.destroy', ['name' => $page->seo_title]) }}" data-redirect="{{ url('admin/pages') }}" class="remodal-confirm">Confirm</button>
-        </div>
-
-@endsection
-
 @section('content')
 
     <div class="flex-display">
@@ -82,12 +66,6 @@
                                 <div class="title">
 
                                     <h2>Seo Editor</h2>
-
-                                </div>
-
-                                <div class="tools">
-
-                                    @yield('tools')
 
                                 </div>
 
@@ -189,12 +167,6 @@
 
                                     </div>
 
-                                    <div class="tools">
-
-                                        Tools Coming Soon...
-
-                                    </div>
-
                                 </div>
 
                                 <div class="form-body">
@@ -234,12 +206,6 @@
                                     <div class="title">
 
                                         <h2>Preview</h2>
-
-                                    </div>
-
-                                    <div class="tools">
-
-                                        @yield('tools')
 
                                     </div>
 
