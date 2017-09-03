@@ -9,15 +9,12 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Setting;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class SettingsRepository.
  */
 class SettingsRepository extends Setting
 {
-
     /**
      * Return a single model where the integer matches.
      *

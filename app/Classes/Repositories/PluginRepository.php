@@ -10,14 +10,12 @@ namespace App\Classes\Repositories;
 
 use App\Model\Plugin;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PluginRepository.
  */
 class PluginRepository extends Plugin
 {
-
     /**
      * @return mixed
      */

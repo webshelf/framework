@@ -9,8 +9,6 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Migration;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class MigrationRepository.
