@@ -99,7 +99,7 @@ abstract class FrontPage
          * this will mean the page still exists but is not viewable
          * here we will create a disabled page showing 404 not found.
          */
-        if ( ! $this->page->enabled) {
+        if (! $this->page->enabled) {
             return ErrorController::disabled();
         }
 
