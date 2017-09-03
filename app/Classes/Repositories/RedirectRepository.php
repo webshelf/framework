@@ -15,29 +15,8 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class RedirectRepository.
  */
-class RedirectRepository
+class RedirectRepository extends Redirect
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Redirect $model
-     */
-    public function __construct(Redirect $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
 
     /**
      * @param int $integer
@@ -45,6 +24,6 @@ class RedirectRepository
      */
     public function whereID(int $integer) : Redirect
     {
-        return $this->model->where('id', $integer)->first();
+        return $this->where('id', $integer)->first();
     }
 }

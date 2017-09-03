@@ -9,39 +9,22 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Page;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PageRepository.
+ *
+ * @method Page withTrashed
  */
-class PageRepository
+class PageRepository extends Page
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Page $model
-     */
-    public function __construct(Page $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
 
     public function whereID(int $integer)
     {
-        return $this->model->where('id', $integer)->first();
+        return $this->where('id', $integer)->first();
     }
 
     /**
@@ -50,7 +33,7 @@ class PageRepository
      */
     public function restoreTrashedPlugin($plugin_name)
     {
-        return $this->model->withTrashed()->where('plugin', $plugin_name)->restore();
+        return $this->withTrashed()->where('plugin', $plugin_name)->restore();
     }
 
     /**
@@ -58,17 +41,17 @@ class PageRepository
      */
     public function makeList() : array
     {
-        return $this->model->pluck('seo_title', 'id')->toArray();
+        return $this->pluck('seo_title', 'id')->toArray();
     }
 
     public function listAllPagesWithoutMenusAndEditable()
     {
-        return $this->model->whereNotNull('editable')->doesntHave('menus')->pluck('seo_title', 'id');
+        return $this->whereNotNull('editable')->doesntHave('menus')->pluck('seo_title', 'id');
     }
 
     public function allPagesWithoutMenusAndEditable() : Collection
     {
-        return $this->model->whereNotNull('editable')->doesntHave('menus')->get();
+        return $this->whereNotNull('editable')->doesntHave('menus')->get();
     }
 
     /**
@@ -78,7 +61,7 @@ class PageRepository
      */
     public function whereName($string) : Page
     {
-        return $this->model->where('slug', $string)->first();
+        return $this->where('slug', $string)->first();
     }
 
     /**
@@ -86,7 +69,7 @@ class PageRepository
      */
     public function whereSitemap() : Collection
     {
-        return $this->model->where('sitemap', true)->where('enabled', true)->get();
+        return $this->where('sitemap', true)->where('enabled', true)->get();
     }
 
     /**
@@ -94,12 +77,12 @@ class PageRepository
      */
     public function enabled() : Collection
     {
-        return $this->model->where('enabled', true)->get();
+        return $this->where('enabled', true)->get();
     }
 
     public function allWithMenuAndParent()
     {
-        return $this->model->with(['menu' => function ($query) {
+        return $this->with(['menu' => function ($query) {
             $query->with('parent');
         }])->get();
     }

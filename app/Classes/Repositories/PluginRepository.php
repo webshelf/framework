@@ -15,36 +15,15 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class PluginRepository.
  */
-class PluginRepository
+class PluginRepository extends Plugin
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Plugin $model
-     */
-    public function __construct(Plugin $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
 
     /**
      * @return mixed
      */
     public function allWhereActive() : Collection
     {
-        return $this->model->where('enabled', true)->get();
+        return $this->where('enabled', true)->get();
     }
 
     /**
@@ -52,7 +31,7 @@ class PluginRepository
      */
     public function allWhereViewable() : Collection
     {
-        return $this->model->where('enabled', true)->whereNull('hidden')->get();
+        return $this->where('enabled', true)->whereNull('hidden')->get();
     }
 
     /**
@@ -60,7 +39,7 @@ class PluginRepository
      */
     public function allWhereDisabled() : Collection
     {
-        return $this->model->where('enabled', false)->get();
+        return $this->where('enabled', false)->get();
     }
 
     /**
@@ -71,6 +50,6 @@ class PluginRepository
      */
     public function whereName($plugin_name)
     {
-        return $this->model->where('name', $plugin_name)->first();
+        return $this->where('name', $plugin_name)->first();
     }
 }

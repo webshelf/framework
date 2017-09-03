@@ -91,7 +91,7 @@ class FrontPageBuilder
      */
     public function menus()
     {
-        $menus = new FrontPageMenu((new MenuRepository(new Menu))->allGlobalMenusWithSubmenus());
+        $menus = new FrontPageMenu((new MenuRepository)->allGlobalMenusWithSubmenus());
 
         $this->menu = $menus->make();
 

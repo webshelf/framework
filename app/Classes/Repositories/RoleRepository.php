@@ -15,44 +15,23 @@ use Illuminate\Database\Eloquent\Collection;
 /**
  * Class RoleRepository.
  */
-class RoleRepository
+class RoleRepository extends Role
 {
-    /**
-     * The model for eloquent access.
-     *
-     * @var Builder
-     */
-    private $model;
-
-    /**
-     * AccountRepository constructor.
-     *
-     * @param Role $model
-     */
-    public function __construct(Role $model)
-    {
-        $this->model = $model;
-    }
-
-    public function all() : Collection
-    {
-        return $this->model->get();
-    }
 
     /**
      * @param int $integer
      * @return Role|array|null|\stdClass
      */
-    public function whereID(int $integer) : Role
+    public function whereID(int $integer)
     {
-        return $this->model->where('id', $integer)->first();
+        return $this->where('id', $integer)->first();
     }
 
     /**
      * @return Collection|\Illuminate\Support\Collection
      */
-    public function whereRolesGreaterOrEqualToMyAccount() : \Illuminate\Support\Collection
+    public function whereRolesGreaterOrEqualToMyAccount()
     {
-        return $this->model->where('id', '>=', account()->role->id())->get();
+        return $this->where('id', '>=', account()->role->id)->get();
     }
 }
