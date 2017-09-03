@@ -158,13 +158,13 @@ class BackendController extends PluginEngine implements InstallableInterface
                 $page->save();
 
                 /* @var Menu $menu */
-                $menu->setSlug(str_slug(strtolower($plugin->name())));
-                $menu->setTitle('News');
-                $menu->setTarget('_self');
-                $menu->setRequired(true);
-                $menu->setCreatorID(account()->id);
-                $menu->setPageID($page->id);
-                $menu->setStatus(true);
+                $menu->slug = (str_slug(strtolower($plugin->name())));
+                $menu->title = ('News');
+                $menu->target = ('_self');
+                $menu->required = (true);
+                $menu->creator_id = (account()->id);
+                $menu->page_id = ($page->id);
+                $menu->enabled = (true);
                 $menu->save();
 
                 (app(MenuController::class))->reorderRowsFromCollection(app(MenuRepository::class)->allMenus());

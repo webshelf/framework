@@ -51,14 +51,14 @@ class FrameworkTableSeeder extends Seeder
     private function seedHomepageMenu()
     {
         $menu = new Menu;
-        $menu->setSlug('index');
-        $menu->setTitle('Homepage');
-        $menu->setTarget('_self');
-        $menu->setOrderID(1);
-        $menu->setPageID(1);
-        $menu->setEnabled(true);
-        $menu->setRequired(true);
-        $menu->setCreatorID(1);
+        $menu->slug = ('index');
+        $menu->title = ('Homepage');
+        $menu->target = ('_self');
+        $menu->order_id = (1);
+        $menu->page_id = (1);
+        $menu->enabled = (true);
+        $menu->required = (true);
+        $menu->creator_id = (1);
         $menu->save();
     }
 }

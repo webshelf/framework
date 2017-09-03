@@ -1,211 +1,83 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 13/03/2016
- * Time: 15:21.
- */
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Menus.
  *
- * @property Account $creator
- * @property Page $page
- * @property mixed submenus
+ * @property int $id
+ * @property string $slug
+ * @property string $title
+ * @property string $icon
+ * @property string $link
+ * @property int $page_id
+ * @property string $target
+ * @property int $menu_id
+ * @property int $order_id
+ * @property boolean $enabled
+ * @property boolean $required
+ * @property int $creator_id
+ * @property int $editor_id
+ *
+ * @property Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property Page page
  */
 class Menu extends EloquentModel
 {
+    /*
+     * Laravel Deleting.
+     * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
+     */
     use SoftDeletes;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'menus';
 
-    protected $softDeletes = true;
-
     /**
-     * ==========================================================.
+     * Generate a link that the menu will visit when clicked.
      *
-     *   GET THE ATTRIBUTES OF THE MODEL
-     *
-     * ==========================================================
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|mixed|string
      */
-    public function id()
-    {
-        return $this->getAttribute('id');
-    }
-
-    public function title()
-    {
-        return $this->getAttribute('title');
-    }
-
     public function link()
     {
-        return $this->belongsToPage() ? url($this->page->url()) : $this->getAttribute('link');
-    }
-
-    /**
-     * Return the linked page name.
-     *
-     * @return mixed
-     */
-    public function pageTitle()
-    {
-        return $this->belongsToPage() ? ucfirst($this->page->seo_title) : null;
-    }
-
-    public function pageName()
-    {
-        return $this->belongsToPage() ? $this->page->slug : null;
-    }
-
-    public function orderId()
-    {
-        return $this->getAttribute('order_id');
-    }
-
-    public function updatedAt()
-    {
-        return $this->getAttribute('updated_at');
-    }
-
-    public function createdAt()
-    {
-        return $this->getAttribute('created_at');
-    }
-
-    public function isEnabled()
-    {
-        return $this->getAttribute('enabled') ? true : false;
-    }
-
-    /**
-     * ==========================================================.
-     *
-     *   SET THE ATTRIBUTES OF THE MODEL
-     *
-     * ==========================================================
-     */
-    public function enableMenu()
-    {
-        $this->setAttribute('enabled', true);
-
-        return $this;
-    }
-
-    public function disableMenu()
-    {
-        $this->setAttribute('enabled', false);
-
-        return $this;
-    }
-
-    public function setEnabled($boolean)
-    {
-        $this->setAttribute('enabled', $boolean ? true : false);
-
-        return $this;
-    }
-
-    public function setLink($string)
-    {
-        $this->setAttribute('link', $string);
-
-        return $this;
-    }
-
-    /**
-     * @param $integer
-     * @return $this
-     */
-    public function setOrderID($integer)
-    {
-        $this->setAttribute('order_id', $integer);
-
-        return $this;
-    }
-
-    /**
-     * @param $string
-     * @return $this
-     */
-    public function setTitle($string)
-    {
-        $this->setAttribute('title', ucfirst($string));
-
-        return $this;
+        return $this->page ? url($this->page->slug) : $this->link;
     }
 
     /**
      * Relationship to the submenu table.
      *
-     * @return Menu
+     * @return Menu|\Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function submenus()
     {
         return $this->hasMany(self::class, 'menu_id', 'id');
     }
 
-    public function setSubmenuID(int $integer)
-    {
-        $this->setAttribute('menu_id', $integer);
-    }
-
+    /**
+     * A Menu can have a menu.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function parent()
     {
         return $this->hasOne(self::class, 'id', 'menu_id');
     }
 
-    public function slug()
-    {
-        return $this->getAttribute('slug');
-    }
-
-    public function setSlug($string)
-    {
-        return $this->setAttribute('slug', $string);
-    }
-
-    public function target()
-    {
-        return $this->getAttribute('target');
-    }
-
-    public function setTarget($string)
-    {
-        return $this->setAttribute('target', $string);
-    }
-
     /**
-     * Set the page target to open a new window.
+     * Menu belongs to a single Page.
      *
-     * @return $this
-     */
-    public function setTargetBlank()
-    {
-        return $this->setTarget('_blank');
-    }
-
-    /**
-     * Set the page target to open link in its own window.
-     *
-     * @return $this
-     */
-    public function setTargetSelf()
-    {
-        $this->setTarget('_self');
-
-        return $this;
-    }
-
-    /**
-     * Relationship to the page.
-     *
-     * @return Page
+     * @return Page|\Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function page()
     {
@@ -213,106 +85,8 @@ class Menu extends EloquentModel
     }
 
     /**
-     * @param $integer
-     * @return $this
-     */
-    public function setPageID($integer)
-    {
-        $this->setAttribute('page_id', $integer);
-
-        return $this;
-    }
-
-    /**
-     * Check if menu belongs to a page.
+     * Get the creators account name.
      *
-     * @return bool
-     */
-    public function belongsToPage()
-    {
-        return $this->pageID() ? true : false;
-    }
-
-    public function icon()
-    {
-        return $this->getAttribute('icon');
-    }
-
-    public function setIcon($string)
-    {
-        return $this->setAttribute('icon', $string);
-    }
-
-    public function hasExternalLink(MenuContract $menu)
-    {
-        return $this->getAttribute('link') ? true : false;
-    }
-
-    /**
-     * Set the enabled value from
-     * 1 - enabled
-     * 0 -disabled.
-     */
-    public function setStatus($boolean)
-    {
-        return $this->setAttribute('enabled', $boolean);
-    }
-
-    public function pageID()
-    {
-        return $this->getAttribute('page_id');
-    }
-
-    /**
-     * Make the current menu a requirement of application loading.
-     *
-     * Boolean for this to be true or false. default is true.
-     *
-     * @param bool $boolean
-     * @return mixed
-     */
-    public function setRequired($boolean = true)
-    {
-        if ($boolean == true) {
-            $this->setAttribute('required', true);
-
-            return $this;
-        }
-
-        $this->setAttribute('required', false);
-
-        return $this;
-    }
-
-    /**
-     * Return boolean if this is a requirement for loading.
-     *
-     * @param null $boolean
-     * @return mixed
-     */
-    public function isRequirement($boolean = null)
-    {
-        if (is_bool($boolean)) {
-            return $this->getAttribute('required') == $boolean ? true : false;
-        }
-
-        return $this->getAttribute('required') ? true : false;
-    }
-
-    /**
-     * @param null $boolean
-     * @return mixed
-     */
-    public function isExternal($boolean = null)
-    {
-        if (is_bool($boolean)) {
-            return $this->getAttribute('link') == $boolean ? true : false;
-        }
-
-        return $this->getAttribute('link') ? true : false;
-    }
-
-    /**
      * @return Account|mixed
      */
     public function creator() : Account
@@ -321,51 +95,11 @@ class Menu extends EloquentModel
     }
 
     /**
-     * Logs require a creator to determine who the original account is.
-     *
-     * @return int
-     */
-    public function creatorID()
-    {
-        return $this->getAttribute('creator_id');
-    }
-
-    /**
-     * @param int $integer
-     * @return $this
-     */
-    public function setCreatorID(int $integer)
-    {
-        return $this->setAttribute('creator_id', $integer);
-    }
-
-    /**
-     * Logs any changes to the model with the editor_column.
-     *
-     * @return int
-     */
-    public function editorID()
-    {
-        return $this->getAttribute('editor_id');
-    }
-
-    /**
-     * Set the editors id to the editor column.
-     *
-     * @param int $integer
-     * @return $this
-     */
-    public function setEditorID(int $integer)
-    {
-        return $this->setAttribute('editor_id', $integer);
-    }
-
-    /**
      * Get the creator model of the eloquent model.
      *
      * @return Account|mixed
      */
-    public function editor()
+    public function modifier()
     {
         return $this->belongsTo(Account::class, 'editor_id', 'id');
     }
