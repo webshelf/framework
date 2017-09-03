@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Exception;
-use App\Model\Plugin;
-use App\Model\Setting;
 use App\Classes\PluginManager;
 use App\Classes\SettingsManager;
 use Illuminate\Foundation\Application;
