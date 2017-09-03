@@ -9,17 +9,19 @@
 @endsection
 
 @php
+    /** @var \App\Model\Page $page */
+
     // VARIABLES FOR FORM CONTROL.
     $editing       = isset($page);
     $creator       = account()->fullName()          ?: 'Unknown Account';
-    $title         = $editing ? (old('title')       ?: $page->seoTitle())       : (old('title')       ?: '');
-    $keywords      = $editing ? (old('keywords')    ?: $page->seoKeywords())    : (old('keywords')    ?: '');
-    $description   = $editing ? (old('description') ?: $page->seoDescription()) : (old('description') ?: '');
-    $content       = $editing ? (old('content')     ?: $page->content())        : (old('content')     ?: '');
+    $title         = $editing ? (old('title')       ?: $page->seo_title)       : (old('title')       ?: '');
+    $keywords      = $editing ? (old('keywords')    ?: $page->seo_keywords)    : (old('keywords')    ?: '');
+    $description   = $editing ? (old('description') ?: $page->seo_description) : (old('description') ?: '');
+    $content       = $editing ? (old('content')     ?: $page->content)        : (old('content')     ?: '');
     $url           = $editing ?  makeUrl($page) : '';
 
-    $sitemap_checkbox   = $editing ? (old('sitemap_checkbox') ?: ($page->isSitemap() ? 'checked' : null))  : (old('sitemap_checkbox') ?: 'checked');
-    $enabled_checkbox   = $editing ? (old('enabled_checkbox') ?: ($page->isEnabled() ? 'checked' : null))  : (old('enabled_checkbox') ?: 'checked');
+    $sitemap_checkbox   = $editing ? (old('sitemap_checkbox') ?: ($page->sitemap ? 'checked' : null))  : (old('sitemap_checkbox') ?: 'checked');
+    $enabled_checkbox   = $editing ? (old('enabled_checkbox') ?: ($page->enabled ? 'checked' : null))  : (old('enabled_checkbox') ?: 'checked');
 
 @endphp
 
@@ -28,7 +30,7 @@
         <button data-remodal-target="modal" class="button" type="button"><i class="fa fa-trash-o"></i> Delete</button>
         <div class="remodal" data-remodal-id="modal">
             <button data-remodal-action="close" class="remodal-close"></button>
-            <h1>Deleting Page : {{ $page->seoTitle() }}</h1>
+            <h1>Deleting Page : {{ $page->seo_title }}</h1>
             <p>
                 Are you sure you want to remove this page, you will not be able to recover it once deleted.
             </p>
@@ -47,7 +49,7 @@
             <li class="active">
                 <a href="#seo" aria-controls="seo" role="tab" data-toggle="tab">SEO Editor</a>
             </li>
-            @if($editing == false || $editing == true && $page->isEditable() )
+            @if($editing == false || $editing == true && $page->editable )
                     <li>
                         <a href="#content" aria-controls="keywords" role="tab" data-toggle="tab">Content Editor</a>
                     </li>
@@ -55,7 +57,7 @@
                         <a href="#options" aria-controls="description" role="tab" data-toggle="tab">Page Options</a>
                     </li>
             @endif
-            @if($editing == true && $page->isEditable() )
+            @if($editing == true && $page->editable) )
                 <li>
                     <a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Preview</a>
                 </li>
@@ -64,7 +66,7 @@
 
         <div class="form-box blue">
 
-            <form method="POST" action="{{ route('admin.pages.update', ["name"=>$page->slug()]) }}" id="form">
+            <form method="POST" action="{{ route('admin.pages.update', ["name"=>$page->slug]) }}" id="form">
 
                 <input type="hidden" name="_method" value="PATCH">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -141,7 +143,7 @@
 
                     </div>
 
-                    @if($editing == false || $editing == true && $page->isEditable() )
+                    @if($editing == false || $editing == true && $page->editable )
 
                         <div role="tabpanel" class="tab-pane fade in" id="content">
 
@@ -222,7 +224,7 @@
 
                     @endif
 
-                    @if($editing == true && $page->isEditable() )
+                    @if($editing == true && $page->editable )
                         <div role="tabpanel" class="tab-pane fade in" id="preview">
 
                             <div class="form form-panel box blue">

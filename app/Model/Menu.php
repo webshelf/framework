@@ -55,12 +55,12 @@ class Menu extends EloquentModel
      */
     public function pageTitle()
     {
-        return $this->belongsToPage() ? $this->page->seoTitle() : null;
+        return $this->belongsToPage() ? ucfirst($this->page->seo_title) : null;
     }
 
     public function pageName()
     {
-        return $this->belongsToPage() ? $this->page->slug() : null;
+        return $this->belongsToPage() ? $this->page->slug : null;
     }
 
     public function orderId()

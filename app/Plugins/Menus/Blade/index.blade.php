@@ -83,10 +83,10 @@
                     title: 'Change the attached page data',
                     source: [
                             @foreach($pages as $page)
-                            @if($page->isEnabled())
-                        {value:"{{ $page->id() }}", text: "{{ ucwords($page->seoTitle()) }}"},
+                            @if($page->enabled)
+                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }}"},
                             @else
-                        {value:"{{ $page->id() }}", text: "{{ ucwords($page->seoTitle()) }} - Unpublished"},
+                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }} - Unpublished"},
                         @endif
                         @endforeach
                     ],
@@ -115,6 +115,9 @@
 @endsection
 
 @section('content')
+
+    <?php /** @var \App\Model\Page $page */ ?>
+    <?php /** @var \App\Model\Menu $menu */ ?>
 
     <style>
 
@@ -197,7 +200,7 @@
                 @foreach($menus as $menu)
 
                     @if($menu->page)
-                        @if($menu->page->isEnabled() == false)
+                        @if($menu->page->enabled == false)
                             <tr role="row" class="odd" style="background-color: #FFF2F2">
                         @endif
                     @else
@@ -249,10 +252,10 @@
 
                             <td>
                                 @if($menu->isExternal(false))
-                                    @if($menu->page->isEnabled() == false)
-                                        <a style='color: red' id="page-{{ $menu->id() }}" data-name="PageID" data-value="{{ $menu->page->id() }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->pageTitle() }} - Unpublished</a>
+                                    @if($menu->page->enabled == false)
+                                        <a style='color: red' id="page-{{ $menu->id() }}" data-name="PageID" data-value="{{ $menu->page->id }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->pageTitle() }} - Unpublished</a>
                                     @else
-                                        <a id="page-{{ $menu->id() }}" data-name="PageID" data-value="{{ $menu->page->id() }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->pageTitle() }}</a>
+                                        <a id="page-{{ $menu->id() }}" data-name="PageID" data-value="{{ $menu->page->id }}" data-type="select" data-pk="{{ $menu->id() }}" data-url="/admin/menus/update">{{ $menu->pageTitle() }}</a>
                                     @endif
                                 @endif
                             </td>
@@ -398,7 +401,7 @@
                         @foreach($submenus as $submenu)
 
 
-                            @if($submenu->isExternal(false) && $submenu->page->isEnabled() == false)
+                            @if($submenu->isExternal(false) && $submenu->page->enabled == false)
                                 <tr role="row" class="odd" style="background-color: #FFF2F2">
                             @else
                                 <tr role="row" class="odd">
@@ -413,10 +416,10 @@
                                     <td>
 
                                         @if($submenu->isExternal(false))
-                                            @if($submenu->page->isEnabled() == false)
-                                                <a style='color:red' id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id() }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }} - Unpublished</a>
+                                            @if($submenu->page->enabled == false)
+                                                <a style='color:red' id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }} - Unpublished</a>
                                             @else
-                                                <a id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id() }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }}</a>
+                                                <a id="page-{{ $submenu->id() }}" data-name="PageID" data-value="{{ $submenu->page->id }}" data-type="select" data-pk="{{ $submenu->id() }}" data-url="/admin/menus/update">{{ $submenu->pageTitle() }}</a>
                                             @endif
                                         @endif
 

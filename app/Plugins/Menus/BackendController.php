@@ -344,7 +344,7 @@ class BackendController extends PluginEngine
         /** @var Menu $menu */
         $menu = $this->menus->whereID($request['menu_id']);
 
-        $menu->submenus()->save((new Menu)->setTitle($page->seoTitle())->setLink(url(str_slug($page->seoTitle())))->setEnabled(true));
+        $menu->submenus()->save((new Menu)->setTitle(ucfirst($page->seo_title))->setLink(url(str_slug(ucfirst($page->seo_title))))->setEnabled(true));
 
         return redirect()->route('menus');
     }
@@ -362,8 +362,8 @@ class BackendController extends PluginEngine
         $page = $this->pages->whereID($request['page_id']);
 
         $menu = new Menu;
-        $menu->setLink(url($page->slug()));
-        $menu->setTitle($page->seoTitle());
+        $menu->setLink(url($page->slug));
+        $menu->setTitle($page->seo_title);
         $menu->setEnabled(true);
         $menu->save();
 

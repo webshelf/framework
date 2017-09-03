@@ -45,17 +45,17 @@ class FrontPageBuilder
     {
         if (settings()->getValue('seo_title_text_append') != '') {
             if (settings()->getValue('seo_title_text_position') == 'right') {
-                $data['title'] = $this->page->seoTitle().' '.settings()->getValue('seo_title_text_seperator').' '.settings()->getValue('seo_title_text_append');
+                $data['title'] = ucfirst($this->page->seo_title).' '.settings()->getValue('seo_title_text_seperator').' '.settings()->getValue('seo_title_text_append');
             } else {
-                $data['title'] = settings()->getValue('seo_title_text_append').' '.settings()->getValue('seo_title_text_seperator').' '.$this->page->seoTitle();
+                $data['title'] = settings()->getValue('seo_title_text_append').' '.settings()->getValue('seo_title_text_seperator').' '.ucfirst($this->page->seo_title);
             }
         } else {
-            $data['title'] = $this->page->seoTitle();
+            $data['title'] = ucfirst($this->page->seo_title);
         }
 
-        $data['keywords'] = $this->page->seoKeywords() ?: settings()->getValue('seo_keywords');
+        $data['keywords'] = $this->page->seo_keywords ?: settings()->getValue('seo_keywords');
 
-        $data['description'] = $this->page->seoDescription() ?: settings()->getValue('seo_description');
+        $data['description'] = $this->page->seo_description ?: settings()->getValue('seo_description');
 
         return $data;
     }
@@ -69,7 +69,7 @@ class FrontPageBuilder
      */
     public function content()
     {
-        return $this->page->content();
+        return $this->page->content;
     }
 
     /**

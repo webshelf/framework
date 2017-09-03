@@ -142,20 +142,19 @@ class BackendController extends PluginEngine implements InstallableInterface
             $menu = new Menu;
 
             \DB::transaction(function () use ($page, $menu, $plugin) {
-                $account_id = account()->id();
 
                 /* @var Plugin $plugin */
                 $plugin->setInstalled(true);
                 $plugin->save();
 
                 /* @var Page $page */
-                $page->setSlug('news');
-                $page->setSeoTitle('News');
-                $page->setPlugin('news');
-                $page->setEditable(false);
-                $page->setEnabled(true);
-                $page->setSitemap(true);
-                $page->setCreatorID($account_id);
+                $page->slug = 'news';
+                $page->seo_title = 'News';
+                $page->plugin = 'News';
+                $page->editable = false;
+                $page->enabled = true;
+                $page->sitemap = true;
+                $page->creator_id = account()->id;
                 $page->save();
 
                 /* @var Menu $menu */
@@ -163,8 +162,8 @@ class BackendController extends PluginEngine implements InstallableInterface
                 $menu->setTitle('News');
                 $menu->setTarget('_self');
                 $menu->setRequired(true);
-                $menu->setCreatorID($account_id);
-                $menu->setPageID($page->id());
+                $menu->setCreatorID(account()->id);
+                $menu->setPageID($page->id);
                 $menu->setStatus(true);
                 $menu->save();
 

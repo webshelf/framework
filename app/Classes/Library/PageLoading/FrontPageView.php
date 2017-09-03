@@ -51,8 +51,8 @@ class FrontPageView
     {
 
         // check if the current page has a view plugin for override.
-        if (view()->exists('website::plugin::'.$page->slug())) {
-            return view()->make('website::plugin::'.$page->slug())->with('page', $data->toArray());
+        if (view()->exists('website::plugin::'.$page->slug)) {
+            return view()->make('website::plugin::'.$page->slug)->with('page', $data->toArray());
         }
 
         // check if a blade template of entered view exists.

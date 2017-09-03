@@ -51,15 +51,15 @@ class FrontPageData extends FrontPage
     {
         $this->page = new Page;
 
-        $this->page->setSeoTitle($title);
+        $this->page->seo_title = $title;
 
-        $this->page->setSeoDescription($description);
+        $this->page->seo_description = $description;
 
-        $this->page->setSeoKeywords($keywords);
+        $this->page->seo_keywords = $keywords;
 
-        $this->page->setSlug(str_slug($title));
+        $this->page->slug = (str_slug($title));
 
-        $this->page->setContent($content);
+        $this->page->content = $content;
 
         $this->build = new FrontPageBuilder($this->page);
 

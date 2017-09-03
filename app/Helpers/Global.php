@@ -67,14 +67,14 @@
         try {
             if ($page->menu) {
                 if ($page->menu->parent) {
-                    return $page->menu->parent->slug().'/'.$page->slug();
+                    return $page->menu->parent->slug.'/'.$page->slug;
                 }
             }
         } catch (\Exception $e) {
-            throw new \Exception('Unexpected error occurred for url creation of the page '.$this->slug());
+            throw new \Exception('Unexpected error occurred for url creation of the page '.$page->slug);
         }
 
-        return $page->slug();
+        return $page->slug;
     }
 
     function makeUrl(\App\Model\Page $page)

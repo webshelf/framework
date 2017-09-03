@@ -99,7 +99,7 @@ abstract class FrontPage
          * this will mean the page still exists but is not viewable
          * here we will create a disabled page showing 404 not found.
          */
-        if ($this->page->isDisabled()) {
+        if ( ! $this->page->enabled) {
             return ErrorController::disabled();
         }
 
@@ -142,7 +142,7 @@ abstract class FrontPage
         /*
          * Sometimes we may require the current page attributes
          */
-        $data->put('current', ['title' => $this->page->seoTitle()]);
+        $data->put('current', ['title' => ucfirst($this->page->seo_title)]);
 
         /*
          * These are page optional depending on what will be

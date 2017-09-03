@@ -22,10 +22,10 @@
     /** @var \App\Model\Page $page */
     foreach ($repository->allWithMenuAndParent() as $page) {
         if (! $page->redirect) {
-            if ($page->isPlugin()) {
-                Route::get(makeSlug($page))->name($page->slug())->uses('App\Http\Controllers\PageController@index');
+            if ($page->plugin) {
+                Route::get(makeSlug($page))->name($page->slug)->uses('App\Http\Controllers\PageController@index');
             } else {
-                Route::get(makeSlug($page))->name($page->slug())->uses('App\Http\Controllers\PageController@index');
+                Route::get(makeSlug($page))->name($page->slug)->uses('App\Http\Controllers\PageController@index');
             }
         }
     }
