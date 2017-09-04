@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  */
 class Redirect extends EloquentModel
 {
-
     /*
      * Laravel Deleting.
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
@@ -41,8 +40,6 @@ class Redirect extends EloquentModel
      * @var array
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-
 
     public function from()
     {
