@@ -35,6 +35,6 @@ class Controller extends ModuleEngine
      */
     public function index()
     {
-        return $this->make('view')->with('migrations', $this->migrations->all());
+        return $this->make('view')->with('updates', $this->migrations->all());
     }
 }

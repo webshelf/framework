@@ -41,17 +41,17 @@
 
         <tbody>
 
-            @foreach($migrations as $migration)
+            @foreach($updates as $update)
 
                 <tr>
 
-                    <td>{{ md5($migration->id) }}</td>
+                    <td>{{ md5($update->id) }}</td>
 
                     <td>{!! bool2Status(true, 'Completed', 'Failed') !!}</td>
 
-                    <td>{{ $migration->batch }}</td>
+                    <td>{{ $update->batch }}</td>
 
-                    <td>{{ $migration->created_at->diffForHumans() }}</td>
+                    <td>{{ $update->created_at->diffForHumans() }}</td>
                 </tr>
 
             @endforeach

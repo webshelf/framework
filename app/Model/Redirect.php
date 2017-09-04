@@ -1,36 +1,48 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 28/07/2016
- * Time: 20:12.
- */
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Redirect.
  *
- * @property Page toPage
- * @property Page fromPage
+ * @property int $id
+ * @property mixed $fromPage
+ * @property mixed $to
+ * @property int $creator_id
+ * @property int $modifier_id
+ *
+ * @property Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Redirect extends EloquentModel
 {
+
+    /*
+     * Laravel Deleting.
+     * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
+     */
     use SoftDeletes;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'redirects';
 
-    protected $softDeletes = true;
-
+    /**
+     * The table date columns, casted to Carbon.
+     *
+     * @var array
+     */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-    public function id()
-    {
-        return $this->getAttribute('id');
-    }
+
 
     public function from()
     {

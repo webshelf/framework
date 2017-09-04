@@ -41,7 +41,7 @@ class BackendController extends PluginEngine
      */
     public function index()
     {
-        return $this->blade('index')->with('redirects', $this->redirects->all());
+        return $this->make('index')->with('redirects', $this->redirects->all());
     }
 
     /**
@@ -51,7 +51,7 @@ class BackendController extends PluginEngine
      */
     public function store()
     {
-        return $this->blade('make')->with('pages', app(PageRepository::class)->makeList());
+        return $this->make('make')->with('pages', app(PageRepository::class)->makeList());
     }
 
     /**
