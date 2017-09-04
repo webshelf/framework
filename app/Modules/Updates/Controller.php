@@ -9,7 +9,7 @@
 namespace App\Modules\Updates;
 
 use App\Modules\ModuleEngine;
-use App\Classes\Repositories\MigrationRepository;
+use App\Classes\Repositories\UpdateRepository;
 
 /**
  * Class Controller.
@@ -17,15 +17,15 @@ use App\Classes\Repositories\MigrationRepository;
 class Controller extends ModuleEngine
 {
     /**
-     * @var MigrationRepository
+     * @var UpdateRepository
      */
     private $migrations;
 
     /**
      * Controller constructor.
-     * @param MigrationRepository $migrations
+     * @param UpdateRepository $migrations
      */
-    public function __construct(MigrationRepository $migrations)
+    public function __construct(UpdateRepository $migrations)
     {
         $this->migrations = $migrations;
     }

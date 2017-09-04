@@ -8,12 +8,12 @@
 
 namespace App\Classes\Repositories;
 
-use App\Model\Migration;
+use App\Model\Update;
 
 /**
  * Class MigrationRepository.
  */
-class MigrationRepository extends Migration
+class UpdateRepository extends Update
 {
     //
 }

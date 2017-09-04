@@ -45,13 +45,13 @@
 
                 <tr>
 
-                    <td>{{ $migration->md5() }}</td>
+                    <td>{{ md5($migration->id) }}</td>
 
                     <td>{!! bool2Status(true, 'Completed', 'Failed') !!}</td>
 
-                    <td>{{ $migration->batch() }}</td>
+                    <td>{{ $migration->batch }}</td>
 
-                    <td>{{ $migration->execution_date()->diffForHumans() }}</td>
+                    <td>{{ $migration->created_at->diffForHumans() }}</td>
                 </tr>
 
             @endforeach
