@@ -16,8 +16,8 @@ class CreateRedirectsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('from');
             $table->unsignedInteger('to');
-            $table->unsignedInteger('creator_id');
-            $table->unsignedInteger('modifier_id');
+            $table->unsignedInteger('creator_id')->default(1);
+            $table->unsignedInteger('modifier_id')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

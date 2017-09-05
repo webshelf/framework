@@ -13,18 +13,20 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(\App\Model\Account::class, function (Faker $faker) {
+$factory->define(App\Model\Account::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
+        'forename' => $faker->firstName,
+        'surname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'role_id' => 1,
     ];
 });
 
-$factory->define(\App\Model\Page::class, function (Faker $faker) {
+$factory->define(App\Model\Page::class, function (Faker $faker) {
     $title = $faker->sentence(5);
 
     return [

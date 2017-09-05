@@ -36,6 +36,13 @@ class Redirect extends EloquentModel
     protected $table = 'redirects';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['from', 'to'];
+
+    /**
      * The table date columns, casted to Carbon.
      *
      * @var array
