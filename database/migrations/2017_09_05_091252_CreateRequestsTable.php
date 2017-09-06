@@ -17,7 +17,7 @@ class CreateRequestsTable extends Migration
             $table->increments('id');
             $table->ipAddress('ip_address');
             $table->string('browser');
-            $table->integer('page');
+            $table->integer('page_id');
             $table->timestamps();
         });
     }
