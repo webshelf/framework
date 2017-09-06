@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property int $id
  * @property string $ip_address
  * @property string $browser
- * @property int $page_visited
+ * @property int $page_id
  *
  * @property Page $page
  * @property Carbon $created_at
@@ -37,6 +37,6 @@ class Agent extends EloquentModel
      */
     public function page()
     {
-        return $this->belongsTo(Page::class, 'page_visited', 'id');
+        return $this->belongsTo(Page::class, 'page_id', 'id');
     }
 }
