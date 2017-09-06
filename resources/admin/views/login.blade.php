@@ -8,7 +8,7 @@
         <meta id="token" name="csrf-token" content="{!! csrf_token() !!}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }}</title>
+        <title>{{ framework()->package }} v{{ framework()->version  }}</title>
 
         <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
 
@@ -57,7 +57,7 @@
                         </div>
                         <hr style="margin-top:35px">
                         <div class="login-poweredBy">
-                            Powered by {{ framework()->packageName() }} v{{ framework()->currentRelease() }}
+                            Powered by {{ framework()->package }} v{{ framework()->version }}
                         </div>
                     </form>
 

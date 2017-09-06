@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }}</title>
+        <title>{{ framework()->package }} v{{ framework()->version  }}</title>
 
         <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
         <link href="{{ mix('assets/dashboard.css') }}" rel="stylesheet">
@@ -67,7 +67,7 @@
 
             <div class="application-logo">
 
-                <h1>{{ framework()->packageName() }} v{{ framework()->currentRelease()  }} Beta</h1>
+                <h1>{{ framework()->package }} v{{ framework()->version  }} Beta</h1>
 
             </div>
 
@@ -196,7 +196,7 @@
 
 					<br>
 
-                                    @if(framework()->isLatestRelease())
+                                    @if(framework()->isLatestVersion())
                                         <span style="font-size: 12px; color:#c4d15a;">You have the latest version!</span>
                                     @else
                                         <span style="font-size: 12px; color:#FFA500;">A new version is available!</span>

@@ -20,21 +20,21 @@ class Framework
      *
      * @return string
      */
-    private $package = 'Webshelf';
+    public $package = 'Webshelf';
 
     /**
      * The framework version number.
      *
      * @return string
      */
-    private $version = '2.4.0';
+    public $version = '2.4.0';
 
     /**
      * The framework application website.
      *
      * @return string
      */
-    private $website = '#';
+    public $website = '#';
 
     /**
      * The applications github repository.
@@ -42,44 +42,14 @@ class Framework
      *
      * @return string
      */
-    private $repository = 'webshelf/framework';
-
-    /**
-     * Get the package name, this is in case it ever changes.
-     *
-     * @return string
-     */
-    public function packageName()
-    {
-        return $this->package ?: 'unknown';
-    }
-
-    /**
-     * Get the website url address that users can visit.
-     *
-     * @return string
-     */
-    public function websiteUrl()
-    {
-        return $this->website;
-    }
-
-    /**
-     * Get the latest version of the current webshelf app.
-     *
-     * @return string
-     */
-    public function currentRelease()
-    {
-        return $this->version ?: 'unknown';
-    }
+    public $repository = 'webshelf/framework';
 
     /**
      * Get the latest github release for version checking.
      *
      * @return string
      */
-    public function latestRelease()
+    public function githubVersion()
     {
         return Github::latestReleaseVersion($this->repository) ?: 'unknown';
     }
@@ -89,12 +59,12 @@ class Framework
      *
      * @return bool
      */
-    public function isLatestRelease()
+    public function isLatestVersion()
     {
         if (app()->isLocal()) {
             return true;
         }
 
-        return $this->currentRelease() != $this->latestRelease();
+        return $this->version != $this->githubVersion();
     }
 }
