@@ -10,9 +10,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\WebsiteWasVisited;
 use App\Model\Page;
 use App\Events\PageWasVisited;
+use App\Events\WebsiteWasVisited;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoading\FrontPage;
 use App\Classes\Library\PageLoading\Loader\FrontPageModel;

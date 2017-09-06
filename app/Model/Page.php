@@ -43,7 +43,6 @@ class Page extends EloquentModel implements AuditInterface
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
     /*
      * Laravel Audits.
      * @ http://www.laravel-auditing.com

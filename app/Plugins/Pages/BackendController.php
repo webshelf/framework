@@ -63,7 +63,6 @@ class BackendController extends PluginEngine
     {
         $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
 
-
         $page->seo_title = $request['title'];
         $page->slug = str_slug($request['slug']) ?: str_slug($page->seo_title);
         $page->creator_id = $request['creator'] ?: account()->id;
