@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 05/09/2017
- * Time: 07:00
+ * Time: 07:00.
  */
 
 namespace App\Model;
@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $ip_address
  * @property string $browser
  * @property int $page_visited
