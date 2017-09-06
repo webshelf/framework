@@ -10,6 +10,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\WebsiteWasVisited;
 use App\Model\Page;
 use App\Events\PageWasVisited;
 use App\Classes\Repositories\PageRepository;
@@ -71,6 +72,11 @@ class PageController extends Controller
         // we keep track of the hits on pages.
         // we let the event handler manage this.
         event(new PageWasVisited($this->currentPage));
+
+        // we keep track of all the user requests.
+        // where they come from and what pages
+        // they view.
+        event(new WebsiteWasVisited(request()));
 
         // if the current route is the homepage.
         // we should return the homepage view.

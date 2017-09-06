@@ -2,7 +2,10 @@
 
 namespace Tests;
 
+use App\Model\Account;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Mockery;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -43,6 +46,38 @@ abstract class TestCase extends BaseTestCase
      */
     protected function login()
     {
-        return auth()->loginUsingId(1);
+        return auth()->login(factory(Account::class)->create());
+    }
+
+    /**
+     * Mock a repository object.
+     *
+     * @param string $class
+     * @param string $method
+     * @param array|Collection $data
+     * @return Mockery\Expectation
+     */
+    protected function mockRepository(string $class, string $method, Collection $data)
+    {
+        $mocker = Mockery::mock($class);
+
+        $this->app->instance($class, $mocker);
+
+        return $mocker->shouldReceive($method)->andReturn($data);
+    }
+
+    /**
+     * Create a mocked object and return it from the container.
+     *
+     * @param string $class
+     * @return Mockery\MockInterface
+     */
+    protected function mock(string $class)
+    {
+        $mockedClass = Mockery::mock($class);
+
+        $this->app->instance($class, $mockedClass);
+
+        return $mockedClass;
     }
 }

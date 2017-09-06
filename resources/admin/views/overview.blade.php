@@ -181,21 +181,19 @@
 
 @section('javascript')
     <script>
-        new Morris.Line({
+        new Morris.Bar({
             // ID of the element in which to draw the chart.
             element: 'page-views',
             // Chart data records -- each entry in this array corresponds to a point on
             // the chart.
-            data: [
-                { date: 'Months', users: '0' },
-            ],
+            data: {!! $userChart->toJSON() !!},
             // The name of the data record attribute that contains x-values.
-            xkey: 'date',
+            xkey: 'day',
             // A list of names of data record attributes that contain y-values.
-            ykeys: ['users'],
+            ykeys: ['count'],
             // Labels for the ykeys -- will be displayed when you hover over the
             // chart.
-            labels: ['Users']
+            labels: ['count']
         });
     </script>
 @endsection

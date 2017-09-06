@@ -6,11 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "barryvdh/laravel-elfinder": "^0.3.10",
+        "consoletvs/charts": "5.*",
+        "facebook/graph-sdk": "^5.2",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "barryvdh/laravel-elfinder": "^0.3.10",
-        "facebook/graph-sdk": "^5.2",
         "league/glide": "^1.2",
         "owen-it/laravel-auditing": "^4.1"
     },
@@ -57,11 +58,11 @@
             "@php artisan package:discover"
 	    ],
         "post-install-cmd": [
-            "@php artisan elfinder:publish",
+            "@php artisan vendor:publish",
             "@php artisan optimize"
         ],
         "post-update-cmd": [
-            "@php artisan elfinder:publish",
+            "@php artisan vendor:publish",
             "@php artisan optimize"
         ]
     },

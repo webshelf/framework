@@ -17,6 +17,7 @@ $factory->define(App\Model\Account::class, function (Faker $faker) {
     static $password;
 
     return [
+        'id' => $faker->numberBetween(0, 9999),
         'forename' => $faker->firstName,
         'surname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
@@ -40,6 +41,6 @@ $factory->define(App\Model\Page::class, function (Faker $faker) {
         'enabled' => $faker->boolean(100),
         'created_at' => $faker->dateTimeBetween('-2 years', '-11 months'),
         'updated_at' => $faker->dateTimeBetween('-10 months'),
-        'creator_id' => 1,
+        'creator_id' => account()->id,
     ];
 });
