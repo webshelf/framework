@@ -2,16 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\PageWasVisited;
 use App\Model\Agent;
 use Illuminate\Http\Request;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\PageWasVisited;
 
 /**
- * Class LogAgentRequest
- *
- * @package App\Listeners
+ * Class LogAgentRequest.
  */
 class LogAgentRequest
 {

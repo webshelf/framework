@@ -2,10 +2,10 @@
 
 namespace Tests;
 
+use Mockery;
 use App\Model\Account;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Mockery;
 
 abstract class TestCase extends BaseTestCase
 {
