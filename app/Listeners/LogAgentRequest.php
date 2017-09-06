@@ -43,7 +43,7 @@ class LogAgentRequest
     {
         $this->agent->ip_address = $this->request->ip();
         $this->agent->browser = $this->request->userAgent();
-        $this->agent->page_visited = $event->page->id;
+        $this->agent->page_id = $event->page->id;
 
         $this->agent->save();
     }
