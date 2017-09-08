@@ -49,7 +49,7 @@
 
                     <tr>
 
-                    <td><a href="{{ route('AccountProfile', $account->email) }}">{{ $account->fullName() }}</a></td>
+                    <td><a href="{{ route('admin.accounts.index', $account->email) }}">{{ $account->fullName() }}</a></td>
 
                     <td>{{ strtolower($account->email) }}</td>
 

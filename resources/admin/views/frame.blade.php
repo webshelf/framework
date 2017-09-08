@@ -97,6 +97,7 @@
                                 @if(plugins()->hasPlugin('pages')) <li><a href="{{ route('admin.pages.create') }}">New Page</a></li> @endif
                                 @if(plugins()->hasPlugin('menus')) <li><a href="{{ route('CreateMenu') }}">New Menu</a></li> @endif
                                 @if(plugins()->hasPlugin('redirects')) <li><a href="{{ route('MakeRedirect') }}">New Redirect</a></li> @endif
+                                @if(account()->hasRole(App\Model\Role::ADMINISTRATOR)) <li><a href="{{ route('admin.accounts.create') }}">New Account</a></li> @endif
                             </ul>
                         </li>
 
@@ -194,7 +195,7 @@
 
                                     <a href="{{ url('/') }}" target="_blank">{{ url('/') }} <i class="fa fa-external-link" aria-hidden="true"></i></a>
 
-					<br>
+                					<br>
 
                                     @if(framework()->isLatestVersion())
                                         <span style="font-size: 12px; color:#c4d15a;">You have the latest version!</span>

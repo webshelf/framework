@@ -84,7 +84,7 @@ class Account extends Authenticatable
      */
     public function hasRole(int $role_id, bool $rule = true)
     {
-        return ($this->role->id() == $role_id) == $rule;
+        return ($this->role->id() <= $role_id) == $rule;
     }
 
     /**
@@ -140,5 +140,16 @@ class Account extends Authenticatable
         }
 
         return $this->hasMany(Redirect::class, 'creator_id', 'id');
+    }
+
+    /**
+     * Generate a bCrpyt string for new password enties.
+     *
+     * @param string $string
+     * @return $this
+     */
+    public function setPassword(string $string)
+    {
+        return $this->setAttribute('password', bcrypt($string));
     }
 }

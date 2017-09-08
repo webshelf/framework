@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\View;
 use App\Classes\Repositories\RoleRepository;
 use App\Http\Controllers\DashboardController;
 use App\Classes\Repositories\AccountRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class Controller.
@@ -57,35 +58,33 @@ class Controller extends ModuleEngine
     }
 
     /**
-     * Show a register email form.
+     * Form to create a new account.
+     *
+     * @param RoleRepository $roleRepository
+     * @return Controller|View
      */
-    public function register()
+    public function create(RoleRepository $roleRepository)
     {
-        return $this->make('register')->with('roles', $this->roles->whereRolesGreaterOrEqualToMyAccount());
+        return $this->make('create')->with('groups', $roleRepository->get());
     }
 
     /**
-     * Display the accounts profile data, including username, images, statistics and etc.
+     * Store a new account to the database.
      *
-     * @param $account_input
-     * @return View
-     * @internal param $email_address
+     * @param Request $request
+     * @param Account $account
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function profile($account_input)
+    public function store(Request $request, Account $account)
     {
-        if (is_numeric($account_input)) {
-            $account = $this->accounts->whereID($account_input);
-        } else {
-            $account = $this->accounts->whereEmail($account_input);
-        }
+        $this->validate($request, [ 'forename' => 'required|min:1|max:255', 'surname' => 'required|min:3|max:255', 'password' => 'required|min:3|max:255', 'email' => 'required|email', 'group' => 'required|integer',]);
 
-        if (! is_null($account)) {
-            return $this->make('profile')->with('account', $account)->with('roles', $this->roles->whereRolesGreaterOrEqualToMyAccount());
-        }
+        $account->forename = $request['forename'];
+        $account->surname = $request['surname'];
+        $account->role_id = $request['group'];
+        $account->email = $request['email'];
+        $account->setPassword($request['password'])->save();
 
-        // let the user know the account couldn't be loaded and redirect back to dashboard.
-        popups()->add((new Popup(['message' => 'The account '.$account_input.' could not be loaded for viewing.']))->error());
-
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.accounts.index');
     }
 }
