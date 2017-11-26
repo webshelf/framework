@@ -9,14 +9,13 @@
 namespace App\Modules\Accounts;
 
 use App\Classes\Email;
-use App\Classes\Popup;
 use App\Model\Account;
+use Illuminate\Http\Request;
 use App\Modules\ModuleEngine;
 use Illuminate\Contracts\View\View;
 use App\Classes\Repositories\RoleRepository;
 use App\Http\Controllers\DashboardController;
 use App\Classes\Repositories\AccountRepository;
-use Illuminate\Http\Request;
 
 /**
  * Class Controller.
@@ -77,7 +76,7 @@ class Controller extends ModuleEngine
      */
     public function store(Request $request, Account $account)
     {
-        $this->validate($request, [ 'forename' => 'required|min:1|max:255', 'surname' => 'required|min:3|max:255', 'password' => 'required|min:3|max:255', 'email' => 'required|email', 'group' => 'required|integer',]);
+        $this->validate($request, ['forename' => 'required|min:1|max:255', 'surname' => 'required|min:3|max:255', 'password' => 'required|min:3|max:255', 'email' => 'required|email', 'group' => 'required|integer']);
 
         $account->forename = $request['forename'];
         $account->surname = $request['surname'];
