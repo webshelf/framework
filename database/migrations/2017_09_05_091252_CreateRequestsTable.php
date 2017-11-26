@@ -13,7 +13,7 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Agents', function (Blueprint $table) {
+        Schema::create('agents', function (Blueprint $table) {
             $table->increments('id');
             $table->ipAddress('ip_address');
             $table->string('browser');
