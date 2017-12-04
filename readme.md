@@ -12,3 +12,6 @@ Webshelf CMS, is a modular content management system platform that allows the fr
 
 ## Plugins & Modules
 They key to Webshelf is the design of modularity, the ability to switch out what you dont require for things you do in a clear and precise way, to aid this, we offer system modules & personal modules (plugins), that can easily be implemented and pushed as new data for usage on the frontend.
+
+## Installation
+Pull, migrate & run.
