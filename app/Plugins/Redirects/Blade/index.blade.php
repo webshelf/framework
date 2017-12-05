@@ -1,21 +1,9 @@
 @extends('dashboard::frame')
 
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 25
-            });
-        });
-    </script>
-
-@endsection
-
 @section('information')
-    <p>Redirects help you and your users from visiting pages which are no longer in use or functional, a core component to a website, is the ability to control
-        where your users go.<br>
-        Please be aware that redirecting your site links can cause a small delay to page loading (<700ms)</p>
+    Redirects help you and your users from visiting pages which are no longer in use or functional, a core component to a website, is the ability to control
+    where your users go.<br>
+    Please be aware that redirecting your site links can cause a small delay to page loading (<700ms)
 @endsection
 
 @section('content')
@@ -69,5 +57,17 @@
         </table>
 
     </div>
+
+@endsection
+
+@section('javascript')
+
+    <script>
+        $(document).ready(function(){
+            $('#table-datatables').DataTable({
+                'iDisplayLength': 25
+            });
+        });
+    </script>
 
 @endsection

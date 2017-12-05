@@ -1,13 +1,11 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Systemwide Settings</h1>
+    Settings
 @endsection
 
 @section('information')
-    <p>
-        Your application can be modified with straight forward, powerful options that you can change to match your needs.
-    </p>
+    Your application can be modified with straight forward, powerful options that you can change to match your needs.
 @endsection
 
 @section('content')

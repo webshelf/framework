@@ -1,18 +1,12 @@
 @extends('dashboard::frame')
 
 @section('tools')
-
     No tools available
-
-@endsection
-
-@section('javascript')
-    {{--Javascript end page.--}}
 @endsection
 
 @section('information')
-    <p>Redirects are the best possibly way of getting your visitors to the pages you want them to this is great for pages that you you have moved, or pages
-    that you do not want the user to see hence a redirect to another page.</p>
+    Redirects are the best possibly way of getting your visitors to the pages you want them to this is great for pages that you you have moved, or pages
+    that you do not want the user to see hence a redirect to another page.
 @endsection
 
 @section('content')
@@ -121,4 +115,8 @@
 
     </div>
 
+@endsection
+
+@section('javascript')
+    {{--Javascript end page.--}}
 @endsection

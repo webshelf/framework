@@ -3999,58 +3999,6 @@ if (typeof jQuery === 'undefined') {
 
 /***/ }),
 
-/***/ "./node_modules/google-charts/googleCharts.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleCharts", function() { return GoogleCharts; });
-const loadScript = Symbol('loadScript');
-
-class googleCharts {
-    [loadScript]() {
-        if (!this.scriptPromise) {
-            this.scriptPromise = new Promise((resolve) => {
-                const head = document.getElementsByTagName('head')[0]
-                const script = document.createElement('script')
-                script.type = 'text/javascript'
-            script.onload = function () {
-                GoogleCharts.api = window.google
-                GoogleCharts.api.charts.load('current', {'packages': ['corechart']});
-                GoogleCharts.api.charts.setOnLoadCallback(() => {
-                    resolve()
-                })
-            }
-            script.src = 'https://www.gstatic.com/charts/loader.js'
-            head.appendChild(script)
-        })
-        }
-        return this.scriptPromise
-    }
-
-    load(callback, type) {
-        return this[loadScript]().then(() => {
-            if (type) {
-                if(!type.length) {
-                    type=[type]
-                }
-                this.api.charts.load('current', {'packages': type})
-                this.api.charts.setOnLoadCallback(callback)
-            } else {
-                callback()
-            }
-        })
-    }
-}
-
-let GoogleCharts = new googleCharts();
-
-if (false) {
-    module.hot.accept();
-}
-
-/***/ }),
-
 /***/ "./node_modules/is-buffer/index.js":
 /***/ (function(module, exports) {
 
@@ -41857,10 +41805,10 @@ __webpack_require__("./resources/assets/js/bootstrap.js");
 
 window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
-window.GoogleCharts = __webpack_require__("./node_modules/google-charts/googleCharts.js");
+//window.GoogleCharts = require('google-charts');
 
 //Load the charts library with a callback
-window.GoogleCharts.load(drawChart);
+//window.GoogleCharts.load(drawChart);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

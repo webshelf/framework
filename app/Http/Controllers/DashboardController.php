@@ -59,6 +59,6 @@ class DashboardController extends Controller
         $audits = $auditRepository->all()->sortByDesc('created_at');
         $facebook_posts = Facebook::loadPostsFrom('183404672136705', 5);
 
-        return view('dashboard::overview')->with(['userChart'=>$userChart, 'fb_messages'=>$facebook_posts, 'products'=>$products, 'audits'=>$audits]);
+        return view('dashboard::index')->with(['userChart'=>$userChart, 'fb_messages'=>$facebook_posts, 'products'=>$products, 'audits'=>$audits]);
     }
 }

@@ -1,133 +1,13 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Frontend Menus</h1>
+    Frontend Menus
 @endsection
+
 @section('information')
-    <p>Menus are the heart of any website, menu navigation allows users to find the content they want with ease <br>
-        A drag and drop interface allows you to manage row reordering with ease, moving the position column.<br>
-        You must be aware that to create a menu with a linked page, you must first create the page. <a href="{{ route('admin.pages.create') }}">Click here to create one now</a></p>
-@endsection
-
-@section('javascript')
-
-    <script>
-        $("a.row_delete").click(function(event) {
-            event.preventDefault();
-            var href = $(this).attr('href');
-            alert('clicked');
-            $.ajax({
-                url: href,
-                type: 'post',
-                data: { _token: "{{ csrf_token() }}" },
-                complete: function(){
-                    location.reload();
-                }
-            });
-        });
-    </script>
-
-    <script>
-
-        $(document).ready(function(){
-
-            //        $.fn.editable.defaults.mode = 'inline';
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN' : "{{ csrf_token() }}",
-                }
-            });
-
-            $(document).ready(function() {
-
-                $('[id^=title]').editable({
-                    type: 'text',
-                    url: '/post',
-                    placement: 'top',
-                    title: 'Change the title name',
-
-                    success: function(response) {
-                        if (response.error)
-                            return response.error.message;
-                    }
-                });
-
-                $('[id^=link]').editable({
-                    type: 'text',
-                    url: '/post',
-                    placement: 'top',
-                    title: 'Change the external url',
-
-                    success: function(response) {
-                        if (response.error)
-                            return response.error.message;
-                    }
-                });
-
-                $('[id^=target]').editable({
-
-                    type: 'select',
-                    placement: 'top',
-                    title: 'Change the browser target',
-                    source: [
-                        {value:"_self",  text:"_self"},
-                        {value:"_blank", text:"_blank"}
-                    ]
-
-                });
-
-                $('[id^=status]').editable({
-
-                    type: 'select',
-                    placement: 'top',
-                    title: 'Change the menu status',
-                    source: [
-                        {value:0, text: 'Private'},
-                        {value:1, text: 'Published'}
-                    ],
-                    success: function() {
-                        $(location).attr('href', '{{ route('menus') }}')
-                    }
-
-                });
-
-
-                $('[id^=page]').editable({
-                    type: 'select',
-                    placement: 'top',
-                    title: 'Change the attached page data',
-                    source: [
-                            @foreach($pages as $page)
-                            @if($page->enabled)
-                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }}"},
-                            @else
-                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }} - Unpublished"},
-                        @endif
-                        @endforeach
-                    ],
-                    success: function() {
-                        $(location).attr('href', '{{ route('menus') }}')
-                    }
-                });
-
-                $('#enabled').editable({
-                    url: '/post',
-                    pk: 1,
-                    value: 1,
-                    source: [{ value:1, text: "Yes"}, { value:2, text: "No"}],
-                    title: 'Select1',
-                    success: function(response, newValue) {
-                        $('#enabled').editable('option', 'source', sources[newValue]);
-                        $('#enabled').editable('setValue', 'test');
-                    }
-                });
-            });
-
-        });
-
-    </script>
-
+    Menus are the heart of any website, menu navigation allows users to find the content they want with ease <br>
+    A drag and drop interface allows you to manage row reordering with ease, moving the position column.<br>
+    You must be aware that to create a menu with a linked page, you must first create the page. <a href="{{ route('admin.pages.create') }}">Click here to create one now</a>
 @endsection
 
 @section('content')
@@ -485,5 +365,126 @@
 
     </div>
 
+
+@endsection
+
+@section('javascript')
+
+    <script>
+        $("a.row_delete").click(function(event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            alert('clicked');
+            $.ajax({
+                url: href,
+                type: 'post',
+                data: { _token: "{{ csrf_token() }}" },
+                complete: function(){
+                    location.reload();
+                }
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+
+            //        $.fn.editable.defaults.mode = 'inline';
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN' : "{{ csrf_token() }}",
+                }
+            });
+
+            $(document).ready(function() {
+
+                $('[id^=title]').editable({
+                    type: 'text',
+                    url: '/post',
+                    placement: 'top',
+                    title: 'Change the title name',
+
+                    success: function(response) {
+                        if (response.error)
+                            return response.error.message;
+                    }
+                });
+
+                $('[id^=link]').editable({
+                    type: 'text',
+                    url: '/post',
+                    placement: 'top',
+                    title: 'Change the external url',
+
+                    success: function(response) {
+                        if (response.error)
+                            return response.error.message;
+                    }
+                });
+
+                $('[id^=target]').editable({
+
+                    type: 'select',
+                    placement: 'top',
+                    title: 'Change the browser target',
+                    source: [
+                        {value:"_self",  text:"_self"},
+                        {value:"_blank", text:"_blank"}
+                    ]
+
+                });
+
+                $('[id^=status]').editable({
+
+                    type: 'select',
+                    placement: 'top',
+                    title: 'Change the menu status',
+                    source: [
+                        {value:0, text: 'Private'},
+                        {value:1, text: 'Published'}
+                    ],
+                    success: function() {
+                        $(location).attr('href', '{{ route('menus') }}')
+                    }
+
+                });
+
+
+                $('[id^=page]').editable({
+                    type: 'select',
+                    placement: 'top',
+                    title: 'Change the attached page data',
+                    source: [
+                            @foreach($pages as $page)
+                            @if($page->enabled)
+                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }}"},
+                            @else
+                        {value:"{{ $page->id }}", text: "{{ ucwords($page->seo_title) }} - Unpublished"},
+                        @endif
+                        @endforeach
+                    ],
+                    success: function() {
+                        $(location).attr('href', '{{ route('menus') }}')
+                    }
+                });
+
+                $('#enabled').editable({
+                    url: '/post',
+                    pk: 1,
+                    value: 1,
+                    source: [{ value:1, text: "Yes"}, { value:2, text: "No"}],
+                    title: 'Select1',
+                    success: function(response, newValue) {
+                        $('#enabled').editable('option', 'source', sources[newValue]);
+                        $('#enabled').editable('setValue', 'test');
+                    }
+                });
+            });
+
+        });
+
+    </script>
 
 @endsection

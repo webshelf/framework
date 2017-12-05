@@ -1,27 +1,13 @@
 @extends('dashboard::frame')
 
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 50
-            });
-        });
-    </script>
-
-@endsection
-
 @section('title')
-    <h1>Database Updated</h1>
+    Updates
 @endsection
 
 @section('information')
-    <p>
-        Our database updates is one of the most powerful features we have to offer, when a database update exists, it shall be applied on page load. (less than 1ms)
-        <br>
-        It is important to note, that this does not mean client updates or dashboard changes.
-    </p>
+    Our database updates is one of the most powerful features we have to offer, when a database update exists, it shall be applied on page load. (less than 1ms)
+    <br>
+    It is important to note, that this does not mean client updates or dashboard changes.
 @endsection
 
 @section('content')
@@ -60,5 +46,17 @@
     </table>
 
     </div>
+
+@endsection
+
+@section('javascript')
+
+    <script>
+        $(document).ready(function(){
+            $('#table-datatables').DataTable({
+                'iDisplayLength': 50
+            });
+        });
+    </script>
 
 @endsection

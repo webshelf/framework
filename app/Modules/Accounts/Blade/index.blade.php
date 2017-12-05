@@ -1,7 +1,12 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Account Management</h1>
+    Account Management
+@endsection
+
+@section('information')
+    Accounts give users permissions to log in to the application and control content providing they have correct permissions.<br>
+    This should not be confused with users who log in to the website and create an account. (Users Plugin)
 @endsection
 
 @section('javascript')
@@ -14,13 +19,6 @@
         });
     </script>
 
-@endsection
-
-@section('information')
-    <p>
-        Accounts give users permissions to log in to the application and control content providing they have correct permissions.<br>
-        This should not be confused with users who log in to the website and create an account. (Users Plugin)
-    </p>
 @endsection
 
 @section('content')

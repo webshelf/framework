@@ -1,11 +1,11 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>File Management System</h1>
+    File Manager
 @endsection
 
 @section('information')
-    <p> Manage and control the images and media stored on your web application servers or previous assets your website uses. </p>
+    Manage and control the images and media stored on your web application servers or previous assets your website users.
 @endsection
 
 @section('content')

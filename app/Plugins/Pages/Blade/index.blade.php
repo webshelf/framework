@@ -1,37 +1,12 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Frontend Pages</h1>
+    Frontend Pages
 @endsection
+
 @section('information')
-    <p>Pages are stored content viewable to a user in a form of a page, these can be modified, viewed and edited by clicking on the page name on the below table.<br>
-        The best pages are those that are easy to view and read in which they also stay true to the title.</p>
-@endsection
-
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 25
-            });
-        });
-
-        $("a#form-delete").click(function(event) {
-            event.preventDefault();
-            var href = $(this).attr('href');
-            $.ajax({
-                url: href,
-                type: 'post',
-                data: { _method:"DELETE", _token: "{{ csrf_token() }}" },
-                complete: function(){
-                    location.reload();
-                }
-            });
-        });
-
-    </script>
-
+    Pages are stored content viewable to a user in a form of a page, these can be modified, viewed and edited by clicking on the page name on the below table.<br>
+    The best pages are those that are easy to view and read in which they also stay true to the title.
 @endsection
 
 @section('content')
@@ -74,5 +49,31 @@
         </table>
 
     </div>
+
+@endsection
+
+@section('javascript')
+
+    <script>
+        $(document).ready(function(){
+            $('#table-datatables').DataTable({
+                'iDisplayLength': 25
+            });
+        });
+
+        $("a#form-delete").click(function(event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            $.ajax({
+                url: href,
+                type: 'post',
+                data: { _method:"DELETE", _token: "{{ csrf_token() }}" },
+                complete: function(){
+                    location.reload();
+                }
+            });
+        });
+
+    </script>
 
 @endsection

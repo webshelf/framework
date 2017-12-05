@@ -1,22 +1,11 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Plugin Overview</h1>
+    Plugin Overview
 @endsection
+
 @section('information')
-    <p>Products are interfaces which can be switched on and off, allowing complete control of your system.</p>
-@endsection
-
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 50
-            });
-        });
-    </script>
-
+    Products are interfaces which can be switched on and off, allowing complete control of your system.
 @endsection
 
 @section('content')
@@ -61,5 +50,17 @@
     </table>
 
     </div>
+
+@endsection
+
+@section('javascript')
+
+    <script>
+        $(document).ready(function(){
+            $('#table-datatables').DataTable({
+                'iDisplayLength': 50
+            });
+        });
+    </script>
 
 @endsection

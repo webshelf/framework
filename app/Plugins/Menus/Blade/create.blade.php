@@ -1,11 +1,12 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Creating a new Menu</h1>
+    Creating a new Menu
 @endsection
+
 @section('information')
-    <p>Pages are stored content viewable to a user in a form of a page, these can be modified, viewed and edited by clicking on the page name on the below table.<br>
-        The best pages are those that are easy to view and read in which they also stay true to the title.</p>
+    Pages are stored content viewable to a user in a form of a page, these can be modified, viewed and edited by clicking on the page name on the below table.<br>
+    The best pages are those that are easy to view and read in which they also stay true to the title.
 @endsection
 
 @section('tools')

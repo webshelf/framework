@@ -1,11 +1,12 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Manage your Page</h1>
+    Manage your Page
 @endsection
+
 @section('information')
-    <p>To keep your audience interested you should focus on providing content that will relate to the page name<br>
-    SEO is also important, we give you the tools to make this possible in a simplistic way, we do the rest.</p>
+    To keep your audience interested you should focus on providing content that will relate to the page name<br>
+    SEO is also important, we give you the tools to make this possible in a simplistic way, we do the rest.
 @endsection
 
 @php
