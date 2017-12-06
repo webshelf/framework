@@ -51,9 +51,10 @@ class Status extends Icons
      */
     private function subjectiveIcon(string $iconTrue, string $iconFalse, bool $boolean)
     {
-        if ($boolean)
+        if ($boolean) {
             return $this->icon($iconTrue, 'green');
-        else
+        } else {
             return $this->icon($iconFalse, 'red');
+        }
     }
 }

@@ -8,10 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use Carbon\Carbon;
 use App\Classes\Library\Services\Facebook;
-use App\Classes\Repositories\AgentRepository;
 use App\Classes\Repositories\AuditRepository;
 
 /**
