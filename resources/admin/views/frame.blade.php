@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
     <script src="{{ mix('assets/backend.js') }}"></script>
 
 </head>
@@ -20,13 +20,6 @@
     @include('dashboard::structure.sidebar')
 
     @include('dashboard::structure.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-
-    {{--<div class="container">--}}
-        {{--<div class="information">--}}
-            {{--<h3>@yield('title', ucwords(currentURI()))</h3>--}}
-            {{--<p>@yield('information', '')</p>--}}
-        {{--</div>--}}
-    {{--</div>--}}
 
     <div class="container page-details">
         <h3>@yield('title')</h3>

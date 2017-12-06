@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 06/12/2017
- * Time: 12:50
+ * Time: 12:50.
  */
 
 namespace App\Classes\Library\StyleCSS;
-
 
 class Icons
 {
@@ -21,8 +20,9 @@ class Icons
      */
     protected function icon(string $iconName, string $color = null, string $link = null)
     {
-        if ($link)
+        if ($link) {
             return sprintf('<a href="%s">%s</a>', $link, $this->icon($iconName, $color));
+        }
 
         return sprintf('<i class="fa %s %s" aria-hidden="true"></i>', $iconName, $color);
     }

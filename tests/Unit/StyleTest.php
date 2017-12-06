@@ -3,31 +3,28 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 06/12/2017
- * Time: 00:59
+ * Time: 00:59.
  */
 
 namespace Tests\Unit;
 
-use App\Classes\Library\StyleCSS\Link;
-use App\Classes\Library\StyleCSS\Status;
-use App\Classes\Library\StyleCSS\Style;
 use PHPUnit\Framework\TestCase;
+use App\Classes\Library\StyleCSS\Link;
+use App\Classes\Library\StyleCSS\Style;
+use App\Classes\Library\StyleCSS\Status;
 
 /**
- * Class StyleTest
- *
- * @package Tests\Unit
+ * Class StyleTest.
  */
 class StyleTest extends TestCase
 {
-
     /**
      * @var Style
      */
     public $css;
 
     /**
-     * Constructor
+     * Constructor.
      */
     protected function setUp()
     {
