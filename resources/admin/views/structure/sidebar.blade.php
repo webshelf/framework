@@ -4,7 +4,7 @@
             <img src="{{ asset('packages/webshelf/images/logo.png') }}" style="height: 100%; width: 100%; display:block;">
         </div>
         <div class="glance">
-            <div class="website-name">CorpusChristiPS</div>
+            <div class="website-name">{{ settings()->getDefault('site_name') }}</div>
         </div>
     </div>
     <div class="content">
@@ -22,11 +22,11 @@
 
             </li>
 
-            <li class="heading">
+            {{--<li class="heading">--}}
 
-                <h5>Plugins</h5>
+                {{--<h5>Plugins</h5>--}}
 
-            </li>
+            {{--</li>--}}
 
             @foreach(plugins()->viewable() as $plugin)
 
@@ -42,11 +42,11 @@
 
             @endforeach
 
-            <li class="heading">
+            {{--<li class="heading">--}}
 
-                <h5>Modules</h5>
+                {{--<h5>Modules</h5>--}}
 
-            </li>
+            {{--</li>--}}
 
             @foreach(config('modules') as $module)
 

@@ -93,6 +93,7 @@
      * @return string
      * @internal param null $true
      * @internal param null $false
+     * @deprecated
      */
     function bool2Status($boolean, $trueMessage = null, $falseMessage = null)
     {
@@ -101,6 +102,18 @@
         } else {
             return '<span class="status red">'.($falseMessage ?: 'Inactive').'</span>';
         }
+    }
+
+    /**
+     * Return a simple color of red or green based on the value inserted.
+     * Used for styling css, or rows in tables.
+     *
+     * @param $boolean
+     * @return string
+     */
+    function colorStyle($boolean)
+    {
+        return $boolean ? 'green' : 'red';
     }
 
     function currentURI()

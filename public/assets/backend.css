@@ -15322,6 +15322,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 body {
+  font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -15363,7 +15364,7 @@ header {
 }
 
 .fa {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .nav-sidebar {
@@ -15383,8 +15384,8 @@ header {
 }
 
 .nav-sidebar .head .logo {
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
 }
 
 .nav-sidebar .head,
@@ -15411,7 +15412,8 @@ header {
           align-items: center;
 }
 
-.nav-sidebar ul li a {
+.nav-sidebar ul li a,
+.head {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -15469,5 +15471,116 @@ header {
 
 .breadcrumbs-list {
   margin: 0;
+}
+
+.overview .avatar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.overview .avatar img {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+}
+
+.overview .title {
+  text-align: center;
+}
+
+.overview .title h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  word-wrap: break-word;
+}
+
+.page-details h3 {
+  color: #2e2e2e;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.page-details p {
+  color: #2e2e2e;
+  font-size: 14px;
+}
+
+.webshelf-table .row {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.webshelf-table .row .title {
+  font-weight: 600;
+}
+
+.webshelf-table .row .website,
+.webshelf-table .row .timestamp {
+  color: grey;
+}
+
+.webshelf-table .row .details,
+.webshelf-table .row .console,
+.webshelf-table .row .stats {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.webshelf-table .row .details {
+  text-align: left;
+}
+
+.webshelf-table .row .console {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  text-align: center;
+  padding: 5px;
+}
+
+.webshelf-table .row .console .green {
+  color: green;
+}
+
+.webshelf-table .row .console .red {
+  color: red;
+}
+
+.webshelf-table .row .console ul {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  color: #e8e8e8;
+}
+
+.webshelf-table .row .stats {
+  text-align: right;
+}
+
+.webshelf-table .row:hover {
+  border-radius: 7px;
+  background-color: #fafafa;
 }
 

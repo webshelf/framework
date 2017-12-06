@@ -1,5 +1,6 @@
 
 body {
+  font-size:14px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -36,7 +37,7 @@ header {
   border-radius: 3px;
 }
 .fa {
-  font-size:1.5em;
+  font-size:1.2em;
 }
 .nav-sidebar {
   position: fixed;
@@ -51,8 +52,8 @@ header {
   transform: translate3d(0, 0, 0);
 }
 .nav-sidebar .head .logo {
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
 }
 .nav-sidebar .head, .nav-sidebar .foot {
   display: flex;
@@ -66,7 +67,7 @@ header {
   display: flex;
   align-items: center;
 }
-.nav-sidebar ul li a {
+.nav-sidebar ul li a, .head {
   flex:1;
   font-size: 14px;
   color: #707070;
@@ -113,4 +114,97 @@ header {
 
 .breadcrumbs-list {
   margin: 0;
+}
+
+.overview {
+
+    .avatar {
+      display: flex;
+      align-content: center;
+
+      img {
+        width:70px;
+        height:70px;
+        margin: auto;
+        border: 1px solid #e5e5e5;
+        border-radius: 7px;
+      }
+    }
+
+  .title {
+    text-align: center;
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1;
+      word-wrap: break-word;
+    }
+  }
+}
+
+.page-details {
+  h3 {
+    color: #2e2e2e;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  p {
+    color: #2e2e2e;
+    font-size: 14px;
+  }
+}
+
+.webshelf-table {
+
+    .row {
+      margin: 0;
+      display: flex;
+      padding: 20px 16px;
+      border-bottom: 1px solid #eee;
+
+        .title {
+          font-weight: 600;
+        }
+        .website, .timestamp {
+          color: grey;
+        }
+        .details, .console, .stats {
+          flex: 1;
+        }
+
+        .details {
+          text-align:left;
+        }
+        .console {
+          display: flex;
+          align-self: center;
+          text-align:center;
+          //border: 1px solid #e8e8e8;
+          //border-radius: 7px;
+          padding: 5px;
+
+          .green {
+            color:green;
+          }
+          .red {
+            color: red;
+          }
+          ul {
+            flex:1;
+            display: flex;
+            margin: 0;
+            justify-content: space-evenly;
+            color: #e8e8e8;
+          }
+        }
+        .stats {
+          text-align:right;
+        }
+    }
+    .row:hover {
+      border-radius:7px;
+      background-color:#fafafa;
+    }
 }
