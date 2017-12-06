@@ -21,13 +21,6 @@
 
     @include('dashboard::structure.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
 
-    {{--<div class="container">--}}
-        {{--<div class="information">--}}
-            {{--<h3>@yield('title', ucwords(currentURI()))</h3>--}}
-            {{--<p>@yield('information', '')</p>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
     <div class="container page-details">
         <h3>@yield('title')</h3>
         <p>@yield('information')</p>
