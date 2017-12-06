@@ -114,6 +114,14 @@ header {
 
 .breadcrumbs-list {
   margin: 0;
+
+  li::before {
+    display: inline-block;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #868e96;
+    content: ">";
+  }
 }
 
 .overview {
@@ -185,12 +193,6 @@ header {
           //border-radius: 7px;
           padding: 5px;
 
-          .green {
-            color:green;
-          }
-          .red {
-            color: red;
-          }
           ul {
             flex:1;
             display: flex;
@@ -207,4 +209,60 @@ header {
       border-radius:7px;
       background-color:#fafafa;
     }
+}
+
+.searchbar {
+  display: flex;
+  background-color:#fafafa;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+
+  .text {
+    flex:3;
+  }
+
+  .ordering {
+    flex:1;
+  }
+}
+
+.green {
+  color:green;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: dodgerblue;
+}
+
+.webshelf-scope-menu {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(229, 229, 229);
+
+  ul {
+    display: flex;
+
+    li {
+      a {
+        color: #000;
+        padding: 16px 15px 11px;
+      }
+    }
+  }
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #707070;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: rgba(0,0,0,0.07);
+  border-radius: 10px;
 }

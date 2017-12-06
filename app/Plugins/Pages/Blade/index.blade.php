@@ -5,10 +5,20 @@
 @endsection
 
 @section('information')
-    View the pages that your website currently holds.
+    View the pages that your website currently holds along with the status of each.
 @endsection
 
 @section('content')
+
+    <form>
+        <div class="searchbar">
+            <div class="text form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+    </form>
 
     <div class="webshelf-table">
 
@@ -29,7 +39,7 @@
                         <li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>
                         <li>{!! css()->status->sitemap($page->sitemap) !!}</li>
                         <li>{!! css()->status->status($page->enabled) !!}</li>
-                        <li>{!! css()->link->view(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>
+                        <li>{!! css()->link->view(makeUrl($page)) !!}</li>
                     </ul>
                 </div>
 

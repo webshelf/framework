@@ -31,6 +31,16 @@ class Status extends Icons
         return $this->statusIcon('fa-cogs', $boolean);
     }
 
+    public function check($boolean)
+    {
+        return $this->subjectiveIcon('fa-check', 'fa-times', $boolean);
+    }
+
+    public function installed($boolean)
+    {
+        return $this->statusIcon('fa-download', $boolean);
+    }
+
     /**
      * Allows color based on boolean.
      */
@@ -44,6 +54,9 @@ class Status extends Icons
      */
     private function subjectiveIcon(string $iconTrue, string $iconFalse, bool $boolean)
     {
-        //
+        if ($boolean)
+            return $this->icon($iconTrue, 'green');
+        else
+            return $this->icon($iconFalse, 'red');
     }
 }

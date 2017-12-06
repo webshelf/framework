@@ -15473,6 +15473,14 @@ header {
   margin: 0;
 }
 
+.breadcrumbs-list li::before {
+  display: inline-block;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  color: #868e96;
+  content: ">";
+}
+
 .overview .avatar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -15553,14 +15561,6 @@ header {
   padding: 5px;
 }
 
-.webshelf-table .row .console .green {
-  color: green;
-}
-
-.webshelf-table .row .console .red {
-  color: red;
-}
-
 .webshelf-table .row .console ul {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -15582,5 +15582,69 @@ header {
 .webshelf-table .row:hover {
   border-radius: 7px;
   background-color: #fafafa;
+}
+
+.searchbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fafafa;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.searchbar .text {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.searchbar .ordering {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: dodgerblue;
+}
+
+.webshelf-scope-menu {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.webshelf-scope-menu ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.webshelf-scope-menu ul li a {
+  color: #000;
+  padding: 16px 15px 11px;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #707070;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
 }
 

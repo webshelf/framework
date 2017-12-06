@@ -49,9 +49,9 @@ class BackendController extends PluginEngine
     /**
      * Show all the menus in one place.
      */
-    public function index()
+    public function index($group_id = 1)
     {
-        return $this->make('index')->with('menus', $this->menus->allByPriorityOrder())->with('pages', $this->pages->allPagesWithoutMenusAndEditable())->with('submenu_group', $this->menus->allSubmenusByPriorityOrderAndGrouped());
+        return $this->make('index')->with('menus', $this->menus->base())->with('list', $this->menus->group($group_id));
     }
 
     /**

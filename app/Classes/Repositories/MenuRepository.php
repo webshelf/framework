@@ -28,9 +28,17 @@ class MenuRepository extends Menu
         return $this->withTrashed()->where('slug', $plugin_name)->restore();
     }
 
-    public function allByPriorityOrder()
+    public function base()
     {
         return $this->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
+    }
+
+    public function group($group_id)
+    {
+        if ($group_id == 1)
+            return $this->base();
+
+        return $this->where('menu_id', $group_id)->orderBy('order_id', 'asc')->get();
     }
 
     public function allByRowOrder()

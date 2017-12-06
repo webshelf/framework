@@ -10,57 +10,38 @@
 
 @section('content')
 
-    <div class="table-panel border light">
-
-        <table id="table-datatables" class="table table-striped table-bordered table-hover row-border order-column">
-
-        <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Product Version</th>
-            <th>Product Status</th>
-            @if(account()->hasRole(App\Model\Role::SUPERUSER))
-                <th>Dev. Action</th>
-            @endif
-        </tr>
-        </thead>
-
-        <tbody>
+    <div class="webshelf-table">
 
         @foreach($products as $product)
+            <div class="row">
 
-            <tr>
+                <div class="details">
+                    <div class="title">
+                        {{ ucfirst($product->name()) }}
+                    </div>
+                    <div class="website">
+                        Version {{ $product->version() }}
+                    </div>
+                </div>
 
-            <tr>
-                <td>{{ ucfirst($product->name()) }}</td>
-                <td>{{ $product->version() }}</td>
-                <td>{!! bool2Status($product->isEnabled(), 'Enabled', 'Disabled') !!}</td>
-                @if(account()->hasRole(App\Model\Role::SUPERUSER))
-                    @if($product->isEnabled())
-                        <td><a href="{{ route('ProductStatus', $product->name()) }}">Disable</a></td>
-                    @else
-                        <td><a href="{{ route('ProductStatus', $product->name()) }}">Enable</a></td>
-                    @endif
-                @endif
-            </tr>
+                <div class="console">
+                    <ul class="list-unstyled">
+                        {{--<li>{!! css()->status->installed($product->isEnabled()) !!}</li>--}}
+                        {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}
+                        {{--<li>{!! css()->status->sitemap($page->sitemap) !!}</li>--}}
+                        {{--<li>{!! css()->status->status($page->enabled) !!}</li>--}}
+                        {{--<li>{!! css()->link->view(makeUrl($page)) !!}</li>--}}
+                    </ul>
+                </div>
 
+                <div class="stats">
+                    <div class="views">
+                        {!! css()->status->check($product->isEnabled()) !!}
+                    </div>
+                </div>
+            </div>
         @endforeach
 
-        </tbody>
-    </table>
-
     </div>
-
-@endsection
-
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 50
-            });
-        });
-    </script>
 
 @endsection

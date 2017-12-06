@@ -61,7 +61,7 @@ class Menu extends EloquentModel
      */
     public function submenus()
     {
-        return $this->hasMany(self::class, 'menu_id', 'id');
+        return $this->hasMany(self::class, 'menu_id', 'page_id');
     }
 
     /**
