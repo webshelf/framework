@@ -3,19 +3,16 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 06/12/2017
- * Time: 00:53
+ * Time: 00:53.
  */
 
 namespace App\Classes\Library\StyleCSS;
 
 /**
- * Class Status
- *
- * @package App\Classes\Library\StyleCSS
+ * Class Status.
  */
 class Status extends Icons
 {
-
     public function sitemap($boolean)
     {
         return $this->statusIcon('fa-sitemap', $boolean);
