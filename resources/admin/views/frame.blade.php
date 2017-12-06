@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
     <script src="{{ mix('assets/backend.js') }}"></script>
 
 </head>
