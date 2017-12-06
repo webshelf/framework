@@ -26,10 +26,10 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-sitemap {{ colorStyle($page->sitemap) }}" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-low-vision {{ colorStyle($page->enabled) }}" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-globe" aria-hidden="true"></i></li>
+                        <li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>
+                        <li>{!! css()->status->sitemap($page->sitemap) !!}</li>
+                        <li>{!! css()->status->status($page->enabled) !!}</li>
+                        <li>{!! css()->link->view(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>
                     </ul>
                 </div>
 

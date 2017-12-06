@@ -105,15 +105,11 @@
     }
 
     /**
-     * Return a simple color of red or green based on the value inserted.
-     * Used for styling css, or rows in tables.
-     *
-     * @param $boolean
-     * @return string
+     * @return \App\Classes\Library\StyleCSS\Style
      */
-    function colorStyle($boolean)
+    function css()
     {
-        return $boolean ? 'green' : 'red';
+        return app(\App\Classes\Library\StyleCSS\Style::class);
     }
 
     function currentURI()
