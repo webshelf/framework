@@ -13,7 +13,7 @@ class StoreMigrationCreationDate extends Migration
     public function up()
     {
         \Schema::table('updates', function (Blueprint $table) {
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->default(NOW());
         });
     }
 
