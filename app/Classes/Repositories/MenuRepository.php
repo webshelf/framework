@@ -35,8 +35,9 @@ class MenuRepository extends Menu
 
     public function group($group_id)
     {
-        if ($group_id == 1)
+        if ($group_id == 1) {
             return $this->base();
+        }
 
         return $this->where('menu_id', $group_id)->orderBy('order_id', 'asc')->get();
     }
