@@ -27,7 +27,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="slug" aria-describedby="slugHelp" value="{{ old('slug') }}">
+                    <input type="text" class="form-control" name="slug" id="slug" aria-describedby="slugHelp" value="{{ old('slug') }}" readonly>
                     <small id="slugHelp" class="form-text text-muted">Create the url slug that will be used.</small>
                 </div>
             </div>
