@@ -32,7 +32,7 @@
 
         @foreach ($audits as $audit)
 
-            <?php /** @var \App\Model\Audit $audit */ ?>
+            <?php  /** @var \App\Model\Audit $audit */ ?>
 
             <div class="row">
 

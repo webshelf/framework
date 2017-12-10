@@ -2296,6 +2296,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-ms-input-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #868e96;
   opacity: 1;
@@ -15646,5 +15651,55 @@ header {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.07);
   border-radius: 10px;
+}
+
+.form-actions {
+  margin-top: 0;
+  margin-bottom: -16px;
+  padding: 16px;
+  background-color: #fafafa;
+  border-top: 1px solid #e5e5e5;
+}
+
+.btn {
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 10px;
+  background-color: #fff;
+  border-color: #e5e5e5;
+  color: #2e2e2e;
+  color: #2e2e2e;
+}
+
+.btn:hover {
+  background-color: #f0f0f0;
+  border-color: #e3e3e3;
+  color: #2e2e2e;
+  cursor: pointer;
+}
+
+.btn-update {
+  background-color: #1aaa55;
+  border-color: #168f48;
+  color: #fff;
+}
+
+.btn-update:hover {
+  background-color: #168f48;
+  border-color: #12753a;
+  color: #fff;
+}
+
+.btn-create {
+  background-color: #1aaa55;
+  border-color: #168f48;
+  color: #fff;
+}
+
+.btn-create:hover {
+  background-color: #168f48;
+  border-color: #12753a;
+  color: #fff;
 }
 

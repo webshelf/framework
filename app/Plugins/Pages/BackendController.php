@@ -69,8 +69,8 @@ class BackendController extends PluginEngine
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
         $page->content = $request['content'];
-        $page->sitemap = $request['sitemap'] ? true : false;
-        $page->enabled = $request['enabled'] ? true : false;
+        $page->sitemap = true; // $request['sitemap'] ? true : false;
+        $page->enabled = true; // $request['enabled'] ? true : false;
         $page->save();
 
         return redirect()->route('admin.pages.index');
@@ -117,8 +117,8 @@ class BackendController extends PluginEngine
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
         $page->content = $request['content'];
-        $page->sitemap = $request['sitemap'] ? true : false;
-        $page->enabled = $request['enabled'] ? true : false;
+        $page->sitemap = true; //$request['sitemap'] ? true : false;
+        $page->enabled = true; //$request['enabled'] ? true : false;
         $page->saveOrFail();
 
         return redirect()->route('admin.pages.index');

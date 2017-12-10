@@ -17,6 +17,9 @@
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>
             </div>
+            <div class="pull-right ml-2">
+                <a href="{{ route('admin.pages.create') }}" class="btn btn-create">Create Page</a>
+        </div>
         </div>
     </form>
 

@@ -40,7 +40,7 @@ class FrameworkTableSeeder extends Seeder
     {
         $account = new Account;
         $account->email = 'marky360@live.ie';
-        $account->password = '$2y$10$h0HdLs5rqQmTFOZWbw596OsP0yXYxc8RILEKDO7oCrwQnSXt5EAJq';
+        $account->password = '$2y$10$9i7d3opPydLSDSGLc86yieSB.ksofo4KOcO6DdpONFFMHcEIPPRUy';
         $account->forename = 'Mark';
         $account->surname = 'Hester';
         $account->verified = true;
