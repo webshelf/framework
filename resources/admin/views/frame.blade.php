@@ -1,38 +1,33 @@
 <!doctype html>
+
 <html lang="en">
-<head>
-    <title>{{ framework()->package }} v{{ framework()->version }}</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
-    <script src="{{ mix('assets/backend.js') }}"></script>
+    <head>
+        <title>{{ framework()->package }} v{{ framework()->version }}</title>
 
-</head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
+        <script src="{{ mix('assets/backend.js') }}"></script>
 
-    @include('dashboard::structure.navbar')
+    </head>
 
-    @include('dashboard::structure.sidebar')
+    <body>
 
-    @include('dashboard::structure.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+        @include('dashboard::structure.navbar')
 
-    <div class="container page-details">
-        <h3>@yield('title')</h3>
-        <p>@yield('information')</p>
-        <hr>
-    </div>
+        @include('dashboard::structure.sidebar')
 
-    <div class="container">
+        @include('dashboard::structure.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
 
-        @yield('content')
+        @include('dashboard::structure.information')
 
-    </div>
+        @include('dashboard::structure.content')
 
-</body>
+    </body>
 
 </html>

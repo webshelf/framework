@@ -93,7 +93,7 @@ class SettingsTest extends TestCase
     public function test_settings_can_add_a_collection_of_model_settings()
     {
         $collection = collect([
-            'alpa'    => (new Setting)->setKey('alpa')->setValue('Some value')->setShadow('Some other value'),
+            'alpha'    => (new Setting)->setKey('alpa')->setValue('Some value')->setShadow('Some other value'),
             'bravo'   => (new Setting)->setKey('bravo')->setValue('Some value')->setShadow('Some other value'),
             'charlie' => (new Setting)->setKey('charlie')->setValue('Some value')->setShadow('Some other value'),
             'delta'   => (new Setting)->setKey('delta')->setValue('Some value')->setShadow('Some other value'),

@@ -41,7 +41,7 @@ class Status extends Icons
     /**
      * Allows color based on boolean.
      */
-    private function statusIcon(string $iconName, bool $boolean)
+    private function statusIcon(string $iconName, $boolean)
     {
         return $boolean ? $this->icon($iconName, 'green') : $this->icon($iconName, 'red');
     }
@@ -49,7 +49,7 @@ class Status extends Icons
     /**
      * Allows separate icons based on boolean, with separate colors.
      */
-    private function subjectiveIcon(string $iconTrue, string $iconFalse, bool $boolean)
+    private function subjectiveIcon(string $iconTrue, string $iconFalse, $boolean)
     {
         if ($boolean) {
             return $this->icon($iconTrue, 'green');

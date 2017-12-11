@@ -36,7 +36,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="creatorID">Creator</label>
-                    <select class="form-control" name="creatorID" id="creatorID" aria-describedby="creatorHelp">
+                    <select class="form-control" name="creatorID" id="creatorID" aria-describedby="creatorHelp" readonly>
                         <option value="1">Mark Hester</option>
                         <option value="2">Danny Dwyer</option>
                         <option value="3">Christie Tango</option>
