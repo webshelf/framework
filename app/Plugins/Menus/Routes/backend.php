@@ -20,7 +20,6 @@
 
     // Allows groupings on the index.
     Route::get('/admin/menus/group/{group_id}')->uses('BackendController@index')->name('admin.menus.group');
-    
 
     // Post Requests.
     // ==================================================================================
