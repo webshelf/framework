@@ -8,24 +8,17 @@
 
 namespace App\Plugins\Menus;
 
-use DB;
 use App\Model\Menu;
-use App\Model\Page;
-use App\Classes\Popup;
-use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use League\Flysystem\Exception;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class Controller.
  */
 class BackendController extends PluginEngine
 {
-
     /**
      * @var MenuRepository
      */
@@ -146,8 +139,7 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Menu $menu)
     {
-        if (!$request['hyperlinkUrl'])
-        {
+        if (! $request['hyperlinkUrl']) {
             $menu->hyperlink = null;
             $menu->title = $request['title'];
             $menu->page_id = $request['page_id'];
@@ -155,9 +147,7 @@ class BackendController extends PluginEngine
             $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
-        }
-        else
-        {
+        } else {
             $menu->page_id = null;
             $menu->title = $request['title'];
             $menu->parent_id = $request['menu_id'];
