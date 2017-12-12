@@ -21,9 +21,9 @@
 
 
                 <li class="item">
-                    <a href="{{ route('admin.menus.index', ["group_id"=>$menu->page_id]) }}">
+                    <a href="{{ route('admin.menus.group', ["group_id" => $menu->id]) }}">
                         <span class="title">{{ $menu->title }}</span>
-                        <span class="badge">{{ count($menu->submenus) }}</span>
+                        <span class="badge">{{ count($menu->children->toArray()) }}</span>
                     </a>
                 </li>
 
@@ -63,7 +63,7 @@
                 <div class="console">
                     <ul class="list-unstyled">
                         <li>{!! css()->link->edit(route('admin.menus.edit', ['name' => $menu])) !!}</li>
-                        <li>{!! css()->status->status($menu->enabled) !!}</li>
+                        <li>{!! css()->status->status($menu->status) !!}</li>
                         {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}
                         {{--<li>{!! css()->status->sitemap($page->sitemap) !!}</li>--}}
                         {{--<li>{!! css()->status->status($page->enabled) !!}</li>--}}

@@ -18,105 +18,50 @@ use Illuminate\Support\Collection;
  */
 class MenuRepository extends Menu
 {
+    /**
+     * Return the Menu with the matching ID.
+     *
+     * @param int $integer
+     * @return Menu
+     */
     public function whereID(int $integer) : Menu
     {
         return $this->where('id', $integer)->first();
     }
 
-    public function restoreTrashedPlugin($plugin_name)
+    /**
+     * Frontend requires that a organised list of menus is returned.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function organisedMenuList()
     {
-        return $this->withTrashed()->where('slug', $plugin_name)->restore();
-    }
-
-    public function base()
-    {
-        return $this->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
-    }
-
-    public function group($group_id)
-    {
-        if ($group_id == 1) {
-            return $this->base();
-        }
-
-        return $this->where('menu_id', $group_id)->orderBy('order_id', 'asc')->get();
-    }
-
-    public function allByRowOrder()
-    {
-        return $this->whereNull('menu_id')->orderBy('order_id', 'asc')->get();
-    }
-
-    public function listAllMenusNotRequired()
-    {
-        return $this->whereNull('required')->pluck('title', 'id');
-    }
-
-    public function makeList()
-    {
-        return $this->pluck('title', 'id');
-    }
-
-    public function listWhereInternal()
-    {
-        return $this->whereNotNull('page_id')->whereNull('menu_id')->pluck('title', 'id');
-    }
-
-    public function submenusWhereID($integer)
-    {
-        return $this->where('menu_id', $integer)->get();
-    }
-
-    public function allMenus()
-    {
-        return $this->whereNull('menu_id')->get();
-    }
-
-    public function allMenusWhereID($integer)
-    {
-        return $this->where('menu_id', $integer)->get();
-    }
-
-    public function allSubmenus()
-    {
-        return $this->whereNotNull('menu_id')->get();
-    }
-
-    public function allSubmenusByPriorityOrderAndGrouped()
-    {
-        return$this->whereNotNull('menu_id')->orderBy('order_id', 'asc')->get()->groupBy('menu_id');
+        return $this->whereNull('parent_id')->where('status', true)->with('page')->orderBy('order', 'asc')->get();
     }
 
     /**
-     * @param $string
-     * @return Menu|array|\stdClass
+     * Top level menus, without any further parents.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function whereName($string)
+    public function whereTopLevel()
     {
-        return $this->where('slug', $string)->first();
+        return $this->whereNull('parent_id')->orderBy('order', 'asc')->get();
+    }
+
+    public function whereTopLevelEditable()
+    {
+        return $this->where('lock', null)->whereNull('parent_id')->orderBy('order', 'asc')->get();
     }
 
     /**
-     * This will return the menus in order, that will be displayed in the front end.
+     * Where the menu belongs to a another menu.
+     *
+     * @param int $integer
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function whereFrontEndMenu() : Collection
+    public function whereParent(int $integer)
     {
-        return $this->whereNull('menu_id')->where('enabled', true)->orderBy('order_id', 'asc')->with('submenus')->get();
-    }
-
-    /**
-     * Return a menus set of submenus from the database.
-     */
-    public function allSubmenusOfMenuID(int $integer) : Collection
-    {
-        return $this->where('menu_id', $integer)->where('enabled', true)->orderBy('order_id', 'asc')->get();
-    }
-
-    /**
-     * Return all the global menus with the submenus and pages.
-     */
-    public function allGlobalMenusWithSubmenus()
-    {
-        return $this->whereNull('menu_id')->where('enabled', true)->with('page')->orderBy('order_id', 'asc')->get();
+        return ($integer == 1) ? $this->whereTopLevel() : $this->where('parent_id', $integer)->orderBy('order', 'asc')->get();
     }
 }

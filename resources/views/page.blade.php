@@ -5,7 +5,7 @@
     <div class="flex-center position-ref full-height">
         <div class="top-right links">
             @foreach($page['menus'] as $menu)
-                @include('dashboard::components.menu_item')
+                <a class="{{ $menu['active'] }}" href="{{ url($menu['link']) }}">{{ $menu['title'] }}</a>
             @endforeach
 
             @if (Auth::check() == false)

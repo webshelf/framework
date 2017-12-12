@@ -63,9 +63,8 @@ class FrontPageMenu
     {
         return [
             'title'    => $menu->title,
-            'link'     => makeSlug($menu->page),
-            'icon'     => $menu->icon,
-            'order'    => $menu->order_id,
+            'link'     => $menu->page->slug(),
+            'order'    => $menu->order,
             'target'   => $menu->target,
             'active'   => $status ? 'active' : 'inactive',
             'submenu'  => [],
@@ -81,7 +80,7 @@ class FrontPageMenu
             $menu_status = false;
 
             /** @var Menu $submenu */
-            foreach ($menu->submenus as $submenu) {
+            foreach ($menu->children as $submenu) {
                 $status = $this->isCurrentPageMenu($submenu);
 
                 if ($status == true) {

@@ -57,7 +57,7 @@ class BackendController extends PluginEngine
      */
     public function index($group_id = 1)
     {
-        return $this->make('index')->with('menus', $this->menus->base())->with('list', $this->menus->group($group_id));
+        return $this->make('index')->with('menus', $this->menus->whereTopLevel())->with('list', $this->menus->whereParent($group_id));
     }
 
     /**
@@ -67,7 +67,7 @@ class BackendController extends PluginEngine
      */
     public function create()
     {
-        return $this->make('create')->with('submenus', $this->menus->listAllMenusNotRequired())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
+        return $this->make('create')->with('parent', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
     }
 
     /**
@@ -148,20 +148,21 @@ class BackendController extends PluginEngine
     {
         if (!$request['hyperlinkUrl'])
         {
-            $menu->link = null;
+            $menu->hyperlink = null;
             $menu->title = $request['title'];
             $menu->page_id = $request['page_id'];
-            $menu->menu_id = $request['menu_id'];
-            $menu->target  = $request['target'];
-            $menu->slug    = str_slug($menu->title);
+            $menu->parent_id = $request['menu_id'];
+            $menu->target = $request['target'];
+            $menu->status = true;
             $menu->creator_id = account()->id;
         }
         else
         {
             $menu->page_id = null;
             $menu->title = $request['title'];
-            $menu->menu_id = $request['menu_id'];
-            $menu->link = $request['hyperlinkUrl'];
+            $menu->parent_id = $request['menu_id'];
+            $menu->hyperlink = $request['hyperlinkUrl'];
+            $menu->status = true;
             $menu->creator_id = account()->id;
         }
 

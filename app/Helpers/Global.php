@@ -62,26 +62,6 @@
         return app(\App\Classes\PluginManager::class);
     }
 
-    function makeSlug(\App\Model\Page $page)
-    {
-        try {
-            if ($page->menu) {
-                if ($page->menu->parent) {
-                    return $page->menu->parent->slug.'/'.$page->slug;
-                }
-            }
-        } catch (\Exception $e) {
-            throw new \Exception('Unexpected error occurred for url creation of the page '.$page->slug);
-        }
-
-        return $page->slug;
-    }
-
-    function makeUrl(\App\Model\Page $page)
-    {
-        return url(makeSlug($page));
-    }
-
     /**
      * Turn a boolean value into readable data.
      * true  = Active

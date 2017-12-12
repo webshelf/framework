@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable;
 use App\Classes\Interfaces\AuditInterface;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @property Account getPublisher
  * @property Redirect redirect
- * @property HasMany $menus
+ * @property Menu $menu
  *
  * @property int $id
  * @property string $slug
@@ -90,23 +91,13 @@ class Page extends EloquentModel implements AuditInterface
     }
 
     /**
-     * A page can have many menus. (Polymorphic).
+     * A page belongs to a single menu.
      *
-     * @return Collection|HasMany
-     */
-    public function menus()
-    {
-        return $this->hasMany(Menu::class, 'page_id', 'id');
-    }
-
-    /**
-     * A page can have many menus. (Polymorphic).
-     *
-     * @return Menu|\Illuminate\Database\Eloquent\Relations\HasOne
+     * @return Menu|BelongsTo
      */
     public function menu()
     {
-        return $this->hasOne(Menu::class, 'page_id', 'id');
+        return $this->belongsTo(Menu::class,'id', 'page_id');
     }
 
     /**
@@ -157,5 +148,23 @@ class Page extends EloquentModel implements AuditInterface
     public function auditUrl()
     {
         return route('admin.pages.edit', $this->slug);
+    }
+
+    /**
+     * Generate a url slug based on the relationship this belongs to.
+     *
+     * @return string
+     */
+    public function slug()
+    {
+        if ($this->menu && $this->menu->parent)
+        {
+            if ($this->menu->parent->page->slug != 'index')
+            {
+                return sprintf('%s/%s', $this->menu->parent->page->slug, $this->slug);
+            }
+        }
+
+        return $this->slug;
     }
 }

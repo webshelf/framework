@@ -20,12 +20,12 @@
     $repository = app(\App\Classes\Repositories\PageRepository::class);
 
     /** @var \App\Model\Page $page */
-    foreach ($repository->allWithMenuAndParent() as $page) {
+    foreach ($repository->frontendPageCollection() as $page) {
         if (! $page->redirect) {
             if ($page->plugin) {
-                Route::get(makeSlug($page))->name($page->slug)->uses('App\Http\Controllers\PageController@index');
+                Route::get($page->slug())->uses('App\Http\Controllers\PageController@index');
             } else {
-                Route::get(makeSlug($page))->name($page->slug)->uses('App\Http\Controllers\PageController@index');
+                Route::get($page->slug())->uses('App\Http\Controllers\PageController@index');
             }
         }
     }
