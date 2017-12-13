@@ -33,7 +33,7 @@ class BackendController extends PluginEngine
     {
         $this->repository = $repository;
     }
-    
+
     /**
      * Display a listing of the resource.
      */
