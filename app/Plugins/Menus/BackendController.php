@@ -8,25 +8,19 @@
 
 namespace App\Plugins\Menus;
 
-use DB;
 use App\Model\Menu;
 use App\Model\Page;
-use App\Classes\Popup;
-use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use Illuminate\Validation\Rule;
-use League\Flysystem\Exception;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class Controller.
  */
 class BackendController extends PluginEngine
 {
-
     /**
      * @var MenuRepository
      */
@@ -153,8 +147,7 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Menu $menu)
     {
-        if (!$request['hyperlinkUrl'])
-        {
+        if (! $request['hyperlinkUrl']) {
             // we expect a page to be connected.
             $request->validate(['page_id' => 'numeric|required']);
 
@@ -165,9 +158,7 @@ class BackendController extends PluginEngine
             $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
-        }
-        else
-        {
+        } else {
             // we expect this to be a hyperlink.
             $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
 

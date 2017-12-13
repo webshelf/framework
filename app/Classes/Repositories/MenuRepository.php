@@ -9,7 +9,6 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
-use Illuminate\Support\Collection;
 
 /**
  * Class MenuRepository.
