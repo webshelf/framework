@@ -23,27 +23,29 @@
             <small id="titleHelp" class="form-text text-muted">Text to appear in navigation menu.</small>
             <!-- TODO: This is for server side, there is another version for browser defaults -->
         </div>
-    
+
         <div class="form-group">
-          <label for="page">Select Page Content</label>
-          <select class="form-control" name="page_id" id="page" aria-describedby="pageHelp">
-            @foreach($pages as $key => $page)
-                <option value="{{ $key }}">{{ $page }}</option>
-            @endforeach
-          </select>
-          <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>
+            <label for="menu">Submenu of:</label>
+            <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
+                <option value="none">No Submenu [Top Level]</option>
+                @foreach($parent as  $menu)
+                    <option value="{{ $menu->id }}">{{ $menu->title }}</option>
+                @endforeach
+            </select>
+            <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
         </div>
-    
+
         <div class="row">
             <div class="col-5">
                 <div class="form-group">
-                    <label for="menu">Submenu of:</label>
-                    <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
-                        @foreach($parent as $key => $menu)
-                            <option value="{{ $key }}">{{ $menu }}</option>
+                    <label for="page">Select Page Content</label>
+                    <select class="form-control" name="page_id" id="page" aria-describedby="pageHelp">
+                        <option value="none">No Page Content</option>
+                        @foreach($pages as $key => $page)
+                            <option value="{{ $key }}">{{ $page }}</option>
                         @endforeach
                     </select>
-                    <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
+                    <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>
                 </div>
             </div>
             
@@ -54,7 +56,7 @@
             <div class="col-5">
                 <div class="form-group">
                     <label for="hyperlinkUrl">Hyperlink:</label>
-                    <input type="url" class="form-control is-valid|is-invalid" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp">
+                    <input type="url" class="form-control is-valid|is-invalid" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp" readonly>
                     <div class="invalid-feedback">
                         Validation message
                     </div>

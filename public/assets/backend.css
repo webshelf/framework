@@ -15622,6 +15622,10 @@ header {
   color: dodgerblue;
 }
 
+.grey {
+  color: grey;
+}
+
 .webshelf-scope-menu {
   margin-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;

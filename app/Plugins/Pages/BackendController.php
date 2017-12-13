@@ -33,7 +33,7 @@ class BackendController extends PluginEngine
     {
         $this->repository = $repository;
     }
-
+    
     /**
      * Display a listing of the resource.
      */
@@ -119,7 +119,7 @@ class BackendController extends PluginEngine
         $page->content = $request['content'];
         $page->sitemap = true; //$request['sitemap'] ? true : false;
         $page->enabled = true; //$request['enabled'] ? true : false;
-        $page->saveOrFail();
+        $page->save();
 
         return redirect()->route('admin.pages.index');
     }
@@ -129,6 +129,7 @@ class BackendController extends PluginEngine
      *
      * @param string $name
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(string $name)
     {

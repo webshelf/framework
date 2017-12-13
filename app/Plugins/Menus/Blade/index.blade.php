@@ -63,6 +63,7 @@
                 <div class="console">
                     <ul class="list-unstyled">
                         <li>{!! css()->link->edit(route('admin.menus.edit', ['name' => $menu])) !!}</li>
+                        <li>{!! css()->link->destroy(route('admin.menus.destroy', ['menu' => $menu->id])) !!}</li>
                         <li>{!! css()->status->status($menu->status) !!}</li>
                         {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}
                         {{--<li>{!! css()->status->sitemap($page->sitemap) !!}</li>--}}

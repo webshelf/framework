@@ -22,4 +22,9 @@ class Link extends Icons
     {
         return $this->icon('fa-globe', 'blue', $url);
     }
+
+    public function destroy(string $url)
+    {
+        return $this->icon('fa-trash', 'grey', $url);
+    }
 }

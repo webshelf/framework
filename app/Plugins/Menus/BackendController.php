@@ -15,6 +15,7 @@ use App\Classes\Popup;
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
+use Illuminate\Validation\Rule;
 use League\Flysystem\Exception;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
@@ -81,6 +82,8 @@ class BackendController extends PluginEngine
      */
     public function store(Request $request, Menu $menu)
     {
+        $request->validate(['title' => 'min:3|max:255|unique:menus|required']);
+
         $this->save($request, new Menu);
 
         return redirect()->route('admin.menus.index');
@@ -106,7 +109,7 @@ class BackendController extends PluginEngine
      */
     public function edit(MenuRepository $repository, $id)
     {
-        return $this->make('edit')->with('menu', $repository->whereID($id));
+        return $this->make('edit')->with('menu', $repository->whereID($id))->with('parent', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
     }
 
     /**
@@ -119,6 +122,8 @@ class BackendController extends PluginEngine
      */
     public function update(Request $request, MenuRepository $repository, $id)
     {
+        $request->validate(['title' => ['min:3|max:255|required', Rule::unique('menus')->ignore($id)]]);
+
         $this->save($request, $repository->whereID($id));
 
         return redirect(route('admin.menus.index'));
@@ -134,7 +139,9 @@ class BackendController extends PluginEngine
      */
     public function destroy($id, MenuRepository $repository)
     {
-        return $repository->whereID($id)->delete();
+        $repository->whereID($id)->delete();
+
+        return redirect(route('admin.menus.index'));
     }
 
     /**
@@ -148,6 +155,9 @@ class BackendController extends PluginEngine
     {
         if (!$request['hyperlinkUrl'])
         {
+            // we expect a page to be connected.
+            $request->validate(['page_id' => 'numeric|required']);
+
             $menu->hyperlink = null;
             $menu->title = $request['title'];
             $menu->page_id = $request['page_id'];
@@ -158,10 +168,14 @@ class BackendController extends PluginEngine
         }
         else
         {
+            // we expect this to be a hyperlink.
+            $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
+
             $menu->page_id = null;
             $menu->title = $request['title'];
             $menu->parent_id = $request['menu_id'];
             $menu->hyperlink = $request['hyperlinkUrl'];
+            $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
         }
