@@ -1,4 +1,4 @@
-<div class="nav-sidebar">
+<div id="nav-sidebar">
     <div class="head">
         <div class="logo">
             <img src="{{ asset('packages/webshelf/images/logo.png') }}" style="height: 100%; width: 100%; display:block;">
@@ -64,11 +64,6 @@
 
             @endforeach
 
-        </ul>
-    </div>
-    <div class="foot">
-        <ul class="list-unstyled">
-            <li><a href="#">Collapse Sidebar</a></li>
         </ul>
     </div>
 </div>

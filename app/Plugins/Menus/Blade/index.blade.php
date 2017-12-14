@@ -56,7 +56,7 @@
                         <a href="">{{ $menu->title }}</a>
                     </div>
                     <div class="website">
-                        {{ $menu->slug }}
+                        <i class="fa fa-pagelines" aria-hidden="true"></i> {{ $menu->page->slug() }}
                     </div>
                 </div>
 

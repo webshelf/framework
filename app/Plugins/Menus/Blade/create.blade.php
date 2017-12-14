@@ -25,11 +25,11 @@
         </div>
 
         <div class="form-group">
-            <label for="menu">Submenu of:</label>
+            <label for="menu">Submenu</label>
             <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
-                <option value="none">No Submenu [Top Level]</option>
-                @foreach($parent as  $menu)
-                    <option value="{{ $menu->id }}">{{ $menu->title }}</option>
+                <option value=""></option>
+                @foreach($parent as $submenu)
+                    <option value="{{ $submenu->id }}">{{ $submenu->title }}</option>
                 @endforeach
             </select>
             <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
@@ -40,9 +40,9 @@
                 <div class="form-group">
                     <label for="page">Select Page Content</label>
                     <select class="form-control" name="page_id" id="page" aria-describedby="pageHelp">
-                        <option value="none">No Page Content</option>
-                        @foreach($pages as $key => $page)
-                            <option value="{{ $key }}">{{ $page }}</option>
+                        <option value=""></option>
+                        @foreach($pages as $page)
+                            <option value="{{ $page->id }}">{{ $page->seo_title }}</option>
                         @endforeach
                     </select>
                     <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>

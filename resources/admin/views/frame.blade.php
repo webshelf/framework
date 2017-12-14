@@ -12,7 +12,6 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
-        <script src="{{ mix('assets/backend.js') }}"></script>
 
     </head>
 
@@ -29,5 +28,7 @@
         @include('dashboard::structure.content')
 
     </body>
+
+    <script src="{{ mix('assets/backend.js') }}"></script>
 
 </html>

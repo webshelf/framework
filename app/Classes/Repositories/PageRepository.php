@@ -40,9 +40,17 @@ class PageRepository extends Page
         return $this->pluck('seo_title', 'id')->toArray();
     }
 
+    /**
+     * @deprecated
+     */
     public function listAllPagesWithoutMenusAndEditable()
     {
         return $this->where('editable', true)->doesntHave('menu')->pluck('seo_title', 'id');
+    }
+
+    public function listPagesWithoutMenus()
+    {
+        return $this->doesntHave('menu')->get();
     }
 
     public function allPagesWithoutMenusAndEditable() : Collection

@@ -68,7 +68,7 @@ class BackendController extends PluginEngine
      */
     public function create()
     {
-        return $this->make('create')->with('parent', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
+        return $this->make('create')->with('parent', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listPagesWithoutMenus());
     }
 
     /**
@@ -109,7 +109,7 @@ class BackendController extends PluginEngine
      */
     public function edit(MenuRepository $repository, $id)
     {
-        return $this->make('edit')->with('menu', $repository->whereID($id))->with('parent', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listAllPagesWithoutMenusAndEditable());
+        return $this->make('edit')->with('menu', $repository->whereID($id))->with('parent', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listPagesWithoutMenus());
     }
 
     /**

@@ -35,15 +35,17 @@
 
         <div class="form-group">
             <label for="menu">Submenu of:</label>
-            <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
-                @if ($menu->parent)
-                    <option value="{{ $menu->parent->id }}">{{ $menu->parent->title }}</option>
-                @else
-                    <option value="">No Submenu [Top Level]</option>
+            <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp" {{ $menu->lock ? 'readonly' : 'null' }}>
+                @if (!$menu->lock)
+                    @foreach($parent as $submenu)
+                        @if ($menu->parent && $menu->parent->id == $submenu->id)
+                            <option value="{{ $submenu->id }}" selected>{{ $submenu->title }}</option>
+                        @else
+                            <option value="{{ $submenu->id }}">{{ $submenu->title }}</option>
+                        @endif
+                    @endforeach
                 @endif
-                @foreach($parent as  $menu)
-                    <option value="{{ $menu->id }}">{{ $menu->title }}</option>
-                @endforeach
+                <option value=""></option>
             </select>
             <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
         </div>
@@ -54,13 +56,14 @@
                     <label for="page">Select Page Content</label>
                     <select class="form-control" name="page_id" id="page" aria-describedby="pageHelp">
                         @if ($menu->page)
-                            <option value="{{ $menu->page->id }}">{{ $menu->page->seo_title }}</option>
+                            <option value="{{ $menu->page->id }}">{{ ucfirst($menu->page->seo_title) }}</option>
                         @else
                             <option value="">No Page Content</option>
                         @endif
                         @foreach($pages as $key => $page)
-                            <option value="{{ $key }}">{{ $page }}</option>
+                            <option value="{{ $key }}">{{ ucfirst($page) }}</option>
                         @endforeach
+                            <option value="" {{ !$menu->page ? 'selected' : 'null'}}></option>
                     </select>
                     <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>
                 </div>
@@ -85,8 +88,8 @@
         <div class="form-group">
             <label for="target">Target</label>
             <select class="form-control" name="target" id="target" aria-describedby="targetHelp">
-                <option value="_self">_self (Page will open on the current browser window)</option>
-                <option value="_blank">_blank (Page will open on a new browser tab window)</option>
+                <option value="_self" {{ $menu->target == '_self' ? 'selected' : 'null' }}>_self (Page will open on the current browser window)</option>
+                <option value="_blank" {{ $menu->target == '_blank' ? 'selected' : 'null' }}>_blank (Page will open on a new browser tab window)</option>
             </select>
             <small id="targetHelp" class="form-text text-muted">How this should open when clicked.</small>
         </div>
