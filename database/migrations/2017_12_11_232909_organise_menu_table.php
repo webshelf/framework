@@ -13,8 +13,7 @@ class OrganiseMenuTable extends Migration
      */
     public function up()
     {
-        Schema::table('menus', function(Blueprint $table)
-        {
+        Schema::table('menus', function (Blueprint $table) {
             $table->dropColumn('slug');
             $table->dropColumn('icon');
 
