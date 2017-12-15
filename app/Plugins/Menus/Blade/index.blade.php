@@ -10,7 +10,6 @@
 
 @section('content')
 
-
     <div class="webshelf-scope-menu">
 
         <ul class="list-unstyled">
@@ -46,10 +45,17 @@
         </div>
     </form>
 
-    <div class="webshelf-table">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Drag and Drop!</strong> Reorder your menus by dragging and dropping to the designated spot.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="webshelf-table" id="sortable_menu">
 
         @foreach($list as $menu)
-            <div class="row">
+            <div class="row" data-id="{{ $menu->id }}">
 
                 <div class="details">
                     <div class="title">
@@ -84,5 +90,26 @@
         @endforeach
 
     </div>
+
+    <script>
+        let menu = Sortable.create(sortable_menu, {
+            animation: 150,
+            sort: true,
+            // Element dragging ended
+            onSort: function (/**Event*/evt) {
+                let el = menu.toArray(evt.to);
+
+                axios.post('/admin/menus/reorder', {
+                    data: menu.toArray(evt.to)
+                })
+                    .then(function (response) {
+                        //console.log(response);
+                    })
+                    .catch(function (error) {
+                        //console.log(error);
+                    });
+            },
+        });
+    </script>
 
 @endsection

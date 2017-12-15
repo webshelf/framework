@@ -145,6 +145,26 @@ class BackendController extends PluginEngine
     }
 
     /**
+     * Change the order the menu list.
+     */
+    public function reorder(Request $request, MenuRepository $repository)
+    {
+        // store the order increment id.
+        $increment = 1;
+
+        for ($i = 0; $i < count($request['data']); $i++)
+        {
+            $menu = $this->menus->whereID($request['data'][$i]);
+
+            $menu->order = $increment++;
+
+            $menu->save();
+        }
+
+
+    }
+
+    /**
      * Save the data for the menu to the database.
      *
      * @param Request $request

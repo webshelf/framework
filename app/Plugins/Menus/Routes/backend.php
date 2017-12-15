@@ -18,6 +18,9 @@
 
     Route::resource('admin/menus', 'BackendController', ['as' => 'admin']);
 
+    // Ajax reorder.
+    Route::post('/admin/menus/reorder/')->uses('BackendController@reorder')->name('admin.menus.reorder');
+
     // Allow destruction without using forms.
     Route::get('/admin/menus/destroy/{menu_id}')->uses('BackendController@destroy')->name('admin.menus.destroy');
 
