@@ -93,12 +93,10 @@
 
     <script>
         let menu = Sortable.create(sortable_menu, {
-            animation: 150,
+            animation: 119,
             sort: true,
             // Element dragging ended
             onSort: function (/**Event*/evt) {
-                let el = menu.toArray(evt.to);
-
                 axios.post('/admin/menus/reorder', {
                     data: menu.toArray(evt.to)
                 })
