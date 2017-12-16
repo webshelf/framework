@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  */
 class Menu extends EloquentModel
 {
@@ -59,7 +58,7 @@ class Menu extends EloquentModel
      */
     public function page()
     {
-        return $this->hasOne(Page::class,'id', 'page_id');
+        return $this->hasOne(Page::class, 'id', 'page_id');
     }
 
     /**
@@ -69,7 +68,7 @@ class Menu extends EloquentModel
      */
     public function parent()
     {
-        return $this->belongsTo(Menu::class, 'parent_id', 'id');
+        return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
     /**
@@ -79,6 +78,6 @@ class Menu extends EloquentModel
      */
     public function children()
     {
-        return $this->hasMany(Menu::class,'parent_id','id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 }
