@@ -20,13 +20,13 @@
 
         @include('dashboard::structure.navbar')
 
-        @include('dashboard::structure.sidebar')
+        <section id="body-margin-top-40">
 
-        @include('dashboard::structure.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+            @include('dashboard::structure.sidebar')
+            
+            @include('dashboard::structure.content', ['breadcrumbs' => $breadcrumbs])
 
-        @include('dashboard::structure.information')
-
-        @include('dashboard::structure.content')
+        </section>
 
     </body>
 

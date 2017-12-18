@@ -10,6 +10,12 @@
 
 @section('content')
 
+    <style>
+        .form-group label {
+            font-weight: 600;
+        }
+    </style>
+
     <div id="settings" data-children=".item">
 
         <div id="website">
@@ -23,7 +29,7 @@
                 </div>
             </div>
 
-            <div id="website-settings" class="collapse item" role="tabpanel">
+            <div id="website-settings" class="collapse item container" role="tabpanel">
                 <div class="form-group">
                     <label for="setting[string][site_name]">Website Name</label>
                     <input type="text" class="form-control" name="setting[string][site_name]" id="websiteName" aria-describedby="websiteNameHelp" placeholder="">
@@ -45,7 +51,7 @@
                 </div>
             </div>
 
-            <div id="page-settings" class="collapse item" role="tabpanel">
+            <div id="page-settings" class="collapse item container" role="tabpanel">
                 <div class="form-group">
                     <label for="setting[string][seo_keywords]">Default Page Keywords</label>
                     <input type="text" class="form-control" name="setting[string][seo_keywords]" id="setting[string][seo_keywords]" aria-describedby="defaultPageKeywordsHelp" placeholder="">
@@ -73,7 +79,7 @@
                 </div>
             </div>
 
-            <div id="seo-settings" class="collapse item" role="tabpanel">
+            <div id="seo-settings" class="collapse item container" role="tabpanel">
                 <div class="form-group">
                     <label for="setting[string][seo_title_text_append]">SEO Text</label>
                     <input type="text" class="form-control" name="setting[string][seo_title_text_append]" id="setting[string][seo_title_text_append]" aria-describedby="seoTextHelp" placeholder="">
@@ -110,7 +116,7 @@
                 </div>
             </div>
 
-            <div id="contact-settings" class="collapse item" role="tabpanel">
+            <div id="contact-settings" class="collapse item container" role="tabpanel">
                 <div class="form-group">
                     <label for="setting[string][address]">Address</label>
                     <textarea class="form-control" name="setting[string][address]" id="setting[string][address]" rows="3" aria-describedby="addressHelp"></textarea>
