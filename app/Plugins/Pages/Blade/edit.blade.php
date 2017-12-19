@@ -60,7 +60,7 @@
 
         <div class="form-group">
           <label for="content">Content</label>
-          <textarea class="form-control" name="content" id="content" aria-describedby="contentHelp" rows="7">{{ $page->content }}</textarea>
+          <textarea class="form-control editor" name="content" id="content" aria-describedby="contentHelp" rows="18">{{ $page->content }}</textarea>
           <small id="contentHelp" class="form-text text-muted">The content that will be shown to users who view the page.</small>
         </div>
 

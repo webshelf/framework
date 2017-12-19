@@ -17,14 +17,15 @@
     "jquery": "^3.1.1",
     "laravel-mix": "^1.4.2",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "vue": "^2.5.11"
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
     "install": "^0.10.2",
     "pace": "0.0.4",
-    "popper.js": "^1.12.9",
+    "popper.js": "^1.13.0",
     "sortablejs": "^1.7.0",
+    "tinymce": "^4.7.4",
     "wowjs": "^1.1.3"
   }
 }

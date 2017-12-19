@@ -12,7 +12,8 @@ window.Vue = require('vue');
 // https://github.com/RubaXa/Sortable
 window.Sortable = require('sortablejs');
 
-
+// Compile files for the editor.
+require('./editor');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
