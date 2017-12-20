@@ -17,8 +17,6 @@ class FrameworkTableSeeder extends Seeder
     {
         $this->seedHomepagePage();
 
-        $this->seedSuperAccount();
-
         $this->seedHomepageMenu();
     }
 
@@ -34,18 +32,6 @@ class FrameworkTableSeeder extends Seeder
         $page->enabled = true;
         $page->editable = false;
         $page->save();
-    }
-
-    private function seedSuperAccount()
-    {
-        $account = new Account;
-        $account->email = 'marky360@live.ie';
-        $account->password = '$2y$10$9i7d3opPydLSDSGLc86yieSB.ksofo4KOcO6DdpONFFMHcEIPPRUy';
-        $account->forename = 'Mark';
-        $account->surname = 'Hester';
-        $account->verified = true;
-        $account->role_id = Role::SUPERUSER;
-        $account->save();
     }
 
     private function seedHomepageMenu()
