@@ -113,10 +113,10 @@ class SettingsManager
     {
         $key = $this->settings->get($key);
 
-        if ($key == null)
-        {
+        if ($key == null) {
             throw new \Exception('test');
         }
+
         return $key['value'] ?: $key['shadow'];
     }
 
