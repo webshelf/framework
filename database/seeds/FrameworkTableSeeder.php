@@ -2,8 +2,6 @@
 
 use App\Model\Menu;
 use App\Model\Page;
-use App\Model\Role;
-use App\Model\Account;
 use Illuminate\Database\Seeder;
 
 class FrameworkTableSeeder extends Seeder
