@@ -26,6 +26,10 @@ class OrganiseMenuTable extends Migration
             $table->renameColumn('editor_id', 'editor_id');
             $table->renameColumn('creator_id', 'creator_id');
         });
+
+        Schema::table('menus', function (Blueprint $table) {
+            $table->boolean('lock')->default(0)->nullable(false)->change();
+        });
     }
 
     /**
