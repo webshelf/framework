@@ -11,7 +11,7 @@
 
         <div class="title">
 
-            <h3>{{ settings()->getDefault('site_name') }}</h3>
+            <h3>{{ settings()->getDefault('website_name') }}</h3>
 
         </div>
 

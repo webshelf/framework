@@ -4,7 +4,7 @@
             <img src="{{ asset('packages/webshelf/images/logo.png') }}" style="height: 100%; width: 100%; display:block;">
         </div>
         <div class="glance">
-            <div class="website-name">{{ settings()->getDefault('site_name') }}</div>
+            <div class="website-name">{{ settings()->getDefault('website_name') }}</div>
         </div>
     </div>
     <div class="content">

@@ -15,8 +15,8 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/settings')->uses('Controller@edit')->name('settings');
+    Route::get('/admin/settings')->uses('Controller@index')->name('admin.settings.index');
 
     // Post Requests.
     // ==================================================================================
-    Route::post('/admin/settings/save')->uses('Controller@save')->name('SaveSettings');
+    Route::post('/admin/settings/update')->uses('Controller@update')->name('admin.settings.update');

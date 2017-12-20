@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ settings()->getDefault('site_name') ?: config('engine.name') }} | Admin Login</title>
+    <title>{{ settings()->getDefault('website_name') ?: config('engine.name') }} | Admin Login</title>
 
     <!-- Include all compiled css -->
     <link href="{{ route('ApplicationResource', 'compiled.css') }}" rel="stylesheet">
@@ -64,8 +64,8 @@
 <div class="login-wrapper">
     <div class="login-container">
         <h1>
-            @if(settings()->has('site_name'))
-                {{ settings()->getDefault('site_name') }} <br><small>Please enter the following details to finish creating your account.</small>
+            @if(settings()->has('website_name'))
+                {{ settings()->getDefault('website_name') }} <br><small>Please enter the following details to finish creating your account.</small>
             @else
                 {{ config('engine.name') }} Account Registration
             @endif
