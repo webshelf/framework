@@ -2,13 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Model\Account;
 use App\Model\Role;
+use App\Model\Account;
 use Illuminate\Console\Command;
 
 class MakeAccount extends Command
 {
-
     /**
      * @var Account
      */
@@ -47,8 +46,7 @@ class MakeAccount extends Command
      */
     public function handle()
     {
-        if ($this->argument('password'))
-        {
+        if ($this->argument('password')) {
             $this->account->forename = 'SuperUser';
             $this->account->surname = '';
             $this->account->verified = true;
