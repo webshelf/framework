@@ -50,7 +50,7 @@ class MenuRepository extends Menu
 
     public function whereTopLevelEditable()
     {
-        return $this->where('lock', null)->whereNull('parent_id')->orderBy('order', 'asc')->get();
+        return $this->where('lock', false)->whereNull('parent_id')->orderBy('order', 'asc')->get();
     }
 
     /**

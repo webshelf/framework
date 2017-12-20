@@ -36,8 +36,9 @@
         <div class="form-group">
             <label for="menu">Submenu of:</label>
             <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp" {{ $menu->lock ? 'readonly' : 'null' }}>
+
                 @if (!$menu->lock)
-                    @foreach($parent as $submenu)
+                    @foreach($parents as $submenu)
                         @if ($menu->parent && $menu->parent->id == $submenu->id)
                             <option value="{{ $submenu->id }}" selected>{{ $submenu->title }}</option>
                         @else

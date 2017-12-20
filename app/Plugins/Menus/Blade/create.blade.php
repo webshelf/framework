@@ -28,7 +28,7 @@
             <label for="menu">Submenu</label>
             <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
                 <option value=""></option>
-                @foreach($parent as $submenu)
+                @foreach($parents as $submenu)
                     <option value="{{ $submenu->id }}">{{ $submenu->title }}</option>
                 @endforeach
             </select>
