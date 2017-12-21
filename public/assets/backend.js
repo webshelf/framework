@@ -92715,9 +92715,6 @@ window.tinymce = __webpack_require__("./node_modules/tinymce/tinymce.js");
 
 tinymce.init({
 
-    skin_url: '/packages/webshelf/tinymce/skins/lightgray',
-    theme_url: '/packages/webshelf/tinymce/themes/modern/theme.min.js',
-
     branding: false,
     selector: '.editor',
 

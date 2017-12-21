@@ -44,6 +44,13 @@
                         <input type="text" class="form-control" name="setting[string][website_copyright]" id="setting[string][website_copyright]" aria-describedby="helpId" placeholder="{{ settings()->getShadow('website_copyright') }}" value="{{ settings()->getValue('website_copyright') }}">
                         <small id="helpId" class="form-text text-muted">Help text</small>
                     </div>
+                    <div class="form-group">
+                        <label for="setting[boolean][maintenance_mode]">Website Status</label>
+                        <select class="form-control" name="setting[boolean][maintenance_mode]" id="setting[boolean][maintenance_mode]">
+                            <option value="1" {{ settings()->getValue('maintenance_mode') == true ? 'selected' : 'null' }}>Offline</option>
+                            <option value="0" {{ settings()->getValue('maintenance_mode') == false ? 'selected' : 'null' }}>Online</option>
+                        </select>
+                    </div>
                 </div>
 
             </div>

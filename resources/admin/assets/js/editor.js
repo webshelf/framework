@@ -5,9 +5,6 @@ window.tinymce = require('tinymce');
 
 tinymce.init({
 
-    skin_url: '/packages/webshelf/tinymce/skins/lightgray',
-    theme_url: '/packages/webshelf/tinymce/themes/modern/theme.min.js',
-
     branding: false,
     selector: '.editor',
 
