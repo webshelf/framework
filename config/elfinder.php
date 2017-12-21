@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -10,7 +10,7 @@ return [
     | The dir where to store the images (relative from public)
     |
     */
-    'dir' => ['uploads/'],
+    'dir' => ['uploads'],
 
     /*
     |--------------------------------------------------------------------------
@@ -26,9 +26,7 @@ return [
     |    ]
     */
     'disks' => [
-        'public' => [
-            'glideURL' => '/glide',
-        ],
+
     ],
 
     /*
@@ -42,7 +40,7 @@ return [
 
     'route' => [
         'prefix' => 'elfinder',
-        'middleware' => 'App\Http\Middleware\RedirectIfAuthenticated', //Set to null to disable middleware filter
+        'middleware' => 'auth', //Set to null to disable middleware filter
     ],
 
     /*
@@ -78,8 +76,8 @@ return [
     |
     */
 
-    'options' => [],
-
+    'options' => array(),
+    
     /*
     |--------------------------------------------------------------------------
     | Root Options
@@ -89,8 +87,8 @@ return [
     | See https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options-2.1#root-options
     |
     */
-    'root_options' => [
+    'root_options' => array(
 
-    ],
+    ),
 
-];
+);

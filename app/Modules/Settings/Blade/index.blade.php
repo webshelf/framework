@@ -10,6 +10,8 @@
 
 @section('content')
 
+    <script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.min.js"></script>
+
     <style>
         .form-group label {
             font-weight: 600;
@@ -42,7 +44,7 @@
                     <div class="form-group">
                         <label for="setting[string][website_copyright]">Website Copyright</label>
                         <input type="text" class="form-control" name="setting[string][website_copyright]" id="setting[string][website_copyright]" aria-describedby="helpId" placeholder="{{ settings()->getShadow('website_copyright') }}" value="{{ settings()->getValue('website_copyright') }}">
-                        <small id="helpId" class="form-text text-muted">Help text</small>
+                        <small id="helpId" class="form-text text-muted">Display the copyright license for your website.</small>
                     </div>
                     <div class="form-group">
                         <label for="setting[boolean][maintenance_mode]">Website Status</label>
@@ -50,6 +52,18 @@
                             <option value="1" {{ settings()->getValue('maintenance_mode') == true ? 'selected' : 'null' }}>Offline</option>
                             <option value="0" {{ settings()->getValue('maintenance_mode') == false ? 'selected' : 'null' }}>Online</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="setting[string][website_logo]">Website Logo</label>
+                        <div class="input-group">
+                            <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary popup_selector" data-inputid="website_logo" type="button">Choose Website Logo</button>
+                            </span>
+                                <input id="website_logo" type="text" class="form-control" name="setting[string][website_logo]" value="{{ settings()->getDefault('website_logo') }}">
+                            </div>
+                        </div>
+                        <small id="helpId" class="form-text text-muted">Logo that represents your website. (URL is relative to the domain)</small>
                     </div>
                 </div>
 
@@ -206,5 +220,4 @@
         </div>
 
     </form>
-
 @endsection

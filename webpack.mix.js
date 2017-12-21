@@ -28,6 +28,8 @@ mix.js('resources/assets/js/frontend.js', 'public/assets/')
 
 // editor
 mix.copyDirectory('resources/admin/package/tinymce', 'public/assets');
+mix.copyDirectory('resources/admin/package/elfinder', 'public/packages/barryvdh/elfinder/');
+
 // mix.copyDirectory('resources/admin/images', 'public/packages/webshelf/images/');
 
 mix

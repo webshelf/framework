@@ -45,6 +45,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapModulesRoutes();
 
+        $this->mapVendorRoutes();
+
         \Log::useFiles('php://stderr');
 
         //  dd((app(\Illuminate\Routing\Router::class))->getRoutes());
@@ -124,5 +126,14 @@ class RouteServiceProvider extends ServiceProvider
             // Backend are routes that can only be accessed to those with access.
             Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);
         }
+    }
+
+    /**
+     * Third party routes sometimes require auth, and sometimes not, but since we dont
+     * define a namespace, its best have it in its seperate folder for simplicity.
+     */
+    protected function mapVendorRoutes()
+    {
+        Route::middleware('web')->group(base_path('routes/vendor.php'));
     }
 }

@@ -5,7 +5,7 @@
 
         <div class="avatar">
 
-            <img src="{{ asset('packages/webshelf/images/logo.png') }}">
+            <img src="{{ url(settings()->getDefault('website_logo')) }}">
 
         </div>
 

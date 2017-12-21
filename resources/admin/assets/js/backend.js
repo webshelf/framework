@@ -12,6 +12,10 @@ window.Vue = require('vue');
 // https://github.com/RubaXa/Sortable
 window.Sortable = require('sortablejs');
 
+// Custom modal box.
+// http://www.jacklmoore.com/colorbox/
+window.colorbox = require('jquery-colorbox');
+
 // Compile files for the editor.
 require('./editor');
 
