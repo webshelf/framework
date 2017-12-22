@@ -10,6 +10,8 @@
 
 @section('content')
 
+    @include('dashboard::structure.validation')
+
     <form action="{{ route('admin.menus.store') }}" method="post">
 
         {{ csrf_field() }}

@@ -11,8 +11,8 @@
 
 @section('content')
 
-    {{--  @var \App\Model\Page $page --}}
-    
+    @include('dashboard::structure.validation')
+
     <form action="{{ route('admin.pages.update', ["name"=>$page->slug]) }}" method="POST">
     
         <input type="hidden" name="_method" value="PATCH">

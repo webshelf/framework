@@ -10,13 +10,9 @@
 
 @section('content')
 
+    @include('dashboard::structure.validation')
+
     <?php /** @var \App\Model\Menu $menu */ ?>
-
-    @foreach($errors->all() as $message)
-
-        {{ $message }}
-
-    @endforeach
 
     <form action="{{ route('admin.menus.update', ['menu' => $menu->id]) }}" method="post">
 
@@ -61,8 +57,8 @@
                         @else
                             <option value="">No Page Content</option>
                         @endif
-                        @foreach($pages as $key => $page)
-                            <option value="{{ $key }}">{{ ucfirst($page) }}</option>
+                        @foreach($pages as $page)
+                            <option value="{{ $page->id }}">{{ ucfirst($page->seo_title) }}</option>
                         @endforeach
                             <option value="" {{ !$menu->page ? 'selected' : 'null'}}></option>
                     </select>

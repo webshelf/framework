@@ -39,9 +39,10 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>
+                        <li>{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
                         <li>{!! css()->status->sitemap($page->sitemap) !!}</li>
                         <li>{!! css()->status->status($page->enabled) !!}</li>
+                        <li>{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
                         <li>{!! css()->link->view($page->slug()) !!}</li>
                     </ul>
                 </div>

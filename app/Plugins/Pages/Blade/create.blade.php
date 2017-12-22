@@ -10,8 +10,8 @@
 
 @section('content')
 
-        {{--  @var \App\Model\Page $page --}}
-    
+    @include('dashboard::structure.validation')
+
     <form action="{{ route('admin.pages.store') }}" method="POST">
     
         <input type="hidden" name="_token" value="{{ csrf_token() }}">

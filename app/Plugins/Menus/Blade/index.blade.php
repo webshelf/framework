@@ -62,7 +62,11 @@
                         <a href="">{{ $menu->title }}</a>
                     </div>
                     <div class="website">
-                        <i class="fa fa-pagelines" aria-hidden="true"></i> {{ $menu->page->slug() }}
+                        @if ($menu->page)
+                            <i class="fa fa-pagelines" aria-hidden="true"></i> {{ $menu->page->slug() }}
+                        @else
+                            <i class="fa fa-pagelines" aria-hidden="true"></i> No Content
+                        @endif
                     </div>
                 </div>
 

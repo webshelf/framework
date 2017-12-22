@@ -34,15 +34,17 @@
 
             <?php  /** @var \App\Model\Audit $audit */ ?>
 
-            <div class="row">
+                @if ($audit->auditable)
+
+                <div class="row">
 
                 <div class="details">
                     <div class="title">
-                        @if (! $audit->user)
-                            <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a> {{ $audit->beforeActionVerb() }} by the CMS.
-                        @else
-                            <span style="font-weight: 400; color:#0c82dc;">{{ $audit->user->fullName() }}</span> {{ $audit->afterActionVerb() }} {{ $audit->model() }} <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a>
-                        @endif
+                            @if (! $audit->user)
+                                <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a> {{ $audit->beforeActionVerb() }} by the CMS.
+                            @else
+                                <span style="font-weight: 400; color:#0c82dc;">{{ $audit->user->fullName() }}</span> {{ $audit->afterActionVerb() }} {{ $audit->model() }} <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a>
+                            @endif
                     </div>
                 </div>
 
@@ -52,6 +54,8 @@
                     </div>
                 </div>
             </div>
+
+            @endif
 
         @endforeach
 

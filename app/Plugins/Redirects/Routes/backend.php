@@ -13,7 +13,7 @@
     |
     */
 
-    Route::get('/admin/redirects')->uses('BackendController@index')->name('redirects');
-    Route::get('/admin/redirects/make')->uses('BackendController@store')->name('MakeRedirect');
-    Route::post('/admin/redirects/create')->uses('BackendController@created')->name('CreateRedirect');
-    Route::post('/admin/redirect/delete/{id}')->uses('BackendController@ajaxDeleteID');
+    Route::resource('admin/redirects', 'BackendController', ['as' => 'admin']);
+
+    // Allow destruction without using X-CSRF.
+    Route::get('/admin/redirects/destroy/{menu_id}')->uses('BackendController@destroy')->name('admin.redirects.destroy');

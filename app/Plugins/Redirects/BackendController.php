@@ -10,6 +10,7 @@ namespace App\Plugins\Redirects;
 
 use App\Classes\Popup;
 use App\Model\Redirect;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
@@ -41,57 +42,138 @@ class BackendController extends PluginEngine
      */
     public function index()
     {
-        return $this->make('index')->with('redirects', $this->redirects->all());
+        return $this->make('index')->with('redirects', $this->redirects->withRelationship());
     }
 
     /**
-     * Form for creating a new redirect.
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @param PageRepository $pageRepository
+     * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function create(PageRepository $pageRepository)
     {
-        return $this->make('make')->with('pages', app(PageRepository::class)->makeList());
+        return $this->make('create')->with('pages', $pageRepository->all());
     }
 
     /**
-     * Store a new redirect to the database.
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->save($request, new Redirect);
+
+        return redirect()->route('admin.redirects.index');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @param RedirectRepository $redirectRepository
+     * @param PageRepository $repository
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, RedirectRepository $redirectRepository, PageRepository $repository)
+    {
+        return $this->make('edit')
+            ->with([
+                'redirect' => $redirectRepository->whereID($id),
+                'pages' => $repository->all()
+            ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @param RedirectRepository $repository
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id, RedirectRepository $repository)
+    {
+        $this->save($request, $repository->whereID($id));
+
+        return redirect()->route('admin.redirects.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @param RedirectRepository $repository
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy($id, RedirectRepository $repository)
+    {
+        $repository->whereID($id)->delete();
+
+        return redirect()->route('admin.redirects.index');
+    }
+
+    /**
+     * Save the data for the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Redirect $redirect
+     * @return bool
      */
-    public function create(Request $request)
+    public function save(Request $request, Redirect $redirect)
     {
         $this->validate($request, [
-            'redirect_from_id' => 'required|unique:redirects,from,NULL,id,deleted_at,NULL|max:255',
-            'redirect_to_id'   => 'required|max:255|different:redirect_from_id,NULL,id,deleted_at,NULL',
-        ], [
-            'redirect_from_id.unique' => 'A redirect already existed for the requested url.',
-            'redirect_to_id.different' => 'You cannot redirect to the same location as the redirect caller',
+            'redirectFromPage' => 'required|max:255',
+            'redirectToPage'   => 'required|max:255|different:redirectFromPage',
         ]);
 
-        // you must not be able to redirect to the same page
-        // redirect too many times error.
+        $redirect->from = $request['redirectFromPage'];
+        $redirect->to = $request['redirectToPage'];
 
-        $redirect = new Redirect;
-        $redirect->setFrom($request['redirect_from_id']);
-        $redirect->setTo($request['redirect_to_id']);
-
-        account()->redirects()->save($redirect);
-
-        popups()->add((new Popup(['message'=>'Redirect has been activated.']))->success());
-
-        return redirect()->route('redirects');
+        return $redirect->save();
     }
 
-    public function ajaxDeleteID(Request $request, $id)
-    {
-        $redirect = $this->redirects->whereID($id);
+//    /**
+//     * Form for creating a new redirect.
+//     *
+//     * @return \Illuminate\Contracts\View\View
+//     */
+//    public function store()
+//    {
+//        return $this->make('make')->with('pages', app(PageRepository::class)->makeList());
+//    }
 
-        $redirect->delete();
+//    /**
+//     * Store a new redirect to the database.
+//     *
+//     * @param Request $request
+//     * @return \Illuminate\Http\RedirectResponse
+//     */
+//    public function create(Request $request)
+//    {
+//        $this->validate($request, [
+//            'redirect_from_id' => 'required|unique:redirects,from,NULL,id,deleted_at,NULL|max:255',
+//            'redirect_to_id'   => 'required|max:255|different:redirect_from_id,NULL,id,deleted_at,NULL',
+//        ], [
+//            'redirect_from_id.unique' => 'A redirect already existed for the requested url.',
+//            'redirect_to_id.different' => 'You cannot redirect to the same location as the redirect caller',
+//        ]);
+//
+//        // you must not be able to redirect to the same page
+//        // redirect too many times error.
+//
+//        $redirect = new Redirect;
+//        $redirect->setFrom($request['redirect_from_id']);
+//        $redirect->setTo($request['redirect_to_id']);
+//
+//        account()->redirects()->save($redirect);
+//
+//        popups()->add((new Popup(['message'=>'Redirect has been activated.']))->success());
+//
+//        return redirect()->route('redirects');
+//    }
 
-        popups()->setSession($request->session())->add((new Popup(['message'=>'Redirect has been removed.']))->success());
-
-        return response()->json(['success' => true, 'notify' => false]);
-    }
 }

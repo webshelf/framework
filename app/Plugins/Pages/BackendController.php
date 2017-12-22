@@ -127,24 +127,18 @@ class BackendController extends PluginEngine
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $name
+     * @param $slug
+     * @param PageRepository $repository
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(string $name)
+    public function destroy($slug, PageRepository $repository)
     {
-        $page = $this->repository->whereName($name);
+        $page = $repository->whereName($slug);
 
-        DB::transaction(function () use ($page) {
-            $page->menus->each(function ($menu) {
-                /* @var Menu $menu */
-                $menu->delete();
-            });
-
-            $page->delete();
-        });
-
-        $page->delete();
+        if ($page->editable) {
+            $repository->whereName($slug)->delete();
+        }
 
         return redirect()->route('admin.pages.index');
     }
