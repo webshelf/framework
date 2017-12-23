@@ -12,8 +12,9 @@
  * with this source code.
  */
 
-return [
+use App\Model\Account;
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Audit implementation
@@ -22,9 +23,7 @@ return [
     | Define which Audit model implementation should be used.
     |
     */
-
     'implementation' => OwenIt\Auditing\Models\Audit::class,
-
     /*
     |--------------------------------------------------------------------------
     | User Keys, Model & Resolver
@@ -34,27 +33,63 @@ return [
     | class.
     |
     */
-
     'user' => [
         'primary_key' => 'id',
         'foreign_key' => 'user_id',
-        'model'       => \App\Model\Account::class,
-        'resolver'    => function () {
-            return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
-        },
+        'model'       => Account::class,
+        'resolver'    => Account::class,
     ],
-
     /*
     |--------------------------------------------------------------------------
-    | Default Driver
+    | Audit Events
+    |--------------------------------------------------------------------------
+    |
+    | The Eloquent events that trigger an Audit.
+    |
+    */
+    'events' => [
+        'created',
+        'updated',
+        'deleted',
+        'restored',
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Strict mode
+    |--------------------------------------------------------------------------
+    |
+    | Enable the strict mode when auditing?
+    |
+    */
+    'strict' => false,
+    /*
+    |--------------------------------------------------------------------------
+    | Audit timestamps
+    |--------------------------------------------------------------------------
+    |
+    | Should the created_at, updated_at and deleted_at timestamps be audited?
+    |
+    */
+    'timestamps' => false,
+    /*
+    |--------------------------------------------------------------------------
+    | Audit threshold
+    |--------------------------------------------------------------------------
+    |
+    | Specify a threshold for the amount of Audit records a model can have.
+    | Zero means no limit.
+    |
+    */
+    'threshold' => 0,
+    /*
+    |--------------------------------------------------------------------------
+    | Audit Driver
     |--------------------------------------------------------------------------
     |
     | The default audit driver used to keep track of changes.
     |
     */
-
-    'default' => 'database',
-
+    'driver' => 'database',
     /*
     |--------------------------------------------------------------------------
     | Audit Drivers
@@ -69,7 +104,6 @@ return [
             'connection' => null,
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Audit Console?
@@ -78,6 +112,5 @@ return [
     | Whether we should audit console events (eg. php artisan db:seed).
     |
     */
-
-    'console' => true,
+    'console' => false,
 ];

@@ -1,77 +1,62 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Frontend Pages</h1>
+    Pages
 @endsection
+
 @section('information')
-    <p>Pages are stored content viewable to a user in a form of a page, these can be modified, viewed and edited by clicking on the page name on the below table.<br>
-        The best pages are those that are easy to view and read in which they also stay true to the title.</p>
-@endsection
-
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 25
-            });
-        });
-
-        $("a#form-delete").click(function(event) {
-            event.preventDefault();
-            var href = $(this).attr('href');
-            $.ajax({
-                url: href,
-                type: 'post',
-                data: { _method:"DELETE", _token: "{{ csrf_token() }}" },
-                complete: function(){
-                    location.reload();
-                }
-            });
-        });
-
-    </script>
-
+    View the pages that your website currently holds along with the status of each.
 @endsection
 
 @section('content')
 
-    <div class="table-panel border light">
+    <form>
+        <div class="searchbar">
+            <div class="text form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+            </div>
+            <div class="pull-right ml-2">
+                <a href="{{ route('admin.pages.create') }}" class="btn btn-create">Create Page</a>
+        </div>
+        </div>
+    </form>
 
-        <table id="table-datatables" class="table table-striped table-bordered table-hover row-border order-column">
+    <div class="webshelf-table">
 
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Anchor</th>
-                <th>Modified</th>
-                <th>Status</th>
-                <th>Sitemap</th>
-                <th>Action</th>
-                <th>Creator</th>
-            </tr>
-            </thead>
+        @foreach($pages as $page)
+            <div class="row">
 
-            <tbody>
-            @foreach($pages as $page)
-                <tr>
-                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}" name="{{ $page->seo_title }}" title="Manage, Review & Revise this page">{{ $page->seo_title }}</a></td>
-                    <td><a style="color: #00A000" href="{{ makeUrl($page) }}" title="View the page on your website '{{ ucwords($page->seo_title) }}'" target="_blank">{{ makeUrl($page) }}</a></td>
-                    <td><a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}" data-toggle="tooltip" data-placement="bottom" title="Last Modified {{ $page->updated_at->diffForHumans() }}">{{ $page->updated_at->format('F dS Y') }}</a></td>
-                    <td title="Allow the public to view this page, or keep it private">{!! bool2Status($page->enabled,'Published', 'Private') !!}</td>
-                    <td title="The status on which this should appear for google search">{!! bool2Status($page->sitemap, 'Enabled', 'Disabled') !!}</td>
-                    <td><a href="{{ route('admin.pages.edit', $page->slug) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> @if($page->editable)<a href="{{ route('admin.pages.destroy', $page->slug) }}" id="form-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>@endif</td>
-                    <td>
-                        <i class="fa profile-image small" aria-hidden="true">
-                            <img src="{{$page->creator->makeGravatarImage() }}" width="24" height="24" alt="profile image">
-                        </i>
-                        <span class="margin-left-medium">{{ $page->creator->fullName() }} [{{ $page->creator->role->title() }}]</span>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
+                <div class="details">
+                    <div class="title">
+                        <a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}">{{ $page->seo_title }}</a>
+                    </div>
+                    <div class="website">
+                        {{ $page->slug() }}
+                    </div>
+                </div>
 
-        </table>
+                <div class="console">
+                    <ul class="list-unstyled">
+                        <li>{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
+                        <li>{!! css()->status->sitemap($page->sitemap) !!}</li>
+                        <li>{!! css()->status->status($page->enabled) !!}</li>
+                        <li>{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
+                        <li>{!! css()->link->view($page->slug()) !!}</li>
+                    </ul>
+                </div>
+
+                <div class="stats">
+                    <div class="views">
+                        <i class="fa fa-eye" aria-hidden="true"></i> {{ $page->views }}
+                    </div>
+                    <div class="timestamp">
+                        updated {{ $page->updated_at->diffForHumans() }}
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
     </div>
 

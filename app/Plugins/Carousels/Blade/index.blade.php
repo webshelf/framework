@@ -2,7 +2,5 @@
 
 
 @section('content')
-
     Slides for glides.
-
 @endsection

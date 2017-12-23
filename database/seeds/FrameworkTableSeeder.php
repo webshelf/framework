@@ -2,8 +2,6 @@
 
 use App\Model\Menu;
 use App\Model\Page;
-use App\Model\Role;
-use App\Model\Account;
 use Illuminate\Database\Seeder;
 
 class FrameworkTableSeeder extends Seeder
@@ -16,8 +14,6 @@ class FrameworkTableSeeder extends Seeder
     public function run()
     {
         $this->seedHomepagePage();
-
-        $this->seedSuperAccount();
 
         $this->seedHomepageMenu();
     }
@@ -36,29 +32,16 @@ class FrameworkTableSeeder extends Seeder
         $page->save();
     }
 
-    private function seedSuperAccount()
-    {
-        $account = new Account;
-        $account->email = 'marky360@live.ie';
-        $account->password = '$2y$10$h0HdLs5rqQmTFOZWbw596OsP0yXYxc8RILEKDO7oCrwQnSXt5EAJq';
-        $account->forename = 'Mark';
-        $account->surname = 'Hester';
-        $account->verified = true;
-        $account->role_id = Role::SUPERUSER;
-        $account->save();
-    }
-
     private function seedHomepageMenu()
     {
         $menu = new Menu;
-        $menu->slug = ('index');
         $menu->title = ('Homepage');
         $menu->target = ('_self');
-        $menu->order_id = (1);
-        $menu->page_id = (1);
-        $menu->enabled = (true);
-        $menu->required = (true);
-        $menu->creator_id = (1);
+        $menu->order = 1;
+        $menu->page_id = 1;
+        $menu->status = true;
+        $menu->lock = true;
+        $menu->creator_id = 1;
         $menu->save();
     }
 }

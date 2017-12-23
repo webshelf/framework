@@ -1,27 +1,13 @@
 @extends('dashboard::frame')
 
-@section('javascript')
-
-    <script>
-        $(document).ready(function(){
-            $('#table-datatables').DataTable({
-                'iDisplayLength': 50
-            });
-        });
-    </script>
-
-@endsection
-
 @section('title')
-    <h1>Seo Sitemap</h1>
+    Seo Sitemap
 @endsection
 
 @section('information')
-    <p>
-        The most vital part of being found on the world wide web, is a sitemap that tells the world what you have to offer.
-        <br>
-        Your application gives you the power to choose what you want search engines to see, while automatically generating data from your content.
-    </p>
+    The most vital part of being found on the world wide web, is a sitemap that tells the world what you have to offer.
+    <br>
+    Your application gives you the power to choose what you want search engines to see, while automatically generating data from your content.
 @endsection
 
 @section('content')
@@ -53,5 +39,17 @@
     </table>
 
     </div>
+
+@endsection
+
+@section('javascript')
+
+    <script>
+        $(document).ready(function(){
+            $('#table-datatables').DataTable({
+                'iDisplayLength': 50
+            });
+        });
+    </script>
 
 @endsection

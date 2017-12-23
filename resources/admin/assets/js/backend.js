@@ -9,6 +9,16 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// https://github.com/RubaXa/Sortable
+window.Sortable = require('sortablejs');
+
+// Custom modal box.
+// http://www.jacklmoore.com/colorbox/
+window.colorbox = require('jquery-colorbox');
+
+// Compile files for the editor.
+require('./editor');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -18,18 +28,18 @@ window.Vue = require('vue');
 //Vue.component('example', require('./components/Example.vue'));
 
 // new Vue({
-//     el: '#app-login',
-//     data: {
-//         email: {
-//             value: '',
-//             status: false,
-//         },
-//         password: {
-//             value: '',
-//             status: false,
-//         }
-//     },
-//     // define methods under the `methods` object
-//     methods: {
-//     }
+//     el: '.webshelf-table'
+//     // data: {
+//     //     email: {
+//     //         value: '',
+//     //         status: false,
+//     //     },
+//     //     password: {
+//     //         value: '',
+//     //         status: false,
+//     //     }
+//     // },
+//     // // define methods under the `methods` object
+//     // methods: {
+//     // }
 // });

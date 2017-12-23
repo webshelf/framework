@@ -39,34 +39,36 @@ class Controller extends ModuleEngine
      *
      * @return mixed
      */
-    public function edit()
+    public function index()
     {
-        return $this->make('edit');
+        return $this->make('index');
     }
 
-    public function save(Request $request)
+    /**
+     * Save the changes for settings.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request)
     {
-        if ($request['setting.string']) {
-            foreach ($request['setting.string'] as $key => $value) {
-                ($this->settings->firstKey($key))->setValue($value ?: null)->save();
+        if ($request['setting']['string']) {
+            foreach ($request['setting']['string'] as $key => $value) {
+                $this->settings->firstKey($key)->setValue($value)->save();
             }
         }
 
-        if ($request['setting.boolean']) {
-            foreach ($request['setting.boolean'] as $key => $value) {
-                if ($value == 'on') {
-                    $value = 1;
-                }
-
-                ($this->settings->firstKey($key))->setValue($value ?: null)->save();
+        if ($request['setting']['boolean']) {
+            foreach ($request['setting']['boolean'] as $key => $value) {
+                $this->settings->firstKey($key)->setValue($value)->save();
             }
         }
-        if ($request['setting.select']) {
-            foreach ($request['setting.select'] as $key => $value) {
-                ($this->settings->firstKey($key))->setValue($value ?: null)->save();
+        if ($request['setting']['select']) {
+            foreach ($request['setting']['select'] as $key => $value) {
+                $this->settings->firstKey($key)->setValue($value)->save();
             }
         }
 
-        return redirect()->intended(route('settings'));
+        return redirect()->intended(route('admin.settings.index'));
     }
 }

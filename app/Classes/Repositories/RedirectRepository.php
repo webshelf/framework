@@ -16,6 +16,14 @@ use App\Model\Redirect;
 class RedirectRepository extends Redirect
 {
     /**
+     * @return \Illuminate\Database\Eloquent\Collection|void|static[]
+     */
+    public function withRelationship()
+    {
+        return $this->whereHas('fromPage')->whereHas('toPage')->get();
+    }
+
+    /**
      * @param int $integer
      * @return Redirect|array|\stdClass
      */

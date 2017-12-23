@@ -40,14 +40,22 @@ class PageRepository extends Page
         return $this->pluck('seo_title', 'id')->toArray();
     }
 
+    /**
+     * @deprecated
+     */
     public function listAllPagesWithoutMenusAndEditable()
     {
-        return $this->whereNotNull('editable')->doesntHave('menus')->pluck('seo_title', 'id');
+        return $this->where('editable', true)->doesntHave('menu')->pluck('seo_title', 'id');
+    }
+
+    public function listPagesWithoutMenus()
+    {
+        return $this->doesntHave('menu')->get();
     }
 
     public function allPagesWithoutMenusAndEditable() : Collection
     {
-        return $this->whereNotNull('editable')->doesntHave('menus')->get();
+        return $this->where('editable', true)->doesntHave('menus')->get();
     }
 
     /**
@@ -76,10 +84,11 @@ class PageRepository extends Page
         return $this->where('enabled', true)->get();
     }
 
-    public function allWithMenuAndParent()
+    public function frontendPageCollection()
     {
-        return $this->with(['menu' => function ($query) {
-            $query->with('parent');
-        }])->get();
+        return $this->with(['menu'])->get();
+//        return $this->with(['menu' => function ($query) {
+//            $query->with('parent');
+//        }])->get();
     }
 }

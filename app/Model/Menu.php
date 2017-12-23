@@ -10,24 +10,24 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * Class Menus.
  *
  * @property int $id
- * @property string $slug
  * @property string $title
- * @property string $icon
- * @property string $link
+ * @property string $hyperlink
  * @property int $page_id
  * @property string $target
- * @property int $menu_id
- * @property int $order_id
- * @property bool $enabled
- * @property bool $required
+ * @property int $parent_id
+ * @property int $order
+ * @property bool $status
+ * @property bool $lock
  * @property int $creator_id
  * @property int $editor_id
+ *
+ * @property Menu $parent
+ * @property Page $page
+ * @property Menu $children
  *
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
- * @property Page page
  */
 class Menu extends EloquentModel
 {
@@ -45,62 +45,39 @@ class Menu extends EloquentModel
     protected $table = 'menus';
 
     /**
-     * Generate a link that the menu will visit when clicked.
+     * The attributes that should be mutated to dates.
      *
-     * @return \Illuminate\Contracts\Routing\UrlGenerator|mixed|string
+     * @var array
      */
-    public function link()
-    {
-        return $this->page ? url($this->page->slug) : $this->link;
-    }
+    protected $dates = ['updated_at', 'created_at', 'deleted_at'];
 
     /**
-     * Relationship to the submenu table.
+     * Return the page that this menu has.
      *
-     * @return Menu|\Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function submenus()
-    {
-        return $this->hasMany(self::class, 'menu_id', 'id');
-    }
-
-    /**
-     * A Menu can have a menu.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function parent()
-    {
-        return $this->hasOne(self::class, 'id', 'menu_id');
-    }
-
-    /**
-     * Menu belongs to a single Page.
-     *
-     * @return Page|\Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return Page|\Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function page()
     {
-        return $this->belongsTo(Page::class, 'page_id', 'id');
+        return $this->hasOne(Page::class, 'id', 'page_id');
     }
 
     /**
-     * Get the creators account name.
+     * Return the menu that this belongs to.
      *
-     * @return Account|mixed
+     * @return Menu|\Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function creator() : Account
+    public function parent()
     {
-        return $this->hasOne(Account::class, 'creator_id', 'id');
+        return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
     /**
-     * Get the creator model of the eloquent model.
+     * The menu can have many submenu children.
      *
-     * @return Account|mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function modifier()
+    public function children()
     {
-        return $this->belongsTo(Account::class, 'editor_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 }

@@ -2,17 +2,20 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
+// Bootstrap
+@import "node_modules/bootstrap/scss/bootstrap";
+
 // Variables
 @import "variables";
-
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Animation Package.
 @import "node_modules/wowjs/css/libs/animate";
 
 // Font awesome icons.
 @import "node_modules/font-awesome/scss/font-awesome";
+
+// Popup boxes, custom modal.
+@import "node_modules/jquery-colorbox/example1/colorbox";
 
 // Dashboard Stylesheet
 @import "backend";

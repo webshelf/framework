@@ -25,7 +25,7 @@ class FrontPageView
      */
     public function hasMaintenance()
     {
-        return settings()->getValue('enable_website') == false;
+        return settings()->getValue('maintenance_mode') == true;
     }
 
     /**

@@ -64,13 +64,13 @@ class BackendController extends PluginEngine
         $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
 
         $page->seo_title = $request['title'];
-        $page->slug = str_slug($request['slug']) ?: str_slug($page->seo_title);
+        $page->slug = str_slug($page->seo_title);
         $page->creator_id = $request['creator'] ?: account()->id;
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
         $page->content = $request['content'];
-        $page->sitemap = $request['sitemap'] ? true : false;
-        $page->enabled = $request['enabled'] ? true : false;
+        $page->sitemap = true; // $request['sitemap'] ? true : false;
+        $page->enabled = true; // $request['enabled'] ? true : false;
         $page->save();
 
         return redirect()->route('admin.pages.index');
@@ -112,14 +112,14 @@ class BackendController extends PluginEngine
         $this->validate($request, ['title'=>'required|min:3|max:255|unique:pages,seo_title,'.$page->id.',id,deleted_at,NULL']);
 
         $page->seo_title = $request['title'];
-        $page->slug = str_slug($request['slug']) ?: str_slug($page->seo_title);
+        $page->slug = str_slug($page->seo_title);
         $page->creator_id = $request['creator'] ?: account()->id;
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
         $page->content = $request['content'];
-        $page->sitemap = $request['sitemap'] ? true : false;
-        $page->enabled = $request['enabled'] ? true : false;
-        $page->saveOrFail();
+        $page->sitemap = true; //$request['sitemap'] ? true : false;
+        $page->enabled = true; //$request['enabled'] ? true : false;
+        $page->save();
 
         return redirect()->route('admin.pages.index');
     }
@@ -127,23 +127,18 @@ class BackendController extends PluginEngine
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $name
+     * @param $slug
+     * @param PageRepository $repository
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy(string $name)
+    public function destroy($slug, PageRepository $repository)
     {
-        $page = $this->repository->whereName($name);
+        $page = $repository->whereName($slug);
 
-        DB::transaction(function () use ($page) {
-            $page->menus->each(function ($menu) {
-                /* @var Menu $menu */
-                $menu->delete();
-            });
-
-            $page->delete();
-        });
-
-        $page->delete();
+        if ($page->editable) {
+            $repository->whereName($slug)->delete();
+        }
 
         return redirect()->route('admin.pages.index');
     }

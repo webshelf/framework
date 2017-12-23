@@ -1,161 +1,89 @@
 @extends('dashboard::frame')
 
 @section('title')
-    <h1>Creating a new Menu</h1>
-@endsection
-@section('information')
-    <p>Pages are stored content viewable to a user in a form of a page, these can be modified, viewed and edited by clicking on the page name on the below table.<br>
-        The best pages are those that are easy to view and read in which they also stay true to the title.</p>
+    Create Menu
 @endsection
 
-@section('tools')
-    No tools available
+@section('information')
+    Navigation on your website starts with the menus.
 @endsection
 
 @section('content')
 
-    <div class="flex-display">
+    @include('dashboard::structure.validation')
 
-        <ul class="nav nav-tabs" role="tablist" id="tabbed">
-            <li role="presentation" class="active">
-                <a href="#menu" aria-controls="seo" role="tab" data-toggle="tab">Menu Creation</a>
-            </li>
-        </ul>
+    <form action="{{ route('admin.menus.store') }}" method="post">
 
-        <div class="form-box blue">
+        {{ csrf_field() }}
 
-            <form action="{{ route('MakeMenu') }}" method="POST" id="form"> {{ csrf_field() }}
-
-                <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane fade in active" id="menu">
-
-                        <div class="form form-panel">
-
-                            <div class="heading blue">
-
-                                <div class="title">
-
-                                    <h2>Menu Creation</h2>
-
-                                </div>
-
-                                <div class="tools">
-
-                                    @yield('tools')
-
-                                </div>
-
-                            </div>
-
-                            <div class="form-body">
-
-                                <div class="form-horizontal form-bordered form-label-stripped">
-                                    <div class="form-group {{ $errors->has('title') ? 'error' : null }} row">
-                                        <label class="control-label col-md-3">Text<span class="required" aria-required="true"> * </span></label>
-                                        <div class="col-xs-10">
-                                            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
-                                            @if($errors->has('title'))
-                                                <span class="validation-error">{{ $errors->first('title') }}</span>
-                                            @endif
-                                            <span class="help-block"> The title of the menu as you would like it appeared to viewers. </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group {{ $errors->has('page_id') ? 'error' : null }} row">
-                                        <label class="control-label col-md-3">Internal Page</label>
-                                        <div class="col-xs-10">
-                                            <select class="form-control {{ $errors->has('page_id') ? 'error' : null }} chosen-select" name="page_id">
-
-                                                <option aria-checked="true"></option>
-
-                                                @foreach($pages as $key => $page)
-
-                                                    <option value="{{ $key }}">{{ $page }}</option>
-
-                                                @endforeach
-
-                                            </select>
-                                            @if($errors->has('page_id'))
-                                                <span class="validation-error">{{ $errors->first('page_id') }}</span>
-                                            @endif
-                                            <span class="help-block"> Internal Page links help you link up created pages with ease. </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group {{ $errors->has('external_link') ? 'error' : null }} row">
-                                        <label class="control-label col-md-3">External Link</label>
-                                        <div class="col-xs-10">
-                                            <input class="form-control" name="external_link" type="text" value="{{ old('external_link') }}">
-                                            @if($errors->has('external_link'))
-                                                <span class="validation-error">{{ $errors->first('external_link') }}</span>
-                                            @endif
-
-                                            <span class="help-block"> Outsource your links, this will disable internal attached page. </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Submenu of</label>
-                                        <div class="col-xs-10">
-                                            <select class="form-control chosen-select" name="submenu_id">
-
-                                                <option aria-checked="true"></option>
-
-                                                @foreach($submenus as $key => $menu)
-
-                                                    <option value="{{ $key }}">{{ $menu }}</option>
-
-                                                @endforeach
-
-                                            </select>
-                                            <span class="help-block"> Submenus are listed below top level menus / Leave blank to create a new Top Level Menu </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="control-label col-md-3">Target</label>
-                                        <div class="col-xs-10">
-                                            <select class="form-control chosen-select" name="target">
-
-                                                <option value="_self" aria-checked="true">_self (Page will open on the current browser window)</option>
-                                                <option value="_blank">_blank (Page will open on a new browser tab window)</option>
-
-                                            </select>
-                                            <span class="help-block"> How do you want the browser to interact with this menu? </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="control-label col-md-3">Privacy</label>
-                                        <div class="col-xs-10">
-                                            <input type="checkbox" data-on-text="Public" data-off-text="Private" data-on-color="success" data-off-color="danger" name="enabled" class="make-switch" checked data-size="small">
-                                            <span class="help-block">Set the privacy of the page and who can view it. </span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="form-actions" id="vue-buttons">
-                    <div class="row">
-                        <button type="submit" name="submit" class="button blue">
-                            <i class="fa fa-check"></i> Submit</button>
-                        <button id="btn-refresh" type="button" class="button blue" >
-                            <i class="fa fa-refresh"></i> Restart</button>
-                        <button id="btn-cancel" data-redirect="{{ route('menus') }}" type="button" class="button blue">
-                            <i class="fa fa-times"></i> Cancel</button>
-                    </div>
-                </div>
-
-            </form>
-
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control is-valid|is-invalid" name="title" id="title" aria-describedby="titleHelp">
+            <div class="invalid-feedback">
+                Validation message
+            </div>
+            <small id="titleHelp" class="form-text text-muted">Text to appear in navigation menu.</small>
+            <!-- TODO: This is for server side, there is another version for browser defaults -->
         </div>
 
-    </div>
+        <div class="form-group">
+            <label for="menu">Submenu</label>
+            <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
+                <option value=""></option>
+                @foreach($parents as $submenu)
+                    <option value="{{ $submenu->id }}">{{ $submenu->title }}</option>
+                @endforeach
+            </select>
+            <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
+        </div>
+
+        <div class="row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label for="page">Select Page Content</label>
+                    <select class="form-control" name="page_id" id="page" aria-describedby="pageHelp">
+                        <option value=""></option>
+                        @foreach($pages as $page)
+                            <option value="{{ $page->id }}">{{ $page->seo_title }}</option>
+                        @endforeach
+                    </select>
+                    <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>
+                </div>
+            </div>
+            
+            <div class="col-2 d-flex">
+                <span style="align-self: center; text-align: center; flex: 1; margin-top: -5px;">Or</span>
+            </div>
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label for="hyperlinkUrl">Hyperlink:</label>
+                    <input type="url" class="form-control is-valid|is-invalid" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp" readonly>
+                    <div class="invalid-feedback">
+                        Validation message
+                    </div>
+                    <small id="hyperlinkUrlHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
+                </div>    
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="target">Target</label>
+            <select class="form-control" name="target" id="target" aria-describedby="targetHelp">
+                <option value="_self" aria-checked="true">_self (Page will open on the current browser window)</option>
+                <option value="_blank">_blank (Page will open on a new browser tab window)</option>
+            </select>
+            <small id="targetHelp" class="form-text text-muted">How this should open when clicked.</small>
+        </div>
+    
+        <div class="form-actions">
+            <button type="submit" class="btn btn-create">Create Menu</button>
+            <div class="pull-right">
+                <button type="reset" class="btn btn-reset">Reset</button>
+                <a href="{{ route('admin.menus.index') }}" class="btn btn-cancel">Cancel</a>
+            </div>
+        </div>
+
+    </form>
 
 @endsection

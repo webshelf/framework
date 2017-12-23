@@ -22,55 +22,8 @@ class CreateSettingsTable extends Migration
         });
 
         $setting = new Setting;
-        $setting->setKey('site_name');
+        $setting->setKey('website_name');
         $setting->setShadow('Business Name CMS');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('feature_hide_disabled');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('search_engine_indexing');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('seo_title_text_append');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('seo_title_text_position');
-        $setting->setShadow('left');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('seo_title_text_seperator');
-        $setting->setShadow('|');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('seo_keywords');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('seo_description');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('google_analitycs_code');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('google_webmaster_code');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('bing_webmaster_code');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('enable_website');
-        $setting->setValue(true);
         $setting->save();
 
         $setting = new Setting;
@@ -78,15 +31,39 @@ class CreateSettingsTable extends Migration
         $setting->save();
 
         $setting = new Setting;
-        $setting->setKey('address_name');
+        $setting->setKey('seo_indexing');
+        $setting->setShadow(false);
         $setting->save();
 
         $setting = new Setting;
-        $setting->setKey('address_location');
+        $setting->setKey('seo_text');
         $setting->save();
 
         $setting = new Setting;
-        $setting->setKey('address_county');
+        $setting->setKey('seo_position');
+        $setting->setShadow('left');
+        $setting->save();
+
+        $setting = new Setting;
+        $setting->setKey('seo_separator');
+        $setting->setShadow('|');
+        $setting->save();
+
+        $setting = new Setting;
+        $setting->setKey('page_keywords');
+        $setting->save();
+
+        $setting = new Setting;
+        $setting->setKey('page_description');
+        $setting->save();
+
+        $setting = new Setting;
+        $setting->setKey('maintenance_mode');
+        $setting->setShadow(true);
+        $setting->save();
+
+        $setting = new Setting;
+        $setting->setKey('address');
         $setting->save();
 
         $setting = new Setting;
@@ -102,21 +79,7 @@ class CreateSettingsTable extends Migration
         $setting->save();
 
         $setting = new Setting;
-        $setting->setKey('site_breadcrumbs');
-        $setting->setShadow(true);
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('db_update_time');
-        $setting->setShadow('Never');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('fb_page_id');
-        $setting->save();
-
-        $setting = new Setting;
-        $setting->setKey('google_project_id');
+        $setting->setKey('facebook_id');
         $setting->save();
     }
 

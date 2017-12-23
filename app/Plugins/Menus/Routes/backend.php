@@ -16,15 +16,16 @@
     // Get Requests.
     // ==================================================================================
 
-    Route::get('/admin/menus')->uses('BackendController@index')->name('menus');
-    Route::get('/admin/menus/create')->uses('BackendController@create')->name('CreateMenu');
-    Route::post('/admin/menus/make')->uses('BackendController@store')->name('MakeMenu');
-    Route::get('/admin/menus/page')->uses('BackendController@page')->name('PageMenu');
+    Route::resource('admin/menus', 'BackendController', ['as' => 'admin']);
 
-    Route::post('/admin/menus/order')->uses('BackendController@ajax_order')->name('UpdateOrder');
-    Route::post('/admin/menus/attach')->uses('BackendController@attach')->name('AttachMenu');
-    Route::post('/admin/menus/update')->uses('BackendController@ajax_update')->name('UpdateMenu');
-    Route::post('/admin/menus/delete/{id}')->uses('BackendController@ajax_delete')->name('DeleteMenu');
+    // Ajax reorder.
+    Route::post('/admin/menus/reorder/')->uses('BackendController@reorder')->name('admin.menus.reorder');
 
-// Post Requests.
+    // Allow destruction without using forms.
+    Route::get('/admin/menus/destroy/{menu_id}')->uses('BackendController@destroy')->name('admin.menus.destroy');
+
+    // Allows groupings on the index.
+    Route::get('/admin/menus/group/{group_id}')->uses('BackendController@index')->name('admin.menus.group');
+
+    // Post Requests.
     // ==================================================================================

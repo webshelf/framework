@@ -1,8 +1,6 @@
 {
-    "/assets/frontend.js": "/assets/frontend.js?id=582ac8540b9289dc67ad",
+    "/assets/backend.js": "/assets/backend.js?id=ac0d617a0dd55d496f51",
+    "/assets/frontend.js": "/assets/frontend.js?id=b01ccf3eac34d3f138cc",
     "/assets/frontend.css": "/assets/frontend.css?id=0ef62bb84cc8e0b18376",
-    "/assets/backend.css": "/assets/backend.css?id=b0333e7700047a53266d",
-    "/assets/backend.js": "/assets/backend.js?id=d8f124a682e7035bd429",
-    "/assets/dashboard.css": "/assets/dashboard.css?id=fa82212cfad5a931980f",
-    "/assets/dashboard.js": "/assets/dashboard.js?id=0acff1cc8dacaf622fcc"
+    "/assets/backend.css": "/assets/backend.css?id=06146635da4ecad33667"
 }

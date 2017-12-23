@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * Class Redirect.
  *
  * @property int $id
- * @property mixed $fromPage
- * @property mixed $to
+ * @property Page $fromPage
+ * @property Page $toPage
  * @property int $creator_id
  * @property int $modifier_id
  *
@@ -51,7 +51,7 @@ class Redirect extends EloquentModel
     public function from()
     {
         if (is_numeric($this->getAttribute('from'))) {
-            return makeSlug($this->fromPage);
+            return $this->fromPage->slug();
         } else {
             return $this->getAttribute('from');
         }
@@ -67,7 +67,7 @@ class Redirect extends EloquentModel
     public function to()
     {
         if (is_numeric($this->getAttribute('to'))) {
-            return makeSlug($this->toPage);
+            return $this->toPage->slug();
         } else {
             return $this->getAttribute('to');
         }

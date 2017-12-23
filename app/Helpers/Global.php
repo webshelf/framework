@@ -62,26 +62,6 @@
         return app(\App\Classes\PluginManager::class);
     }
 
-    function makeSlug(\App\Model\Page $page)
-    {
-        try {
-            if ($page->menu) {
-                if ($page->menu->parent) {
-                    return $page->menu->parent->slug.'/'.$page->slug;
-                }
-            }
-        } catch (\Exception $e) {
-            throw new \Exception('Unexpected error occurred for url creation of the page '.$page->slug);
-        }
-
-        return $page->slug;
-    }
-
-    function makeUrl(\App\Model\Page $page)
-    {
-        return url(makeSlug($page));
-    }
-
     /**
      * Turn a boolean value into readable data.
      * true  = Active
@@ -93,6 +73,7 @@
      * @return string
      * @internal param null $true
      * @internal param null $false
+     * @deprecated
      */
     function bool2Status($boolean, $trueMessage = null, $falseMessage = null)
     {
@@ -101,6 +82,14 @@
         } else {
             return '<span class="status red">'.($falseMessage ?: 'Inactive').'</span>';
         }
+    }
+
+    /**
+     * @return \App\Classes\Library\StyleCSS\Style
+     */
+    function css()
+    {
+        return app(\App\Classes\Library\StyleCSS\Style::class);
     }
 
     function currentURI()
