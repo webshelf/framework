@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca39e201c069e037c7c5d1cb7aa6f6ad",
+    "content-hash": "bbbdedc565ae5810cba2375f6e1844f9",
     "packages": [
         {
             "name": "barryvdh/elfinder-flysystem-driver",
@@ -823,64 +823,6 @@
             "time": "2017-11-14T20:44:03+00:00"
         },
         {
-            "name": "facebook/graph-sdk",
-            "version": "5.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facebook/php-graph-sdk.git",
-                "reference": "2f9639c15ae043911f40ffe44080b32bac2c5280"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2f9639c15ae043911f40ffe44080b32bac2c5280",
-                "reference": "2f9639c15ae043911f40ffe44080b32bac2c5280",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.4|^7.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "~5.0",
-                "mockery/mockery": "~0.8",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
-                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Facebook\\": "src/Facebook/"
-                },
-                "files": [
-                    "src/Facebook/polyfills.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Facebook Platform"
-            ],
-            "authors": [
-                {
-                    "name": "Facebook",
-                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
-                }
-            ],
-            "description": "Facebook SDK for PHP",
-            "homepage": "https://github.com/facebook/php-graph-sdk",
-            "keywords": [
-                "facebook",
-                "sdk"
-            ],
-            "time": "2017-08-16T17:28:07+00:00"
-        },
-        {
             "name": "fideloper/proxy",
             "version": "3.3.4",
             "source": {
@@ -1269,16 +1211,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.26",
+            "version": "v5.5.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d7e6a7aab600c5cfae595ea22074ac3c536cbc28"
+                "reference": "b4fb6eeb227b7327b4ca7f92263b693ec9ac9875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d7e6a7aab600c5cfae595ea22074ac3c536cbc28",
-                "reference": "d7e6a7aab600c5cfae595ea22074ac3c536cbc28",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b4fb6eeb227b7327b4ca7f92263b693ec9ac9875",
+                "reference": "b4fb6eeb227b7327b4ca7f92263b693ec9ac9875",
                 "shasum": ""
             },
             "require": {
@@ -1399,7 +1341,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-12-18T14:15:59+00:00"
+            "time": "2017-12-20T15:43:48+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1884,28 +1826,29 @@
         },
         {
             "name": "owen-it/laravel-auditing",
-            "version": "v4.1.4",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owen-it/laravel-auditing.git",
-                "reference": "c383fb4eb58acbb3b819ce0ff9936e7ea70ff966"
+                "reference": "4597f6e5ebfbecb24297bda906b648c1e90eda23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/c383fb4eb58acbb3b819ce0ff9936e7ea70ff966",
-                "reference": "c383fb4eb58acbb3b819ce0ff9936e7ea70ff966",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/4597f6e5ebfbecb24297bda906b648c1e90eda23",
+                "reference": "4597f6e5ebfbecb24297bda906b648c1e90eda23",
                 "shasum": ""
             },
             "require": {
                 "illuminate/console": "5.2.* || 5.3.* || 5.4.* || 5.5.*",
                 "illuminate/database": "5.2.* || 5.3.* || 5.4.* || 5.5.*",
                 "illuminate/filesystem": "5.2.* || 5.3.* || 5.4.* || 5.5.*",
-                "php": ">=5.5.9"
+                "php": ">=7.0.13"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.4",
-                "orchestra/testbench": "^3.2",
-                "phpunit/phpunit": "^4.0"
+                "mockery/mockery": "~1.0",
+                "orchestra/database": "^3.5",
+                "orchestra/testbench": "^3.5",
+                "phpunit/phpunit": "^6.0"
             },
             "suggest": {
                 "laravelista/lumen-vendor-publish": "Needed to publish the package configuration in Lumen"
@@ -1913,7 +1856,7 @@
             "type": "package",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "5.0-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -1945,7 +1888,7 @@
                 }
             ],
             "description": "Audit changes of your Eloquent models in Laravel/Lumen",
-            "homepage": "https://laravel-auditing.com",
+            "homepage": "http://laravel-auditing.com",
             "keywords": [
                 "Accountability",
                 "Audit",
@@ -1962,7 +1905,7 @@
                 "revision",
                 "tracking"
             ],
-            "time": "2017-10-29T21:34:57+00:00"
+            "time": "2017-12-09T21:47:06+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3473,18 +3416,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codacy/php-codacy-coverage.git",
-                "reference": "4d47299776a84d0e287df59d440c2e6ded3b9363"
+                "reference": "546ac2e000a004571c1000ecff4d68a98706db3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codacy/php-codacy-coverage/zipball/4d47299776a84d0e287df59d440c2e6ded3b9363",
-                "reference": "4d47299776a84d0e287df59d440c2e6ded3b9363",
+                "url": "https://api.github.com/repos/codacy/php-codacy-coverage/zipball/546ac2e000a004571c1000ecff4d68a98706db3a",
+                "reference": "546ac2e000a004571c1000ecff4d68a98706db3a",
                 "shasum": ""
             },
             "require": {
                 "gitonomy/gitlib": ">=1.0",
                 "php": ">=5.3.3",
-                "symfony/console": "~2.5|~3.0"
+                "symfony/console": "~2.5|~3.0|~4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~6.5"
@@ -3510,7 +3453,7 @@
             ],
             "description": "Sends PHP test coverage information to Codacy.",
             "homepage": "https://github.com/codacy/php-codacy-coverage",
-            "time": "2017-12-15T16:36:47+00:00"
+            "time": "2017-12-20T14:31:46+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -4758,16 +4701,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "1174d9018191e93cb9d719edec01257fc05f8158"
+                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/1174d9018191e93cb9d719edec01257fc05f8158",
-                "reference": "1174d9018191e93cb9d719edec01257fc05f8158",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
+                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
                 "shasum": ""
             },
             "require": {
@@ -4818,7 +4761,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-11-03T07:16:52+00:00"
+            "time": "2017-12-22T14:50:35+00:00"
         },
         {
             "name": "sebastian/diff",

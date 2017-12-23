@@ -15736,6 +15736,10 @@ h4 {
   text-decoration: none;
 }
 
+#nav-sidebar ul li a.active {
+  border-right: 5px solid #3c4573;
+}
+
 #nav-sidebar ul li a:hover {
   color: #464646;
   background-color: rgba(0, 0, 0, 0.04);

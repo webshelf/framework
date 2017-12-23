@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use OwenIt\Auditing\Contracts\UserResolver;
 
 /**
  * Class Accounts.
@@ -43,7 +44,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $login_count
  * @property string $ip_address
  */
-class Account extends Authenticatable
+class Account extends Authenticatable implements UserResolver
 {
     /*
      * Soft Delete trait
@@ -151,5 +152,15 @@ class Account extends Authenticatable
     public function setPassword(string $string)
     {
         return $this->setAttribute('password', bcrypt($string));
+    }
+
+    /**
+     * Resolve the ID of the logged User.
+     *
+     * @return mixed|null
+     */
+    public static function resolveId()
+    {
+        return auth()->check() ? auth()->user()->getAuthIdentifier() : null;
     }
 }
