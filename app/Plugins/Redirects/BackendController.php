@@ -10,7 +10,6 @@ namespace App\Plugins\Redirects;
 
 use App\Classes\Popup;
 use App\Model\Redirect;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
@@ -82,7 +81,7 @@ class BackendController extends PluginEngine
         return $this->make('edit')
             ->with([
                 'redirect' => $redirectRepository->whereID($id),
-                'pages' => $repository->all()
+                'pages' => $repository->all(),
             ]);
     }
 
@@ -175,5 +174,4 @@ class BackendController extends PluginEngine
 //
 //        return redirect()->route('redirects');
 //    }
-
 }

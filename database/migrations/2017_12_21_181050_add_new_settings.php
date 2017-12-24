@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-
 use App\Model\Setting;
+use Illuminate\Database\Migrations\Migration;
 
 class AddNewSettings extends Migration
 {

@@ -8,11 +8,9 @@
 
 namespace App\Plugins\Pages;
 
-use App\Model\Menu;
 use App\Model\Page;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use Illuminate\Support\Facades\DB;
 use App\Classes\Repositories\PageRepository;
 
 /**
