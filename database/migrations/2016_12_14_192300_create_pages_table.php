@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Model\Page;
 
 class CreatePagesTable extends Migration
 {
@@ -28,6 +29,14 @@ class CreatePagesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        $page = new Page();
+        $page->slug = 'index';
+        $page->seo_title = 'Homepage';
+        $page->sitemap = true;
+        $page->enabled = true;
+        $page->editable = false;
+        $page->save();
     }
 
     /**

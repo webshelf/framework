@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Model\Menu;
 
 class OrganiseMenuTable extends Migration
 {
@@ -30,6 +31,16 @@ class OrganiseMenuTable extends Migration
         Schema::table('menus', function (Blueprint $table) {
             $table->boolean('lock')->default(0)->nullable(false)->change();
         });
+
+        $menu = new Menu;
+        $menu->title = ('Homepage');
+        $menu->target = ('_self');
+        $menu->order = 1;
+        $menu->page_id = 1;
+        $menu->status = true;
+        $menu->lock = true;
+        $menu->creator_id = 1;
+        $menu->save();
     }
 
     /**
