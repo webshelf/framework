@@ -93845,9 +93845,19 @@ function elFinderBrowser(field_name, url, type, win) {
 }
 
 tinymce.init({
-
     branding: false,
     selector: '.editor',
+
+    file_browser_callback: elFinderBrowser,
+
+    plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools"],
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+});
+
+tinymce.init({
+    branding: false,
+    selector: '.page-editor',
+    content_css: '/assets/frontend.css',
 
     file_browser_callback: elFinderBrowser,
 
