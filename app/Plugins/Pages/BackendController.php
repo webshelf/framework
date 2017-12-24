@@ -56,22 +56,13 @@ class BackendController extends PluginEngine
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param Page $page
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Page $page)
+    public function store(Request $request)
     {
         $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
 
-        $page->seo_title = $request['title'];
-        $page->slug = str_slug($page->seo_title);
-        $page->creator_id = $request['creator'] ?: account()->id;
-        $page->seo_keywords = $request['keywords'];
-        $page->seo_description = $request['description'];
-        $page->content = $request['content'];
-        $page->sitemap = true; // $request['sitemap'] ? true : false;
-        $page->enabled = true; // $request['enabled'] ? true : false;
-        $page->save();
+        $this->save($request, new Page);
 
         return redirect()->route('admin.pages.index');
     }
@@ -111,15 +102,7 @@ class BackendController extends PluginEngine
 
         $this->validate($request, ['title'=>'required|min:3|max:255|unique:pages,seo_title,'.$page->id.',id,deleted_at,NULL']);
 
-        $page->seo_title = $request['title'];
-        $page->slug = str_slug($page->seo_title);
-        $page->creator_id = $request['creator'] ?: account()->id;
-        $page->seo_keywords = $request['keywords'];
-        $page->seo_description = $request['description'];
-        $page->content = $request['content'];
-        $page->sitemap = true; //$request['sitemap'] ? true : false;
-        $page->enabled = true; //$request['enabled'] ? true : false;
-        $page->save();
+        $this->save($request, $page);
 
         return redirect()->route('admin.pages.index');
     }
@@ -141,5 +124,29 @@ class BackendController extends PluginEngine
         }
 
         return redirect()->route('admin.pages.index');
+    }
+
+    /**
+     * Resource data for saving.
+     *
+     * @param Request $request
+     * @param Page $page
+     */
+    private function save(Request $request, Page $page)
+    {
+        $page->seo_title = $request['title'];
+        $page->creator_id = $request['creator'] ?: account()->id;
+        $page->seo_keywords = $request['keywords'];
+        $page->seo_description = $request['description'];
+        $page->content = $request['content'];
+        $page->sitemap = true; //$request['sitemap'] ? true : false;
+        $page->enabled = true; //$request['enabled'] ? true : false;
+
+        // we should not allow important slugs to be changed.
+        if ($page->editable == true) {
+            $page->slug = str_slug($page->seo_title);
+        }
+
+        $page->save();
     }
 }
