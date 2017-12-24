@@ -27,7 +27,7 @@ class Framework
      *
      * @return string
      */
-    public $version = '2.4.1';
+    public $version = '3.0.0';
 
     /**
      * The framework application website.
@@ -43,28 +43,4 @@ class Framework
      * @return string
      */
     public $repository = 'webshelf/framework';
-
-    /**
-     * Get the latest github release for version checking.
-     *
-     * @return string
-     */
-    public function githubVersion()
-    {
-        return Github::latestReleaseVersion($this->repository) ?: 'unknown';
-    }
-
-    /**
-     * Check if the framework is updated to the latest version.
-     *
-     * @return bool
-     */
-    public function isLatestVersion()
-    {
-        if (app()->isLocal()) {
-            return true;
-        }
-
-        return $this->version != $this->githubVersion();
-    }
 }
