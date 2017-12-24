@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-lg navbar-dark bg-purple sticky-top">
+<header class="navbar navbar-expand-lg navbar-dark sticky-top">
     <a class="navbar-brand" href="#">
         <!--<img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">-->
         {{ framework()->package }} v{{ framework()->version }}
