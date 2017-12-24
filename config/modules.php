@@ -29,11 +29,11 @@ return [
         'url'   => 'admin/settings',
     ],
 
-    [
-        'title' => 'Accounts',
-        'icon'  => 'fa fa-users',
-        'url'   => 'admin/accounts',
-    ],
+//    [
+//        'title' => 'Accounts',
+//        'icon'  => 'fa fa-users',
+//        'url'   => 'admin/accounts',
+//    ],
 
     [
         'title'   => 'Filemanager',

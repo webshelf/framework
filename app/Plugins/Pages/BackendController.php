@@ -56,13 +56,16 @@ class BackendController extends PluginEngine
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Page $page
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Page $page)
     {
         $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
 
-        $this->save($request, new Page);
+        $page->editable = true;
+
+        $this->save($request, $page);
 
         return redirect()->route('admin.pages.index');
     }

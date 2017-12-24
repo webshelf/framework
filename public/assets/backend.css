@@ -15671,6 +15671,7 @@ header {
 }
 
 #nav-sidebar {
+  min-height: 95.77vh;
   -ms-flex-preferred-size: 220px;
       flex-basis: 220px;
   -webkit-transition: left 0.15s;
@@ -15680,6 +15681,12 @@ header {
           box-shadow: inset -2px 0 0 #e5e5e5;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
+}
+
+#nav-sidebar .head {
+  border-bottom: 1px solid #dcdde0;
+  background-color: white;
+  border-right: 1px dashed #dcdde0;
 }
 
 #nav-sidebar.collapsed ul li a {
@@ -16040,5 +16047,11 @@ header {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.content .heading {
+  border: 1px dashed #ced4da;
+  padding: 20px;
+  background-color: #dcdde024;
 }
 

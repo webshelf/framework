@@ -30,12 +30,20 @@
         </div>
         </div>
 
-        <h3>@yield('title')</h3>
+        <div class="content">
 
-        <p>@yield('information')</p>
+                <div class="heading">
 
-        <hr>
+                        <h3>@yield('title')</h3>
 
-        @yield('content')
+                        <p>@yield('information')</p>
+
+                </div>
+
+                <hr>
+
+                @yield('content')
+
+        </div>
 
 </div>
