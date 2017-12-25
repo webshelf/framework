@@ -9,11 +9,11 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use OwenIt\Auditing\Contracts\UserResolver;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use OwenIt\Auditing\Contracts\UserResolver;
 
 /**
  * Class Accounts.
