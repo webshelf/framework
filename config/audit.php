@@ -11,7 +11,6 @@
  * please view the LICENSE.md file that was distributed
  * with this source code.
  */
-
 use App\Model\Account;
 
 return [
