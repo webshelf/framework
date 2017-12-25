@@ -1,7 +1,7 @@
 <?php
 
-use App\Model\Page;
 use App\Model\Menu;
+use App\Model\Page;
 use App\Model\Account;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
         factory(Page::class, 75)->create();
 
-        factory(Menu::class, rand(4,7))->states('parent')->create();
+        factory(Menu::class, rand(4, 7))->states('parent')->create();
 
         factory(Menu::class, 32)->create();
 
