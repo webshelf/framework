@@ -16,7 +16,6 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Model\Account::class, function (Faker $faker) {
-
     return [
         'forename' => $faker->firstName,
         'surname' => $faker->lastName,
@@ -34,14 +33,13 @@ $factory->define(App\Model\Account::class, function (Faker $faker) {
 });
 
 $factory->define(App\Model\Page::class, function (Faker $faker) {
-
     $title = $faker->sentence(3);
     $account_id = Account::all()->random()->id;
 
     return [
         'slug' => str_slug($title),
         'content' => $faker->sentence(300),
-        'banner' => $faker->imageUrl(700,400),
+        'banner' => $faker->imageUrl(700, 400),
         'seo_title' => $title,
         'seo_description' => $faker->sentence(),
         'seo_keywords' => $faker->sentence(5),
@@ -57,10 +55,10 @@ $factory->define(App\Model\Page::class, function (Faker $faker) {
 });
 
 $factory->define(\App\Model\Menu::class, function (Faker $faker) {
-        $page_id = Page::all()->random()->id;
-        $account_id = Account::all()->random()->id;
+    $page_id = Page::all()->random()->id;
+    $account_id = Account::all()->random()->id;
 
-        return [
+    return [
             'title' => $faker->sentence(3),
             'page_id' => $page_id,
             'target' => '_self',
