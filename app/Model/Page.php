@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @property int $id
  * @property string $slug
+ * @property string $url
  * @property string $content
  * @property string $banner
  * @property string $seo_title
@@ -148,19 +149,12 @@ class Page extends EloquentModel implements AuditInterface
         return route('admin.pages.edit', $this->slug);
     }
 
-    /**
-     * Generate a url slug based on the relationship this belongs to.
-     *
-     * @return string
-     */
-    public function slug()
+    public function regenerateUrl()
     {
         if ($this->menu && $this->menu->parent) {
-            if ($this->menu->parent->page->slug != 'index') {
-                return sprintf('%s/%s', strtolower($this->menu->parent->title), $this->slug);
-            }
+            return $this->url = sprintf('%s/%s', strtolower($this->menu->parent->title), $this->slug);
         }
 
-        return $this->slug;
+        return $this->url = str_slug($this->seo_title);
     }
 }

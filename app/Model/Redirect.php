@@ -51,7 +51,7 @@ class Redirect extends EloquentModel
     public function from()
     {
         if (is_numeric($this->getAttribute('from'))) {
-            return $this->fromPage->slug();
+            return $this->fromPage->url;
         } else {
             return $this->getAttribute('from');
         }
@@ -67,7 +67,7 @@ class Redirect extends EloquentModel
     public function to()
     {
         if (is_numeric($this->getAttribute('to'))) {
-            return $this->toPage->slug();
+            return $this->toPage->url;
         } else {
             return $this->getAttribute('to');
         }

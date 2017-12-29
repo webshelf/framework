@@ -7,7 +7,7 @@
         <p>Articles are a great way to provide a daily blog of information, giving users a reason to come back to explore new content.</p>
     </div>
 
-    <form action="{{ route('UpdateNews', $article->slug()) }}" method="post" id="form_page">
+    <form action="{{ route('UpdateNews', $article->url) }}" method="post" id="form_page">
 
         <div class="portlet light ">
             <div class="portlet-title tabbable-line">

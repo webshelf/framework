@@ -143,9 +143,11 @@ class BackendController extends PluginEngine
         $page->sitemap = true; //$request['sitemap'] ? true : false;
         $page->enabled = true; //$request['enabled'] ? true : false;
 
+
         // we should not allow important slugs to be changed.
         if ($page->editable == true) {
             $page->slug = str_slug($page->seo_title);
+            $page->regenerateUrl();
         }
 
         $page->save();
