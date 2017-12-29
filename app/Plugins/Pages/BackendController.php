@@ -135,11 +135,11 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Page $page)
     {
-        $page->seo_title = $request['title'];
+        $page->seo_title = ucfirst($request['title']);
         $page->creator_id = $request['creator'] ?: account()->id;
-        $page->seo_keywords = $request['keywords'];
-        $page->seo_description = $request['description'];
-        $page->content = $request['content'];
+        $page->seo_keywords = ucfirst($request['keywords']);
+        $page->seo_description = ucfirst($request['description']);
+        $page->content = ucfirst($request['content']);
         $page->sitemap = true; //$request['sitemap'] ? true : false;
         $page->enabled = true; //$request['enabled'] ? true : false;
 

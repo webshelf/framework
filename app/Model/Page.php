@@ -161,6 +161,6 @@ class Page extends EloquentModel implements AuditInterface
             return $this->url = sprintf('%s/%s', strtolower($this->menu->parent->title), $this->slug);
         }
 
-        return $this->url = str_slug($this->seo_title);
+        return $this->url = $this->slug;
     }
 }
