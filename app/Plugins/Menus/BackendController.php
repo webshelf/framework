@@ -10,8 +10,10 @@ namespace App\Plugins\Menus;
 
 use App\Model\Menu;
 use App\Model\Page;
+use Doctrine\DBAL\DBALException;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
@@ -177,7 +179,6 @@ class BackendController extends PluginEngine
         } else {
             // we expect this to be a hyperlink.
             $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
-
             $menu->page_id = null;
             $menu->title = $request['title'];
             $menu->parent_id = $request['menu_id'];
@@ -187,15 +188,20 @@ class BackendController extends PluginEngine
             $menu->creator_id = account()->id;
         }
 
-        $menu->save();
+        /*
+         * Menus require a regeneration of the menus page.
+         * We will use transaction to assure that both are changed at the same time.
+         */
+        DB::transaction(function () use ($menu) {
+            $menu->save();
 
-        if ($request['page_id'])
-        {
-            /** @var Page $page */
-            $page = (new PageRepository)->whereID($request['page_id']);
-            $page->regenerateUrl();
-            $page->save();
-        }
+            if ($menu->page)
+            {
+                /** @var Page $page */
+                $menu->page->generateMenuUrl();
+                $menu->page->save();
+            }
+        }, 5);
 
         return true;
     }

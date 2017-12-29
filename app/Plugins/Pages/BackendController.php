@@ -147,7 +147,7 @@ class BackendController extends PluginEngine
         // we should not allow important slugs to be changed.
         if ($page->editable == true) {
             $page->slug = str_slug($page->seo_title);
-            $page->regenerateUrl();
+            $page->generateMenuUrl();
         }
 
         $page->save();

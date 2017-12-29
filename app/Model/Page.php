@@ -149,7 +149,13 @@ class Page extends EloquentModel implements AuditInterface
         return route('admin.pages.edit', $this->slug);
     }
 
-    public function regenerateUrl()
+    /**
+     * Generate the url which loads the pages into the website.
+     * This url is used for navigation url generation, breadcrumbs, routing etc.
+     *
+     * @return string
+     */
+    public function generateMenuUrl()
     {
         if ($this->menu && $this->menu->parent) {
             return $this->url = sprintf('%s/%s', strtolower($this->menu->parent->title), $this->slug);
