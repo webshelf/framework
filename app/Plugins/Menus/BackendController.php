@@ -189,8 +189,7 @@ class BackendController extends PluginEngine
 
         $menu->save();
 
-        if ($request['page_id'])
-        {
+        if ($request['page_id']) {
             /** @var Page $page */
             $page = (new PageRepository)->whereID($request['page_id']);
             $page->regenerateUrl();
