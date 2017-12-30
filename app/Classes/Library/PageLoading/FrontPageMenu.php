@@ -63,7 +63,7 @@ class FrontPageMenu
     {
         return [
             'title'    => $menu->title,
-            'link'     => $menu->page->url,
+            'link'     => $menu->page->slug(),
             'order'    => $menu->order,
             'target'   => $menu->target,
             'active'   => $status ? 'active' : 'inactive',

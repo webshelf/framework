@@ -167,6 +167,7 @@ class BackendController extends PluginEngine
         if (! $request['hyperlinkUrl']) {
             // we expect a page to be connected.
             $request->validate(['page_id' => 'numeric|required']);
+
             $menu->hyperlink = null;
             $menu->title = $request['title'];
             $menu->page_id = $request['page_id'];
@@ -187,16 +188,6 @@ class BackendController extends PluginEngine
             $menu->creator_id = account()->id;
         }
 
-        $menu->save();
-
-        if ($request['page_id'])
-        {
-            /** @var Page $page */
-            $page = (new PageRepository)->whereID($request['page_id']);
-            $page->regenerateUrl();
-            $page->save();
-        }
-
-        return true;
+        return $menu->save();
     }
 }

@@ -63,7 +63,7 @@
                     </div>
                     <div class="website">
                         @if ($menu->page)
-                            <i class="fa fa-pagelines" aria-hidden="true"></i> {{ $menu->page->url }}
+                            <i class="fa fa-pagelines" aria-hidden="true"></i> {{ $menu->page->slug() }}
                         @else
                             <i class="fa fa-pagelines" aria-hidden="true"></i> No Content
                         @endif
