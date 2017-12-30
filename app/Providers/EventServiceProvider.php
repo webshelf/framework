@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\PageWasVisited' => [
-            'App\Listeners\IncrementPageView',
+            'App\Listeners\IncrementPageView'
         ],
     ];
 

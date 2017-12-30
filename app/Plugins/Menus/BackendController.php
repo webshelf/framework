@@ -10,10 +10,11 @@ namespace App\Plugins\Menus;
 
 use App\Model\Menu;
 use App\Model\Page;
+use Doctrine\DBAL\DBALException;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 
@@ -194,8 +195,9 @@ class BackendController extends PluginEngine
         DB::transaction(function () use ($menu) {
             $menu->save();
 
-            if ($menu->page) {
-                /* @var Page $page */
+            if ($menu->page)
+            {
+                /** @var Page $page */
                 $menu->page->generateMenuUrl();
                 $menu->page->save();
             }
