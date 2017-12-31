@@ -3,20 +3,18 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 00:12
+ * Time: 00:12.
  */
 
 namespace App\Classes\Library\PageLoader;
 
 use App\Model\Page;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
-use Illuminate\View\View;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 class Frontpage
 {
-
     /**
      * @var Response
      */
@@ -64,8 +62,7 @@ class Frontpage
      */
     private function getBladeView(string $view = null)
     {
-        if ($view == null)
-        {
+        if ($view == null) {
             return currentURI() == 'index' ? 'website::index' : 'website::page';
         }
 

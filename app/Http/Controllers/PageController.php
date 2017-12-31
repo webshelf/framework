@@ -10,15 +10,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Library\PageLoader\Navigation;
-use App\Classes\Repositories\MenuRepository;
 use App\Model\Page;
 use App\Events\PageWasVisited;
 use App\Events\WebsiteWasVisited;
+use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use App\Classes\Library\PageLoading\FrontPage;
-use App\Classes\Library\PageLoading\Loader\FrontPageModel;
-use Doctrine\Common\Cache\Cache;
 
 /**
  * Class PageController.
