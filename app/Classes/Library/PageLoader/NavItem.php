@@ -3,12 +3,12 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 30/12/2017
- * Time: 18:47
+ * Time: 18:47.
  */
 
 namespace App\Classes\Library\PageLoader;
 
-/**
+/*
  * Class NavItem
  *
  * @package App\Classes\Library\PageLoader
@@ -17,12 +17,10 @@ namespace App\Classes\Library\PageLoader;
 use Illuminate\Support\Collection;
 
 /**
- * Class NavItem
- * @package App\Classes\Library\PageLoader
+ * Class NavItem.
  */
 class NavItem
 {
-
     /**
      * @var string
      */
@@ -34,7 +32,7 @@ class NavItem
     protected $url = '#';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $active = false;
 
@@ -61,7 +59,7 @@ class NavItem
         $this->children = new Collection;
     }
 
-    public function addChild(NavItem $navItem)
+    public function addChild(self $navItem)
     {
         $this->children->put($navItem->text, $navItem);
     }
