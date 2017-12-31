@@ -156,9 +156,7 @@ class Page extends EloquentModel implements AuditInterface
     public function slug()
     {
         if ($this->menu && $this->menu->parent) {
-            if ($this->menu->parent->page->slug != 'index') {
-                return sprintf('%s/%s', strtolower($this->menu->parent->title), $this->slug);
-            }
+            return sprintf('%s/%s', strtolower($this->menu->parent->page->seo_title), $this->slug);
         }
 
         return $this->slug;

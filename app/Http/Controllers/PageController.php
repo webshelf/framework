@@ -10,12 +10,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Library\PageLoader\Navigation;
+use App\Classes\Repositories\MenuRepository;
 use App\Model\Page;
 use App\Events\PageWasVisited;
 use App\Events\WebsiteWasVisited;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoading\FrontPage;
 use App\Classes\Library\PageLoading\Loader\FrontPageModel;
+use Doctrine\Common\Cache\Cache;
 
 /**
  * Class PageController.
@@ -43,18 +46,6 @@ class PageController extends Controller
     }
 
     /**
-     * Standard page views are once that use the URL as the designated target.
-     *
-     * @return mixed
-     * @throws \Exception
-     * @internal param FrontPageLoader $pageLoader
-     */
-    public function index()
-    {
-        return $this->load((new FrontPageModel($this->currentPage)));
-    }
-
-    /**
      * Redirects must use a controller to handle the parameter, as they require a specified target.
      * @return mixed
      */
@@ -64,29 +55,39 @@ class PageController extends Controller
     }
 
     /**
-     * @param FrontPage $page
-     * @return \Illuminate\Http\Response|mixed|\Symfony\Component\HttpFoundation\Response
+     * Standard page views are once that use the URL as the designated target.
+     *
+     * @return mixed
+     * @throws \Exception
+     * @internal param FrontPageLoader $pageLoader
      */
-    private function load(FrontPage $page)
+    public function index()
     {
-        // we keep track of the hits on pages.
-        // we let the event handler manage this.
-        event(new PageWasVisited($this->currentPage));
+        //$this->trackEvents($this->currentPage);
 
-        // we keep track of all the user requests.
-        // where they come from and what pages
-        // they view.
+        $frontpage = app(\App\Classes\Library\PageLoader\Frontpage::class);
+
+        return $frontpage->draft($this->currentPage, $this->navigationData())->publish();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function navigationData()
+    {
+        return (new MenuRepository)->allParentsWithChildren();
+    }
+
+    /**
+     * @param Page $page
+     * @return bool
+     */
+    private function trackEvents(Page $page)
+    {
+        event(new PageWasVisited($page));
+
         event(new WebsiteWasVisited(request()));
 
-        // if the current route is the homepage.
-        // we should return the homepage view.
-        if (currentURI() == 'index') {
-            return $page->view('website::index');
-        }
-
-        // if we are not on the index page, we will
-        // assume that the user is loading a standard
-        // page.
-        return $page->view('website::page');
+        return true;
     }
 }

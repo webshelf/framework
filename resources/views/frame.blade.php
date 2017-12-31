@@ -8,7 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
+    <title>{{ $webpage->name() }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -76,11 +77,57 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        .links > a {
+            padding:15px;
+        }
+
+        .links > a.active {
+            background-color:#636b6f1c;
+        }
+
+        .links > a:hover {
+            background-color: #abe3ff24;
+        }
     </style>
 
 </head>
 
 <body>
+
+    <div class="flex-center position-ref full-height">
+        <div class="top-right links">
+            <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
+            <?php /** @var \App\Classes\Library\PageLoader\NavItem $item */ ?>
+
+            @foreach ($webpage->navigationItems() as $item)
+                <a class="{{ $item->classState() }}" href="{{ $item->url() }}">{{ $item->title() }}</a>
+            @endforeach
+
+            @if (Auth::check() == false)
+                <a href="{{ route('login') }}">Login</a>
+            @endif
+        </div>
+
+        <div class="content">
+
+            <div class="title m-b-md">
+
+                <span class="content-page">@yield('content')</span>
+
+                <br>
+
+                <span class="framework">{{ framework()->package }} v{{ framework()->version }}</span>
+
+            </div>
+
+            <div class="links">
+                @foreach ($webpage->sidebarItems() as $item)
+                    <a href="{{ $item->url() }}" class="{{ $item->classState() }}">{{ $item->title() }}</a>
+                @endforeach
+            </div>
+        </div>
+    </div>
 
     @yield('content')
 

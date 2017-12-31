@@ -63,4 +63,9 @@ class MenuRepository extends Menu
     {
         return ($integer == 1) ? $this->whereTopLevel() : $this->where('parent_id', $integer)->orderBy('order', 'asc')->get();
     }
+
+    public function allParentsWithChildren()
+    {
+        return $this->whereNull('parent_id')->with('page', 'children')->orderBy('order', 'asc')->get();
+    }
 }

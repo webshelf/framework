@@ -80,4 +80,14 @@ class Menu extends EloquentModel
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
+
+    /**
+     * Return the link that this connects to, page or hyperlink.
+     *
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function link()
+    {
+        return $this->page ? $this->page->slug() : $this->hyperlink;
+    }
 }
