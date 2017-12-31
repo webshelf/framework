@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 00:15
+ * Time: 00:15.
  */
 
 namespace App\Classes\Library\PageLoader;
@@ -12,9 +12,7 @@ use App\Model\Page;
 use Illuminate\Support\Collection;
 
 /**
- * Class Webpage
- *
- * @package App\Classes\Library\PageLoader
+ * Class Webpage.
  */
 class Webpage
 {
