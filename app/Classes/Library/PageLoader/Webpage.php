@@ -8,13 +8,13 @@
 
 namespace App\Classes\Library\PageLoader;
 
-use App\Classes\Library\PageLoader\Cordinators\Collections;
-use App\Classes\Library\PageLoader\Cordinators\Contact;
+use App\Model\Page as Model;
+use App\Classes\SettingsManager;
+use Illuminate\Support\Collection;
 use App\Classes\Library\PageLoader\Cordinators\Page;
 use App\Classes\Library\PageLoader\Cordinators\Site;
-use App\Classes\SettingsManager;
-use App\Model\Page as Model;
-use Illuminate\Support\Collection;
+use App\Classes\Library\PageLoader\Cordinators\Contact;
+use App\Classes\Library\PageLoader\Cordinators\Collections;
 
 /**
  * Class Webpage.
@@ -50,9 +50,9 @@ class Webpage
         $settings = app(SettingsManager::class);
         $navigation = new Navigation($navigationRepository);
 
-        $this->page        = new Page($model);
-        $this->contact     = new Contact($settings);
-        $this->site        = new Site($settings);
+        $this->page = new Page($model);
+        $this->contact = new Contact($settings);
+        $this->site = new Site($settings);
         $this->collections = new Collections($model, $navigation);
     }
 }

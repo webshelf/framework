@@ -3,22 +3,18 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 02:22
+ * Time: 02:22.
  */
 
 namespace App\Classes\Library\PageLoader\Cordinators;
 
-
 use App\Classes\SettingsManager;
 
 /**
- * Class Site
- *
- * @package App\Classes\Library\PageLoader\Cordinators
+ * Class Site.
  */
 class Site
 {
-
     /**
      * @var SettingsManager
      */
@@ -37,7 +33,8 @@ class Site
     /**
      * @return mixed
      */
-    public function name() {
+    public function name()
+    {
         return $this->settings->getValue('website_name');
     }
 

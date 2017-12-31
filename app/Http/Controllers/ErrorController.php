@@ -8,9 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Library\PageLoader\Webpage;
-use App\Classes\Library\PageLoading\Loader\FrontPageData;
 use App\Model\Page;
+use App\Classes\Library\PageLoading\Loader\FrontPageData;
 
 /**
  * Class ErrorController.
