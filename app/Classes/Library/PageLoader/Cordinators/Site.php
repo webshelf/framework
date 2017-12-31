@@ -9,10 +9,43 @@
 namespace App\Classes\Library\PageLoader\Cordinators;
 
 
+use App\Classes\SettingsManager;
+
+/**
+ * Class Site
+ *
+ * @package App\Classes\Library\PageLoader\Cordinators
+ */
 class Site
 {
 
-    public function name();
+    /**
+     * @var SettingsManager
+     */
+    private $settings;
 
-    public function copyright();
+    /**
+     * Site constructor.
+     *
+     * @param SettingsManager $settingsManager
+     */
+    public function __construct(SettingsManager $settingsManager)
+    {
+        $this->settings = $settingsManager;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function name() {
+        return $this->settings->getValue('website_name');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function copyright()
+    {
+        return $this->settings->getValue('website_copyright');
+    }
 }

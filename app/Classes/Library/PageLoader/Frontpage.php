@@ -8,7 +8,9 @@
 
 namespace App\Classes\Library\PageLoader;
 
+use App\Http\Controllers\ErrorController;
 use App\Model\Page;
+use App\Model\Role;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -21,51 +23,91 @@ class Frontpage
     private $response;
 
     /**
-     * @var Page
+     * @var Webpage
      */
     private $webpage;
 
     /**
-     * Frontpage constructor.
-     * @param ResponseFactory $responseFactory
+     * @var Page
      */
-    public function __construct(ResponseFactory $responseFactory)
-    {
-        $this->response = $responseFactory;
-    }
+    private $model;
 
     /**
-     * @param Page $page
+     * Frontpage constructor.
+     * @param Page $model
      * @param Collection $navigationRepository
-     * @return Frontpage
      */
-    public function draft(Page $page, Collection $navigationRepository)
+    public function __construct(Page $model, Collection $navigationRepository)
     {
-        $this->webpage = new Webpage($page, $navigationRepository);
+        $this->response = app(ResponseFactory::class);
+
+        $this->webpage = new Webpage($this->model = $model, $navigationRepository);
 
         return $this;
     }
 
     /**
-     * @param string $view
+     * @param string|null $template
      * @param int $status
-     * @return bool
+     * @return Response
      */
-    public function publish(string $view = null, int $status = 200)
+    public function publish(string $template = null, int $status = 200)
     {
-        return $this->response->view($this->getBladeView(), ['webpage' => $this->webpage], $status);
+        if ($this->isMaintenanceMode()) {
+            return ErrorController::maintenance();
+        }
+
+        if ($this->isDisabledPage($this->model)) {
+            return ErrorController::disabled();
+        }
+
+        return $this->response->view($this->makeBlade($template), ['webpage' => $this->webpage], $status);
     }
 
     /**
-     * @param string|null $view
+     * A user can disable a webpage from being viewed.
+     *
+     * @param Page $page
+     * @return bool
+     */
+    public function isDisabledPage(Page $page)
+    {
+        return $page->enabled == false;
+    }
+
+    /**
+     * Check if the website is in maintenance mode
+     * which is set by the user on the dashboard.
+     *
+     * @return bool
+     */
+    public function isMaintenanceMode()
+    {
+        return settings()->getValue('maintenance_mode');
+    }
+
+    /**
+     * Check if the current logged in user if exists,
+     * can bypass the maintenance and view it offline.
+     *
+     * @return bool
+     */
+    public function canBypassMaintenance()
+    {
+        return auth()->check() == true && account()->hasRole(Role::ADMINISTRATOR);
+    }
+
+    /**
+     * @param string|null $template
      * @return string
      */
-    private function getBladeView(string $view = null)
+    private function makeBlade(string $template = null)
     {
-        if ($view == null) {
+        if ($template == null) {
             return currentURI() == 'index' ? 'website::index' : 'website::page';
         }
 
-        return "website::{$view}";
+        return $template;
     }
+
 }

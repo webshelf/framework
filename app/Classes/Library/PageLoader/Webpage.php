@@ -8,7 +8,12 @@
 
 namespace App\Classes\Library\PageLoader;
 
-use App\Model\Page;
+use App\Classes\Library\PageLoader\Cordinators\Collections;
+use App\Classes\Library\PageLoader\Cordinators\Contact;
+use App\Classes\Library\PageLoader\Cordinators\Page;
+use App\Classes\Library\PageLoader\Cordinators\Site;
+use App\Classes\SettingsManager;
+use App\Model\Page as Model;
 use Illuminate\Support\Collection;
 
 /**
@@ -19,160 +24,35 @@ class Webpage
     /**
      * @var Page
      */
-    private $page;
+    public $page;
 
     /**
-     * @var Navigation
+     * @var Contact
      */
-    private $navigation;
+    public $contact;
 
     /**
-     * @param Page $page
+     * @var Site
+     */
+    public $site;
+
+    /**
+     * @var Collections
+     */
+    public $collections;
+
+    /**
+     * @param Model $model
      * @param Collection $navigationRepository
      */
-    public function __construct(Page $page, Collection $navigationRepository)
+    public function __construct(Model $model, Collection $navigationRepository)
     {
-        $this->page = $page;
+        $settings = app(SettingsManager::class);
+        $navigation = new Navigation($navigationRepository);
 
-        $this->navigation = new Navigation($navigationRepository);
+        $this->page        = new Page($model);
+        $this->contact     = new Contact($settings);
+        $this->site        = new Site($settings);
+        $this->collections = new Collections($model, $navigation);
     }
-
-    /**
-     * @return string
-     */
-    public function name()
-    {
-        return $this->page->seo_title;
-    }
-
-    /**
-     * @return string
-     */
-    public function title()
-    {
-        if (settings()->getValue('seo_text') != '') {
-            if (settings()->getValue('seo_position') == 'right') {
-                return ucfirst($this->page->seo_title).' '.settings()->getValue('seo_separator').' '.settings()->getValue('seo_separator');
-            } else {
-               return settings()->getValue('seo_text').' '.settings()->getValue('seo_separator').' '.ucfirst($this->page->seo_title);
-            }
-        } else {
-            return ucfirst($this->page->seo_title);
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function keywords()
-    {
-        return $this->page->seo_keywords ?: settings()->getValue('page_keywords');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function description()
-    {
-        return $this->page->seo_description ?: settings()->getValue('page_description');
-    }
-
-    /**
-     * @return string
-     */
-    public function content()
-    {
-        return $this->page->content;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function address()
-    {
-        return settings()->getValue('address');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function phone_number()
-    {
-        return settings()->getValue('phone_number');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function fax_number()
-    {
-        return settings()->getValue('fax_number');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function email_address()
-    {
-        return settings()->getValue('email_address');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function copyright()
-    {
-        return settings()->getValue('website_copyright');
-    }
-
-    /**
-     * @return array
-     */
-    public function plugins()
-    {
-        // TODO: Implement plugins() method.
-
-        return [];
-    }
-
-    /**
-     * @return Collection
-     */
-    public function navigationItems()
-    {
-        return $this->navigation->collection;
-    }
-
-    /**
-     * @return array
-     */
-    public function sidebarItems()
-    {
-        if ($this->page->menu->parent)
-        {
-            $collection = $this->navigation->collection->get($this->page->menu->parent->title);
-
-            return $collection->children;
-        }
-
-        if ($this->page->menu)
-        {
-            $collection = $this->navigation->collection->get($this->page->menu->title);
-
-            return $collection->children;
-        }
-
-        return [];
-    }
-
-    /**
-     * @return array
-     */
-    public function breadcrumbItems()
-    {
-        // TODO: Implement breadcrumbItems() method.
-
-        return [];
-    }
-
 }

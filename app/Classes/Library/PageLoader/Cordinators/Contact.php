@@ -8,16 +8,61 @@
 
 namespace App\Classes\Library\PageLoader\Cordinators;
 
+use App\Classes\SettingsManager;
 
+/**
+ * Class Contact
+ *
+ * @package App\Classes\Library\PageLoader\Cordinators
+ */
 class Contact
 {
 
-    public function address();
+    /**
+     * @var SettingsManager
+     */
+    private $settings;
 
-    public function phone_number();
+    /**
+     * Contact constructor.
+     *
+     * @param SettingsManager $settings
+     */
+    public function __construct(SettingsManager $settings)
+    {
+        $this->settings = $settings;
+    }
 
-    public function fax_number();
+    /**
+     * @return mixed
+     */
+    public function address()
+    {
+        return $this->settings->getValue('address');
+    }
 
-    public function email_address();
+    /**
+     * @return mixed
+     */
+    public function phone()
+    {
+        return $this->settings->getValue('phone_number');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function fax()
+    {
+        return $this->settings->getValue('fax_number');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function email()
+    {
+        return $this->settings->getValue('email_address');
+    }
 
 }

@@ -10,6 +10,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Library\PageLoader\Frontpage;
+use App\Classes\Library\PageLoader\Webpage;
 use App\Model\Page;
 use App\Events\PageWasVisited;
 use App\Events\WebsiteWasVisited;
@@ -59,11 +61,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        //$this->trackEvents($this->currentPage);
-
-        $frontpage = app(\App\Classes\Library\PageLoader\Frontpage::class);
-
-        return $frontpage->draft($this->currentPage, $this->navigationData())->publish();
+        return (new Frontpage($this->currentPage, $this->navigationData()))->publish();
     }
 
     /**
