@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 02:19
+ * Time: 02:19.
  */
 
 namespace App\Classes\Library\PageLoader\Cordinators;
@@ -11,13 +11,10 @@ namespace App\Classes\Library\PageLoader\Cordinators;
 use App\Classes\SettingsManager;
 
 /**
- * Class Contact
- *
- * @package App\Classes\Library\PageLoader\Cordinators
+ * Class Contact.
  */
 class Contact
 {
-
     /**
      * @var SettingsManager
      */
@@ -64,5 +61,4 @@ class Contact
     {
         return $this->settings->getValue('email_address');
     }
-
 }

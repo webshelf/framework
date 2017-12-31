@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 02:20
+ * Time: 02:20.
  */
 
 namespace App\Classes\Library\PageLoader\Cordinators;
@@ -11,13 +11,10 @@ namespace App\Classes\Library\PageLoader\Cordinators;
 use App\Model\Page as Model;
 
 /**
- * Class Page
- *
- * @package App\Classes\Library\PageLoader\Cordinators
+ * Class Page.
  */
 class Page
 {
-
     /**
      * @var Model
      */
@@ -60,21 +57,24 @@ class Page
     /**
      * @return mixed
      */
-    public function keywords() {
+    public function keywords()
+    {
         return $this->model->seo_keywords ?: settings()->getValue('page_keywords');
     }
 
     /**
      * @return mixed
      */
-    public function description() {
+    public function description()
+    {
         return $this->model->seo_description ?: settings()->getValue('page_description');
     }
 
     /**
      * @return string
      */
-    public function content() {
+    public function content()
+    {
         return $this->model->content;
     }
 }

@@ -12,9 +12,7 @@ use App\Model\Menu;
 use Illuminate\Support\Collection;
 
 /**
- * Class Navigation
- *
- * @package App\Classes\Library\PageLoader
+ * Class Navigation.
  */
 class Navigation
 {

@@ -8,11 +8,11 @@
 
 namespace App\Classes\Library\PageLoader;
 
-use App\Http\Controllers\ErrorController;
 use App\Model\Page;
 use App\Model\Role;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use App\Http\Controllers\ErrorController;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
 class Frontpage
@@ -109,5 +109,4 @@ class Frontpage
 
         return $template;
     }
-
 }

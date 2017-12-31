@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 02:23
+ * Time: 02:23.
  */
 
 namespace App\Classes\Library\PageLoader\Cordinators;
@@ -12,13 +12,10 @@ use App\Model\Page as Model;
 use App\Classes\Library\PageLoader\Navigation;
 
 /**
- * Class Collections
- *
- * @package App\Classes\Library\PageLoader\Cordinators
+ * Class Collections.
  */
 class Collections
 {
-
     /**
      * @var \App\Model\Page
      */
@@ -61,15 +58,13 @@ class Collections
      */
     public function sidebar()
     {
-        if ($this->model->menu->parent)
-        {
+        if ($this->model->menu->parent) {
             $collection = $this->navigation->collection->get($this->model->menu->parent->title);
 
             return $collection->children;
         }
 
-        if ($this->model->menu)
-        {
+        if ($this->model->menu) {
             $collection = $this->navigation->collection->get($this->model->menu->title);
 
             return $collection->children;
