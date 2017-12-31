@@ -14,6 +14,7 @@ namespace App\Classes\Library\PageLoader;
  * @package App\Classes\Library\PageLoader
  */
 
+use App\Model\Menu;
 use Illuminate\Support\Collection;
 
 /**
@@ -32,6 +33,16 @@ class NavItem
     protected $url = '#';
 
     /**
+     * @var int
+     */
+    protected $order;
+
+    /**
+     * @var string
+     */
+    protected $target;
+
+    /**
      * @var bool
      */
     protected $active = false;
@@ -39,26 +50,28 @@ class NavItem
     /**
      * @var Collection
      */
-    protected $children = [];
+    public $children = [];
 
     /**
      * NavItem constructor.
      *
-     * @param string $text
-     * @param string $url
+     * @param Menu $menu
      * @param bool $active
      */
-    public function __construct(string $text, string $url = '#', bool $active = false)
+    public function __construct(Menu $menu, bool $active = false)
     {
-        $this->text = $text;
+        $this->text = $menu->title;
 
-        $this->url = $url;
+        $this->url = $menu->link();
 
         $this->active = $active;
 
         $this->children = new Collection;
     }
 
+    /**
+     * @param NavItem $navItem
+     */
     public function addChild(self $navItem)
     {
         $this->children->put($navItem->text, $navItem);
@@ -86,13 +99,5 @@ class NavItem
     public function title()
     {
         return $this->text;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getChildren()
-    {
-        return $this->children;
     }
 }
