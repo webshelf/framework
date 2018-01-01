@@ -8,12 +8,12 @@
 
 namespace App\Classes\Library\PageLoader;
 
-use App\Classes\Repositories\MenuRepository;
 use App\Model\Page;
 use App\Model\Role;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\ErrorController;
+use App\Classes\Repositories\MenuRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
 class Frontpage
@@ -128,6 +128,6 @@ class Frontpage
 
         $navigation = (new MenuRepository)->allParentsWithChildren();
 
-        return (new Frontpage($page, $navigation))->publish($template, false, $response);
+        return (new self($page, $navigation))->publish($template, false, $response);
     }
 }
