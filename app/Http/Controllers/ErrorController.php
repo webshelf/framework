@@ -3,13 +3,14 @@
  * Created by PhpStorm.
  * User: Mark
  * Date: 20/06/2016
+ * Data: 01/01/2018
  * Time: 00:28.
  */
 
 namespace App\Http\Controllers;
 
-use App\Model\Page;
-use App\Classes\Library\PageLoading\Loader\FrontPageData;
+use Illuminate\Http\Response;
+use App\Classes\Library\PageLoader\Frontpage;
 
 /**
  * Class ErrorController.
@@ -31,7 +32,7 @@ class ErrorController extends Controller
      */
     public static function unknown()
     {
-        return (new FrontPageData('404 Error', '404 : Cannot find the page'))->without(['breadcrumbs'])->view('404', 404, true);
+        return Frontpage::build('404', '404 : Cannot find the page.', '404', Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -43,7 +44,7 @@ class ErrorController extends Controller
      */
     public static function disabled()
     {
-        return (new FrontPageData('Page Moved', 'Page is unable to be located currently'))->without(['breadcrumbs'])->view('disabled', 404, true);
+        return Frontpage::build('Page Moved', 'Page is unable to be located.','disabled',Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -54,7 +55,7 @@ class ErrorController extends Controller
      */
     public static function maintenance()
     {
-        return (new FrontPageData('Maintenance Mode', 'The website is currently offline and will return shortly'))->without(['*'])->view('maintenance', 503, true);
+        return Frontpage::build('Maintenance Mode','The website is currently offline and will return shortly','maintenance',Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
     /**
@@ -66,7 +67,7 @@ class ErrorController extends Controller
      */
     public static function database()
     {
-        return (new FrontPageData('Database Connection Issue', 'There was a problem with the database and must be resolved.'))->without(['*'])->view('database', 500, true);
+        return Frontpage::build('Database Connection Issue','Thee was a problem with the database and must be resolved.','database',Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -78,6 +79,6 @@ class ErrorController extends Controller
      */
     public static function developer()
     {
-        return (new FrontPageData('Developer Issues have Occurred', 'The application was unable to handle the request and could not continue'))->without(['*'])->view('500', 500, true);
+        return Frontpage::build('Development Error','The application was unable to continue','500',Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

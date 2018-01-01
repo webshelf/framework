@@ -34,6 +34,8 @@ class Collections
      */
     public function __construct(Model $model, Navigation $navigation)
     {
+        $this->model = $model;
+
         $this->navigation = $navigation;
     }
 
@@ -58,7 +60,7 @@ class Collections
      */
     public function sidebar()
     {
-        if ($this->model->menu->parent) {
+        if ($this->model->menu && $this->model->menu->parent) {
             $collection = $this->navigation->collection->get($this->model->menu->parent->title);
 
             return $collection->children;

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
-    <title>{{ $webpage->name() }}</title>
+    <title>{{ $webpage->page->title() }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -100,7 +100,7 @@
             <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
             <?php /** @var \App\Classes\Library\PageLoader\NavItem $item */ ?>
 
-            @foreach ($webpage->navigationItems() as $item)
+            @foreach ($webpage->collections->collection() as $item)
                 <a class="{{ $item->classState() }}" href="{{ $item->url() }}">{{ $item->title() }}</a>
             @endforeach
 
@@ -122,7 +122,7 @@
             </div>
 
             <div class="links">
-                @foreach ($webpage->sidebarItems() as $item)
+                @foreach ($webpage->collections->sidebar() as $item)
                     <a href="{{ $item->url() }}" class="{{ $item->classState() }}">{{ $item->title() }}</a>
                 @endforeach
             </div>

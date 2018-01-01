@@ -8,6 +8,7 @@
 
 namespace App\Classes\Library\PageLoader;
 
+use App\Classes\Repositories\MenuRepository;
 use App\Model\Page;
 use App\Model\Role;
 use Illuminate\Http\Response;
@@ -25,7 +26,7 @@ class Frontpage
     /**
      * @var Webpage
      */
-    private $webpage;
+    public $webpage;
 
     /**
      * @var Page
@@ -42,16 +43,15 @@ class Frontpage
         $this->response = app(ResponseFactory::class);
 
         $this->webpage = new Webpage($this->model = $model, $navigationRepository);
-
-        return $this;
     }
 
     /**
      * @param string|null $template
+     * @param bool $override
      * @param int $status
      * @return Response
      */
-    public function publish(string $template = null, int $status = 200)
+    public function publish(string $template = null, bool $override = true, int $status = 200)
     {
         if ($this->isMaintenanceMode()) {
             return ErrorController::maintenance();
@@ -61,7 +61,7 @@ class Frontpage
             return ErrorController::disabled();
         }
 
-        return $this->response->view($this->makeBlade($template), ['webpage' => $this->webpage], $status);
+        return $this->response->view($this->makeBlade($template, $override), ['webpage' => $this->webpage], $status);
     }
 
     /**
@@ -70,7 +70,7 @@ class Frontpage
      * @param Page $page
      * @return bool
      */
-    public function isDisabledPage(Page $page)
+    private function isDisabledPage(Page $page)
     {
         return $page->enabled == false;
     }
@@ -99,14 +99,35 @@ class Frontpage
 
     /**
      * @param string|null $template
+     * @param bool $override
      * @return string
      */
-    private function makeBlade(string $template = null)
+    private function makeBlade(string $template = null, bool $override = true)
     {
         if ($template == null) {
             return currentURI() == 'index' ? 'website::index' : 'website::page';
         }
 
+        if ($override && view()->exists("website::plugins.{$this->model->slug}")) {
+            $template = "website::plugins.{$this->model->slug}";
+        }
+
         return $template;
+    }
+
+    /**
+     * @param string $title
+     * @param string $description
+     * @param string $template
+     * @param int $response
+     * @return Response
+     */
+    public static function build(string $title, string $description, string $template, int $response)
+    {
+        $page = new Page(['title' => $title, 'seo_description' => $description]);
+
+        $navigation = (new MenuRepository)->allParentsWithChildren();
+
+        return (new Frontpage($page, $navigation))->publish($template, false, $response);
     }
 }
