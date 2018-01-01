@@ -44,7 +44,7 @@ class ErrorController extends Controller
      */
     public static function disabled()
     {
-        return Frontpage::build('Page Moved', 'Page is unable to be located.','disabled',Response::HTTP_NOT_FOUND);
+        return Frontpage::build('Page Moved', 'Page is unable to be located.', 'disabled', Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -55,7 +55,7 @@ class ErrorController extends Controller
      */
     public static function maintenance()
     {
-        return Frontpage::build('Maintenance Mode','The website is currently offline and will return shortly','maintenance',Response::HTTP_SERVICE_UNAVAILABLE);
+        return Frontpage::build('Maintenance Mode', 'The website is currently offline and will return shortly', 'maintenance', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
     /**
@@ -67,7 +67,7 @@ class ErrorController extends Controller
      */
     public static function database()
     {
-        return Frontpage::build('Database Connection Issue','Thee was a problem with the database and must be resolved.','database',Response::HTTP_INTERNAL_SERVER_ERROR);
+        return Frontpage::build('Database Connection Issue', 'Thee was a problem with the database and must be resolved.', 'database', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -79,6 +79,6 @@ class ErrorController extends Controller
      */
     public static function developer()
     {
-        return Frontpage::build('Development Error','The application was unable to continue','500',Response::HTTP_INTERNAL_SERVER_ERROR);
+        return Frontpage::build('Development Error', 'The application was unable to continue', '500', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

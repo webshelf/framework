@@ -3,29 +3,24 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 31/12/2017
- * Time: 16:57
+ * Time: 16:57.
  */
 
 namespace Tests\Feature;
 
-use App\Classes\Library\PageLoader\Webpage;
 use App\Model\Menu;
 use App\Model\Page;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 use Tests\TestCase;
-use App\Classes\Library\PageLoader\Frontpage;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use App\Classes\Library\PageLoader\Webpage;
+use App\Classes\Library\PageLoader\Frontpage;
 
 /**
- * Class FrontpageLoaderTest
- *
- * @package Tests\Feature
+ * Class FrontpageLoaderTest.
  */
 class FrontpageLoaderTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -66,11 +61,10 @@ class FrontpageLoaderTest extends TestCase
      */
     private function publish(Frontpage $frontpage, string $url = '/', string $template = null)
     {
-        Route::get($url, function() use ($frontpage, $template) {
+        Route::get($url, function () use ($frontpage, $template) {
             return $frontpage->publish($template, false);
         });
 
         return $this->visit($url);
     }
-
 }
