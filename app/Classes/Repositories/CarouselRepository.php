@@ -15,7 +15,6 @@ use App\Model\Carousel;
  */
 class CarouselRepository extends Carousel
 {
-
     /**
      * @param int $integer
      * @return mixed|Carousel
