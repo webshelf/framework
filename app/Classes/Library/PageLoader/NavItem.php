@@ -100,4 +100,12 @@ class NavItem
     {
         return $this->text;
     }
+
+    /**
+     * @return mixed
+     */
+    public function target()
+    {
+        return $this->target();
+    }
 }
