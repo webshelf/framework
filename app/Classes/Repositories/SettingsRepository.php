@@ -9,21 +9,28 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Setting;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class SettingsRepository.
  */
-class SettingsRepository extends Setting
+class SettingsRepository extends BaseRepository
 {
     /**
-     * Return a single model where the integer matches.
-     *
-     * @param $integer
-     * @return SettingsRepository|array|\Illuminate\Database\Eloquent\Model
+     * @var Setting|Builder|Collection
      */
-    public function whereID(int $integer)
+    protected $model;
+
+    /**
+     * PageRepository constructor.
+     *
+     * @param Setting $model
+     */
+    public function __construct(Setting $model)
     {
-        return $this->where('id', $integer)->first();
+        $this->model = $model;
     }
 
     /**
@@ -32,6 +39,6 @@ class SettingsRepository extends Setting
      */
     public function firstKey(string $string)
     {
-        return $this->where('key', $string)->first();
+        return $this->model->where('key', $string)->first();
     }
 }

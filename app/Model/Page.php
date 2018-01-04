@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use OwenIt\Auditing\Auditable;
 use App\Classes\Interfaces\AuditInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +36,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @return Page|Collection|Builder
  */
 class Page extends EloquentModel implements AuditInterface
 {

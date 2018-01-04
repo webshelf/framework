@@ -9,23 +9,30 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class MenuRepository.
  *
  * @method Menu withTrashed
  */
-class MenuRepository extends Menu
+class MenuRepository extends BaseRepository
 {
     /**
-     * Return the Menu with the matching ID.
-     *
-     * @param int $integer
-     * @return Menu
+     * @var Menu|Builder|Collection
      */
-    public function whereID(int $integer) : Menu
+    protected $model;
+
+    /**
+     * PageRepository constructor.
+     *
+     * @param Menu $model
+     */
+    public function __construct(Menu $model)
     {
-        return $this->where('id', $integer)->first();
+        $this->model = $model;
     }
 
     /**
@@ -35,7 +42,7 @@ class MenuRepository extends Menu
      */
     public function organisedMenuList()
     {
-        return $this->whereNull('parent_id')->where('status', true)->with('page')->orderBy('order', 'asc')->get();
+        return $this->model->whereNull('parent_id')->where('status', true)->with('page')->orderBy('order', 'asc')->get();
     }
 
     /**
@@ -45,12 +52,12 @@ class MenuRepository extends Menu
      */
     public function whereTopLevel()
     {
-        return $this->whereNull('parent_id')->orderBy('order', 'asc')->get();
+        return $this->model->whereNull('parent_id')->orderBy('order', 'asc')->get();
     }
 
     public function whereTopLevelEditable()
     {
-        return $this->where('lock', false)->whereNull('parent_id')->orderBy('order', 'asc')->get();
+        return $this->model->where('lock', false)->whereNull('parent_id')->orderBy('order', 'asc')->get();
     }
 
     /**
@@ -61,11 +68,11 @@ class MenuRepository extends Menu
      */
     public function whereParent(int $integer)
     {
-        return ($integer == 1) ? $this->whereTopLevel() : $this->where('parent_id', $integer)->orderBy('order', 'asc')->get();
+        return ($integer == 1) ? $this->whereTopLevel() : $this->model->where('parent_id', $integer)->orderBy('order', 'asc')->get();
     }
 
     public function allParentsWithChildren()
     {
-        return $this->whereNull('parent_id')->with('page', 'children')->orderBy('order', 'asc')->get();
+        return $this->model->whereNull('parent_id')->with('page', 'children')->orderBy('order', 'asc')->get();
     }
 }

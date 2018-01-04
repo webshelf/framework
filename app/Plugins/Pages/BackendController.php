@@ -95,11 +95,12 @@ class BackendController extends PluginEngine
      *
      * @param  \Illuminate\Http\Request $request
      * @param string $name
+     * @param PageRepository $repository
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $name)
+    public function update(Request $request, string $name, PageRepository $repository)
     {
-        $page = $this->repository->whereName($name);
+        $page = $repository->whereName($name);
 
         $this->validate($request, ['title'=>'required|min:3|max:255|unique:pages,seo_title,'.$page->id.',id,deleted_at,NULL']);
 

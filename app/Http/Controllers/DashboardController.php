@@ -22,13 +22,13 @@ class DashboardController extends Controller
     /**
      * Basic overview of the website, here its the dashboard panel.
      *
-     * @param AuditRepository $auditRepository
+     * @param AuditRepository $repository
      * @return \Illuminate\Contracts\View\View
      * @internal param Facebook $facebook
      */
-    public function index(AuditRepository $auditRepository)
+    public function index(AuditRepository $repository)
     {
-        $audits = $auditRepository->orderByDesc('created_at')->paginate(15);
+        $audits = $repository->paginateAudits(15);
 
         return view('dashboard::index')->with(['audits'=>$audits]);
     }

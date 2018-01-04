@@ -41,7 +41,7 @@ class InstanceServiceProvider extends ServiceProvider
     {
         $this->app->singleton(SettingsManager::class, function () {
             try {
-                return (new SettingsManager)->collect(SettingsRepository::all());
+                return (new SettingsManager)->collect(app(SettingsRepository::class)->all());
             } catch (Exception $e) {
                 if ($this->app->runningInConsole()) {
                     return new SettingsManager;
@@ -56,7 +56,7 @@ class InstanceServiceProvider extends ServiceProvider
     {
         $this->app->singleton(PluginManager::class, function () {
             try {
-                return (new PluginManager)->collect(PluginRepository::all());
+                return (new PluginManager)->collect(app(PluginRepository::class)->all());
             } catch (Exception $e) {
                 if ($this->app->runningInConsole()) {
                     return new PluginManager;

@@ -9,19 +9,28 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Account;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 /**
  * Class AccountRepository.
  */
-class AccountRepository extends Account
+class AccountRepository extends BaseRepository
 {
+
     /**
-     * @param int $integer
-     * @return Account|array|\stdClass
+     * @var Account|Builder|Collection
      */
-    public function whereID(int $integer) : Account
+    protected $model;
+
+    /**
+     * PageRepository constructor.
+     *
+     * @param Account $model
+     */
+    public function __construct(Account $model)
     {
-        return $this->where('id', $integer)->first();
+        $this->model = $model;
     }
 
     /**
@@ -30,6 +39,6 @@ class AccountRepository extends Account
      */
     public function whereEmail(string $string) : Account
     {
-        return $this->where('email', $string)->first();
+        return $this->model->where('email', $string)->first();
     }
 }

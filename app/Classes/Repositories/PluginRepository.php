@@ -9,19 +9,35 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Plugin;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-
 /**
  * Class PluginRepository.
  */
-class PluginRepository extends Plugin
+class PluginRepository extends BaseRepository
 {
+    /**
+     * @var Plugin|Builder|Collection
+     */
+    protected $model;
+
+    /**
+     * PageRepository constructor.
+     *
+     * @param Plugin $model
+     */
+    public function __construct(Plugin $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * @return mixed
      */
     public function allWhereActive() : Collection
     {
-        return $this->where('enabled', true)->get();
+        return $this->model->where('enabled', true)->get();
     }
 
     /**
@@ -29,7 +45,7 @@ class PluginRepository extends Plugin
      */
     public function allWhereViewable() : Collection
     {
-        return $this->where('enabled', true)->whereNull('hidden')->get();
+        return $this->model->where('enabled', true)->whereNull('hidden')->get();
     }
 
     /**
@@ -37,7 +53,7 @@ class PluginRepository extends Plugin
      */
     public function allWhereDisabled() : Collection
     {
-        return $this->where('enabled', false)->get();
+        return $this->model->where('enabled', false)->get();
     }
 
     /**
@@ -48,6 +64,6 @@ class PluginRepository extends Plugin
      */
     public function whereName($plugin_name)
     {
-        return $this->where('name', $plugin_name)->first();
+        return $this->model->where('name', $plugin_name)->first();
     }
 }

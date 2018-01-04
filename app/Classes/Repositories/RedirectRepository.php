@@ -9,26 +9,35 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Redirect;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class RedirectRepository.
  */
-class RedirectRepository extends Redirect
+class RedirectRepository extends BaseRepository
 {
+    /**
+     * @var Redirect|Builder|Collection
+     */
+    protected $model;
+
+    /**
+     * PageRepository constructor.
+     *
+     * @param Redirect $model
+     */
+    public function __construct(Redirect $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|void|static[]
      */
     public function withRelationship()
     {
-        return $this->whereHas('fromPage')->whereHas('toPage')->get();
-    }
-
-    /**
-     * @param int $integer
-     * @return Redirect|array|\stdClass
-     */
-    public function whereID(int $integer) : Redirect
-    {
-        return $this->where('id', $integer)->first();
+        return $this->model->whereHas('fromPage')->whereHas('toPage')->get();
     }
 }

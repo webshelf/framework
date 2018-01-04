@@ -68,7 +68,7 @@ class PageController extends Controller
      */
     private function navigationData()
     {
-        return (new MenuRepository)->allParentsWithChildren();
+        return app(MenuRepository::class)->allParentsWithChildren();
     }
 
     /**

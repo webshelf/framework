@@ -9,20 +9,28 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Role;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class RoleRepository.
  */
-class RoleRepository extends Role
+class RoleRepository extends BaseRepository
 {
     /**
-     * @param int $integer
-     * @return Role|array|null|\stdClass
+     * @var Role|Builder|Collection
      */
-    public function whereID(int $integer)
+    protected $model;
+
+    /**
+     * PageRepository constructor.
+     *
+     * @param Role $model
+     */
+    public function __construct(Role $model)
     {
-        return $this->where('id', $integer)->first();
+        $this->model = $model;
     }
 
     /**
@@ -30,6 +38,6 @@ class RoleRepository extends Role
      */
     public function whereRolesGreaterOrEqualToMyAccount()
     {
-        return $this->where('id', '>=', account()->role->id)->get();
+        return $this->model->where('id', '>=', account()->role->id)->get();
     }
 }
