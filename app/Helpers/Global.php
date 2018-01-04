@@ -35,7 +35,7 @@
     {
         return app(\App\Classes\PluginManager::class);
     }
-    
+
     /**
      * @return \App\Classes\Library\StyleCSS\Style
      */
