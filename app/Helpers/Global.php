@@ -52,6 +52,22 @@
     }
 
     /**
+     * Return an array of the segmented url path.
+     *
+     * @return array
+     */
+    function segmentRequestPath()
+    {
+        $path = app('request')->path();
+
+        if ($path == '/') {
+            return ['index'];
+        }
+
+        return explode('/', $path);
+    }
+
+    /**
      * Turn a boolean value into readable data.
      * true  = Active
      * false = Inactive.

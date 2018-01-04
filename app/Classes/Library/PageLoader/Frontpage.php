@@ -126,7 +126,7 @@ class Frontpage
     {
         $page = new Page(['title' => $title, 'seo_description' => $description]);
 
-        $navigation = (new MenuRepository)->allParentsWithChildren();
+        $navigation = app(MenuRepository::class)->allParentsWithChildren();
 
         return (new self($page, $navigation))->publish($template, false, $response);
     }

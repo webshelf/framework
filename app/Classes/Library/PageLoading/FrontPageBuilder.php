@@ -115,17 +115,13 @@ class FrontPageBuilder
      */
     public function breadcrumbs()
     {
-        if (settings()->getValue('site_breadcrumbs') == true) {
-            $breadcrumbs = new Breadcrumbs;
+        $breadcrumbs = new Breadcrumbs;
 
-            $breadcrumbs->fromCurrentUrl();
+        $breadcrumbs->fromCurrentUrl();
 
-            $breadcrumbs->homeExists(true);
+        $breadcrumbs->homeExists(true);
 
-            return $breadcrumbs;
-        }
-
-        return [];
+        return $breadcrumbs;
     }
 
     /**

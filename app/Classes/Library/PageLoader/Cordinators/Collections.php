@@ -8,6 +8,7 @@
 
 namespace App\Classes\Library\PageLoader\Cordinators;
 
+use App\Classes\Breadcrumbs;
 use App\Model\Page as Model;
 use App\Classes\Library\PageLoader\Navigation;
 
@@ -76,10 +77,18 @@ class Collections
     }
 
     /**
+     * @return bool
+     */
+    public function hasSidebar()
+    {
+        return $this->model->menu || $this->model->menu && $this->model->menu->parent;
+    }
+
+    /**
      * @return array
      */
     public function breadcrumbs()
     {
-        return [];
+        return Breadcrumbs::fromCurrentRoute()->toArray();
     }
 }

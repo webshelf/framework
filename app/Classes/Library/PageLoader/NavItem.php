@@ -106,6 +106,6 @@ class NavItem
      */
     public function target()
     {
-        return $this->target();
+        return $this->target;
     }
 }
