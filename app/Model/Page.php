@@ -89,6 +89,14 @@ class Page extends EloquentModel implements AuditInterface
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function carousel()
+    {
+        return $this->hasOne(Carousel::class, 'page_id', 'id');
+    }
+
+    /**
      * A page belongs to a single menu.
      *
      * @return Menu|BelongsTo

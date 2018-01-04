@@ -15,12 +15,21 @@ use App\Model\Carousel;
  */
 class CarouselRepository extends Carousel
 {
+
     /**
      * @param int $integer
-     * @return Carousel
+     * @return mixed|Carousel
      */
-    public function whereID(int $integer) : Carousel
+    public function whereID(int $integer)
     {
-        return $this->where('id', $integer)->first();
+        return $this->where('id', $integer)->with('slides')->first();
+    }
+
+    /**
+     * @return CarouselRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function allWithSlides()
+    {
+        return $this->with('slides')->get();
     }
 }
