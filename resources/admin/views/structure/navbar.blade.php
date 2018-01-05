@@ -21,10 +21,11 @@
                     <i class="fa fa-plus-square" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">New Menu</a>
-                    <a class="dropdown-item" href="#">New Page</a>
-                    <a class="dropdown-item" href="#">New Redirect</a>
-                    <a class="dropdown-item" href="#">New Account</a>
+
+                    <a class="dropdown-item" href="{{ route('admin.menus.create') }}">New Menu</a>
+                    <a class="dropdown-item" href="{{ route('admin.pages.create') }}">New Page</a>
+                    <a class="dropdown-item" href="{{ route('admin.redirects.create') }}">New Redirect</a>
+
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -32,10 +33,10 @@
                     <div class="profile-image"><img src="{{ account()->makeGravatarImage() }}" width="24" height="24" alt="profile image"></div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    {{--<a class="dropdown-item" href="#">Profile</a>--}}
+                    <a class="dropdown-item" href="{{ route('admin.settings.index') }}">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sign out</a>
+                    <a class="dropdown-item" href="{{ route('AuthLogout') }}">Log out</a>
                 </div>
             </li>
         </ul>
