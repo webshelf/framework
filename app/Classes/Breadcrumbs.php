@@ -91,6 +91,26 @@ class Breadcrumbs
     }
 
     /**
+     * @param int $count
+     * @return $this
+     */
+    public function limit(int $count)
+    {
+        $collection = new Collection;
+
+        for ($i = 0; $i < $count; $i++)
+        {
+            if ($this->collection->has($i)) {
+                $collection->push($this->collection->get($i));
+            }
+        }
+
+        $this->collection = $collection;
+
+        return $this;
+    }
+
+    /**
      * @return Breadcrumbs
      */
     public static function fromCurrentRoute()

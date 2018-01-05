@@ -41,6 +41,6 @@ class BreadcrumbComposer
      */
     public function compose(View $view)
     {
-        $view->with('breadcrumbs', Breadcrumbs::fromCurrentRoute());
+        $view->with('breadcrumbs', Breadcrumbs::fromCurrentRoute()->limit(3));
     }
 }

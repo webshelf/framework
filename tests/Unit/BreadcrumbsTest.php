@@ -71,6 +71,19 @@ class BreadcrumbsTest extends TestCase
         $this->assertTrue($breadcrumbs->hasCount(1));
     }
 
+    public function testCrumbLimiter()
+    {
+        /** @var Breadcrumbs $breadcrumbs */
+        $breadcrumbs = app(Breadcrumbs::class);
+
+        $breadcrumbs->addCrumb('Home', 'http://website.com');
+        $breadcrumbs->addCrumb('About', 'http://about.com');
+        $breadcrumbs->addCrumb('Contact', 'http://contact.com');
+
+        $this->assertTrue($breadcrumbs->limit(2)->hasCount(2));
+        $this->assertFalse($breadcrumbs->limit(2)->hasCount(1));
+    }
+
     public function testFromCurrentRoute()
     {
         Route::get('/breadcrumb/test', function () {
