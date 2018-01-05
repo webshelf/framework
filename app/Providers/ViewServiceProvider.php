@@ -8,14 +8,11 @@
 
 namespace App\Providers;
 
-use App\Classes\Breadcrumbs;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
+use Illuminate\Support\ServiceProvider;
 
 /**
- * Class ViewServiceProvider
- *
- * @package App\Providers
+ * Class ViewServiceProvider.
  */
 class ViewServiceProvider extends ServiceProvider
 {
