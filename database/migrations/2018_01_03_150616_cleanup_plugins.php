@@ -21,7 +21,7 @@ class CleanupPlugins extends Migration
         Schema::drop('plugin_feeds');
         Schema::drop('plugin_options');
 
-        $plugin = new \App\Classes\Repositories\PluginRepository;
+        $plugin = app(\App\Classes\Repositories\PluginRepository::class);
 
         $plugin->whereName('carousels')->delete();
         $plugin->whereName('news')->delete();

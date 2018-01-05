@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (app()->isLocal()) {
+        if (app()->isLocal() && !anInstanceOf(NotFoundHttpException::class)) {
             return parent::render($request, $exception);
         }
 
@@ -82,6 +82,6 @@ class Handler extends ExceptionHandler
      */
     private function hasDisabledSite()
     {
-        return settings()->getValue('enable_website') == false;
+        return settings()->getValue('maintenance_mode');
     }
 }

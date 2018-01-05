@@ -51,14 +51,17 @@ class Frontpage
      * @param int $status
      * @return Response
      */
-    public function publish(string $template = null, bool $override = true, int $status = 200)
+    public function publish(string $template = null, bool $override = true, int $status = 200, bool $errorResponse = false)
     {
-        if ($this->isMaintenanceMode()) {
-            return ErrorController::maintenance();
-        }
+        if (!$errorResponse)
+        {
+            if ($this->isMaintenanceMode()) {
+                return ErrorController::maintenance();
+            }
 
-        if ($this->isDisabledPage($this->model)) {
-            return ErrorController::disabled();
+            if ($this->isDisabledPage($this->model)) {
+                return ErrorController::disabled();
+            }
         }
 
         return $this->response->view($this->makeBlade($template, $override), ['webpage' => $this->webpage], $status);
@@ -124,10 +127,10 @@ class Frontpage
      */
     public static function build(string $title, string $description, string $template, int $response)
     {
-        $page = new Page(['title' => $title, 'seo_description' => $description]);
+        $page = new Page(['seo_title' => $title, 'seo_description' => $description]);
 
         $navigation = app(MenuRepository::class)->allParentsWithChildren();
 
-        return (new self($page, $navigation))->publish($template, false, $response);
+        return (new self($page, $navigation))->publish("errors::{$template}", false, $response, true);
     }
 }

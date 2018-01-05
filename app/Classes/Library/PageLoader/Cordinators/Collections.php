@@ -85,10 +85,10 @@ class Collections
     }
 
     /**
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public function breadcrumbs()
     {
-        return Breadcrumbs::fromCurrentRoute()->toArray();
+        return Breadcrumbs::fromCurrentRoute()->crumbs();
     }
 }

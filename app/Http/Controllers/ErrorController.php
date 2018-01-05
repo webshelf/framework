@@ -32,7 +32,7 @@ class ErrorController extends Controller
      */
     public static function unknown()
     {
-        return Frontpage::build('404', '404 : Cannot find the page.', '404', Response::HTTP_NOT_FOUND);
+        return Frontpage::build('404 Page Not Found', '404 : Cannot find the page.', '404', Response::HTTP_NOT_FOUND);
     }
 
     /**

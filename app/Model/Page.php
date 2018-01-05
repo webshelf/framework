@@ -60,11 +60,11 @@ class Page extends EloquentModel implements AuditInterface
     protected $table = 'pages';
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are not mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['seo_title', 'slug'];
+    protected $guarded = [];
 
     /**
      * The table date columns, casted to Carbon.

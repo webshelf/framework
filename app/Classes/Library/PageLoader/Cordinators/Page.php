@@ -45,7 +45,7 @@ class Page
     {
         if (settings()->getValue('seo_text') != '') {
             if (settings()->getValue('seo_position') == 'right') {
-                return ucfirst($this->model->seo_title).' '.settings()->getValue('seo_separator').' '.settings()->getValue('seo_separator');
+                return ucfirst($this->model->seo_title).' '.settings()->getValue('seo_separator').' '.settings()->getValue('seo_text');
             } else {
                 return settings()->getValue('seo_text').' '.settings()->getValue('seo_separator').' '.ucfirst($this->model->seo_title);
             }

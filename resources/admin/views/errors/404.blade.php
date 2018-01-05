@@ -1,6 +1,6 @@
-@extends('website::page')
+@extends('website::frame')
 
-@section('error.message')
+@section('content')
 
     Sorry, We could not find that page ! [404]
 
