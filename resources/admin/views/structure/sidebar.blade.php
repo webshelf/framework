@@ -12,7 +12,7 @@
 
             <li>
 
-                <a href="{{ route('dashboard') }}" class="{{ $breadcrumbs->contain('admin', 3) ? 'active' : 'inactive' }}">
+                <a href="{{ route('dashboard') }}" class="{{ ($breadcrumbs->contain('admin', 1) && $breadcrumbs->hasCount(2)) ? 'active' : 'inactive' }}">
 
                     <i class="nav-icon fa fa-tachometer icon" aria-hidden="true"></i>
 
@@ -31,7 +31,7 @@
             @foreach(plugins()->viewable() as $plugin)
 
                 <li>
-                        <a href="{{ $plugin->adminUrl() }}" class="{{ $breadcrumbs->contain($plugin->name(), 3) ? 'active' : 'inactive' }}">
+                        <a href="{{ $plugin->adminUrl() }}" class="{{ $breadcrumbs->contain($plugin->name(), 2) ? 'active' : 'inactive' }}">
 
                             <i class="nav-icon fa {{ $plugin->icon() }}" aria-hidden="true"></i>
 
@@ -52,7 +52,7 @@
 
                 <li>
 
-                        <a href="{{ url($module['url']) }}" class="{{ $breadcrumbs->contain($module['title'], 3) ? 'active' : 'inactive' }}">
+                        <a href="{{ url($module['url']) }}" class="{{ $breadcrumbs->contain($module['title'], 2) ? 'active' : 'inactive' }}">
 
                             <i class="nav-icon fa {{ $module['icon'] }}" aria-hidden="true"></i>
 

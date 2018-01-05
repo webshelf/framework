@@ -61,6 +61,16 @@ class BreadcrumbsTest extends TestCase
         $this->assertfalse($breadcrumbs->contain('not-valid-title', 5));
     }
 
+    public function testCrumbCounting()
+    {
+        /** @var Breadcrumbs $breadcrumbs */
+        $breadcrumbs = app(Breadcrumbs::class);
+
+        $breadcrumbs->addCrumb('Home', 'http://website.com');
+
+        $this->assertTrue($breadcrumbs->hasCount(1));
+    }
+
     public function testFromCurrentRoute()
     {
         Route::get('/breadcrumb/test', function () {

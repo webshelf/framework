@@ -82,6 +82,15 @@ class Breadcrumbs
     }
 
     /**
+     * @param int $integer
+     * @return bool
+     */
+    public function hasCount(int $integer)
+    {
+        return $this->collection->count() == $integer;
+    }
+
+    /**
      * @return Breadcrumbs
      */
     public static function fromCurrentRoute()
