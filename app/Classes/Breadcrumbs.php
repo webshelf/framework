@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 04/01/2018
- * Time: 01:28
+ * Time: 01:28.
  */
 
 namespace App\Classes;
@@ -12,13 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 /**
- * Class Breadcrumbs
- *
- * @package App\Classes
+ * Class Breadcrumbs.
  */
 class Breadcrumbs
 {
-
     /**
      * A collection of crumbs.
      *
@@ -75,8 +72,9 @@ class Breadcrumbs
      */
     public function contain(string $name, int $position)
     {
-        if ($this->collection->has($position) == false)
+        if ($this->collection->has($position) == false) {
             return false;
+        }
 
         return $this->collection->get($position)->title == $this->filter($name);
     }
@@ -106,14 +104,12 @@ class Breadcrumbs
         // Add the home array.
         $instance->addCrumb('Home', $urlPath);
 
-        foreach ($routes as $route)
-        {
-            $urlPath = $urlPath . '/' . $route;
+        foreach ($routes as $route) {
+            $urlPath = $urlPath.'/'.$route;
 
             $instance->addCrumb($route, $urlPath);
         }
 
         return $instance;
     }
-
 }
