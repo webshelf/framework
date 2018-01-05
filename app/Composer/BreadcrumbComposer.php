@@ -41,6 +41,6 @@ class BreadcrumbComposer
      */
     public function compose(View $view)
     {
-        $view->with('breadcrumbs', $this->breadcrumbs->fromCurrentUrl()->rename(['admin'=>'dashboard'])->remove(['home']));
+        $view->with('breadcrumbs', Breadcrumbs::fromCurrentRoute());
     }
 }

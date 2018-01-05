@@ -24,7 +24,7 @@
 
             @include('dashboard::structure.sidebar')
             
-            @include('dashboard::structure.content', ['breadcrumbs' => $breadcrumbs])
+            @include('dashboard::structure.content')
 
         </section>
 

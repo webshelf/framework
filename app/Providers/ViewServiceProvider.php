@@ -8,10 +8,20 @@
 
 namespace App\Providers;
 
+use App\Classes\Breadcrumbs;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
+/**
+ * Class ViewServiceProvider
+ *
+ * @package App\Providers
+ */
 class ViewServiceProvider extends ServiceProvider
 {
+    /**
+     *  Register component views.
+     */
     public function register()
     {
         /*

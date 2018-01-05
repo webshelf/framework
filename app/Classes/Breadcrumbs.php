@@ -45,6 +45,7 @@ class Breadcrumbs
         $crumb = new \stdClass();
         $crumb->title = $this->filter($title);
         $crumb->path = url($path);
+
         $this->collection->push($crumb);
 
         return true;
@@ -62,13 +63,26 @@ class Breadcrumbs
     /**
      * @return Collection
      */
-    public function make()
+    public function crumbs()
     {
         return $this->collection;
     }
 
     /**
-     * @return Collection
+     * @param string $name
+     * @param int $position
+     * @return bool
+     */
+    public function contain(string $name, int $position)
+    {
+        if ($this->collection->has($position) == false)
+            return false;
+
+        return $this->collection->get($position)->title == $this->filter($name);
+    }
+
+    /**
+     * @return Breadcrumbs
      */
     public static function fromCurrentRoute()
     {
@@ -90,7 +104,7 @@ class Breadcrumbs
             $instance->addCrumb($route, $urlPath);
         }
 
-        return $instance->make();
+        return $instance;
     }
 
 }
