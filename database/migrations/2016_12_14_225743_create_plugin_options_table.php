@@ -23,21 +23,6 @@ class CreatePluginOptionsTable extends Migration
 
             $table->unique(['key']);
         });
-
-        /*
-         * GENERATE STATIC DATA.
-         */
-        $plugin = app(PluginRepository::class)->whereName('pages');
-
-        $plugin_option = new PluginOption;
-        $plugin_option->setKey('editor_height');
-
-        $plugin->options()->save($plugin_option);
-
-        $plugin_option = new PluginOption;
-        $plugin_option->setKey('editor_width');
-
-        $plugin->options()->save($plugin_option);
     }
 
     /**
