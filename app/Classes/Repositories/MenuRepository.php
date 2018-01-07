@@ -11,6 +11,7 @@ namespace App\Classes\Repositories;
 use App\Model\Menu;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -71,8 +72,13 @@ class MenuRepository extends BaseRepository
         return ($integer == 1) ? $this->whereTopLevel() : $this->model->where('parent_id', $integer)->orderBy('order', 'asc')->get();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function allParentsWithChildren()
     {
-        return $this->model->whereNull('parent_id')->with('page', 'children')->orderBy('order', 'asc')->get();
+        return $this->model->whereNull('parent_id')->with(['page', 'children' => function(HasMany $children) {
+            $children->orderBy('order')->get();
+        }])->orderBy('order', 'asc')->get();
     }
 }

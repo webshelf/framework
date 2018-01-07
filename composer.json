@@ -16,10 +16,11 @@
         "barryvdh/laravel-elfinder": "^0.3.11"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
         "codacy/coverage": "dev-master",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "~1.0",
+        "mockery/mockery": "0.9.9",
         "phpunit/phpunit": "~6.0",
         "symfony/thanks": "^1.0"
     },
