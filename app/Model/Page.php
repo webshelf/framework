@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Classes\Interfaces\SluggableInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -33,13 +34,14 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property int $creator_id
  * @property int $editor_id
  *
+ * @property Link $links
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @return Page|Collection|Builder
  */
-class Page extends EloquentModel implements AuditInterface
+class Page extends EloquentModel implements AuditInterface, SluggableInterface
 {
     /*
      * Laravel Deleting.
@@ -78,9 +80,7 @@ class Page extends EloquentModel implements AuditInterface
      *
      * @var array
      */
-    protected $auditExclude = [
-        'views',
-    ];
+    protected $auditExclude = ['views'];
 
     /**
      * Increment the view count of the page.
@@ -90,14 +90,6 @@ class Page extends EloquentModel implements AuditInterface
     public function incrementViews()
     {
         return $this->views = $this->views + 1;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function carousel()
-    {
-        return $this->hasOne(Carousel::class, 'page_id', 'id');
     }
 
     /**
@@ -158,6 +150,14 @@ class Page extends EloquentModel implements AuditInterface
     public function auditUrl()
     {
         return route('admin.pages.edit', $this->slug);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function linked()
+    {
+        return $this->morphMany(Link::class, 'to');
     }
 
     /**

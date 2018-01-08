@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "413e0553bfc5b7613139a828bb9c1a3c",
+    "content-hash": "6fe5d91f0533b7a9d8220f865f6508b4",
     "packages": [
+        {
+            "name": "ajthinking/tinx",
+            "version": "v2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ajthinking/tinx.git",
+                "reference": "2fa48f07133b76f0ce4437f20cac75b5f7cad478"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ajthinking/tinx/zipball/2fa48f07133b76f0ce4437f20cac75b5f7cad478",
+                "reference": "2fa48f07133b76f0ce4437f20cac75b5f7cad478",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "5.2.* || 5.3.* || 5.4.* || 5.5.*",
+                "laravel/tinker": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "laravel",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ajthinking\\Tinx\\TinxServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ajthinking\\Tinx\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anders Jürisoo",
+                    "email": "jurisoo@hotmail.com"
+                }
+            ],
+            "description": "Inject cool stuff into Laravel Tinker and make it restartable.",
+            "time": "2017-12-26T02:15:05+00:00"
+        },
         {
             "name": "barryvdh/elfinder-flysystem-driver",
             "version": "v0.2.1",
@@ -2350,6 +2397,52 @@
             "time": "2017-09-22T20:46:04+00:00"
         },
         {
+            "name": "rymanalu/factory-generator",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rymanalu/factory-generator.git",
+                "reference": "1d023936d8dd30d9a4b44214106e34c17951d586"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rymanalu/factory-generator/zipball/1d023936d8dd30d9a4b44214106e34c17951d586",
+                "reference": "1d023936d8dd30d9a4b44214106e34c17951d586",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^5.1",
+                "illuminate/support": "^5.1",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rymanalu\\FactoryGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roni Yusuf Manalu",
+                    "email": "rymanalu@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Model Factory Generator.",
+            "homepage": "https://github.com/rymanalu/factory-generator",
+            "keywords": [
+                "factory",
+                "generator",
+                "laravel",
+                "model",
+                "model factory"
+            ],
+            "time": "2017-03-25T16:40:32+00:00"
+        },
+        {
             "name": "studio-42/elfinder",
             "version": "2.1.30",
             "source": {
@@ -4030,6 +4123,53 @@
             "time": "2017-02-28T12:52:32+00:00"
         },
         {
+            "name": "mpociot/laravel-test-factory-helper",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpociot/laravel-test-factory-helper.git",
+                "reference": "3d122e7517454800f69531b6a3151b254da2a285"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpociot/laravel-test-factory-helper/zipball/3d122e7517454800f69531b6a3151b254da2a285",
+                "reference": "3d122e7517454800f69531b6a3151b254da2a285",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.3",
+                "illuminate/console": "^5.0",
+                "illuminate/filesystem": "^5.0",
+                "illuminate/support": "^5.0",
+                "php": ">=5.6.0",
+                "symfony/class-loader": "^2.3|3.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mpociot\\LaravelTestFactoryHelper\\TestFactoryHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mpociot\\LaravelTestFactoryHelper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate Laravel test factories from your existing models",
+            "keywords": [
+                "factory",
+                "laravel",
+                "tests"
+            ],
+            "time": "2017-10-09T18:00:57+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.7.0",
             "source": {
@@ -5341,6 +5481,62 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "v3.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/class-loader.git",
+                "reference": "e63c12699822bb3b667e7216ba07fbcc3a3e203e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/e63c12699822bb3b667e7216ba07fbcc3a3e203e",
+                "reference": "e63c12699822bb3b667e7216ba07fbcc3a3e203e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.8|~3.0|~4.0",
+                "symfony/polyfill-apcu": "~1.1"
+            },
+            "suggest": {
+                "symfony/polyfill-apcu": "For using ApcClassLoader on HHVM"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "https://symfony.com",
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/thanks",

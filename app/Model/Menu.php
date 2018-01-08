@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\Classes\Interfaces\LinkableInterface;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
@@ -11,9 +13,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @property int $id
  * @property string $title
- * @property string $hyperlink
- * @property int $page_id
  * @property string $target
+ * @property int $link_id
  * @property int $parent_id
  * @property int $order
  * @property bool $status
@@ -24,12 +25,13 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Menu $parent
  * @property Page $page
  * @property Menu $children
+ * @property Link $link
  *
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Menu extends EloquentModel
+class Menu extends EloquentModel implements LinkableInterface
 {
     /*
      * Laravel Deleting.
@@ -45,6 +47,13 @@ class Menu extends EloquentModel
     protected $table = 'menus';
 
     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    // protected $with = ['link'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
@@ -53,6 +62,8 @@ class Menu extends EloquentModel
 
     /**
      * Return the page that this menu has.
+     *
+     * @deprecated Replaced with link.
      *
      * @return Page|\Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -82,12 +93,10 @@ class Menu extends EloquentModel
     }
 
     /**
-     * Return the link that this connects to, page or hyperlink.
-     *
-     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function link()
     {
-        return $this->page ? $this->page->slug() : $this->hyperlink;
+        return $this->morphOne(Link::class, 'from');
     }
 }

@@ -8,6 +8,7 @@
 
 namespace App\Plugins\Pages;
 
+use App\Model\Link;
 use App\Model\Page;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;

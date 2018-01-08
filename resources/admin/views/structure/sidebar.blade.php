@@ -1,7 +1,7 @@
 <div id="nav-sidebar">
     <div class="head">
         <div class="logo">
-            <img src="{{ url(settings()->getValue('website_logo')) }}" style="height: 100%; width: 100%; display:block;">
+            {{--<img src="{{ url(settings()->getValue('website_logo')) }}" style="height: 100%; width: 100%; display:block;">--}}
         </div>
         <div class="glance">
             <div class="website-name">{{ settings()->getValue('website_name') }}</div>

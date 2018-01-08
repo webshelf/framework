@@ -33,11 +33,6 @@ class NavItem
     protected $url = '#';
 
     /**
-     * @var int
-     */
-    protected $order;
-
-    /**
      * @var string
      */
     protected $target;
@@ -90,7 +85,8 @@ class NavItem
      */
     public function url()
     {
-        return url($this->url);
+        return '';
+//        return url($this->url);
     }
 
     /**

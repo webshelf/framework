@@ -8,6 +8,8 @@
 
 namespace App\Plugins\Menus;
 
+use App\Classes\Interfaces\SluggableInterface;
+use App\Model\Link;
 use App\Model\Menu;
 use App\Model\Page;
 use Illuminate\Http\Request;
@@ -164,30 +166,32 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Menu $menu)
     {
-        if (! $request['hyperlinkUrl']) {
-            // we expect a page to be connected.
-            $request->validate(['page_id' => 'numeric|required']);
-
-            $menu->hyperlink = null;
-            $menu->title = $request['title'];
-            $menu->page_id = $request['page_id'];
-            $menu->parent_id = $request['menu_id'];
-            $menu->target = $request['target'];
-            $menu->status = true;
-            $menu->creator_id = account()->id;
-        } else {
+        if ($request['hyperlinkUrl']) {
             // we expect this to be a hyperlink.
             $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
-
-            $menu->page_id = null;
             $menu->title = $request['title'];
             $menu->parent_id = $request['menu_id'];
-            $menu->hyperlink = $request['hyperlinkUrl'];
             $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
+            return $menu->save();
         }
 
-        return $menu->save();
+        // we expect a page to be connected.
+        $request->validate(['page_id' => 'numeric|required']);
+
+        $menu->title = $request['title'];
+        $menu->parent_id = $request['menu_id'];
+        $menu->target = $request['target'];
+        $menu->status = true;
+        $menu->creator_id = account()->id;
+
+        // Save the menu so we can get an ID if we need one.
+        $menu->save();
+
+        /** @var SluggableInterface $model */
+        $model = $this->pages->whereID($request['page_id']);
+
+        return Link::associate($menu, $model);
     }
 }
