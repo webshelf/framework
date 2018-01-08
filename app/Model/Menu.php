@@ -2,9 +2,8 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\LinkableInterface;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use App\Classes\Interfaces\LinkableInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 

@@ -2,23 +2,21 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\SluggableInterface;
 use Illuminate\Database\Eloquent\Model;
+use App\Classes\Interfaces\SluggableInterface;
 
 /**
- * Class Link
+ * Class Link.
  *
  * @property string $slug
  *
- * @property integer $from_id
+ * @property int $from_id
  * @property string $from_type
- * @property integer $to_id
+ * @property int $to_id
  * @property string $to_type
  *
  * @property Model $to
  * @property Model $from
- *
- * @package App\Model
  */
 class Link extends Model
 {
@@ -61,7 +59,7 @@ class Link extends Model
 
     public static function associate(Model $from, SluggableInterface $to)
     {
-        $link = new Link([
+        $link = new self([
             'slug' => $to->slug(),
             'to_id' => $to->id,
             'to_type' => $to->getMorphClass(),
@@ -72,4 +70,3 @@ class Link extends Model
         return $link->save();
     }
 }
-

@@ -2,13 +2,13 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\SluggableInterface;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 use OwenIt\Auditing\Auditable;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 use App\Classes\Interfaces\AuditInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Classes\Interfaces\SluggableInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 

@@ -8,7 +8,6 @@
 
 namespace App\Plugins\Menus;
 
-use App\Classes\Interfaces\SluggableInterface;
 use App\Model\Link;
 use App\Model\Menu;
 use App\Model\Page;
@@ -17,6 +16,7 @@ use App\Plugins\PluginEngine;
 use Illuminate\Validation\Rule;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
+use App\Classes\Interfaces\SluggableInterface;
 
 /**
  * Class Controller.
@@ -174,6 +174,7 @@ class BackendController extends PluginEngine
             $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
+
             return $menu->save();
         }
 
