@@ -32,7 +32,7 @@ class CleanupPlugins extends Migration
         $item = $plugin->whereName('pages');
         $item->setVersion('2.1')->setRequired(false)->save();
         $item = $plugin->whereName('redirects');
-        $item->setVersion('1.9')->setEnabled(false)->setRequired(false)->save();
+        $item->setVersion('1.9')->setEnabled(true)->setRequired(false)->save();
         $item = $plugin->whereName('products');
         $item->setVersion('1.3')->save();
     }
