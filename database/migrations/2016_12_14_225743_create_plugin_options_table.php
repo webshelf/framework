@@ -1,9 +1,7 @@
 <?php
 
-use App\Model\PluginOption;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Classes\Repositories\PluginRepository;
 
 class CreatePluginOptionsTable extends Migration
 {
