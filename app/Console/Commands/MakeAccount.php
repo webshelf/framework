@@ -47,12 +47,12 @@ class MakeAccount extends Command
     public function handle()
     {
         if ($this->argument('password')) {
-            $this->account->forename = 'SuperUser';
-            $this->account->surname = '';
+            $this->account->forename = 'Mark';
+            $this->account->surname = 'Hester';
             $this->account->verified = true;
             $this->account->role_id = Role::SUPERUSER;
             $this->account->password = bcrypt($this->argument('password'));
-            $this->account->email = 'superuser@webshelf.net';
+            $this->account->email = 'marky360@lvie.ie';
             $this->account->save();
 
             $this->info('Successfully created the root super user for this website.');
