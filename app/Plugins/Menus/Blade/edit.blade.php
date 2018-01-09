@@ -34,15 +34,11 @@
             <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp" {{ $menu->lock ? 'readonly' : 'null' }}>
 
                 @if (!$menu->lock)
+                    <option value="" {{ !$menu->parent ? 'selected' : 'null' }}></option>
                     @foreach($parents as $submenu)
-                        @if ($menu->parent && $menu->parent->id == $submenu->id)
-                            <option value="{{ $submenu->id }}" selected>{{ $submenu->title }}</option>
-                        @else
-                            <option value="{{ $submenu->id }}">{{ $submenu->title }}</option>
-                        @endif
+                        <option value="{{ $submenu->id }}" {{ $menu->parent && $menu->parent->id == $submenu->id ? 'selected' : 'null' }}>{{ $submenu->title }}</option>
                     @endforeach
                 @endif
-                <option value=""></option>
             </select>
             <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
         </div>
