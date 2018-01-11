@@ -10,64 +10,70 @@
 
         <title>{{ framework()->package }} v{{ framework()->version  }}</title>
 
-        <link href="{{ mix('assets/backend.css') }}" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
+
+        <script src="{{ mix('assets/backend.js') }}"></script>
 
     </head>
 
-    <body>
+    <body id="login-form">
 
-        <div class="background">
+        <div class="container-fluid">
 
-            <div class="container">
+            <div class="row">
 
-                <div class="alignment" id="login-box">
+                <div class="hidden-xs col-sm-7 col-md-8 background">
 
-                    <form id="app-login" action="{{ route('AuthLogin') }}" method="post">
-                        {{ csrf_field() }}
-                        <div class="login-information">
-                            Log in to your account
-                        </div>
-                        <hr style="margin-bottom: 25px;">
-                        @if($errors->first('message'))<small><div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div></small>@endif
-                        <div class="form-group {{ $errors->has('email') ? 'error' : null }} row">
-                            <span class="icon-envelope"></span>
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input v-model="email.value" name="email" type="email" class="form-control" id="emailInput" placeholder="Enter email" required>
-                            @if($errors->has('title'))
-                                <span class="validation-error">{{ $errors->first('email') }}</span>
-                            @else
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            @endif
-                        </div>
-                        <div class="form-group {{ $errors->has('password') ? 'error' : null }} row">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input v-model="password.value" name="password" type="password" class="form-control" id="passwordInput" placeholder="Password" required>
-                            @if($errors->has('title'))
-                                <span class="validation-error">{{ $errors->first('email') }}</span>
-                            @else
-                                <small id="passwordHelp" class="form-text text-muted">Encrypted with the latest technology.</small>
-                            @endif
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label align-middle">
-                                <input type="checkbox" class="form-check-input">
-                                Remember me
-                            </label>
-                            <button type="submit" class="btn btn-primary float-right" style="float:right">Login</button>
-                        </div>
-                        <hr style="margin-top:35px">
-                        <div class="login-poweredBy">
-                            Powered by {{ framework()->package }} v{{ framework()->version }}
-                        </div>
-                    </form>
+                    <div class="app-info">
+
+                        <h1>{{ framework()->package }} v{{ framework()->version }}</h1>
+
+                        <p>Welcome to a unique, refreshing website management system.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-5 col-md-4 login-sidebar">
+
+                    <div class="login-container">
+
+                        <p>Sign into {{ settings()->getDefault('website_name') }}</p>
+
+                        @include('dashboard::structure.validation')
+
+                        <form action="{{ route('AuthLogin') }}" method="post">
+
+                            {{ csrf_field() }}
+
+                            <div class="form-group">
+                                <label for="emailAddress">Email Address</label>
+                                <input type="text" class="form-control" name="email" id="emailAddress"
+                                       aria-describedby="emailAddressHelp"
+                                       placeholder="" required>
+                                <small id="emailAddressHelp" class="form-text text-muted">The email address you associate with.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                       aria-describedby="passwordHelp"
+                                       placeholder="" required>
+                                <small id="passwordHelp" class="form-text text-muted">Enter the password for this account email.</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-webshelf">Login!</button>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
             </div>
 
         </div>
-
-        <script src="{{ mix('assets/backend.js') }}"></script>
 
     </body>
 
