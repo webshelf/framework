@@ -30,9 +30,8 @@
         </div>
 
         <div class="form-group">
-            <label for="menu">Submenu of:</label>
+            <label for="menu">Parent Menu</label>
             <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp" {{ $menu->lock ? 'readonly' : 'null' }}>
-
                 @if (!$menu->lock)
                     <option value="" {{ !$menu->parent ? 'selected' : 'null' }}></option>
                     @foreach($parents as $submenu)

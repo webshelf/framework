@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            <label for="menu">Submenu</label>
+            <label for="menu">Parent Menu</label>
             <select class="form-control" name="menu_id" id="menu" aria-describedby="menuHelp">
                 <option value=""></option>
                 @foreach($parents as $submenu)
