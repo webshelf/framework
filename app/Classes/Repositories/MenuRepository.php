@@ -9,10 +9,9 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class MenuRepository.
@@ -77,7 +76,7 @@ class MenuRepository extends BaseRepository
      */
     public function allParentsWithChildren()
     {
-        return $this->model->whereNull('parent_id')->with(['page', 'children' => function(HasMany $children) {
+        return $this->model->whereNull('parent_id')->with(['page', 'children' => function (HasMany $children) {
             $children->orderBy('order');
         }])->orderBy('order', 'asc')->get();
     }
