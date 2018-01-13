@@ -1,4 +1,7 @@
 
+// control the accent color that represnts the service.
+$accentColor: #2b4162;
+
 body {
   font-size:14px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -21,7 +24,7 @@ h4 {
 }
 
 header {
-  background-color: #2B4162;
+  background-color: $accentColor;
 }
 
 .breadcrumb-container {

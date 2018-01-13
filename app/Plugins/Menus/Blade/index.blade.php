@@ -61,18 +61,12 @@
                     <div class="title">
                         <a href="">{{ $menu->title }}</a>
                     </div>
-                    <div class="website">
-                        @if ($menu->page)
-                            <i class="fa fa-pagelines" aria-hidden="true"></i> {{ $menu->page->slug() }}
-                        @else
-                            <i class="fa fa-pagelines" aria-hidden="true"></i> No Content
-                        @endif
-                    </div>
                 </div>
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li>{!! css()->link->edit(route('admin.menus.edit', ['name' => $menu])) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Edit attached Page">{!! css()->link->edit(route('admin.menus.edit', ['name' => $menu])) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Edit attached Page">{!! css()->link->page(route('admin.pages.edit', $menu->page->slug)) !!}</li>
                         <li>{!! css()->link->destroy(route('admin.menus.destroy', ['menu' => $menu->id])) !!}</li>
                         <li>{!! css()->status->status($menu->status) !!}</li>
                         {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}

@@ -20,15 +20,17 @@
 
         <div class="content">
 
-                <div class="heading">
+                @hasSection('title')
+                        <div class="heading">
 
-                        <h3>@yield('title')</h3>
+                                <h3>@yield('title')</h3>
 
-                        <p>@yield('information')</p>
+                                <p>@yield('information')</p>
 
-                </div>
+                        </div>
 
-                <hr>
+                        <hr>
+                @endif
 
                 @yield('content')
 

@@ -18,6 +18,11 @@ class Link extends Icons
         return $this->icon('fa-pencil', 'blue', $url);
     }
 
+    public function page(string $url)
+    {
+        return $this->icon('fa-paperclip', 'blue', $url);
+    }
+
     public function view(string $url)
     {
         return $this->icon('fa-globe', 'blue', $url);

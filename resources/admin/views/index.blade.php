@@ -1,6 +1,7 @@
 @extends('dashboard::frame')
 
 @section('content')
+
     <div class="overview">
 
         <div class="avatar">

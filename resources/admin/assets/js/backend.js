@@ -19,6 +19,10 @@ window.colorbox = require('jquery-colorbox');
 // Compile files for the editor.
 require('./editor');
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
