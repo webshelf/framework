@@ -72,14 +72,6 @@ class BackendLoadingTest extends TestCase
     /**
      * @test
      */
-    public function view_accounts_modules_page()
-    {
-        $this->dashboardAccessTest('/admin/accounts');
-    }
-
-    /**
-     * @test
-     */
     public function view_filemanager_modules_page()
     {
         $this->dashboardAccessTest('/admin/filemanager');
