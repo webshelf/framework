@@ -41,14 +41,4 @@ class FrontendLoadingTest extends TestCase
 
         $this->call('GET', '/unknown-page-test')->assertStatus(404)->assertViewHas('webpage');
     }
-
-    /**
-     * @test
-     */
-    public function view_503_error_page()
-    {
-        settings()->add('enable_website', false);
-
-        $this->call('GET', '/')->assertStatus(503)->assertViewHas('webpage');
-    }
 }
