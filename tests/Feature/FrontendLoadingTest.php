@@ -19,7 +19,7 @@ class FrontendLoadingTest extends TestCase
     {
         settings()->add('enable_website', true);
 
-        $this->call('GET', '/')->assertStatus(200)->assertViewHas('page');
+        $this->call('GET', '/')->assertStatus(200)->assertViewHas('webpage');
     }
 
     /**
@@ -39,7 +39,7 @@ class FrontendLoadingTest extends TestCase
     {
         settings()->add('enable_website', true);
 
-        $this->call('GET', '/unknown-page-test')->assertStatus(404)->assertViewHas('page');
+        $this->call('GET', '/unknown-page-test')->assertStatus(404)->assertViewHas('webpage');
     }
 
     /**
@@ -49,6 +49,6 @@ class FrontendLoadingTest extends TestCase
     {
         settings()->add('enable_website', false);
 
-        $this->call('GET', '/')->assertStatus(503)->assertViewHas('page');
+        $this->call('GET', '/')->assertStatus(503)->assertViewHas('webpage');
     }
 }
