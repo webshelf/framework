@@ -52,7 +52,7 @@ class MakeAccount extends Command
             $this->account->verified = true;
             $this->account->role_id = Role::SUPERUSER;
             $this->account->password = bcrypt($this->argument('password'));
-            $this->account->email = 'marky360@lvie.ie';
+            $this->account->email = 'marky360@live.ie';
             $this->account->save();
 
             $this->info('Successfully created the root super user for this website.');
