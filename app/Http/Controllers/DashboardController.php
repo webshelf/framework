@@ -10,7 +10,6 @@ namespace App\Http\Controllers;
 
 use App\Classes\Library\Services\Facebook;
 use App\Classes\Repositories\ActivityRepository;
-use App\Classes\Repositories\AuditRepository;
 
 /**
  * Class AdminController.
