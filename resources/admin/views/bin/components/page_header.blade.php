@@ -16,8 +16,7 @@
     <meta name="cache-control" content="public">
     <meta name="keywords"      content="{{ $page['seo']['keywords'] }}">
     <meta name="description"   content="{{ $page['seo']['description'] }}">
-    <meta name="author"        content="//coffeebreakcms.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author"        content="//webshelf.com">
 
     <script>window.Laravel =  {!! json_encode(['csrfToken' => csrf_token()]) !!}</script>
 
