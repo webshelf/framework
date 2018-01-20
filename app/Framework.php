@@ -25,7 +25,7 @@ class Framework
      *
      * @return string
      */
-    public $version = '4.1.0';
+    public $version = '5.0.0';
 
     /**
      * The framework application website.
