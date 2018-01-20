@@ -3,16 +3,13 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 18/01/2018
- * Time: 14:31
+ * Time: 14:31.
  */
 
 namespace App\Classes\Interfaces;
 
-
 /**
- * Interface Linker
- *
- * @package App\Classes\Interfaces
+ * Interface Linker.
  */
 interface Linker
 {
