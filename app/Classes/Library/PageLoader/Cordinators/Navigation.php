@@ -150,7 +150,7 @@ class Navigation
      */
     public function hasSidebar()
     {
-        return false;
+        return count($this->sidebar()) > 0 ? true : false;
     }
 
     /**
