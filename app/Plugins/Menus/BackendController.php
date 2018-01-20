@@ -8,16 +8,14 @@
 
 namespace App\Plugins\Menus;
 
-use App\Classes\PageRouteBuilder;
-use App\Classes\Repositories\LinkRepository;
-use App\Model\Activity;
 use App\Model\Link;
 use App\Model\Menu;
-use App\Model\Page;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use App\Classes\Repositories\LinkRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 
@@ -88,7 +86,7 @@ class BackendController extends PluginEngine
      */
     public function store(Request $request, Menu $menu)
     {
-        $request->validate(['title' => "min:3|max:255|unique:menus,title,NULL,id,deleted_at,NULL|required"]);
+        $request->validate(['title' => 'min:3|max:255|unique:menus,title,NULL,id,deleted_at,NULL|required']);
 
         $this->save($request, $menu);
 
@@ -153,10 +151,8 @@ class BackendController extends PluginEngine
     {
         $menu = $this->menus->whereID($id);
 
-        if ($menu->children)
-        {
-            foreach ($menu->children as $submenu)
-            {
+        if ($menu->children) {
+            foreach ($menu->children as $submenu) {
                 $submenu->link->delete();
             }
         }
@@ -197,7 +193,6 @@ class BackendController extends PluginEngine
     private function save(Request $request, Menu $menu)
     {
         if (! $request['hyperlinkUrl']) {
-
             $model = json_decode($request['linkable_object']);
 
             $menu->hyperlink = null;
@@ -208,22 +203,17 @@ class BackendController extends PluginEngine
             $menu->status = true;
             $menu->creator_id = account()->id;
 
-            DB::transaction(function() use ($menu, $model)
-            {
+            DB::transaction(function () use ($menu, $model) {
                 $menu->save();
 
-                if ($menu->link)
-                {
+                if ($menu->link) {
                     $menu->link->connect($menu, getMorphedModel($model->class, $model->key))->save();
-                }
-                else
-                {
+                } else {
                     (new Link)->connect($menu, getMorphedModel($model->class, $model->key))->save();
                 }
             }, 5);
 
             return true;
-
         } else {
             // we expect this to be a hyperlink.
             $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
