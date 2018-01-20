@@ -112,6 +112,7 @@ class Account extends Authenticatable implements UserResolver
     {
         return $this->hasMany(Menu::class, 'creator_id', 'id');
     }
+
     /**
      * @return Role|BelongsTo
      */

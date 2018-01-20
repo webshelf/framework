@@ -8,9 +8,8 @@
 
 namespace App\Plugins\Pages;
 
-use App\Classes\PageRouteBuilder;
-use App\Model\Activity;
 use App\Model\Page;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
