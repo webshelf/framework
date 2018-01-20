@@ -9,6 +9,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\UserResolver;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -111,15 +112,6 @@ class Account extends Authenticatable implements UserResolver
     {
         return $this->hasMany(Menu::class, 'creator_id', 'id');
     }
-
-    /**
-     * @return HasMany
-     */
-    public function articles()
-    {
-        return $this->hasMany(Article::class, 'creator_id', 'id');
-    }
-
     /**
      * @return Role|BelongsTo
      */
@@ -162,5 +154,17 @@ class Account extends Authenticatable implements UserResolver
     public static function resolveId()
     {
         return auth()->check() ? auth()->user()->getAuthIdentifier() : null;
+    }
+
+    /**
+     * Record an activity action the user has taken on the backend.
+     *
+     * @param int $activity_event
+     * @param Model $model
+     * @return mixed
+     */
+    public function record(int $activity_event, Model $model)
+    {
+        return app(Activity::class)->log($activity_event, $model, $this);
     }
 }

@@ -5,7 +5,9 @@
 @endsection
 
 @section('information')
-    Menus are what allow users to click through your web pages.
+    Menus are what allow users to click through your web pages. <br>
+    <br>
+    <b>Usage:</b> Reorder your menus by dragging and dropping to the designated spot.
 @endsection
 
 @section('content')
@@ -17,7 +19,6 @@
             @foreach($menus as $menu)
 
                 <?php /** @var \App\Model\Menu $menu */ ?>
-
 
                 <li class="item">
                     <a href="{{ route('admin.menus.group', ["group_id" => $menu->id]) }}">
@@ -45,13 +46,6 @@
         </div>
     </form>
 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Drag and Drop!</strong> Reorder your menus by dragging and dropping to the designated spot.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
     <div class="webshelf-table" id="sortable_menu">
 
         @foreach($list as $menu)
@@ -61,12 +55,15 @@
                     <div class="title">
                         <a href="">{{ $menu->title }}</a>
                     </div>
+                    <div class="website">
+                        {{ $menu->link->url()}}
+                    </div>
                 </div>
 
                 <div class="console">
                     <ul class="list-unstyled">
                         <li data-toggle="tooltip" data-placement="bottom" title="Edit attached Page">{!! css()->link->edit(route('admin.menus.edit', ['name' => $menu])) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Edit attached Page">{!! css()->link->page(route('admin.pages.edit', $menu->page->slug)) !!}</li>
+                        {{--<li data-toggle="tooltip" data-placement="bottom" title="Edit attached Page">{!! css()->link->page(route('admin.pages.edit', $menu->page->slug)) !!}</li>--}}
                         <li>{!! css()->link->destroy(route('admin.menus.destroy', ['menu' => $menu->id])) !!}</li>
                         <li>{!! css()->status->status($menu->status) !!}</li>
                         {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}

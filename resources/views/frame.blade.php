@@ -98,10 +98,10 @@
     <div class="flex-center position-ref full-height">
         <div class="top-right links">
             <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
-            <?php /** @var \App\Classes\Library\PageLoader\NavItem $item */ ?>
+            <?php /** @var \App\Model\Menu $menu */ ?>
 
-            @foreach ($webpage->collections->collection() as $item)
-                <a class="{{ $item->classState() }}" href="{{ $item->url() }}">{{ $item->title() }}</a>
+            @foreach ($webpage->navigation->main() as $menu)
+                <a class="{{ $menu->classState() }}" href="{{ $menu->route() }}">{{ $menu->title }}</a>
             @endforeach
 
             @if (Auth::check() == false)
@@ -122,8 +122,8 @@
             </div>
 
             <div class="links">
-                @foreach ($webpage->collections->sidebar() as $item)
-                    <a href="{{ $item->url() }}" class="{{ $item->classState() }}">{{ $item->title() }}</a>
+                @foreach ($webpage->navigation->sidebar() as $menu)
+                    <a href="{{ $menu->route() }}" class="{{ $menu->classState() }}">{{ $menu->title }}</a>
                 @endforeach
             </div>
         </div>

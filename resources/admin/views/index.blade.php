@@ -31,36 +31,29 @@
 
     <div class="webshelf-table">
 
-        @foreach ($audits as $audit)
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Account</th>
+                <th scope="col">Action</th>
+                <th scope="col">Table</th>
+                <th scope="col">Name</th>
+            </tr>
+            </thead>
+            <tbody>
 
-            <?php  /** @var \App\Model\Audit $audit */ ?>
+            <?php /** @var \App\Model\Activity $activity */ ?>
+            @foreach ($activities as $activity)
+                <tr>
+                    <td>{{ $activity->account->fullName() }}</td>
+                    <td>{{ $activity->eventName() }}</td>
+                    <td>{{ $activity->model->getTable() }}</td>
+                    <td>{{ $activity->model->name() }}</td>
+                </tr>
+            @endforeach
 
-                @if ($audit->auditable)
-
-                <div class="row">
-
-                <div class="details">
-                    <div class="title">
-                            @if (! $audit->user)
-                                <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a> {{ $audit->beforeActionVerb() }} by the CMS.
-                            @else
-                                <span style="font-weight: 400; color:#0c82dc;">{{ $audit->user->fullName() }}</span> {{ $audit->afterActionVerb() }} {{ $audit->model() }} <a href="{{ $audit->auditable->auditUrl() }}">{{ $audit->auditable->auditTitle() }}</a>
-                            @endif
-                    </div>
-                </div>
-
-                <div class="stats">
-                    <div class="timestamp">
-                        updated {{ $audit->created_at->diffForHumans() }}
-                    </div>
-                </div>
-            </div>
-
-            @endif
-
-        @endforeach
-
-        {{ $audits->links() }}
+            </tbody>
+        </table>
 
     </div>
 

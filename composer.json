@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "barryvdh/laravel-elfinder": "^0.3.11",
         "consoletvs/charts": "5.*",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
@@ -13,7 +14,7 @@
         "laravel/tinker": "~1.0",
         "league/glide": "^1.2",
         "owen-it/laravel-auditing": "^5.0.2",
-        "barryvdh/laravel-elfinder": "^0.3.11"
+        "spatie/laravel-activitylog": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

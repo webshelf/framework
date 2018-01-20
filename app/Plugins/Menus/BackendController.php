@@ -8,10 +8,15 @@
 
 namespace App\Plugins\Menus;
 
+use App\Classes\PageRouteBuilder;
+use App\Classes\Repositories\LinkRepository;
+use App\Model\Activity;
+use App\Model\Link;
 use App\Model\Menu;
 use App\Model\Page;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
@@ -32,16 +37,23 @@ class BackendController extends PluginEngine
     private $pages;
 
     /**
+     * @var LinkRepository
+     */
+    private $links;
+
+    /**
      * BackendController constructor.
      *
      * @param MenuRepository $menus
      * @param PageRepository $pages
      */
-    public function __construct(MenuRepository $menus, PageRepository $pages)
+    public function __construct(MenuRepository $menus, PageRepository $pages, LinkRepository $links)
     {
         $this->menus = $menus;
 
         $this->pages = $pages;
+
+        $this->links = $links;
     }
 
     /**
@@ -62,7 +74,7 @@ class BackendController extends PluginEngine
      */
     public function create()
     {
-        return $this->make('create')->with('parents', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listPagesWithoutMenus());
+        return $this->make('create')->with('parents', $this->menus->whereTopLevelEditable())->with('linkableObjects', $this->links->allLinkableObjects());
     }
 
     /**
@@ -76,9 +88,11 @@ class BackendController extends PluginEngine
      */
     public function store(Request $request, Menu $menu)
     {
-        $request->validate(['title' => 'min:3|max:255|unique:menus|required']);
+        $request->validate(['title' => "min:3|max:255|unique:menus,title,NULL,id,deleted_at,NULL|required"]);
 
-        $this->save($request, new Menu);
+        $this->save($request, $menu);
+
+        account()->record(Activity::$created, $menu);
 
         return redirect()->route('admin.menus.index');
     }
@@ -101,24 +115,28 @@ class BackendController extends PluginEngine
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(MenuRepository $repository, $id)
+    public function edit($id)
     {
-        return $this->make('edit')->with('menu', $repository->whereID($id))->with('parents', $this->menus->whereTopLevelEditable())->with('pages', $this->pages->listPagesWithoutMenus());
+        return $this->make('edit')->with('menu', $this->menus->whereID($id))->with('parents', $this->menus->whereTopLevelEditable())->with('linkableObjects', $this->links->allLinkableObjects());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @param MenuRepository $repository
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MenuRepository $repository, $id)
+    public function update(Request $request, $id)
     {
         $request->validate(['title' => ['min:3|max:255|required', Rule::unique('menus')->ignore($id)]]);
 
-        $this->save($request, $repository->whereID($id));
+        $menu = $this->menus->whereID($id);
+
+        $this->save($request, $menu);
+
+        account()->record(Activity::$updated, $menu);
 
         return redirect(route('admin.menus.index'));
     }
@@ -131,9 +149,23 @@ class BackendController extends PluginEngine
      * @return bool|null
      * @throws \Exception
      */
-    public function destroy($id, MenuRepository $repository)
+    public function destroy($id)
     {
-        $repository->whereID($id)->delete();
+        $menu = $this->menus->whereID($id);
+
+        if ($menu->children)
+        {
+            foreach ($menu->children as $submenu)
+            {
+                $submenu->link->delete();
+            }
+        }
+
+        $menu->link->delete();
+
+        account()->record(Activity::$deleted, $menu);
+
+        $menu->delete();
 
         return redirect(route('admin.menus.index'));
     }
@@ -141,7 +173,7 @@ class BackendController extends PluginEngine
     /**
      * Change the order the menu list.
      */
-    public function reorder(Request $request, MenuRepository $repository)
+    public function reorder(Request $request)
     {
         // store the order increment id.
         $increment = 1;
@@ -165,8 +197,8 @@ class BackendController extends PluginEngine
     private function save(Request $request, Menu $menu)
     {
         if (! $request['hyperlinkUrl']) {
-            // we expect a page to be connected.
-            $request->validate(['page_id' => 'numeric|required']);
+
+            $model = json_decode($request['linkable_object']);
 
             $menu->hyperlink = null;
             $menu->title = $request['title'];
@@ -175,6 +207,23 @@ class BackendController extends PluginEngine
             $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
+
+            DB::transaction(function() use ($menu, $model)
+            {
+                $menu->save();
+
+                if ($menu->link)
+                {
+                    $menu->link->connect($menu, getMorphedModel($model->class, $model->key))->save();
+                }
+                else
+                {
+                    (new Link)->connect($menu, getMorphedModel($model->class, $model->key))->save();
+                }
+            }, 5);
+
+            return true;
+
         } else {
             // we expect this to be a hyperlink.
             $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
@@ -186,8 +235,8 @@ class BackendController extends PluginEngine
             $menu->target = $request['target'];
             $menu->status = true;
             $menu->creator_id = account()->id;
-        }
 
-        return $menu->save();
+            $menu->save();
+        }
     }
 }

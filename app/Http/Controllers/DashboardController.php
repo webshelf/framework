@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Library\Services\Facebook;
+use App\Classes\Repositories\ActivityRepository;
 use App\Classes\Repositories\AuditRepository;
 
 /**
@@ -22,14 +23,14 @@ class DashboardController extends Controller
     /**
      * Basic overview of the website, here its the dashboard panel.
      *
-     * @param AuditRepository $repository
+     * @param ActivityRepository $repository
      * @return \Illuminate\Contracts\View\View
      * @internal param Facebook $facebook
      */
-    public function index(AuditRepository $repository)
+    public function index(ActivityRepository $repository)
     {
-        $audits = $repository->paginateAudits(15);
+        $activities = $repository->paginate(25);
 
-        return view('dashboard::index')->with(['audits'=>$audits]);
+        return view('dashboard::index')->with(['activities'=>$activities]);
     }
 }

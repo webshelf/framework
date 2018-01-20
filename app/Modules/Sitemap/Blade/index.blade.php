@@ -22,7 +22,7 @@
         <tbody>
         @foreach ($sitemaps as $sitemap)
             <tr>
-                <td>/{{ $sitemap['url_location'] }}</td>
+                <td>{{ $sitemap['url_location'] }}</td>
                 <td>{{ $sitemap['last_modified'] }}</td>
                 <td>{{ $sitemap['change_frequency'] }}</td>
                 <td>{{ $sitemap['priority'] }}</td>

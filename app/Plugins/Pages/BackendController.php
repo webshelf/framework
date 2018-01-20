@@ -8,6 +8,8 @@
 
 namespace App\Plugins\Pages;
 
+use App\Classes\PageRouteBuilder;
+use App\Model\Activity;
 use App\Model\Page;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
@@ -65,6 +67,8 @@ class BackendController extends PluginEngine
 
         $this->save($request, $page);
 
+        account()->record(Activity::$created, $page);
+
         return redirect()->route('admin.pages.index');
     }
 
@@ -106,6 +110,8 @@ class BackendController extends PluginEngine
 
         $this->save($request, $page);
 
+        account()->record(Activity::$updated, $page);
+
         return redirect()->route('admin.pages.index');
     }
 
@@ -125,6 +131,8 @@ class BackendController extends PluginEngine
             $repository->whereName($slug)->delete();
         }
 
+        account()->record(Activity::$deleted, $page);
+
         return redirect()->route('admin.pages.index');
     }
 
@@ -137,6 +145,7 @@ class BackendController extends PluginEngine
     private function save(Request $request, Page $page)
     {
         $page->seo_title = $request['title'];
+        $page->prefix = strtolower($request['prefix']);
         $page->creator_id = $request['creator'] ?: account()->id;
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];

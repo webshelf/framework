@@ -2,9 +2,12 @@
 
 namespace App\Model;
 
+use App\Classes\Interfaces\Linker;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Support\Collection;
 
 /**
  * Class Menus.
@@ -21,6 +24,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property int $creator_id
  * @property int $editor_id
  *
+ * @property Link $link
  * @property Menu $parent
  * @property Page $page
  * @property Menu $children
@@ -29,7 +33,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Menu extends EloquentModel
+class Menu extends EloquentModel implements Linker
 {
     /*
      * Laravel Deleting.
@@ -38,11 +42,32 @@ class Menu extends EloquentModel
     use SoftDeletes;
 
     /**
+     * Status if current menu.
+     *
+     * @var bool
+     */
+    public $active = false;
+
+    /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'menus';
+
+    /**
+     * The attributes that are not mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = ['link.to'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -54,6 +79,7 @@ class Menu extends EloquentModel
     /**
      * Return the page that this menu has.
      *
+     * @deprecated
      * @return Page|\Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function page()
@@ -84,10 +110,40 @@ class Menu extends EloquentModel
     /**
      * Return the link that this connects to, page or hyperlink.
      *
-     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     * @return MorphOne|Collection|Link
      */
     public function link()
     {
-        return $this->page ? $this->page->slug() : $this->hyperlink;
+        return $this->morphOne(Link::class, 'from');
+    }
+
+    /**
+     * Allows the CSS to set a state on the navigation.
+     *
+     * @return string
+     */
+    public function classState()
+    {
+        return $this->active ? 'active' : 'inactive';
+    }
+
+    /**
+     * Generate the url that this links to.
+     *
+     * @return mixed
+     */
+    public function route()
+    {
+        return url($this->link->url());
+    }
+
+    /**
+     * The name of the current model object.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return $this->title;
     }
 }

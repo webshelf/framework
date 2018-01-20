@@ -23,12 +23,14 @@
     foreach ($repository->frontendPageCollection() as $page) {
         if (! $page->redirect) {
             if ($page->plugin) {
-                Route::get($page->slug())->uses('App\Http\Controllers\PageController@index');
+                Route::get($page->route())->uses('App\Http\Controllers\PageController@index');
             } else {
-                Route::get($page->slug())->uses('App\Http\Controllers\PageController@index');
+                Route::get($page->route())->uses('App\Http\Controllers\PageController@index');
             }
         }
     }
+
+    //Route::any('{menu}/{submenu}', function() { return redirect('/'); });
 
     // Post Requests.
     // ==================================================================================

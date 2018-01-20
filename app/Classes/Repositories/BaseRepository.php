@@ -8,6 +8,7 @@
 
 namespace App\Classes\Repositories;
 
+use App\Model\Menu;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -31,7 +32,7 @@ class BaseRepository
 
     /**
      * @param int $integer
-     * @return \Illuminate\Database\Eloquent\Model|null|static
+     * @return Menu
      */
     public function whereID(int $integer)
     {

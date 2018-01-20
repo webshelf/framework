@@ -81,6 +81,15 @@ class PageRepository extends BaseRepository
     }
 
     /**
+     * @param $string
+     * @return Page
+     */
+    public function whereRoute($string) : Page
+    {
+        return $this->model->where('route', $string)->first();
+    }
+
+    /**
      * Sitemap enabled pages.
      */
     public function whereSitemap() : Collection

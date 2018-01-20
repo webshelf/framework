@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Classes\Interfaces\Linkable;
 use Carbon\Carbon;
 use OwenIt\Auditing\Auditable;
 use Illuminate\Support\Collection;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Menu $menu
  *
  * @property int $id
+ * @property string $prefix
  * @property string $slug
  * @property string $content
  * @property string $banner
@@ -39,18 +41,13 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @return Page|Collection|Builder
  */
-class Page extends EloquentModel implements AuditInterface
+class Page extends EloquentModel implements Linkable
 {
     /*
      * Laravel Deleting.
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-    /*
-     * Laravel Audits.
-     * @ http://www.laravel-auditing.com
-     */
-    use Auditable;
 
     /**
      * The table associated with the model.
@@ -91,15 +88,6 @@ class Page extends EloquentModel implements AuditInterface
     {
         return $this->views = $this->views + 1;
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function carousel()
-    {
-        return $this->hasOne(Carousel::class, 'page_id', 'id');
-    }
-
     /**
      * A page belongs to a single menu.
      *
@@ -141,42 +129,41 @@ class Page extends EloquentModel implements AuditInterface
     }
 
     /**
-     * Generate a link for the audit log.
-     *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne|Collection
      */
-    public function auditTitle()
+    public function link()
     {
-        return $this->seo_title;
+        return $this->morphOne(Link::class, 'from');
     }
 
     /**
-     * Generate a url to the audited data.
-     *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany|Collection
      */
-    public function auditUrl()
+    public function linked()
     {
-        return route('admin.pages.edit', $this->slug);
+        return $this->morphMany(Link::class, 'to');
     }
 
     /**
-     * Generate a url slug based on the relationship this belongs to.
+     * The url that is used to view this model.
      *
      * @return string
      */
-    public function slug()
+    public function route()
     {
-        if ($this->menu && $this->menu->parent) {
-            return sprintf('%s/%s', str_slug($this->menu->parent->title), str_slug($this->menu->title));
-        }
+        if ($this->prefix)
+            return "{$this->prefix}/{$this->slug}";
 
-        if ($this->menu) {
-            if (! $this->menu->lock) {
-                return str_slug($this->menu->title);
-            }
-        }
+        return "{$this->slug}";
+    }
 
-        return $this->slug;
+    /**
+     * The name of the current model object.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return "{$this->seo_title}";
     }
 }

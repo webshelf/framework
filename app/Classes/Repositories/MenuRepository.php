@@ -76,8 +76,7 @@ class MenuRepository extends BaseRepository
      */
     public function allParentsWithChildren()
     {
-        return $this->model->whereNull('parent_id')->with(['page', 'children' => function (HasMany $children) {
-            $children->orderBy('order');
+        return $this->model->whereNull('parent_id')->with(['children' => function (HasMany $children) {
         }])->orderBy('order', 'asc')->get();
     }
 }

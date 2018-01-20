@@ -44,6 +44,19 @@
         return app(\App\Classes\Library\StyleCSS\Style::class);
     }
 
+    /**
+     * @param string $table
+     * @param int $id
+     * @return App\Classes\Interfaces\Linkable
+     */
+    function getMorphedModel(string $table, int $id)
+    {
+        return app($table)->whereKey($id)->first();
+    }
+
+    /**
+     * @return string
+     */
     function currentURI()
     {
         $route = basename(request()->path()) ?: 'index';

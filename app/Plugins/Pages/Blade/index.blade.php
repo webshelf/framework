@@ -33,7 +33,7 @@
                         <a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}">{{ $page->seo_title }}</a>
                     </div>
                     <div class="website">
-                        {{ $page->slug() }}
+                        {{ $page->route() }}
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                         <li>{!! css()->status->sitemap($page->sitemap) !!}</li>
                         <li>{!! css()->status->status($page->enabled) !!}</li>
                         <li>{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
-                        <li>{!! css()->link->view($page->slug()) !!}</li>
+                        <li>{!! css()->link->view(url($page->route())) !!}</li>
                     </ul>
                 </div>
 

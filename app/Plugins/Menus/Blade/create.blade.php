@@ -40,12 +40,24 @@
         <div class="row">
             <div class="col-5">
                 <div class="form-group">
-                    <label for="page">Select Page Content</label>
-                    <select class="form-control" name="page_id" id="page" aria-describedby="pageHelp">
-                        <option value=""></option>
-                        @foreach($pages as $page)
-                            <option value="{{ $page->id }}">{{ $page->seo_title }}</option>
+                    <label for="linkable_object">Select Linkable Content</label>
+                    <select class="form-control" name="linkable_object" id="linkable_object" aria-describedby="pageHelp">
+
+                        <?php /** @var \App\Classes\Interfaces\Linkable $item */ ?>
+                        <option value="" selected></option>
+                        @foreach ($linkableObjects as $item)
+                            <option value="{{ json_encode(['key' => $item->getKey(), 'class' => $item->getMorphClass()]) }}">{{ ucfirst($item->name()) }} - {{ $item->route() }}.html</option>
                         @endforeach
+
+                        {{--@if ($menu->page)--}}
+                        {{--<option value="{{ $menu->page->id }}">{{ ucfirst($menu->page->seo_title) }}</option>--}}
+                        {{--@else--}}
+                        {{--<option value="">No Page Content</option>--}}
+                        {{--@endif--}}
+                        {{--@foreach($pages as $page)--}}
+                        {{--<option value="{{ $page->id }}">{{ ucfirst($page->seo_title) }}</option>--}}
+                        {{--@endforeach--}}
+                        {{--<option value="" {{ !$menu->page ? 'selected' : 'null'}}></option>--}}
                     </select>
                     <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>
                 </div>

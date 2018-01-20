@@ -34,7 +34,7 @@ class FrontpageLoaderTest extends TestCase
         $this->assertNotEmpty($frontpage->webpage->page);
         $this->assertNotEmpty($frontpage->webpage->contact);
         $this->assertNotEmpty($frontpage->webpage->site);
-        $this->assertNotEmpty($frontpage->webpage->collections);
+        $this->assertNotEmpty($frontpage->webpage->navigation);
     }
 
     /**

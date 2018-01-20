@@ -33,21 +33,17 @@
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <label for="creatorID">Creator</label>
-                    <select class="form-control" name="creatorID" id="creatorID" aria-describedby="creatorHelp" readonly>
-                        <option value="1">Mark Hester</option>
-                        <option value="2">Danny Dwyer</option>
-                        <option value="3">Christie Tango</option>
-                    </select>
-                    <small id="creatorHelp" class="form-text text-muted">The page author.</small>
+                    <label for="prefix">Prefix (Group)</label>
+                    <input type="text" class="form-control" name="prefix" id="prefix" aria-describedby="prefixHelp" value="{{ old('prefix') }}">
+                    <small id="prefixHelp" class="form-text text-muted">Group the page for better SEO.</small>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-          <label for="tags">Tags</label>
-          <input type="text" class="form-control" name="tags" id="tags" aria-describedby="tagHelp" value="{{ old('tags') }}">
-          <small id="tagHelp" class="form-text text-muted">Tags help your page be found by search engines.</small>
+          <label for="keywords">Keywords</label>
+          <input type="text" class="form-control" name="keywords" id="keywords" aria-describedby="keywordsHelp" value="{{ old('keywords') }}">
+          <small id="keywordsHelp" class="form-text text-muted">Tags help your page be found by search engines.</small>
         </div>
 
         <div class="form-group">
