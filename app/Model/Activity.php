@@ -2,24 +2,21 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\Linkable;
 use App\Classes\Interfaces\Linker;
+use App\Classes\Interfaces\Linkable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Activity
+ * Class Activity.
  *
  * @property string $message
  * @property int $event
  *
  * @property Linkable $model
  * @property Account $account
- *
- * @package App
  */
 class Activity extends Model
 {
-
     /**
      * @var int
      */
@@ -52,11 +49,10 @@ class Activity extends Model
      */
     public function eventName()
     {
-        switch ($this->event)
-        {
-            case self::$deleted : return 'deleted';
-            case self::$created : return 'created';
-            case self::$updated : return 'updated';
+        switch ($this->event) {
+            case self::$deleted: return 'deleted';
+            case self::$created: return 'created';
+            case self::$updated: return 'updated';
         }
 
         return false;

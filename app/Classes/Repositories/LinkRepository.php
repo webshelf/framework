@@ -3,19 +3,16 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 19/01/2018
- * Time: 12:46
+ * Time: 12:46.
  */
 
 namespace App\Classes\Repositories;
 
-use App\Classes\Interfaces\Linkable;
 use App\Model\Link;
 use Illuminate\Support\Collection;
 
 /**
- * Class LinkRepository
- *
- * @package App\Classes\Repositories
+ * Class LinkRepository.
  */
 class LinkRepository extends BaseRepository
 {

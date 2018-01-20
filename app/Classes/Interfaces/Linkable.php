@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 18/01/2018
- * Time: 14:31
+ * Time: 14:31.
  */
 
 namespace App\Classes\Interfaces;
 
 /**
- * Interface Linkable
- *
- * @package App\Classes\Interfaces
+ * Interface Linkable.
  */
 interface Linkable extends Linker
 {
@@ -21,5 +19,4 @@ interface Linkable extends Linker
      * @return string
      */
     public function route();
-
 }

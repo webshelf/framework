@@ -2,23 +2,20 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\Linkable;
 use App\Classes\Interfaces\Linker;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use App\Classes\Interfaces\Linkable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Link
+ * Class Link.
  *
  * @property string $external
  *
  * @property Linkable $to
- *
- * @package App
  */
 class Link extends Model
 {
-
     /**
      * The table associated with the model.
      *
@@ -61,8 +58,9 @@ class Link extends Model
      */
     public function url()
     {
-       if($this->isExternal())
-           return $this->external;
+        if ($this->isExternal()) {
+            return $this->external;
+        }
 
         return $this->to->route();
     }
@@ -81,10 +79,9 @@ class Link extends Model
      * @param string $external
      * @return $this
      */
-    public function connect(Linker $model, Linkable $object = null, string $external = "")
+    public function connect(Linker $model, Linkable $object = null, string $external = '')
     {
-        if ($model && $object)
-        {
+        if ($model && $object) {
             $this->setAttribute('from_id', $model->getKey());
 
             $this->setAttribute('from_type', $model->getMorphClass());
@@ -96,8 +93,7 @@ class Link extends Model
             return $this;
         }
 
-        if ($model && $external)
-        {
+        if ($model && $external) {
             $this->setAttribute('from_id', $model->getKey());
 
             $this->setAttribute('from_type', $model->getMorphClass());

@@ -2,16 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Classes\PageRouteBuilder;
-use App\Classes\Repositories\MenuRepository;
-use App\Classes\Repositories\PageRepository;
 use App\Model\Menu;
 use App\Model\Page;
 use Illuminate\Console\Command;
+use App\Classes\PageRouteBuilder;
+use App\Classes\Repositories\MenuRepository;
 
 class GeneratePageRoutes extends Command
 {
-
     /**
      * @var MenuRepository
      */
@@ -51,8 +49,7 @@ class GeneratePageRoutes extends Command
     public function handle()
     {
         /** @var Menu $menu */
-        foreach ($this->menus->all() as $menu)
-        {
+        foreach ($this->menus->all() as $menu) {
             PageRouteBuilder::link($menu->page, $menu);
 
             $this->info("{$menu->title} was linked to {$menu->page->slug}");
