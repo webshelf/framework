@@ -34,7 +34,7 @@ abstract class PluginEngine extends Controller
      *
      * @return mixed
      */
-    private function pluginName()
+    protected function pluginName()
     {
         if ($this->pluginName) {
             return $this->pluginName;

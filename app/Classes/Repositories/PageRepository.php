@@ -90,6 +90,15 @@ class PageRepository extends BaseRepository
     }
 
     /**
+     * @param $string
+     * @return Page
+     */
+    public function wherePlugin($string) : Page
+    {
+        return $this->model->where('plugin', $string)->first();
+    }
+
+    /**
      * Sitemap enabled pages.
      */
     public function whereSitemap() : Collection

@@ -8,16 +8,69 @@
 
 namespace App\Model;
 
+use App\Plugins\PluginHandler;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Plugins.
  *
- * @property PluginOption $options
+ * @property string $name
+ *
+ * @property boolean $required
+ * @property boolean $enabled
+ *
+ * @property PluginHandler $handler
+ *
+ * @property Plugin $options
  */
 class Plugin extends EloquentModel
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'plugins';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [];
+
+    /**
+     * The table date columns, casted to Carbon.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['enabled' => 'boolean', 'required' => 'boolean'];
+
+    /**
+     * Return the plugins namespace
+     *
+     * @return string
+     */
+    protected function dirNamespace()
+    {
+        return sprintf("App\Plugins\%s", ucfirst($this->name));
+    }
+
+    /**
+     *
+     * @return PluginHandler
+     */
+    protected function getHandlerAttribute()
+    {
+        return app(sprintf("%s\%sController", $this->dirNamespace(), ucfirst($this->name)));
+    }
 
     /**
      * ==========================================================.
@@ -28,17 +81,17 @@ class Plugin extends EloquentModel
      */
     public function icon()
     {
-        return $this->getAttribute('icon');
+        return $this->handler->icon();
     }
 
     public function name()
     {
-        return $this->getAttribute('name');
+        return $this->name;
     }
 
     public function version()
     {
-        return $this->getAttribute('version');
+        return $this->handler->version();
     }
 
     public function isEnabled()
@@ -207,5 +260,12 @@ class Plugin extends EloquentModel
     public function feeds()
     {
         return $this->hasMany(PluginFeed::class, 'plugin_id', 'id');
+    }
+
+    public function install()
+    {
+        $controller = app(printf("App\Plugins\%s", $this->name));
+
+        $controller->install();
     }
 }

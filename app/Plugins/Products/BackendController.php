@@ -10,7 +10,8 @@ namespace App\Plugins\Products;
 
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PluginRepository;
-use App\Classes\Interfaces\InstallableInterface;
+use App\Classes\Interfaces\Installable;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class AdminController.
@@ -20,7 +21,7 @@ class BackendController extends PluginEngine
     /**
      * @var PluginRepository
      */
-    private $products;
+    private $plugins;
 
     /**
      * BackendController constructor.
@@ -28,7 +29,7 @@ class BackendController extends PluginEngine
      */
     public function __construct(PluginRepository $plugins)
     {
-        $this->products = $plugins;
+        $this->plugins = $plugins;
     }
 
     /**
@@ -36,39 +37,64 @@ class BackendController extends PluginEngine
      */
     public function index()
     {
-        return $this->make('index')->with('products', plugins()->all());
+        return $this->make('index')->with('products', $this->plugins->all());
     }
 
     /**
-     * Change the plugin status from enabled to disabled or vice versa.
-     * This will also call the install function on the plugin class if exists.
+     * Steps required for the application install.
+     * Usually defined for logging & new sql entries.
      *
-     * @param $plugin_name
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @param string $plugin_name
+     * @return mixed
      */
-    public function ProductStatus($plugin_name)
+    public function install(string $plugin_name)
     {
-        $plugin = $this->products->whereName($plugin_name);
+        $plugin = $this->plugins->whereName($plugin_name);
 
-        if ($plugin->isEnabled()) {
-            $controller = adminPluginController($plugin_name);
+        if ($plugin->enabled == false)
+        {
+            \DB::transaction( function () use ($plugin)
+            {
+                if ($plugin->handler instanceof Installable)
+                {
+                    $plugin->handler->install();
+                }
 
-            if ($controller instanceof InstallableInterface) {
-                $controller->uninstall($plugin);
-            }
+                $plugin->enabled = true;
 
-            $plugin->disable()->save();
-        } elseif ($plugin->isDisabled()) {
-            $controller = adminPluginController($plugin_name);
-
-            if ($controller instanceof InstallableInterface) {
-                $controller->install($plugin);
-            }
-
-            $plugin->enable()->save();
+                $plugin->save();
+            }, 5);
         }
 
-        return redirect()->intended(route('ProductIndex'));
+        return response()->redirectToRoute('products.index');
+    }
+
+    /**
+     * Steps required for the application uninstall.
+     * Usually defined for logging & new sql entries.
+     *
+     * @param string $plugin_name
+     * @return mixed
+     */
+    public function uninstall(string $plugin_name)
+    {
+        $plugin = $this->plugins->whereName($plugin_name);
+
+        if ($plugin->enabled == true)
+        {
+            \DB::transaction( function () use ($plugin)
+            {
+                if ($plugin->handler instanceof Installable)
+                {
+                    $plugin->handler->uninstall();
+                }
+
+                $plugin->enabled = false;
+
+                $plugin->save();
+            }, 5);
+        }
+
+        return response()->redirectToRoute('products.index');
     }
 }

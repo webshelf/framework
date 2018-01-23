@@ -127,11 +127,10 @@ class BackendController extends PluginEngine
     {
         $page = $repository->whereName($slug);
 
-        if ($page->editable) {
+        if ($page->editable && !$page->plugin) {
             $repository->whereName($slug)->delete();
+            account()->record(Activity::$deleted, $page);
         }
-
-        account()->record(Activity::$deleted, $page);
 
         return redirect()->route('admin.pages.index');
     }

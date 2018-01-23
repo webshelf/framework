@@ -15,8 +15,10 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/products')->uses('BackendController@index')->name('ProductIndex');
-    Route::get('/admin/products/{plugin}/status')->uses('BackendController@index')->name('ProductStatus');
+    Route::get('/admin/products')->uses('BackendController@index')->name('products.index');
 
-    // Post Requests.
-    // ==================================================================================
+    /**
+     * Login for plugins.
+     */
+    Route::get('/admin/products/install/{plugin}')->uses('BackendController@install')->name('products.install');
+    Route::get('/admin/products/uninstall/{plugin}')->uses('BackendController@uninstall')->name('products.uninstall');

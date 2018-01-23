@@ -12,6 +12,8 @@
 
     <div class="webshelf-table">
 
+        <?php /** @var \App\Model\Plugin $product */ ?>
+
         @foreach($products as $product)
             <div class="row">
 
@@ -26,6 +28,15 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
+
+                        @if($product->required == false)
+                            @if ($product->enabled)
+                                <li><a href="{{ route('products.uninstall', $product->name) }}">Uninstall</a></li>
+                            @else
+                                <li><a href="{{ route('products.install', $product->name) }}">Install</a></li>
+                            @endif
+                        @endif
+
                         {{--<li>{!! css()->status->installed($product->isEnabled()) !!}</li>--}}
                         {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}
                         {{--<li>{!! css()->status->sitemap($page->sitemap) !!}</li>--}}
@@ -36,7 +47,7 @@
 
                 <div class="stats">
                     <div class="views">
-                        {!! css()->status->check($product->isEnabled()) !!}
+                        {!! css()->status->check($product->enabled) !!}
                     </div>
                 </div>
             </div>
