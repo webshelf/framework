@@ -2,12 +2,10 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\Linkable;
 use Carbon\Carbon;
-use OwenIt\Auditing\Auditable;
 use Illuminate\Support\Collection;
+use App\Classes\Interfaces\Linkable;
 use Illuminate\Database\Eloquent\Builder;
-use App\Classes\Interfaces\AuditInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -88,6 +86,7 @@ class Page extends EloquentModel implements Linkable
     {
         return $this->views = $this->views + 1;
     }
+
     /**
      * A page belongs to a single menu.
      *
@@ -151,8 +150,9 @@ class Page extends EloquentModel implements Linkable
      */
     public function route()
     {
-        if ($this->prefix)
+        if ($this->prefix) {
             return "{$this->prefix}/{$this->slug}";
+        }
 
         return "{$this->slug}";
     }

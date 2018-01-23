@@ -3,19 +3,17 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 19/01/2018
- * Time: 23:48
+ * Time: 23:48.
  */
 
 namespace App\Classes\Repositories;
 
+use App\Model\Activity;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use App\Model\Activity;
 
 /**
- * Class ActivityRepository
- *
- * @package App\Classes\Repositories
+ * Class ActivityRepository.
  */
 class ActivityRepository extends BaseRepository
 {
