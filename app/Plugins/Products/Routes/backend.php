@@ -17,7 +17,7 @@
     // ==================================================================================
     Route::get('/admin/products')->uses('BackendController@index')->name('products.index');
 
-    /**
+    /*
      * Login for plugins.
      */
     Route::get('/admin/products/install/{plugin}')->uses('BackendController@install')->name('products.install');

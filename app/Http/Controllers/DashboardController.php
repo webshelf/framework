@@ -8,11 +8,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Library\Services\Facebook;
-use App\Classes\Repositories\ActivityRepository;
-use App\Classes\Repositories\AuditRepository;
-use App\Classes\Repositories\PluginRepository;
 use App\Model\Plugin;
+use App\Classes\Library\Services\Facebook;
+use App\Classes\Repositories\PluginRepository;
+use App\Classes\Repositories\ActivityRepository;
 
 /**
  * Class AdminController.
@@ -31,7 +30,6 @@ class DashboardController extends Controller
      */
     public function index(ActivityRepository $repository)
     {
-
         $plugin = (new PluginRepository(new Plugin))->whereName('articles');
 
         $plugin->handler->version();
