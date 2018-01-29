@@ -8,9 +8,8 @@
 
 namespace App\Plugins\Pages;
 
-use App\Classes\PageRouteBuilder;
-use App\Model\Activity;
 use App\Model\Page;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
@@ -127,7 +126,7 @@ class BackendController extends PluginEngine
     {
         $page = $repository->whereName($slug);
 
-        if ($page->editable && !$page->plugin) {
+        if ($page->editable && ! $page->plugin) {
             $repository->whereName($slug)->delete();
             account()->record(Activity::$deleted, $page);
         }

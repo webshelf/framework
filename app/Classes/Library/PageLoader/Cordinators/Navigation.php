@@ -8,9 +8,9 @@
 
 namespace App\Classes\Library\PageLoader\Cordinators;
 
-use App\Classes\Breadcrumbs;
 use App\Model\Menu;
 use App\Model\Page;
+use App\Classes\Breadcrumbs;
 use Illuminate\Support\Collection;
 
 /**
@@ -46,7 +46,6 @@ class Navigation
         $this->navigation = $navigation;
 
         $this->lookupCurrentMenu();
-
     }
 
     /**
@@ -63,32 +62,24 @@ class Navigation
      */
     private function lookupCurrentMenu()
     {
-        foreach($this->navigation as $menu)
-        {
-            foreach ($menu->children as $submenu)
-            {
-                if ($this->isCurrent($submenu))
-                {
+        foreach ($this->navigation as $menu) {
+            foreach ($menu->children as $submenu) {
+                if ($this->isCurrent($submenu)) {
                     $this->setActiveMenu($submenu);
 
                     break;
                 }
             }
 
-            if ($this->hasActiveMenu())
-            {
+            if ($this->hasActiveMenu()) {
                 $menu->active = true;
 
                 break;
-            }
-
-            else if ($this->isCurrent($menu))
-            {
+            } elseif ($this->isCurrent($menu)) {
                 $this->setActiveMenu($menu);
 
                 break;
             }
-
         }
     }
 
@@ -128,10 +119,8 @@ class Navigation
      */
     public function sidebar()
     {
-        if ($this->hasActiveMenu())
-        {
-            if ($this->activeMenu->parent)
-            {
+        if ($this->hasActiveMenu()) {
+            if ($this->activeMenu->parent) {
                 $menu = $this->navigation->where('title', $this->activeMenu->parent->title)->first();
 
                 return $menu->children;
