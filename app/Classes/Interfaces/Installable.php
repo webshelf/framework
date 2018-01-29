@@ -19,7 +19,7 @@ interface Installable
      * The steps required for this plugin product to fully
      * integrate into the webservice.
      *
-     * @return boolean
+     * @return bool
      */
     public function install();
 
@@ -27,7 +27,7 @@ interface Installable
      * The steps required for this plugin product to fully
      * remove itself from the webservice.
      *
-     * @return boolean
+     * @return bool
      */
     public function uninstall();
 }

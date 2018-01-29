@@ -9,9 +9,8 @@
 namespace App\Plugins\Products;
 
 use App\Plugins\PluginEngine;
-use App\Classes\Repositories\PluginRepository;
 use App\Classes\Interfaces\Installable;
-use Illuminate\Support\Facades\DB;
+use App\Classes\Repositories\PluginRepository;
 
 /**
  * Class AdminController.
@@ -51,12 +50,9 @@ class BackendController extends PluginEngine
     {
         $plugin = $this->plugins->whereName($plugin_name);
 
-        if ($plugin->enabled == false)
-        {
-            \DB::transaction( function () use ($plugin)
-            {
-                if ($plugin->handler instanceof Installable)
-                {
+        if ($plugin->enabled == false) {
+            \DB::transaction(function () use ($plugin) {
+                if ($plugin->handler instanceof Installable) {
                     $plugin->handler->install();
                 }
 
@@ -80,12 +76,9 @@ class BackendController extends PluginEngine
     {
         $plugin = $this->plugins->whereName($plugin_name);
 
-        if ($plugin->enabled == true)
-        {
-            \DB::transaction( function () use ($plugin)
-            {
-                if ($plugin->handler instanceof Installable)
-                {
+        if ($plugin->enabled == true) {
+            \DB::transaction(function () use ($plugin) {
+                if ($plugin->handler instanceof Installable) {
                     $plugin->handler->uninstall();
                 }
 
