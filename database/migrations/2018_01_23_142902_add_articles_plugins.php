@@ -1,12 +1,12 @@
 <?php
 
+use App\Model\Plugin;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Model\Plugin;
 
 /**
- * Class AddArticlesPlugins
+ * Class AddArticlesPlugins.
  */
 class AddArticlesPlugins extends Migration
 {
@@ -35,8 +35,7 @@ class AddArticlesPlugins extends Migration
         $pluginRepository->whereName('menus')->setAttribute('required', true)->save();
         $pluginRepository->whereName('pages')->setAttribute('required', true)->save();
 
-        Schema::table('plugins', function(Blueprint $table)
-        {
+        Schema::table('plugins', function (Blueprint $table) {
             $table->dropColumn('version');
             $table->dropColumn('icon');
         });

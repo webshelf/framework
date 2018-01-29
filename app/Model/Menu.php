@@ -2,12 +2,12 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\Linker;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Menus.
