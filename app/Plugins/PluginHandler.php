@@ -3,19 +3,16 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 23/01/2018
- * Time: 14:23
+ * Time: 14:23.
  */
 
 namespace App\Plugins;
 
 /**
- * Class PluginHandler
- *
- * @package App\Plugins
+ * Class PluginHandler.
  */
 abstract class PluginHandler extends PluginEngine
 {
-
     /**
      * Return the icon display for this plugin.
      *

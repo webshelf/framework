@@ -3,24 +3,21 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 23/01/2018
- * Time: 15:14
+ * Time: 15:14.
  */
 
 namespace App\Plugins\Articles;
 
-use App\Classes\Interfaces\Installable;
-use App\Classes\Repositories\PageRepository;
 use App\Model\Page;
 use App\Plugins\PluginHandler;
+use App\Classes\Interfaces\Installable;
+use App\Classes\Repositories\PageRepository;
 
 /**
- * Class ArticleController
- *
- * @package App\Plugins\Articles
+ * Class ArticleController.
  */
 class ArticlesController extends PluginHandler implements Installable
 {
-
     /**
      * Return the icon associated with this plugin.
      */
@@ -41,7 +38,7 @@ class ArticlesController extends PluginHandler implements Installable
      * The steps required for this plugin product to fully
      * integrate into the webservice.
      *
-     * @return boolean
+     * @return bool
      */
     public function install()
     {
@@ -62,7 +59,7 @@ class ArticlesController extends PluginHandler implements Installable
      * The steps required for this plugin product to fully
      * remove itself from the webservice.
      *
-     * @return boolean
+     * @return bool
      * @throws \Exception
      */
     public function uninstall()

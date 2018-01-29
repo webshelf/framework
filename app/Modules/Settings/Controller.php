@@ -8,7 +8,6 @@
 
 namespace App\Modules\Settings;
 
-use App\Model\Activity;
 use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
 use App\Classes\Repositories\SettingsRepository;

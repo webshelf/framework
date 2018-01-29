@@ -3,9 +3,7 @@
 namespace App\Classes\Interfaces;
 
 /**
- * Interface ActivityEvents
- *
- * @package App\Classes\Interfaces
+ * Interface ActivityEvents.
  */
 interface ActivityEvents
 {

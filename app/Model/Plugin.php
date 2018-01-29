@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @property string $name
  *
- * @property boolean $required
- * @property boolean $enabled
+ * @property bool $required
+ * @property bool $enabled
  *
  * @property PluginHandler $handler
  *
@@ -54,7 +54,7 @@ class Plugin extends EloquentModel
     protected $casts = ['enabled' => 'boolean', 'required' => 'boolean'];
 
     /**
-     * Return the plugins namespace
+     * Return the plugins namespace.
      *
      * @return string
      */
@@ -64,7 +64,6 @@ class Plugin extends EloquentModel
     }
 
     /**
-     *
      * @return PluginHandler
      */
     protected function getHandlerAttribute()

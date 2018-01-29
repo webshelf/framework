@@ -14,7 +14,7 @@ class PagePrefixColumn extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->string('prefix')->after('id')->default("");
+            $table->string('prefix')->after('id')->default('');
         });
     }
 
