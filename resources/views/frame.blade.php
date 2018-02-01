@@ -20,116 +20,43 @@
     <!-- Scripts -->
     <script src="{{ mix('assets/frontend.js') }}"></script>
 
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #8f8f8f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .framework {
-            color: #e57319;
-            font-size: 84px;
-        }
-
-        .content-page {
-            color: #19bbe5;
-            font-size: 25px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-
-        .links > a {
-            padding:15px;
-        }
-
-        .links > a.active {
-            background-color:#636b6f1c;
-        }
-
-        .links > a:hover {
-            background-color: #abe3ff24;
-        }
-    </style>
-
 </head>
 
 <body>
 
-    <div class="flex-center position-ref full-height">
-        <div class="top-right links">
-            <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
-            <?php /** @var \App\Model\Menu $menu */ ?>
-
-            @foreach ($webpage->navigation->main() as $menu)
-                <a class="{{ $menu->classState() }}" href="{{ $menu->route() }}">{{ $menu->title }}</a>
-            @endforeach
-
-            @if (Auth::check() == false)
-                <a href="{{ route('login') }}">Login</a>
-            @endif
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-block d-lg-none">Start Bootstrap</span>
+            <span class="d-none d-lg-block">
+              <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#education">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
+                </li>
+            </ul>
         </div>
-
-        <div class="content">
-
-            <div class="title m-b-md">
-
-                <span class="content-page">@yield('content')</span>
-
-                <br>
-
-                <span class="framework">{{ framework()->package }} v{{ framework()->version }}</span>
-
-            </div>
-
-            <div class="links">
-                @foreach ($webpage->navigation->sidebar() as $menu)
-                    <a href="{{ $menu->route() }}" class="{{ $menu->classState() }}">{{ $menu->title }}</a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    @yield('content')
+    </nav>
 
 </body>
 

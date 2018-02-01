@@ -6,7 +6,7 @@
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 // Animation Package.
 @import "node_modules/wowjs/css/libs/animate";

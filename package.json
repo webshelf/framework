@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "axios": "^0.17",
-    "bootstrap": "^4.0.0-beta.2",
-    "bootstrap-sass": "^3.3.7",
+    "bootstrap": "^4.0.0",
+    "popper.js": "^1.12",
     "cross-env": "^5.1",
     "jquery": "^3.2",
     "laravel-mix": "^1.7.*",
@@ -24,7 +24,6 @@
     "install": "^0.10.2",
     "jquery-colorbox": "^1.6.4",
     "pace": "0.0.4",
-    "popper.js": "^1.13.0",
     "sortablejs": "^1.7.0",
     "tinymce": "^4.7.4",
     "wowjs": "^1.1.3"
