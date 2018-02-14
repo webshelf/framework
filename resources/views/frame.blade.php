@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="{{ app()->getLocale() }}">
 
 <head>
@@ -24,11 +25,13 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="sideNav">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
-            <span class="d-block d-lg-none">Start Bootstrap</span>
+            <span class="d-block d-lg-none" id="mobile-brand-title">Spes Mundi</span>
             <span class="d-none d-lg-block">
-              <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
+              <h1>Spes<br>Mundi</h1>
             </span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,27 +39,139 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-                </li>
+
+                <?php /** @var \App\Model\Menu $menu */ ?>
+                @foreach ($webpage->navigation->main() as $menu)
+                    <li class="nav-item {{ $menu->classState() }}">
+                        <a class="nav-link" href="{{ $menu->route() }}" target="{{ $menu->target }}">{{ $menu->title }}</a>
+                    </li>
+                @endforeach
             </ul>
         </div>
+        <span class="d-none d-lg-block social">
+              <i class="fa fa-facebook-square"></i>
+              <i class="fa fa-youtube-square"></i>
+              <i class="fa fa-twitter-square"></i>
+        </span>
+
     </nav>
+
+    <section id="main-wrapper" class="container-fluid p-0">
+
+        @yield('content')
+
+        <div id="newsletter-bar">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-6">
+
+                        <h1>Subscribe & Get our notifications</h1>
+
+                    </div>
+
+                    <div class="col-6">
+
+                        <form method="post">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="email_address" id="email_address"
+                                       aria-describedby="emailAddressHelp"
+                                       placeholder="Email Address">
+                            </div>
+
+                            <button type="submit" class="btn info">Sign up</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer>
+
+            <div id="explore">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-5">
+
+                            <h1>Support Our Work</h1>
+
+                            <p>
+                                We spend countless hours supporting the interests and needs for those in third world countries,
+                                click the following banner to financial support us in our conquest.
+                            </p>
+
+                            <img src="{{ asset('uploads/assets/jusuit_banner_footer.png') }}" class="img-fluid" alt="Responsive image">
+
+                        </div>
+
+                        <div class="col-3 offset-md-1">
+
+                            <h1>Jesuit Manual</h1>
+
+                            <ul id="explore-jesuit">
+                                <li><a href="http://jesuits.org/mission" target="_new">Mission Statement</a></li>
+                                <li><a href="http://jesuits.org/aboutus" target="_new">About The Work</a></li>
+                                <li><a href="http://jesuits.org/spirituality" target="_new">Ignatian Spirituality</a></li>
+                                <li><a href="https://www.beajesuit.org/" target="_new">Becoming a Jesuit</a></li>
+                                <li><a href="http://jesuits.org/worldwide" target="_new">Worldwide Vocation</a></li>
+                                <li><a href="http://jesuits.org/whatwedo?PAGE=DTN-20130520124035" target="_new">Justice and Ecology</a></li>
+                                <li><a href="http://jesuits.org/supportus" target="_new">Support Jesuit</a></li>
+                            </ul>
+
+                        </div>
+
+                        <div class="col-3">
+
+                            <h1>Explore Articles</h1>
+
+                            <ul id="explore-articles">
+                                <li><a href="#">Quis autem vel eum iure</a></li>
+                                <li><a href="#">vel eum iure reprehenderit</a></li>
+                                <li><a href="#">sed quia consequuntur magni</a></li>
+                                <li><a href="#">Ut enim ad minima veniam</a></li>
+                                <li><a href="#">Neque porro quisquam</a></li>
+                                <li><a href="#">dolores eos qui ratione</a></li>
+                                <li><a href="#">reprehenderit qui in ea</a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="copyright">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-6">© 2018 SpesMundi.com</div>
+
+                        <div class="col-6">Powered by Webshelf v5.0.2</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    </section>
 
 </body>
 

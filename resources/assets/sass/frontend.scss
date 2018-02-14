@@ -1,6 +1,9 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Balthazar|Lobster+Two');
+@import url('https://fonts.googleapis.com/css?family=Asar');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
 
 // Variables
 @import "variables";
@@ -14,5 +17,9 @@
 // Font awesome icons.
 @import "node_modules/font-awesome/scss/font-awesome";
 
+// Global variables.
+$sidebar-size: 13.5rem;
+
 // Frontend Stylesheet
+@import "navigation";
 @import "frontend";
