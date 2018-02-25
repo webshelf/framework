@@ -26,9 +26,9 @@
                             @foreach ($articles as $article)
                                 <article>
                                     @if ($articles->count() == 1)
-                                    <h2>{{ $article->title }}</h2>
+                                    <h2>{{ ucfirst($article->title) }}</h2>
                                     @else
-                                    <h2><a href="{{ route('articles.article', $article->slug) }}">{{ $article->title }}</a></h2>
+                                    <h2><a href="{{ route('articles.article', $article->slug) }}">{{ ucfirst($article->title) }}</a></h2>
                                     @endif
                                     <div class="creator">Posted {{ $article->created_at->format('dS M Y') }} by {{ $article->creator->fullName() }}</div>
                                     @if($articles->count() == 1 && !$article->featured_img == '')

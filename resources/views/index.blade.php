@@ -78,7 +78,7 @@
                                 </div>
 
                                 <div class="title">
-                                    <h3>{{ $article->title }}</h3>
+                                    <h3>{{ ucfirst($article->title) }}</h3>
                                 </div>
 
                             </a>
@@ -100,7 +100,7 @@
                                 </div>
 
                                 <div class="title">
-                                    <h3>{{ $article->title }}</h3>
+                                    <h3>{{ ucfirst($article->title) }}</h3>
                                 </div>
 
                             </a>
@@ -142,7 +142,7 @@
                                 </div>
 
                                 <div class="title">
-                                    <h3>{{ $article->title }}</h3>
+                                    <h3>{{ ucfirst($article->title) }}</h3>
                                 </div>
 
                             </a>
@@ -164,7 +164,7 @@
                                 </div>
 
                                 <div class="title">
-                                    <h3>{{ $article->title }}</h3>
+                                    <h3>{{ ucfirst($article->title) }}</h3>
                                 </div>
 
                             </a>
