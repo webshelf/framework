@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Pages.
@@ -46,6 +47,13 @@ class Page extends EloquentModel implements Linkable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
+
+    /*
+     * Laravel Searchable Model.
+     *
+     * @ https://laravel.com/docs/5.3/scout#installation
+     */
+    use Searchable;
 
     /**
      * The table associated with the model.

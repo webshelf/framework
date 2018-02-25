@@ -83,7 +83,7 @@ class Controller extends ModuleEngine
             $classLocation = sprintf('App\Plugins\%s\FrontendController', $plugin->name());
 
             if (class_exists($classLocation)) {
-                $class = new $classLocation;
+                $class = app($classLocation);
 
                 if ($class instanceof Sitemap) {
                     $this->sitemap($class);

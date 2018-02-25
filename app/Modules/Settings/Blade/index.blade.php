@@ -187,7 +187,7 @@
             <div id="webmaster">
                 <div class="row">
                     <div class="col-11">
-                        <h4>Webmaster Settings</h4>
+                        <h4>Third Party Settings</h4>
                         <p>Control third party aspects of your website.</p>
                     </div>
                     <div class="col-1">
@@ -202,6 +202,27 @@
                         <small id="facebookPageIdHelp" class="form-text text-muted">
                             Provide public access to this platform by providing your facebook page id. <br>
                             You can retrieve your facebook id following this link : findmyfbid.com
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="setting[string][facebook_url]">Facebook Page Url</label>
+                        <input type="text" class="form-control" name="setting[string][facebook_url]" id="setting[string][facebook_url]" aria-describedby="facebookPageHelp" value="{{ settings()->getValue('facebook_url') }}">
+                        <small id="facebookPageHelp" class="form-text text-muted">
+                            Set the Facebook connection links on your webpage.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="setting[string][youtube_url]">Youtube Channel Url</label>
+                        <input type="text" class="form-control" name="setting[string][youtube_url]" id="setting[string][youtube_url]" aria-describedby="youtubeHelp" value="{{ settings()->getValue('youtube_url') }}">
+                        <small id="youtubeHelp" class="form-text text-muted">
+                            Set the Youtube connection links on your webpage.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="setting[string][twitter_url]">Twitter Page Url</label>
+                        <input type="text" class="form-control" name="setting[string][twitter_url]" id="setting[string][twitter_url]" aria-describedby="twitterHelp" value="{{ settings()->getValue('twitter_url') }}">
+                        <small id="twitterHelp" class="form-text text-muted">
+                            Set the Twitter connection links on your webpage.
                         </small>
                     </div>
                 </div>

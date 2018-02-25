@@ -16,6 +16,11 @@ use App\Http\Controllers\ErrorController;
 use App\Classes\Repositories\MenuRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
+/**
+ * Class Frontpage
+ *
+ * @package App\Classes\Library\PageLoader
+ */
 class Frontpage
 {
     /**
@@ -107,11 +112,11 @@ class Frontpage
     private function makeBlade(string $template = null, bool $override = true)
     {
         if ($template == null) {
-            return currentURI() == 'index' ? 'website::index' : 'website::page';
+            $template = currentURI() == 'index' ? 'website::index' : 'website::page';
         }
 
-        if ($override && view()->exists("website::plugins.{$this->model->slug}")) {
-            $template = "website::plugins.{$this->model->slug}";
+        if ($override && view()->exists("website::plugin.{$this->model->slug}")) {
+            $template = "website::plugin.{$this->model->slug}";
         }
 
         return $template;

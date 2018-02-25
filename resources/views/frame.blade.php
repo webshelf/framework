@@ -8,12 +8,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('uploads/favicon-32x32.png') }}" sizes="32x32" />
 
     <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
     <title>{{ $webpage->page->title() }}</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ mix('assets/frontend.css') }}" rel="stylesheet">
@@ -27,15 +25,15 @@
 
     <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="sideNav">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-            <span class="d-block d-lg-none" id="mobile-brand-title">Spes Mundi</span>
-            <span class="d-none d-lg-block">
+    <nav class="navbar navbar-expand-xl navbar-light fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}">
+            <span class="d-block d-xl-none" id="mobile-brand-title">Spes Mundi</span>
+            <span class="d-none d-xl-block">
               <h1>Spes<br>Mundi</h1>
             </span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="navbar-toggler-icon fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
@@ -48,10 +46,10 @@
                 @endforeach
             </ul>
         </div>
-        <span class="d-none d-lg-block social">
-              <i class="fa fa-facebook-square"></i>
-              <i class="fa fa-youtube-square"></i>
-              <i class="fa fa-twitter-square"></i>
+        <span class="d-none d-xl-block social">
+            <a href="{{ $webpage->url_facebook() }}" class="facebook" target="_blank"><i class="fa fa-facebook-square"></i></a>
+            <a href="{{ $webpage->url_youtube() }}" class="youtube" target="_blank"><i class="fa fa-youtube-square"></i></a>
+            <a href="{{ $webpage->url_twitter() }}" class="twitter" target="_blank"><i class="fa fa-twitter-square"></i></a>
         </span>
 
     </nav>
@@ -62,17 +60,17 @@
 
         <div id="newsletter-bar">
 
-            <div class="container">
+            <div class="container pt-4 pb-4">
 
                 <div class="row">
 
-                    <div class="col-6">
+                    <div class="col-xs-12 col-md-6 ">
 
-                        <h1>Subscribe & Get our notifications</h1>
+                        <h1>Subscribe & Get Notifications</h1>
 
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-xs-12 col-md-6 pt-3 pt-md-0">
 
                         <form method="post">
 
@@ -102,22 +100,22 @@
 
                     <div class="row">
 
-                        <div class="col-5">
+                        <div class="col-lg-5 col-sm-12 col-xs-12">
 
-                            <h1>Support Our Work</h1>
+                            <h3>Support Our Work</h3>
 
                             <p>
                                 We spend countless hours supporting the interests and needs for those in third world countries,
                                 click the following banner to financial support us in our conquest.
                             </p>
 
-                            <img src="{{ asset('uploads/assets/jusuit_banner_footer.png') }}" class="img-fluid" alt="Responsive image">
+                            <a href="http://www.jesuitmissions.ie/donate"><img src="{{ asset('uploads/assets/jesuit_banner.png') }}" class="img-fluid" alt="Responsive image"></a>
 
                         </div>
 
-                        <div class="col-3 offset-md-1">
+                        <div class="col-lg-3 col-xs-6 offset-lg-1 col-sm-6 mt-sm-5 mt-lg-0 mt-5 mt-lg-0">
 
-                            <h1>Jesuit Manual</h1>
+                            <h3>Jesuit Manual</h3>
 
                             <ul id="explore-jesuit">
                                 <li><a href="http://jesuits.org/mission" target="_new">Mission Statement</a></li>
@@ -131,18 +129,14 @@
 
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-lg-3 col-xs-6 col-sm-6 mt-sm-5 mt-lg-0 mt-5 mt-lg-0">
 
-                            <h1>Explore Articles</h1>
+                            <h3>Explore Articles</h3>
 
                             <ul id="explore-articles">
-                                <li><a href="#">Quis autem vel eum iure</a></li>
-                                <li><a href="#">vel eum iure reprehenderit</a></li>
-                                <li><a href="#">sed quia consequuntur magni</a></li>
-                                <li><a href="#">Ut enim ad minima veniam</a></li>
-                                <li><a href="#">Neque porro quisquam</a></li>
-                                <li><a href="#">dolores eos qui ratione</a></li>
-                                <li><a href="#">reprehenderit qui in ea</a></li>
+                                @foreach ($webpage->plugins->articles()->articles->take(5) as $article)
+                                    <li><a href="{{ route('articles.article', $article->slug) }}">{{ str_limit(ucfirst(strtolower($article->title)), 30, '...') }}</a></li>
+                                @endforeach
                             </ul>
 
                         </div>
@@ -159,9 +153,13 @@
 
                     <div class="row">
 
-                        <div class="col-6">© 2018 SpesMundi.com</div>
+                        <div class="col-xs-12 col-md-6 text-left text-md-left">
+                            <a href="{{ $webpage->url_facebook() }}" class="facebook" target="_blank">Facebook</a> |
+                            <a href="{{ $webpage->url_youtube() }}" class="youtube" target="_blank">Youtube</a> |
+                            <a href="{{ route('sitemap') }}" target="_blank">Sitemap</a>
+                        </div>
 
-                        <div class="col-6">Powered by Webshelf v5.0.2</div>
+                        <div class="col-xs-12 col-md-6 text-left text-md-right">© 2018 SpesMundi.com | Powered by Webshelf v5.0.2</div>
 
                     </div>
 

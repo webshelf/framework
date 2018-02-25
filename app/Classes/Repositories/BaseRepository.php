@@ -38,4 +38,9 @@ class BaseRepository
     {
         return $this->model->where('id', $integer)->first();
     }
+
+    public function whereSlug(string $text)
+    {
+        return $this->model->where('slug', $text)->first();
+    }
 }

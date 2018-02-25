@@ -15,6 +15,10 @@ fontawesome.config = {
     familyPrefix: 'fa'
 };
 
+window.Sticky = require('sticky-js');
+
+var sticky = new Sticky('.sticky-bar');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

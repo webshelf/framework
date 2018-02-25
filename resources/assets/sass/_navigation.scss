@@ -1,6 +1,4 @@
 #sideNav {
-  background-color: rgb(247, 247, 248);
-
   .navbar-brand {}
   .navbar-nav .nav-item .nav-link {
     font-weight: 600;
@@ -8,7 +6,39 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (max-width: 1140px) {
+  .navbar {
+    background-color: white;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  }
+  #mobile-brand-title {
+    font-size: 2rem;
+    font-weight: normal;
+    color: black;
+    padding-right: 10px;
+    font-family: 'Lobster Two', cursive;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top:144px;
+  }
+}
+
+@media (max-width: 1140px) and(min-width: 768px) {
+  body {
+    padding-top:77px;
+  }
+}
+
+@media (min-width: 1140px) {
+
+  body {
+    padding-top: 0;
+    padding-left: $sidebar-size;
+  }
+
   #sideNav {
     position: fixed;
     top: 0;
@@ -17,9 +47,11 @@
     display: flex;
     flex-direction: column;
     border-right: 1px solid #E1E1E1;
+    background-color: rgb(247, 247, 248);
 
     h1 {
       font-size: 3rem;
+      font-weight: normal;
       color: black;
       padding-right: 10px;
       font-family: 'Lobster Two', cursive;
@@ -54,7 +86,7 @@
         width: 100%;
         .nav-item {
           font-size: 1rem;
-          letter-spacing: 1.2px;
+          letter-spacing: 1px;
           font-family: 'Balthazar', serif;
           display: block;
           line-height: 50px;
@@ -66,8 +98,21 @@
         }
         .nav-item.active {
           background-color: #efefef;
+          border-right: 2px solid black;
         }
       }
     }
   }
+}
+
+.navbar-light .navbar-toggler {
+  border-color: white;
+  color: rgb(0, 0, 0);
+}
+.navbar-light .navbar-toggler-icon {
+  background: none;
+}
+.navbar-toggler-icon {
+  height: 100%;
+  font-size: 1.5rem;
 }

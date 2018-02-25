@@ -11,10 +11,12 @@
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "laravel/scout": "^4.0",
         "laravel/tinker": "~1.0",
         "league/glide": "^1.2",
         "owen-it/laravel-auditing": "^5.0.2",
-        "spatie/laravel-activitylog": "^2.3"
+        "spatie/laravel-activitylog": "^2.3",
+        "yab/laravel-scout-mysql-driver": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

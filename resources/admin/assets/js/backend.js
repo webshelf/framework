@@ -9,6 +9,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.Select = require('bootstrap-select');
+
 // https://github.com/RubaXa/Sortable
 window.Sortable = require('sortablejs');
 

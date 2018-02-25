@@ -45,6 +45,8 @@
     }
 
     /**
+     * Returned the morphed model.
+     *
      * @param string $table
      * @param int $id
      * @return App\Classes\Interfaces\Linkable
