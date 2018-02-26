@@ -23,14 +23,15 @@
                     <h2>Finding and Spreading Hope in our World!</h2>
 
                     <p>
-                        Hello, I'm Tony O'Riordan, An Irish Jesuit Priest now assigned to work with the refugees and
-                        internally displaced people of South Sudan, I am the leader of the refugee service team and I
-                        wish to document my work with you through my website.
+                        Welcome to `SpesMundi’ my personal webpage. My name is Tony O’Riordan. I am Irish Jesuit priest
+                        and recently I have been assigned to South Sudan. I have been appointed the Project Director of
+                        the Jesuit Refugee Service (JRS) in Maban which is in the North East of the Country and I am
+                        due to start in March 2018.
                     </p>
                     
                     <a href="{{ url('about') }}"><button type="button" class="btn btn-primary">Read More...</button></a>
-                    
-                    <button type="button" class="btn btn-outline-primary">Explore Analysis of South Sudan (PDF)</button>
+
+                    <a class="btn btn-outline-primary" href="{{ asset('uploads/PDF/south-sudan.pdf') }}" target="_blank">Explore Analysis of South Sudan (PDF)</a>
 
                 </div>
 

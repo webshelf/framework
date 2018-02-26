@@ -30,16 +30,16 @@
                         <h3>Explore</h3>
 
                         <ul>
-                            <li>South Sudan (PDF)</li>
-                            <li>Moyross Parish</li>
-                            <li>Jesuits Worldwide</li>
+                            <li><a href="{{ asset('uploads/PDF/south-sudan.pdf') }}" target="_blank">South Sudan (PDF)</a></li>
+                            <li><a href="http://moyrossparish.com/">Moyross Parish</a></li>
+                            <li><a href="http://jesuits.org/worldwide">Jesuits Worldwide</a></li>
                         </ul>
 
                         <h3>Charities</h3>
 
-                        <img src="https://scholarlykitchen.sspnet.org/wp-content/uploads/2015/04/oxfam.png" alt="Oxfam Logo" width="75%">
+                        <a href="https://jrs.ie/"><img src="{{ asset('uploads/assets/jesuit_refugee_service_logo.png') }}" alt="Click for Jesuits Refugee Service." width="75%"></a>
 
-                        <img src="https://www.ucanews.com/uploads/2013/03/1363337284.jpg" alt="Click for Jesuits Ireland Website" width="75%">
+                        <a href="http://www.jesuits.org/"><img src="{{ asset('uploads/assets/jesuits_org.png') }}" alt="Click for Jesuits Ireland Website." width="75%"></a>
 
                     </div>
 
