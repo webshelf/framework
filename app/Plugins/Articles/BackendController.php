@@ -10,6 +10,7 @@ namespace App\Plugins\Articles;
 
 use App\Classes\Repositories\ArticleCategoryRepository;
 use App\Classes\Repositories\ArticleRepository;
+use App\Model\Activity;
 use App\Model\Article;
 use App\Model\ArticleCategory;
 use Illuminate\Http\Request;
@@ -76,6 +77,8 @@ class BackendController extends PluginEngine
         // use the global save function.
         $this->save($request, $article);
 
+        account()->record(Activity::$created, $article);
+
         // redirect back to articles index.
         return redirect()->route('admin.articles.index');
     }
@@ -119,6 +122,8 @@ class BackendController extends PluginEngine
 
         $this->save($request, $article);
 
+        account()->record(Activity::$updated, $article);
+
         return redirect()->route('admin.articles.index');
     }
 
@@ -133,6 +138,8 @@ class BackendController extends PluginEngine
         $article = $this->articles->whereSlug($slug);
 
         $article->delete();
+
+        account()->record(Activity::$deleted, $article);
 
         return redirect()->route('admin.articles.index');
     }
@@ -159,6 +166,8 @@ class BackendController extends PluginEngine
         $category->title = $request['name'];
         $category->auditSave();
 
+        account()->record(Activity::$created, $category);
+
         return redirect()->route('admin.articles.categories.index');
     }
 
@@ -169,7 +178,11 @@ class BackendController extends PluginEngine
      */
     public function categories_destroy(int $id, ArticleCategoryRepository $categoryRepository)
     {
-        $categoryRepository->whereID($id)->delete();
+        $category = $categoryRepository->whereID($id);
+
+        account()->record(Activity::$deleted, $category);
+
+        $category->delete();
 
         return redirect()->route('admin.articles.categories.index');
     }

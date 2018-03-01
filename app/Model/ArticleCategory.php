@@ -97,4 +97,14 @@ class ArticleCategory extends BaseModel
     {
         return str_slug($this->getAttribute('title'));
     }
+
+    /**
+     * The name of the current model object.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return $this->getAttribute('title');
+    }
 }
