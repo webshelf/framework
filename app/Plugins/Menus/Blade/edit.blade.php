@@ -50,8 +50,9 @@
 
                         <?php /** @var \App\Classes\Interfaces\Linkable $item */ ?>
                         <option value="" selected></option>
+
                         @foreach ($linkableObjects as $item)
-                            <option value="{{ json_encode(['key' => $item->getKey(), 'class' => $item->getMorphClass()]) }}">{{ ucfirst($item->name()) }} - {{ $item->route() }}.html</option>
+                            <option value="{{ json_encode(['key' => $item->getKey(), 'class' => $item->getMorphClass()]) }}" {{ $menu->link->id == $item->getKey() ? 'selected' : null }}>{{ ucfirst($item->name()) }} - {{ $item->route() }}.html</option>
                         @endforeach
 
                         {{--@if ($menu->page)--}}
