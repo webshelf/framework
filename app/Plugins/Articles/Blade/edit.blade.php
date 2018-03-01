@@ -78,7 +78,7 @@
 
         <div class="form-actions">
 
-            <button type="submit" class="btn btn-create">Create Article</button>
+            <button type="submit" class="btn btn-create">Update Article</button>
 
             <div class="pull-right">
                 <button type="reset" class="btn btn-reset">Reset</button>
