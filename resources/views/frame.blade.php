@@ -105,8 +105,9 @@
                             <h3>Support Our Work</h3>
 
                             <p>
-                                We spend countless hours supporting the interests and needs for those in third world countries,
-                                click the following banner to financial support us in our conquest.
+                                The Jesuit Mission Office in Dublin supports my work in South Sudan. It also supports
+                                the work of many other individuals and groups in others parts of the world where the
+                                needs are great. If you are in a position to make a donation today, click the banner.
                             </p>
 
                             <a href="http://www.jesuitmissions.ie/donate"><img src="{{ asset('uploads/assets/jesuit_banner.png') }}" class="img-fluid" alt="Responsive image"></a>

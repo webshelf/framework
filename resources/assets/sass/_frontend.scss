@@ -41,14 +41,18 @@ h1 {
 }
 
 h2 {
+  color: #253858;
   font-size: 23px;
   letter-spacing: 1px;
   font-weight: 700;
-  //color: $color-royal-purple;
 }
 
 a img:hover {
   opacity: 0.9;
+}
+
+img {
+  max-width:100%;
 }
 
 .btn-primary {
@@ -72,6 +76,10 @@ a img:hover {
   background-image: none;
   border-color: #61458B;
 }
+.btn-outline-primary:hover {
+  background-color: #3a235d;
+  border-color: #61458B;
+}
 
 #main-wrapper {
 
@@ -88,14 +96,13 @@ a img:hover {
   }
 
   #landing {
-    height: 50vh;
+    height: 55vh;
     margin-top:-50px;
-    background-position: bottom;
+    background-position: center;
     background-image: url("../img/IMG_9475.jpg");
     position: relative;
-    background-color: #775f9b;
+    background-color: #F4F7F9;
     background-size: cover;
-    position:relative;
     background-attachment: fixed;
 
     #title {

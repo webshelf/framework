@@ -153,10 +153,10 @@ class BackendController extends PluginEngine
      */
     public function categories_store(Request $request)
     {
-        $this->validate($request, ['unique:name']);
+        $this->validate($request,['unique:title']);
 
         $category = new ArticleCategory;
-        $category->name = $request['name'];
+        $category->title = $request['name'];
         $category->auditSave();
 
         return redirect()->route('admin.articles.categories.index');
