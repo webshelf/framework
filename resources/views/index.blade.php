@@ -20,7 +20,7 @@
 
                 <div class="col-lg-7 col-md-12">
 
-                    <h2>Finding and Spreading Hope in our World!</h2>
+                    <h2 class="frontpage">Finding and Spreading Hope in our World!</h2>
 
                     <p>
                         Welcome to `SpesMundi’ my personal webpage. My name is Tony O’Riordan. I am Irish Jesuit priest
@@ -55,7 +55,7 @@
 
         <div class="container">
 
-            <h2>Latest Articles</h2>
+            <h2 class="frontpage">Latest Articles</h2>
 
             <div class="article-group row">
 
@@ -121,7 +121,7 @@
 
         <div class="container">
 
-            <h2>Popular Articles</h2>
+            <h2 class="frontpage">Popular Articles</h2>
 
             <div class="article-group row">
 

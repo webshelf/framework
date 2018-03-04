@@ -14,7 +14,7 @@
 
             <div class="row">
 
-                <div class="col-xs-12 col-lg-8">
+                <div class="col-xs-12 col-lg-9 pr-40">
 
                     <?php /** @var \App\Model\Article $article */ ?>
                     <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
@@ -25,25 +25,26 @@
                         @else
                             @foreach ($articles as $article)
                                 <article>
+                                    <div class="creator">Posted {{ $article->created_at->format('M d, Y') }} by {{ $article->creator->fullName() }}</div>
                                     @if ($articles->count() == 1)
                                     <h2>{{ ucfirst($article->title) }}</h2>
                                     @else
                                     <h2><a href="{{ route('articles.article', $article->slug) }}">{{ ucfirst($article->title) }}</a></h2>
                                     @endif
-                                    <div class="creator">Posted {{ $article->created_at->format('dS M Y') }} by {{ $article->creator->fullName() }}</div>
                                     @if($articles->count() == 1 && !$article->featured_img == '')
                                         <img src="{{ url($article->featured_img) }}" alt="{{ $article->title }}" width="100%" class="img-responsive mb-3 mt-3">
                                     @endif
                                     <div class="content">{!! $article->content !!}</div>
+                                    @if ($articles->count() == 1)
+                                        <hr>
+                                        <h4><a href="{{ url()->previous() }}"><i class="fa fa-arrow-circle-left mr-2"></i>Go Back</a></h4>
+                                    @endif
                                 </article>
                                 @if (!$loop->last)
                                     <hr>
                                 @endif
                             @endforeach
-                            @if ($articles->count() == 1)
-                                <hr>
-                                <h2><a href="{{ url()->previous() }}"><i class="fa fa-arrow-circle-left mr-2"></i>Go Back</a></h2>
-                            @else
+                            @if($articles->count() > 1)
                                 {{ $articles->links() }}
                             @endif
                         @endif
@@ -51,7 +52,7 @@
 
                 </div>
 
-                <div class="col-xs-12 col-lg-3 offset-lg-1 mt-4 mt-lg-0" id="sidebar" data-sticky-container>
+                <div class="col-xs-12 col-lg-3 mt-4 mt-lg-0" id="sidebar" data-sticky-container>
 
                     <div class="sticky-bar" data-margin-top="20" data-margin-bottom="20">
 
