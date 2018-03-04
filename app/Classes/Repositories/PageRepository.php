@@ -34,6 +34,21 @@ class PageRepository extends BaseRepository
         $this->model = $model;
     }
 
+    public function allNormalPages()
+    {
+        return $this->model->where('special', '=', false)->get();
+    }
+
+    public function allSpecialPages()
+    {
+        return $this->model->where('special', '=', true)->get();
+    }
+
+    public function whereIdentifier(string $string)
+    {
+        return $this->model->where('identifier', $string)->first();
+    }
+
     /**
      * @param $plugin_name
      * @return mixed

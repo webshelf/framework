@@ -58,7 +58,8 @@
 
         @yield('content')
 
-        <div id="newsletter-bar">
+        @if(plugins()->enabled('newsletters'))
+            <div id="newsletter-bar">
 
             <div class="container pt-4 pb-4">
 
@@ -72,12 +73,12 @@
 
                     <div class="col-xs-12 col-md-6 pt-3 pt-md-0">
 
-                        <form method="post">
+                        <form method="post" action="{{ route('newsletter.join') }}">
+
+                            {{ csrf_field() }}
 
                             <div class="form-group">
-                                <input type="text" class="form-control" name="email_address" id="email_address"
-                                       aria-describedby="emailAddressHelp"
-                                       placeholder="Email Address">
+                                <input type="email" class="form-control" name="email_address" id="email_address" aria-describedby="emailAddressHelp" placeholder="Email Address" required>
                             </div>
 
                             <button type="submit" class="btn info">Sign up</button>
@@ -91,6 +92,7 @@
             </div>
 
         </div>
+        @endif
 
         <footer>
 

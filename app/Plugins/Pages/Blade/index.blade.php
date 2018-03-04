@@ -10,6 +10,25 @@
 
 @section('content')
 
+    <div class="webshelf-scope-menu">
+
+        <ul class="list-unstyled">
+
+            <li class="item">
+                <a href="{{ route('admin.pages.index') }}">
+                    <span class="title">Normal</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="{{ route('admin.pages.special') }}">
+                    <span class="title">Special</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
     <form>
         <div class="searchbar">
             <div class="text form-row">

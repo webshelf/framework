@@ -60,15 +60,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return (new Frontpage($this->currentPage, $this->navigationData()))->publish();
-    }
-
-    /**
-     * @return mixed
-     */
-    private function navigationData()
-    {
-        return app(MenuRepository::class)->allParentsWithChildren();
+        return (new Frontpage($this->currentPage, app(MenuRepository::class)->allParentsWithChildren()))->publish();
     }
 
     /**

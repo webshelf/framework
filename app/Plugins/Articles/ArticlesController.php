@@ -23,7 +23,7 @@ class ArticlesController extends PluginHandler implements Installable
      */
     public function icon()
     {
-        return 'fa-book';
+        return 'fa-file-text';
     }
 
     /**

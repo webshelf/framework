@@ -38,7 +38,12 @@ class BackendController extends PluginEngine
      */
     public function index()
     {
-        return $this->make('index')->with('pages', $this->repository->all());
+        return $this->make('index')->with('pages', $this->repository->allNormalPages());
+    }
+
+    public function indexSpecial()
+    {
+        return $this->make('index')->with('pages', $this->repository->allSpecialPages());
     }
 
     /**

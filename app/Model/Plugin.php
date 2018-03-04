@@ -195,7 +195,7 @@ class Plugin extends EloquentModel
     public function adminUrl()
     {
         if ($this->isBackEnd()) {
-            return url('/admin/'.$this->name());
+            return route("admin.{$this->name}.index");
         }
 
         throw new \Exception('This is not a backend enabled plugin and should not be used here.');
