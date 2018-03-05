@@ -37,7 +37,7 @@
                                     <div class="content">{!! $article->content !!}</div>
                                     @if ($articles->count() == 1)
                                         <hr>
-                                        <h4><a href="{{ url()->previous() }}"><i class="fa fa-arrow-circle-left mr-2"></i>Go Back</a></h4>
+                                        <h5><a href="{{ url()->previous() }}"><i class="fa fa-arrow-circle-left mr-2"></i>Go Back</a></h5>
                                     @endif
                                 </article>
                                 @if (!$loop->last)
