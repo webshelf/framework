@@ -43,9 +43,9 @@ h1 {
 
 h2 {
   color: $color-royal-purple;
-  font-size:40px;
+  font-size:35px;
   font-weight:400;
-  line-height: 55px;
+  line-height: 50px;
   margin-bottom: 15px;
 }
 
@@ -296,6 +296,12 @@ img {
         display: flex;
         align-items: center;
       }
+    }
+  }
+
+  #about-page {
+    p {
+      text-align: justify;
     }
   }
 

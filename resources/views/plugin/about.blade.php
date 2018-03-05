@@ -17,13 +17,13 @@
 
             <div class="row">
 
-                <div class="col-xs-12 col-lg-9 pr-40">
+                <div class="col-xs-12 col-lg-8">
 
                     {!! $webpage->page->content() !!}
 
                 </div>
 
-                <div class="col-xs-12 col-lg-3 mt-4 mt-lg-0" id="sidebar" data-sticky-container>
+                <div class="col-xs-12 col-lg-3 offset-lg-1 mt-4 mt-lg-0" id="sidebar" data-sticky-container>
 
                     <div class="sticky-bar" data-margin-top="20" data-margin-bottom="20">
 
