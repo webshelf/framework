@@ -48,10 +48,10 @@
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <label for="status">Status</label>
+                    <label for="status">Visibility</label>
                     <select class="form-control" name="status" id="status">
-                        <option value="1" {{ $article->status == 1 ? 'selected' : null }}>Public</option>
-                        <option value="0" {{ $article->status == 0 ? 'selected' : null }}>Private</option>
+                        <option value="{{ \App\Model\Article::STATUS_PUBLISHED }}" {{ $article->status == \App\Model\Article::STATUS_PUBLISHED ? 'selected' : null }}> Published</option>
+                        <option value="{{ \App\Model\Article::STATUS_UNPUBLISHED }}" {{ $article->status == \App\Model\Article::STATUS_UNPUBLISHED ? 'selected' : null }}>Unpublished</option>
                     </select>
                 </div>
             </div>

@@ -39,10 +39,10 @@
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <label for="status">Status</label>
+                    <label for="status">Visibility</label>
                     <select class="form-control" name="status" id="status">
-                        <option value="1">Public</option>
-                        <option value="0">Private</option>
+                        <option value="{{ \App\Model\Article::STATUS_PUBLISHED }}" selected>Published</option>
+                        <option value="{{ \App\Model\Article::STATUS_UNPUBLISHED }}">Unpublished</option>
                     </select>
                 </div>
             </div>

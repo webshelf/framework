@@ -54,6 +54,7 @@ class Frontpage
      * @param string|null $template
      * @param bool $override
      * @param int $status
+     * @param bool $errorResponse
      * @return Response
      */
     public function publish(string $template = null, bool $override = true, int $status = 200, bool $errorResponse = false)

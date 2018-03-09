@@ -46,7 +46,7 @@
                     <ul class="list-unstyled">
                         <li>{!! css()->link->edit(route('admin.articles.edit', $article->slug)) !!}</li>
                         <li>{!! css()->status->sitemap($article->sitemap) !!}</li>
-                        <li>{!! css()->status->status($article->status) !!}</li>
+                        <li>{!! css()->status->visibility($article->status) !!}</li>
                         <li>{!! css()->link->destroy(route('admin.articles.destroy', $article->slug)) !!}</li>
                         <li>{!! css()->link->view(url($article->route())) !!}</li>
                     </ul>

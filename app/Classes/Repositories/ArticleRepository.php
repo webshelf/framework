@@ -42,9 +42,26 @@ class ArticleRepository extends BaseRepository
         return $this->model->where(['sitemap' => true, 'status' => true])->get();
     }
 
+    /**
+     * @ver 5.0.2
+     * @date 08/03/2018
+     * @param int $count
+     * @return \Illuminate\Database\Eloquent\Collection|Collection|static[]
+     */
+    public function latest($count = 7)
+    {
+        return $this->model->take($count)->where('status', Article::STATUS_PUBLISHED)->orderBy('created_at')->get();
+    }
+
+    /**
+     * @ver 5.0.2
+     * @date 08/03/2018
+     * @param int $count
+     * @return \Illuminate\Database\Eloquent\Collection|Collection|static[]
+     */
     public function mostViewed($count = 7)
     {
-        return $this->model->orderBy('views', 'desc')->take($count)->get();
+        return $this->model->orderBy('views', 'desc')->take($count)->where('status', Article::STATUS_PUBLISHED)->get();
     }
 
     /**
