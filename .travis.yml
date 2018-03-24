@@ -19,7 +19,7 @@
     "printf \"\\n\" | pecl install -f redis",
     "npm install && npm run dev",
     "mysql -e 'CREATE DATABASE webshelf;'",
-    "composer install
+    "composer install",
     "travis_retry composer self-update",
     "php artisan migrate"
   ],
