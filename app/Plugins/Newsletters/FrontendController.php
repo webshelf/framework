@@ -8,15 +8,14 @@
 
 namespace App\Plugins\Newsletters;
 
-use App\Classes\Library\PageLoader\Frontpage;
+use Illuminate\Http\Request;
+use App\Plugins\PluginEngine;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use App\Model\Page;
+use App\Classes\Library\PageLoader\Frontpage;
 use App\Plugins\Newsletters\Model\Newsletter;
-use App\Plugins\Newsletters\Model\NewsletterRepository;
 use App\Plugins\Newsletters\Model\NewsletterUser;
-use App\Plugins\PluginEngine;
-use Illuminate\Http\Request;
+use App\Plugins\Newsletters\Model\NewsletterRepository;
 
 /**
  * Class FrontendController.

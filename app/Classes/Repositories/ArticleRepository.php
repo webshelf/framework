@@ -3,22 +3,18 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 16/02/2018
- * Time: 16:00
+ * Time: 16:00.
  */
 
 namespace App\Classes\Repositories;
 
-use App\Model\Article;
 use App\Model\Menu;
+use App\Model\Article;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 
 /**
- * Class ArticleRepository
- *
- * @package App\Classes\Repositories
+ * Class ArticleRepository.
  */
 class ArticleRepository extends BaseRepository
 {
@@ -107,7 +103,7 @@ class ArticleRepository extends BaseRepository
      * @ver 5.1.15
      * @date 19/03/2018
      * @param int $creator_id
-     * @return integer
+     * @return int
      */
     public function publishedArticlesCount(int $creator_id)
     {
