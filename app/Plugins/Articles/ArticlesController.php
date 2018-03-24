@@ -23,7 +23,7 @@ class ArticlesController extends PluginHandler implements Installable
      */
     public function icon()
     {
-        return 'fa-book';
+        return 'fa-file-text';
     }
 
     /**
@@ -31,7 +31,7 @@ class ArticlesController extends PluginHandler implements Installable
      */
     public function version()
     {
-        return '1.0';
+        return '1.1';
     }
 
     /**

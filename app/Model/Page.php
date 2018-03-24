@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Pages.
@@ -18,8 +19,10 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Menu $menu
  *
  * @property int $id
+ * @property string $identifier
  * @property string $prefix
  * @property string $slug
+ * @property string $title
  * @property string $content
  * @property string $banner
  * @property string $seo_title
@@ -29,7 +32,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property bool $sitemap
  * @property bool $enabled
  * @property string $plugin
- * @property int $editable
+ * @property bool $editable
+ * @property bool $special
  * @property int $creator_id
  * @property int $editor_id
  *
@@ -46,6 +50,13 @@ class Page extends EloquentModel implements Linkable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
+
+    /*
+     * Laravel Searchable Model.
+     *
+     * @ https://laravel.com/docs/5.3/scout#installation
+     */
+    use Searchable;
 
     /**
      * The table associated with the model.
@@ -166,4 +177,15 @@ class Page extends EloquentModel implements Linkable
     {
         return "{$this->seo_title}";
     }
+
+    /**
+     * @param $value
+     */
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['seo_title'] = $value;
+
+        $this->attributes['slug'] = str_slug($value);
+    }
+
 }

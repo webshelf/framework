@@ -1,0 +1,151 @@
+<?php
+
+namespace App\Model;
+
+use App\Classes\Repositories\PageRepository;
+use Carbon\Carbon;
+use App\Classes\Interfaces\Linkable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
+
+/**
+ * Class Article
+ *
+ * @property int $id
+ * @property string $slug
+ * @property string $title
+ * @property string $content
+ * @property string $featured_img
+ * @property int $category_id
+ * @property int $editor_id
+ * @property int $creator_id
+ * @property boolean $status
+ *
+ * @property ArticleCategory $category
+ *
+ * @property Account $creator
+ * @property Account $editor
+ *
+ * @property Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @package App
+ */
+class Article extends BaseModel implements Linkable
+{
+    /*
+     * Laravel Deleting.
+     *
+     * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
+     */
+    use SoftDeletes;
+
+    /*
+     * Laravel Searchable Model.
+     *
+     * @ https://laravel.com/docs/5.3/scout#installation
+     */
+    use Searchable;
+
+    /*
+     * Status conditions column.
+     */
+    const STATUS_PUBLISHED = 1;
+    const STATUS_UNPUBLISHED = 0;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'articles';
+
+    /**
+     * The attributes that are not mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * The table date columns, casted to Carbon.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * Attributes to exclude from the Audit.
+     *
+     * @var array
+     */
+    protected $auditExclude = [];
+
+    /**
+     * @return ArticleCategory|HasOne
+     */
+    public function category()
+    {
+        return $this->hasOne(ArticleCategory::class,'id', 'category_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(Account::class, 'creator_id', 'id');
+    }
+
+    public function editor()
+    {
+        return $this->belongsTo(Account::class, 'editor_id', 'id');
+    }
+
+    /**
+     * Set the title of the article, and the slug.
+     *
+     * @param $value
+     */
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+
+        $this->attributes['slug'] = str_slug($value);
+    }
+
+    /**
+     * The url that is used to view this model.
+     *
+     * @return string
+     */
+    public function route()
+    {
+        /** @var Page $page */
+        $page = app(PageRepository::class)->wherePlugin('Articles');
+
+        if ($this->category) {
+            return "{$page->route()}/{$this->getAttribute('slug')}";
+        }
+
+        return "{$page->route()}/{$this->getAttribute('slug')}";
+    }
+
+    /**
+     * The name of the current model object.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return $this->getAttribute('title');
+    }
+
+    /**
+     * @param int $amount
+     * @return int
+     */
+    public function incrementView(int $amount = 1)
+    {
+        return $this->increment('views', $amount);
+    }
+}

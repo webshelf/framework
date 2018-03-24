@@ -8,12 +8,10 @@
 
 namespace Tests\Feature;
 
-use App\Model\Menu;
 use App\Model\Page;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
-use App\Classes\Library\PageLoader\Webpage;
 use App\Classes\Library\PageLoader\Frontpage;
 
 /**
@@ -26,45 +24,56 @@ class FrontpageLoaderTest extends TestCase
      */
     public function a_frontpage_should_be_constructable()
     {
-        $page = factory(Page::class)->make();
-        $navs = factory(Menu::class, 6)->states('parent')->make();
+        $webpage = (new Frontpage($this->page(), new Collection))->draft();
 
-        $frontpage = (new Frontpage($page, $navs));
+        $this->assertNotEmpty($webpage);
+        $this->assertNotEmpty($webpage->contact);
+        $this->assertNotEmpty($webpage->frame);
+        $this->assertNotEmpty($webpage->navigation);
+        $this->assertNotEmpty($webpage->plugins);
+    }
+    
+    public function default_frontpage_views()
+    {
+        Route::get('/', function () {
+            return (new Frontpage($this->page(), new Collection))->publish();
+        });
 
-        $this->assertNotEmpty($frontpage->webpage->page);
-        $this->assertNotEmpty($frontpage->webpage->contact);
-        $this->assertNotEmpty($frontpage->webpage->site);
-        $this->assertNotEmpty($frontpage->webpage->navigation);
+        Route::get('/test', function () {
+            return (new Frontpage($this->page(), new Collection))->publish();
+        });
+
+        $this->visit('/')->assertViewIs('website::index');
+        $this->visit('/test')->assertViewIs('website::page');
     }
 
     /**
      * @test
      */
-    public function frontpage_should_be_publishable_with_default_template()
+    public function page_title_should_append_text_with_positioning()
     {
-        $page = factory(Page::class)->make();
-        $navs = factory(Menu::class, 6)->states('parent')->make();
+        $webpage = (new Frontpage($this->page(), new Collection))->draft();
 
-        $index = $this->publish($frontpage = (new Frontpage($page, $navs)), '/');
-        $page = $this->publish($frontpage = (new Frontpage($page, $navs)), '/test');
+        settings()->set('seo_text', 'Unit Testing Right');
+        settings()->set('seo_position', 'right');
+        settings()->set('seo_separator', '-');
 
-        $index->assertViewIs('website::index')->assertViewHas('webpage', $frontpage->webpage);
-        $page->assertViewIs('website::page')->assertViewHas('webpage', $frontpage->webpage);
+        $this->assertSame('Homepage - Unit Testing Right', $webpage->title());
+
+        settings()->set('seo_text', 'Unit Testing Left');
+        settings()->set('seo_position', 'left');
+        settings()->set('seo_separator', '|');
+
+        $this->assertSame('Unit Testing Left | Homepage', $webpage->title());
     }
 
-    /**
-     * Build a route and return the visit response.
-     * @param Frontpage $frontpage
-     * @param string $url
-     * @param string|null $template
-     * @return $this|\Illuminate\Foundation\Testing\TestResponse
-     */
-    private function publish(Frontpage $frontpage, string $url = '/', string $template = null)
+    private function page()
     {
-        Route::get($url, function () use ($frontpage, $template) {
-            return $frontpage->publish($template, false);
-        });
+        $page = new Page([
+            'slug' => 'index',
+            'seo_title' => 'Homepage'
+        ]);
 
-        return $this->visit($url);
+        return $page;
     }
 }

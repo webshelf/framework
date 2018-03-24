@@ -6,7 +6,7 @@
  * Time: 02:23.
  */
 
-namespace App\Classes\Library\PageLoader\Cordinators;
+namespace App\Classes\Library\PageLoader\Coordinators;
 
 use App\Model\Menu;
 use App\Model\Page;
@@ -45,7 +45,10 @@ class Navigation
 
         $this->navigation = $navigation;
 
-        $this->lookupCurrentMenu();
+        if ($this->navigation->isNotEmpty())
+        {
+            $this->lookupCurrentMenu();
+        }
     }
 
     /**
@@ -96,14 +99,6 @@ class Navigation
     private function hasActiveMenu()
     {
         return $this->activeMenu ? true : false;
-    }
-
-    /**
-     * @return array
-     */
-    public function plugins()
-    {
-        return [];
     }
 
     /**

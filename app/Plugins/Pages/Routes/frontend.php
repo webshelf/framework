@@ -21,12 +21,8 @@
 
     /** @var \App\Model\Page $page */
     foreach ($repository->frontendPageCollection() as $page) {
-        if (! $page->redirect) {
-            if ($page->plugin) {
-                Route::get($page->route())->uses('App\Http\Controllers\PageController@index');
-            } else {
-                Route::get($page->route())->uses('App\Http\Controllers\PageController@index');
-            }
+        if (!$page->redirect && !$page->plugin) {
+            Route::get($page->route())->uses('App\Http\Controllers\PageController@index');
         }
     }
 

@@ -20,7 +20,7 @@ class Status extends Icons
 
     public function visibility($boolean)
     {
-        return $this->statusIcon('fa-low-vision', $boolean);
+        return $this->statusIcon('fa-eye', $boolean);
     }
 
     public function status($boolean)

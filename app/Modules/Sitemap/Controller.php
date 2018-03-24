@@ -80,10 +80,11 @@ class Controller extends ModuleEngine
 
         /** @var Plugin $plugin */
         foreach ($plugins as $plugin) {
-            $classLocation = sprintf('App\Plugins\%s\FrontendController', $plugin->name());
 
-            if (class_exists($classLocation)) {
-                $class = new $classLocation;
+            $classDir = 'App\Plugins\\' . ucfirst($plugin->name) . '\\FrontendController';
+
+            if (class_exists($classDir)) {
+                $class = app($classDir);
 
                 if ($class instanceof Sitemap) {
                     $this->sitemap($class);

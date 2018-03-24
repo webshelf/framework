@@ -32,6 +32,8 @@ abstract class PluginEngine extends Controller
     /**
      * Get the module name by checking the class name location.
      *
+     * @todo class_basname() ?
+     *
      * @return mixed
      */
     protected function pluginName()

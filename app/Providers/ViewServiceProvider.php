@@ -41,6 +41,12 @@ class ViewServiceProvider extends ServiceProvider
         $this->loadViewsFrom(base_path('app/Plugins'), 'plugins');
 
         /*
+         * 16/03/2018.
+         * Templates for frontend view short codes.
+         */
+        $this->loadViewsFrom(resource_path('templates'), 'templates');
+
+        /*
          * Errors can be overwritten by the front end website, default to dashboard errors.
          */
         $this->loadViewsFrom([resource_path('views/errors'), resource_path('admin/views/errors')], 'errors');

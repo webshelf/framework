@@ -38,4 +38,15 @@ class BaseRepository
     {
         return $this->model->where('id', $integer)->first();
     }
+
+    /**
+     * @deprecated change to the repository class calling it.
+     *
+     * @param string $text
+     * @return \Illuminate\Database\Eloquent\Model|mixed|null|static
+     */
+    public function whereSlug(string $text)
+    {
+        return $this->model->where('slug', $text)->first();
+    }
 }

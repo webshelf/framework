@@ -137,6 +137,14 @@ class Account extends Authenticatable implements UserResolver
     }
 
     /**
+     * @return HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class,'creator_id','id');
+    }
+
+    /**
      * Generate a bCrpyt string for new password enties.
      *
      * @param string $string
