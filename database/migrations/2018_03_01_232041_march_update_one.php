@@ -37,7 +37,7 @@ class MarchUpdateOne extends Migration
 
         Schema::create('newsletter_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email', 255)->unique();
+            $table->string('email', 191)->unique();
             $table->timestamps();
         });
 
