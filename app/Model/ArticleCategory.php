@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class ArticleCategory
+ * Class ArticleCategory.
  *
  * @property string $title
  * @property string $slug
@@ -21,8 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
- * @package App
  */
 class ArticleCategory extends BaseModel
 {
@@ -65,7 +63,7 @@ class ArticleCategory extends BaseModel
      */
     public function articles()
     {
-        return $this->hasMany(Article::class,'category_id','id');
+        return $this->hasMany(Article::class, 'category_id', 'id');
     }
 
     /**
