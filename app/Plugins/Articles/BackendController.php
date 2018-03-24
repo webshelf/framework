@@ -8,21 +8,20 @@
 
 namespace App\Plugins\Articles;
 
-use App\Classes\Repositories\ArticleCategoryRepository;
-use App\Classes\Repositories\ArticleRepository;
-use App\Model\Activity;
 use App\Model\Article;
-use App\Model\ArticleCategory;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
+use App\Model\ArticleCategory;
 use Illuminate\Validation\Rule;
+use App\Classes\Repositories\ArticleRepository;
+use App\Classes\Repositories\ArticleCategoryRepository;
 
 /**
  * Class Controller.
  */
 class BackendController extends PluginEngine
 {
-
     /**
      * @var ArticleRepository
      */
@@ -160,7 +159,7 @@ class BackendController extends PluginEngine
      */
     public function categories_store(Request $request)
     {
-        $this->validate($request,['unique:title']);
+        $this->validate($request, ['unique:title']);
 
         $category = new ArticleCategory;
         $category->title = $request['name'];

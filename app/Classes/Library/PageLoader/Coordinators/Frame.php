@@ -8,8 +8,6 @@
 
 namespace App\Classes\Library\PageLoader\Coordinators;
 
-use App\Classes\SettingsManager;
-
 /**
  * Class Site.
  */
