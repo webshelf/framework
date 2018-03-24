@@ -141,7 +141,7 @@ class Account extends Authenticatable implements UserResolver
      */
     public function articles()
     {
-        return $this->hasMany(Article::class,'creator_id','id');
+        return $this->hasMany(Article::class, 'creator_id', 'id');
     }
 
     /**
