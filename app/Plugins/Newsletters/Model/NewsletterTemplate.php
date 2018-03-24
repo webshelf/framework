@@ -2,13 +2,11 @@
 
 namespace App\Plugins\Newsletters\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class NewsletterTemplate
- *
- * @package App\Plugins\Newsletters\Model
+ * Class NewsletterTemplate.
  */
 class NewsletterTemplate extends Model
 {
