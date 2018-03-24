@@ -17,9 +17,7 @@ use App\Classes\Repositories\MenuRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
 /**
- * Class Frontpage
- *
- * @package App\Classes\Library\PageLoader
+ * Class Frontpage.
  */
 class Frontpage
 {
