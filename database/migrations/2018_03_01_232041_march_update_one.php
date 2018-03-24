@@ -1,9 +1,9 @@
 <?php
 
 use App\Model\Page;
-use App\Plugins\Newsletters\Model\Newsletter;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use App\Plugins\Newsletters\Model\Newsletter;
 use Illuminate\Database\Migrations\Migration;
 
 class MarchUpdateOne extends Migration
@@ -49,7 +49,7 @@ class MarchUpdateOne extends Migration
             $table->timestamps();
         });
 
-        Schema::table('pages', function(Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             $table->string('identifier')->nullable()->after('id')->index();
             $table->boolean('special')->default(0)->after('editable');
         });
@@ -64,7 +64,6 @@ class MarchUpdateOne extends Migration
         $page->setAttribute('sitemap', false);
         $page->setAttribute('enabled', true);
         $page->save();
-
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-use App\Model\Setting;
 use App\Model\Plugin;
-use Illuminate\Support\Facades\Artisan;
+use App\Model\Setting;
+use App\Model\ArticleCategory;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Model\ArticleCategory;
 
 class FebruaryUpdateOne extends Migration
 {
@@ -39,7 +39,7 @@ class FebruaryUpdateOne extends Migration
             $table->dropColumn('icon');
         });
 
-        Schema::create('articles', function(Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug');
             $table->string('title');
@@ -55,7 +55,7 @@ class FebruaryUpdateOne extends Migration
             $table->timestamps();
         });
 
-        Schema::create('article_categories', function(Blueprint $table) {
+        Schema::create('article_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->boolean('status')->default(1);
@@ -96,7 +96,7 @@ class FebruaryUpdateOne extends Migration
         $setting->setAttribute('key', 'twitter_url');
         $setting->save();
 
-        /**
+        /*
          * INDEX ALL NEW MATERIAL FOR SEARCHING.
          */
         Artisan::call('scout:mysql-index');
