@@ -10,10 +10,10 @@ namespace App\Classes\Library\PageLoader;
 
 use App\Model\Page;
 use Illuminate\Support\Collection;
-use App\Classes\Library\PageLoader\Coordinators\Contact;
 use App\Classes\Library\PageLoader\Coordinators\Frame;
-use App\Classes\Library\PageLoader\Coordinators\Plugins;
 use App\Classes\Library\PageLoader\Coordinators\Social;
+use App\Classes\Library\PageLoader\Coordinators\Contact;
+use App\Classes\Library\PageLoader\Coordinators\Plugins;
 use App\Classes\Library\PageLoader\Coordinators\Navigation;
 
 /**
@@ -103,9 +103,9 @@ class Webpage
     {
         if (settings()->getValue('seo_text') != '') {
             if (settings()->getValue('seo_position') == 'right') {
-                return ucfirst($this->page->seo_title) . ' ' . settings()->getValue('seo_separator') . ' ' . settings()->getValue('seo_text');
+                return ucfirst($this->page->seo_title).' '.settings()->getValue('seo_separator').' '.settings()->getValue('seo_text');
             } else {
-                return settings()->getValue('seo_text') . ' ' . settings()->getValue('seo_separator') . ' ' . ucfirst($this->page->seo_title);
+                return settings()->getValue('seo_text').' '.settings()->getValue('seo_separator').' '.ucfirst($this->page->seo_title);
             }
         }
 

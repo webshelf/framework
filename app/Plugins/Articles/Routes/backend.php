@@ -21,4 +21,3 @@
 
     // Allow destruction without using forms.
     Route::get('/admin/articles/destroy/{slug}')->uses('BackendController@destroy')->name('admin.articles.destroy');
-

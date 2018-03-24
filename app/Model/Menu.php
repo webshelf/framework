@@ -3,12 +3,12 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use Laravel\Scout\Searchable;
 
 /**
  * Class Menus.
@@ -41,7 +41,6 @@ class Menu extends EloquentModel implements Linker
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
     /*
      * Laravel Searchable Model.
      *
