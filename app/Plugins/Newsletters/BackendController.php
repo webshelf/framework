@@ -8,10 +8,9 @@
 
 namespace App\Plugins\Newsletters;
 
-use App\Plugins\Newsletters\Model\NewsletterRepository;
-use App\Plugins\Newsletters\Model\NewsletterUser;
-use App\Plugins\PluginEngine;
 use Illuminate\Http\Request;
+use App\Plugins\PluginEngine;
+use App\Plugins\Newsletters\Model\NewsletterRepository;
 
 /**
  * Class BackendController.
