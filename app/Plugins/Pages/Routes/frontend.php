@@ -21,7 +21,7 @@
 
     /** @var \App\Model\Page $page */
     foreach ($repository->frontendPageCollection() as $page) {
-        if (!$page->redirect && !$page->plugin) {
+        if (! $page->redirect && ! $page->plugin) {
             Route::get($page->route())->uses('App\Http\Controllers\PageController@index');
         }
     }
