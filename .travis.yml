@@ -1,36 +1,43 @@
-{
-  "language": "php",
-  "sudo": false,
-  "cache": {
-    "directories": [
-      "node_modules",
-      "$HOME/.composer/cache",
-      "vendor"
-    ]
-  },
-  "services": [
-    "mysql",
-    "memcached",
-    "redis-server"
-  ],
-  "before_install": [
-    "phpenv config-rm xdebug.ini || true",
-    "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini",
-    "printf \"\\n\" | pecl install -f redis",
-    "npm install && npm run dev",
-    "mysql -e 'CREATE DATABASE webshelf;'",
-    "composer update",
-    "travis_retry composer self-update",
-    "php artisan migrate"
-  ],
-  "install": [
-    "if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi",
-    "if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi"
-  ],
-  "script": "vendor/bin/phpunit",
-  "global_env": "setup=stable",
-  "group": "stable",
-  "dist": "trusty",
-  "php": 7.1,
-  "os": "linux"
-}
+-language: php
+-
+-env:
+-  global:
+-    - setup=stable
+-
+-matrix:
+-  fast_finish: true
+-  include:
+-    - php: 7.1.5
+-    - php: 7.1.5
+-      env: setup=lowest
+-    - php: 7.2
+-    - php: 7.2
+-      env: setup=lowest
+-
+-sudo: false
+-
+-cache:
+-  directories:
+-    - node_modules
+-    - $HOME/.composer/cache
+-
+-services:
+-  - mysql
+-  - memcached
+-  - redis-server
+-
+-before_install:
+-  - phpenv config-rm xdebug.ini || true
+-  - npm install && npm run dev
+-  - mysql -e 'CREATE DATABASE IF NOT EXISTS webshelf;'
+-  - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+-  - printf "\n" | pecl install -f redis
+-  - travis_retry composer self-update
+-  - composer install
+-  - php artisan migrate
+-  - php artisan db:seed
+-
+-install:
+-  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
+-  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+-  
