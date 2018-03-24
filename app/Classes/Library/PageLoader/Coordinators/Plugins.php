@@ -5,9 +5,7 @@ namespace App\Classes\Library\PageLoader\Coordinators;
 use App\Classes\Repositories\ArticleRepository;
 
 /**
- * Class Plugins
- *
- * @package App\Classes\Library\PageLoader\Coordinators
+ * Class Plugins.
  */
 class Plugins
 {
