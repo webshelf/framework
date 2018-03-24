@@ -4,7 +4,8 @@
   "cache": {
     "directories": [
       "node_modules",
-      "$HOME/.composer/cache"
+      "$HOME/.composer/cache",
+      "vendor",
     ]
   },
   "services": [
