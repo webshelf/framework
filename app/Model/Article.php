@@ -2,15 +2,15 @@
 
 namespace App\Model;
 
-use App\Classes\Repositories\PageRepository;
 use Carbon\Carbon;
-use App\Classes\Interfaces\Linkable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+use App\Classes\Interfaces\Linkable;
+use App\Classes\Repositories\PageRepository;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * Class Article
+ * Class Article.
  *
  * @property int $id
  * @property string $slug
@@ -20,7 +20,7 @@ use Laravel\Scout\Searchable;
  * @property int $category_id
  * @property int $editor_id
  * @property int $creator_id
- * @property boolean $status
+ * @property bool $status
  *
  * @property ArticleCategory $category
  *
@@ -30,8 +30,6 @@ use Laravel\Scout\Searchable;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
- * @package App
  */
 class Article extends BaseModel implements Linkable
 {
@@ -41,7 +39,6 @@ class Article extends BaseModel implements Linkable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
     /*
      * Laravel Searchable Model.
      *
@@ -88,7 +85,7 @@ class Article extends BaseModel implements Linkable
      */
     public function category()
     {
-        return $this->hasOne(ArticleCategory::class,'id', 'category_id');
+        return $this->hasOne(ArticleCategory::class, 'id', 'category_id');
     }
 
     public function creator()

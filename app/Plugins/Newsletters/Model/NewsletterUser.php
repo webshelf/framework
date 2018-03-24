@@ -3,19 +3,17 @@
 namespace App\Plugins\Newsletters\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class NewsletterUser
+ * Class NewsletterUser.
  *
  * @property int $id
  * @property string $email
  *
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
- * @package App\Plugins\Newsletters\Model
  */
 class NewsletterUser extends Model
 {
