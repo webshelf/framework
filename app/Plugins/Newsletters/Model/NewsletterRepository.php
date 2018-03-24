@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 02/03/2018
- * Time: 11:37
+ * Time: 11:37.
  */
 
 namespace App\Plugins\Newsletters\Model;
@@ -13,9 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Classes\Repositories\BaseRepository;
 
 /**
- * Class NewsletterRepository
- *
- * @package App\Plugins\Newsletters\Model
+ * Class NewsletterRepository.
  */
 class NewsletterRepository extends BaseRepository
 {
