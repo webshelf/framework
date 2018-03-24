@@ -4,7 +4,8 @@
   "cache": {
     "directories": [
       "node_modules",
-      "$HOME/.composer/cache"
+      "$HOME/.composer/cache",
+      "vendor"
     ]
   },
   "services": [
@@ -18,7 +19,7 @@
     "printf \"\\n\" | pecl install -f redis",
     "npm install && npm run dev",
     "mysql -e 'CREATE DATABASE webshelf;'",
-    "composer install",
+    "composer update",
     "travis_retry composer self-update",
     "php artisan migrate"
   ],
