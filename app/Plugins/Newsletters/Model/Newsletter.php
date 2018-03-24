@@ -4,12 +4,11 @@ namespace App\Plugins\Newsletters\Model;
 
 use Carbon\Carbon;
 use App\Model\Account;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Newsletter
+ * Class Newsletter.
  *
  * @property int $id
  * @property string $title
@@ -24,8 +23,6 @@ use Laravel\Scout\Searchable;
  *
  * @property Carbon $updated_at
  * @property Carbon $created_at
- *
- * @package App\Plugins\Newsletters\Model
  */
 class Newsletter extends Model
 {
