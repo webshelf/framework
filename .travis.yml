@@ -16,9 +16,9 @@
     "phpenv config-rm xdebug.ini || true",
     "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini",
     "printf \"\\n\" | pecl install -f redis",
-    "npm install && npm run dev",
+    "npm install && npm run production",
     "mysql -e 'CREATE DATABASE webshelf;'",
-    "composer install",
+    "composer install --no-dev",
     "travis_retry composer self-update",
     "php artisan migrate"
   ],
