@@ -45,8 +45,7 @@ class Navigation
 
         $this->navigation = $navigation;
 
-        if ($this->navigation->isNotEmpty())
-        {
+        if ($this->navigation->isNotEmpty()) {
             $this->lookupCurrentMenu();
         }
     }

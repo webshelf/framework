@@ -8,24 +8,23 @@
 
 namespace App\Plugins\Articles;
 
-use App\Classes\Interfaces\Sitemap;
-use App\Classes\SitemapGenerator;
+use App\Model\Page;
 use App\Model\Article;
 use Illuminate\Http\Request;
+use App\Plugins\PluginEngine;
+use App\Classes\SitemapGenerator;
+use App\Classes\Interfaces\Sitemap;
 use Illuminate\View\Factory as View;
-use App\Classes\Library\PageLoader\Frontpage;
-use App\Classes\Repositories\ArticleRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use App\Model\Page;
-use App\Plugins\PluginEngine;
+use App\Classes\Library\PageLoader\Frontpage;
+use App\Classes\Repositories\ArticleRepository;
 
 /**
  * Class UserController.
  */
 class FrontendController extends PluginEngine implements Sitemap
 {
-
     /**
      * @var View
      */
@@ -57,7 +56,7 @@ class FrontendController extends PluginEngine implements Sitemap
     }
 
     /**
-     * Usually the place for listing all the articles. (index)
+     * Usually the place for listing all the articles. (index).
      *
      * @param ArticleRepository $repository
      * @return \Illuminate\Http\Response

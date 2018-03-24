@@ -9,8 +9,8 @@
 namespace Tests\Feature;
 
 use App\Model\Page;
-use Illuminate\Support\Collection;
 use Tests\TestCase;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use App\Classes\Library\PageLoader\Frontpage;
 
@@ -32,7 +32,7 @@ class FrontpageLoaderTest extends TestCase
         $this->assertNotEmpty($webpage->navigation);
         $this->assertNotEmpty($webpage->plugins);
     }
-    
+
     public function default_frontpage_views()
     {
         Route::get('/', function () {
@@ -71,7 +71,7 @@ class FrontpageLoaderTest extends TestCase
     {
         $page = new Page([
             'slug' => 'index',
-            'seo_title' => 'Homepage'
+            'seo_title' => 'Homepage',
         ]);
 
         return $page;
