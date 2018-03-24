@@ -80,8 +80,7 @@ class Controller extends ModuleEngine
 
         /** @var Plugin $plugin */
         foreach ($plugins as $plugin) {
-
-            $classDir = 'App\Plugins\\' . ucfirst($plugin->name) . '\\FrontendController';
+            $classDir = 'App\Plugins\\'.ucfirst($plugin->name).'\\FrontendController';
 
             if (class_exists($classDir)) {
                 $class = app($classDir);
