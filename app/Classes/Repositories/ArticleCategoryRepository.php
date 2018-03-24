@@ -3,14 +3,12 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
+use App\Model\ArticleCategory;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use App\Model\ArticleCategory;
 
 /**
- * Class ArticleCategoryRepository
- *
- * @package App\Classes\Repositories
+ * Class ArticleCategoryRepository.
  */
 class ArticleCategoryRepository extends BaseRepository
 {
