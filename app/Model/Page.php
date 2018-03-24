@@ -3,13 +3,13 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Laravel\Scout\Searchable;
 use Illuminate\Support\Collection;
 use App\Classes\Interfaces\Linkable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use Laravel\Scout\Searchable;
 
 /**
  * Class Pages.
@@ -50,7 +50,6 @@ class Page extends EloquentModel implements Linkable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
     /*
      * Laravel Searchable Model.
      *
@@ -187,5 +186,4 @@ class Page extends EloquentModel implements Linkable
 
         $this->attributes['slug'] = str_slug($value);
     }
-
 }
