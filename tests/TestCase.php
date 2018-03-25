@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Faker\Factory;
 use Mockery;
+use Faker\Factory;
 use App\Model\Account;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;

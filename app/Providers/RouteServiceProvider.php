@@ -87,8 +87,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapPluginRoutes()
     {
         /** @var Plugin $plugin */
-        foreach (plugins()->enabled() as $plugin)
-        {
+        foreach (plugins()->enabled() as $plugin) {
             $plugin_name = ucfirst($plugin->name());
 
             $namespace = sprintf('App\Plugins\%s', $plugin_name);

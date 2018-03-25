@@ -3,9 +3,7 @@
 namespace App\Classes\Library\PageLoader\Coordinators;
 
 /**
- * Class Social
- *
- * @package App\Classes\Library\PageLoader\Cordinators
+ * Class Social.
  */
 class Social
 {
