@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Faker\Factory;
 use Mockery;
 use App\Model\Account;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,12 +30,14 @@ abstract class TestCase extends BaseTestCase
      *
      * Unauthenticated users should be redirected to login.
      * Authenticated users should be allowed to view the page.
+     *
+     * @param string $url
      */
     protected function dashboardAccessTest(string $url)
     {
         $this->call('GET', $url)->assertStatus(302)->assertSee('/admin/login');
 
-        auth()->loginUsingId(1);
+        auth()->login(factory(Account::class)->make());
 
         $this->call('GET', $url)->assertStatus(200);
     }

@@ -59,8 +59,8 @@ class Frontpage
      */
     public function publish(string $template = null, bool $override = true, int $status = 200, bool $errorResponse = false)
     {
-        if (! $errorResponse) {
-            if ($this->isMaintenanceMode()) {
+        if (!$errorResponse) {
+            if ($this->isMaintenanceMode() && ! $this->canBypassMaintenance()) {
                 return ErrorController::maintenance();
             }
 
@@ -102,7 +102,7 @@ class Frontpage
      */
     public function canBypassMaintenance()
     {
-        return auth()->check() == true && account()->hasRole(Role::ADMINISTRATOR);
+        return auth()->check() == true;
     }
 
     /**
