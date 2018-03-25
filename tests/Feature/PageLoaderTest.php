@@ -3,25 +3,22 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 25/03/2018
- * Time: 13:33
+ * Time: 13:33.
  */
 
 namespace Tests\Feature;
 
-use App\Model\Account;
 use App\Model\Page;
-use App\Model\Role;
+use Tests\TestCase;
+use App\Model\Account;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Classes\Library\PageLoader\Frontpage;
-use Tests\TestCase;
 
 /**
- * Class FrontpageTest
- *
- * @package Tests\Feature
+ * Class FrontpageTest.
  */
 class PageLoaderTest extends TestCase
 {
@@ -32,10 +29,10 @@ class PageLoaderTest extends TestCase
     {
         $page = new Page(['slug'=>'unit-testing', 'seo_title'=>'PHP Unit Testing', 'enabled'=>true]);
 
-        Route::get('/', function() use ($page) {
+        Route::get('/', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish();
         });
-        Route::get('/index', function() use ($page) {
+        Route::get('/index', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish();
         });
 
@@ -52,7 +49,7 @@ class PageLoaderTest extends TestCase
 
         $page = new Page(['slug'=>'unit-testing', 'seo_title'=>'PHP Unit Testing', 'enabled'=>true]);
 
-        Route::get('/', function() use ($page) {
+        Route::get('/', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish();
         });
 
@@ -70,7 +67,7 @@ class PageLoaderTest extends TestCase
 
         $page = new Page(['slug'=>'unit-testing', 'seo_title'=>'PHP Unit Testing', 'enabled'=>true]);
 
-        Route::get('/', function() use ($page) {
+        Route::get('/', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish();
         });
 
@@ -84,7 +81,7 @@ class PageLoaderTest extends TestCase
     {
         $page = new Page(['slug'=>'unit-testing', 'seo_title'=>'PHP Unit Testing', 'enabled' => false]);
 
-        Route::get('/', function() use ($page) {
+        Route::get('/', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish();
         });
 
@@ -110,10 +107,10 @@ class PageLoaderTest extends TestCase
     {
         $page = new Page(['slug'=>'readme', 'seo_title'=>'PHP Unit Testing', 'enabled'=>true]);
 
-        Route::get('/undefined', function() use ($page) {
+        Route::get('/undefined', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish();
         });
-        Route::get('/defined', function() use ($page) {
+        Route::get('/defined', function () use ($page) {
             return (new Frontpage($page, new Collection))->publish('website::plugin.readme');
         });
 
@@ -212,7 +209,5 @@ class PageLoaderTest extends TestCase
 
         $frontpage = (new Frontpage($page, new Collection))->draft();
         $this->assertEquals('Success - PHP Unit Testing', $frontpage->title());
-
-
     }
 }

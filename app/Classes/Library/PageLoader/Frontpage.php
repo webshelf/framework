@@ -9,7 +9,6 @@
 namespace App\Classes\Library\PageLoader;
 
 use App\Model\Page;
-use App\Model\Role;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\ErrorController;
@@ -17,9 +16,7 @@ use App\Classes\Repositories\MenuRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
 /**
- * Class Frontpage
- *
- * @package App\Classes\Library\PageLoader
+ * Class Frontpage.
  */
 class Frontpage
 {
@@ -59,7 +56,7 @@ class Frontpage
      */
     public function publish(string $template = null, bool $override = true, int $status = 200, bool $errorResponse = false)
     {
-        if (!$errorResponse) {
+        if (! $errorResponse) {
             if ($this->isMaintenanceMode() && ! $this->canBypassMaintenance()) {
                 return ErrorController::maintenance();
             }
