@@ -1,1 +1,0 @@
-import {GoogleCharts} from 'google-charts';
