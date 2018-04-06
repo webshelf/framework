@@ -25,9 +25,9 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property string $title
  * @property string $content
  * @property string $banner
- * @property string $seo_title
- * @property string $seo_description
- * @property string $seo_keywords
+ * @property string $heading
+ * @property string $description
+ * @property string $keywords
  * @property int $views
  * @property bool $sitemap
  * @property bool $enabled
@@ -170,6 +170,7 @@ class Page extends EloquentModel implements Linkable
     /**
      * The name of the current model object.
      *
+     * @deprecated
      * @return string
      */
     public function name()
@@ -185,5 +186,35 @@ class Page extends EloquentModel implements Linkable
         $this->attributes['seo_title'] = $value;
 
         $this->attributes['slug'] = str_slug($value);
+    }
+
+    public function getHeadingAttribute()
+    {
+        return $this->attributes['seo_title'];
+    }
+
+    public function setHeadingAttribute($value)
+    {
+        $this->attributes['seo_title'] = $value;
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->attributes['seo_description'];
+    }
+
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['seo_description'] = $value;
+    }
+
+    public function setKeywordsAttribute($value)
+    {
+        $this->attributes['seo_keywords'] = $value;
+    }
+
+    public function getKeywordsAttribute()
+    {
+        return $this->attributes['seo_keywords'];
     }
 }

@@ -77,6 +77,8 @@ class FrontendController extends PluginEngine implements Sitemap
 
         $article->save();
 
+        $this->currentPage->heading = $article->title;
+
         $this->view->share('articles', collect([0 => $article]));
 
         return $this->articleFrontPage();
@@ -86,6 +88,8 @@ class FrontendController extends PluginEngine implements Sitemap
     {
         $this->view->share('articles', $repository->searchThenPaginate($request->get('search')));
 
+        $this->currentPage->heading = "Article Search";
+
         return $this->articleFrontPage();
     }
 
@@ -93,12 +97,16 @@ class FrontendController extends PluginEngine implements Sitemap
     {
         $this->view->share('articles', $repository->whereCategoryId($id));
 
+        $this->currentPage->heading = "Browse Categories";
+
         return $this->articleFrontPage();
     }
 
     public function creator(ArticleRepository $repository, int $id)
     {
         $this->view->share('articles', $repository->whereCreatorId($id));
+
+        $this->currentPage->heading = "Browse Creators";
 
         return $this->articleFrontPage();
     }
