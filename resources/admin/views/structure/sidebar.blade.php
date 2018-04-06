@@ -28,7 +28,7 @@
 
             {{--</li>--}}
 
-            @foreach(plugins()->viewable() as $plugin)
+            @foreach(plugins()->getViewable() as $plugin)
 
                 <li>
                         <a href="{{ $plugin->adminUrl() }}" class="{{ $breadcrumbs->contain($plugin->name(), 2) ? 'active' : 'inactive' }}">

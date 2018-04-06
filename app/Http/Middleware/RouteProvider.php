@@ -30,7 +30,7 @@ class RouteProvider
         $router = app('router');
 
         /** @var Plugin $plugin */
-        foreach (plugins()->enabled() as $plugin) {
+        foreach (plugins()->all() as $plugin) {
             // does not require authentication.
             if ($plugin->isFrontEnd() && userPluginController($plugin->name()) instanceof RouteableInterface) {
                 $this->loadPluginRoutes(userPluginController($plugin->name(), null, false), $router);

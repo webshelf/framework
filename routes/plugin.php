@@ -15,7 +15,7 @@ use App\Classes\Interfaces\RouteableInterface;
     */
 
     /** @var Plugin $plugin */
-    foreach (plugins()->enabled() as $plugin) {
+    foreach (plugins()->getEnabled() as $plugin) {
         // does not require authentication.
         if ($plugin->isFrontEnd() && userPluginController($plugin->name()) instanceof RouteableInterface) {
             (userPluginController($plugin->name(), null, false))->routes(app('router'));

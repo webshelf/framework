@@ -19,46 +19,56 @@ class PluginManager
     /**
      * Enabled plugins.
      *
-     * @var array
+     * @var Collection
      */
-    private $enabled = [];
+    private $enabled;
 
     /**
      * Disabled plugins.
      *
-     * @var array
+     * @var Collection
      */
-    private $disabled = [];
+    private $disabled;
 
     /**
      * Viewable by user plugin.
      *
-     * @var array
+     * @var Collection
      */
-    private $viewable = [];
+    private $viewable;
+
+    /**
+     * PluginManager constructor.
+     */
+    public function __construct()
+    {
+        $this->enabled = new Collection;
+
+        $this->disabled = new Collection;
+
+        $this->viewable = new Collection;
+    }
 
     /**
      * Add a plugin to the plugin manager for application usage.
      *
      * @param Plugin $plugin
-     * @return $this
+     * @return Collection
      * @throws \Exception
      */
-    public function add(Plugin $plugin)
+    private function add(Plugin $plugin)
     {
-        if ($plugin->isEnabled()) {
-            // set as a viewable plugin
-            if ($plugin->isHidden() == false) {
-                $this->viewable[$plugin->name()] = $plugin;
+        if ($plugin->enabled == true)
+        {
+            if ($plugin->hidden == false)
+            {
+                $this->viewable->put($plugin->name, $plugin);
             }
 
-            // add to enabled plugins.
-            $this->enabled[$plugin->name()] = $plugin;
-        } else {
-            $this->disabled[$plugin->name()] = $plugin;
+            return $this->enabled->put($plugin->name, $plugin);
         }
 
-        return $this;
+        return $this->disabled->put($plugin->name, $plugin);
     }
 
     /**
@@ -68,39 +78,7 @@ class PluginManager
      */
     public function all()
     {
-        return array_merge($this->enabled, $this->disabled);
-    }
-
-    /**
-     * Check if the plugins is enabled (boolean)
-     * or return all enabled plugins by default.
-     *
-     * @param null $plugin
-     * @return array|bool
-     */
-    public function enabled($plugin = null)
-    {
-        if ($plugin != null) {
-            return $this->checkStatus($this->getPlugin($plugin), true);
-        }
-
-        return $this->enabled;
-    }
-
-    /**
-     * Check if the plugin is disabled (boolean)
-     * Or return all disabled plugins by default.
-     *
-     * @param null $plugin
-     * @return array|bool
-     */
-    public function disabled($plugin = null)
-    {
-        if ($plugin != null) {
-            return $this->checkStatus($this->getPlugin($plugin), false);
-        }
-
-        return $this->disabled;
+        return array_merge($this->enabled->toArray(), $this->disabled->toArray());
     }
 
     /**
@@ -111,36 +89,9 @@ class PluginManager
      */
     public function hasPlugin($plugin_name)
     {
-        return array_key_exists($plugin_name, $this->enabled);
+        return $this->enabled->has($plugin_name);
     }
 
-    /**
-     * Get the loaded plugin from the array.
-     *
-     * @param $plugin_name
-     * @return mixed
-     * @throws \Exception
-     */
-    private function getPlugin($plugin_name)
-    {
-        if (array_key_exists($plugin_name, $this->all())) {
-            return $this->all()[$plugin_name];
-        }
-
-        throw new \Exception(sprintf('Cannot load the plugin (%s) as it does not exist.', $plugin_name));
-    }
-
-    /**
-     * Check the status of a loaded plugin.
-     *
-     * @param array $plugin
-     * @param $status
-     * @return bool
-     */
-    private function checkStatus($plugin, $status)
-    {
-        return $plugin['enabled'] === $status;
-    }
 
     /**
      * For tenant usage, we must add a collection of settings models from the database.
@@ -150,7 +101,7 @@ class PluginManager
      * @param Collection $collection
      * @return $this
      */
-    public function collect(Collection $collection)
+    public function loadCollection(Collection $collection)
     {
         /** @var Plugin $model */
         foreach ($collection as $model) {
@@ -161,18 +112,58 @@ class PluginManager
     }
 
     /**
-     * Check if plugin is viewable (booleans)
-     * or return all viewable plugins by default.
+     * Enable a plugint hat has been disabled.
      *
-     * @param null $plugin
-     * @return array|bool
+     * @param $pluginName
      */
-    public function viewable($plugin = null)
+    public function enable($pluginName)
     {
-        if ($plugin != null) {
-            return $this->checkViewable($this->getPlugin($plugin), true);
+        if ($this->disabled->has($pluginName))
+        {
+            $this->enabled->put($pluginName, $this->disabled->pull($pluginName));
         }
+    }
 
-        return $this->viewable;
+    /**
+     * Disable a plugin that has been enabled.
+     *
+     * @param $pluginName
+     */
+    public function disable($pluginName)
+    {
+        if ($this->enabled->has($pluginName))
+        {
+            $this->disabled->put($pluginName, $this->enabled->pull($pluginName));
+        }
+    }
+
+    /**
+     * Return all end user viewable plugins.
+     *
+     * @return array
+     */
+    public function getViewable()
+    {
+        return $this->viewable->all();
+    }
+
+    /**
+     * Return frameworks enabled plugins.
+     *
+     * @return array
+     */
+    public function getEnabled()
+    {
+        return $this->enabled->all();
+    }
+
+    /**
+     * Return frameworks disabled plugins.
+     *
+     * @return array
+     */
+    public function getDisabled()
+    {
+        return $this->disabled->all();
     }
 }

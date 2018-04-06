@@ -240,7 +240,7 @@
                                     <h3>Plugins</h3>
                                 </li>
 
-                                @foreach(plugins()->viewable() as $plugin)
+                                @foreach(plugins()->getViewable() as $plugin)
 
                                     <li>
 

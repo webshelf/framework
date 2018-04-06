@@ -56,7 +56,7 @@ class InstanceServiceProvider extends ServiceProvider
     {
         $this->app->singleton(PluginManager::class, function () {
             try {
-                return (new PluginManager)->collect(app(PluginRepository::class)->all());
+                return (new PluginManager)->loadCollection(app(PluginRepository::class)->all());
             } catch (Exception $e) {
                 if ($this->app->runningInConsole()) {
                     return new PluginManager;
