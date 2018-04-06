@@ -58,10 +58,8 @@ class PluginManager
      */
     private function add(Plugin $plugin)
     {
-        if ($plugin->enabled == true)
-        {
-            if ($plugin->hidden == false)
-            {
+        if ($plugin->enabled == true) {
+            if ($plugin->hidden == false) {
                 $this->viewable->put($plugin->name, $plugin);
             }
 
@@ -92,7 +90,6 @@ class PluginManager
         return $this->enabled->has($plugin_name);
     }
 
-
     /**
      * For tenant usage, we must add a collection of settings models from the database.
      *
@@ -118,8 +115,7 @@ class PluginManager
      */
     public function enable($pluginName)
     {
-        if ($this->disabled->has($pluginName))
-        {
+        if ($this->disabled->has($pluginName)) {
             $this->enabled->put($pluginName, $this->disabled->pull($pluginName));
         }
     }
@@ -131,8 +127,7 @@ class PluginManager
      */
     public function disable($pluginName)
     {
-        if ($this->enabled->has($pluginName))
-        {
+        if ($this->enabled->has($pluginName)) {
             $this->disabled->put($pluginName, $this->enabled->pull($pluginName));
         }
     }

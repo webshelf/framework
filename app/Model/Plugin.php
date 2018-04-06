@@ -8,21 +8,21 @@
 
 namespace App\Model;
 
-use App\Plugins\PluginHandler;
 use Carbon\Carbon;
+use App\Plugins\PluginHandler;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 /**
  * Class Plugins.
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
- * @property boolean $enabled
- * @property boolean $installed
- * @property boolean $hidden
- * @property boolean $required
- * @property boolean $is_frontend
- * @property boolean $is_backend
+ * @property bool $enabled
+ * @property bool $installed
+ * @property bool $hidden
+ * @property bool $required
+ * @property bool $is_frontend
+ * @property bool $is_backend
  *
  * @property Carbon $created_at
  * @property Carbon $updated_at
