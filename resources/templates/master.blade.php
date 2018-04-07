@@ -23,6 +23,20 @@
     <script src="{{ mix('assets/frontend.js') }}"></script>
     @stack("webpage.scripts")
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117148224-1"></script>
+
+    @if (settings()->getValue('google_site_tag'))
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ settings()->getValue('google_site_tag') }}');
+    </script>
+    @endif
+
+
 </head>
 
     @yield('webpage.content')

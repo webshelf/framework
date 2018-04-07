@@ -187,7 +187,7 @@
             <div id="webmaster">
                 <div class="row">
                     <div class="col-11">
-                        <h4>Third Party Settings</h4>
+                        <h4>Third Party Services</h4>
                         <p>Control third party aspects of your website.</p>
                     </div>
                     <div class="col-1">
@@ -196,6 +196,13 @@
                 </div>
 
                 <div id="webmaster-settings" class="collapse item" role="tabpanel">
+                    <div class="form-group">
+                        <label for="setting[string][google_site_tag]">Google Site Tag</label>
+                        <input type="text" class="form-control" name="setting[string][google_site_tag]" id="setting[string][google_site_tag]" aria-describedby="googleHelp" value="{{ settings()->getValue('google_site_tag') }}">
+                        <small id="googleHelp" class="form-text text-muted">
+                            The Global Site Tag provides streamlined tagging across Google’s site measurement, conversion tracking, and remarketing products.
+                        </small>
+                    </div>
                     <div class="form-group">
                         <label for="setting[string][facebook_id]">Facebook Page ID</label>
                         <input type="text" class="form-control" name="setting[string][facebook_id]" id="setting[string][facebook_id]" aria-describedby="facebookPageIdHelp" value="{{ settings()->getValue('facebook_id') }}">
