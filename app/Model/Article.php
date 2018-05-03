@@ -49,8 +49,8 @@ class Article extends BaseModel implements Linkable
     /*
      * Status conditions column.
      */
-    const STATUS_PUBLISHED = 1;
-    const STATUS_UNPUBLISHED = 0;
+    const STATUS_PUBLIC = 1;
+    const STATUS_PRIVATE = 0;
 
     /**
      * The table associated with the model.

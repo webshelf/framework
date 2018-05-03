@@ -46,7 +46,7 @@ class ArticleRepository extends BaseRepository
      */
     public function latest($count = 7)
     {
-        return $this->model->take($count)->where('status', Article::STATUS_PUBLISHED)->orderBy('created_at', 'desc')->get();
+        return $this->model->take($count)->where('status', Article::STATUS_PUBLIC)->orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -57,7 +57,7 @@ class ArticleRepository extends BaseRepository
      */
     public function mostViewed($count = 7)
     {
-        return $this->model->orderBy('views', 'desc')->take($count)->where('status', Article::STATUS_PUBLISHED)->get();
+        return $this->model->orderBy('views', 'desc')->take($count)->where('status', Article::STATUS_PUBLIC)->get();
     }
 
     /**
@@ -77,7 +77,7 @@ class ArticleRepository extends BaseRepository
      */
     public function viewable()
     {
-        return $this->model->where('status', Article::STATUS_PUBLISHED)->get();
+        return $this->model->where('status', Article::STATUS_PUBLIC)->get();
     }
 
     /**
@@ -86,7 +86,7 @@ class ArticleRepository extends BaseRepository
      */
     public function paginateLatest(int $count)
     {
-        return $this->model->orderBy('created_at', 'desc')->where('status', Article::STATUS_PUBLISHED)->simplePaginate($count);
+        return $this->model->orderBy('created_at', 'desc')->where('status', Article::STATUS_PUBLIC)->simplePaginate($count);
     }
 
     /**
@@ -107,7 +107,7 @@ class ArticleRepository extends BaseRepository
      */
     public function publishedArticlesCount(int $creator_id)
     {
-        return $this->model->where('status', Article::STATUS_PUBLISHED)->where('creator_id', $creator_id)->count();
+        return $this->model->where('status', Article::STATUS_PUBLIC)->where('creator_id', $creator_id)->count();
     }
 
     /**
@@ -120,7 +120,7 @@ class ArticleRepository extends BaseRepository
 
     public function collectArticle(string $slug)
     {
-        return $this->model->where('slug', $slug)->where('status', Article::STATUS_PUBLISHED)->orderBy('created_at', 'desc')->first();
+        return $this->model->where('slug', $slug)->where('status', Article::STATUS_PUBLIC)->orderBy('created_at', 'desc')->first();
     }
 
     /**
@@ -130,16 +130,16 @@ class ArticleRepository extends BaseRepository
      */
     public function searchThenPaginate(string $text, int $paginate = 7)
     {
-        return $this->model->search($text)->orderBy('created_at', 'desc')->where('status', Article::STATUS_PUBLISHED)->paginate($paginate);
+        return $this->model->search($text)->orderBy('created_at', 'desc')->where('status', Article::STATUS_PUBLIC)->paginate($paginate);
     }
 
     public function whereCreatorId(int $creator_id, int $paginate = 5)
     {
-        return $this->model->orderBy('created_at', 'desc')->where('creator_id', $creator_id)->where('status', Article::STATUS_PUBLISHED)->simplePaginate($paginate);
+        return $this->model->orderBy('created_at', 'desc')->where('creator_id', $creator_id)->where('status', Article::STATUS_PUBLIC)->simplePaginate($paginate);
     }
 
     public function whereCategoryId(int $id, int $paginate = 5)
     {
-        return $this->model->where('category_id', $id)->where('status', Article::STATUS_PUBLISHED)->orderBy('created_at', 'desc')->simplePaginate($paginate);
+        return $this->model->where('category_id', $id)->where('status', Article::STATUS_PUBLIC)->orderBy('created_at', 'desc')->simplePaginate($paginate);
     }
 }

@@ -35,15 +35,34 @@
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
                     </select>
+                    <small class="form-text text-muted">Group articles together.</small>
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label for="status">Visibility</label>
                     <select class="form-control" name="status" id="status">
-                        <option value="{{ \App\Model\Article::STATUS_PUBLISHED }}" selected>Published</option>
-                        <option value="{{ \App\Model\Article::STATUS_UNPUBLISHED }}">Unpublished</option>
+                        <option value="{{ \App\Model\Article::STATUS_PUBLIC }}" selected>Public</option>
+                        <option value="{{ \App\Model\Article::STATUS_PRIVATE }}">Private</option>
                     </select>
+                    <small class="form-text text-muted">Set the visibility of this article to others.</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Publish Date</label>
+                    <input type="datetime" class="form-control" name="publish_date" id="publish_date" aria-describedby="publish_date_help" placeholder="">
+                    <small id="publish_date_help" class="form-text text-muted">The starting date that this article will be viewable on.</small>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Unpublish Date</label>
+                    <input type="datetime" class="form-control" name="unpublish_date" id="unpublish_date" aria-describedby="unpublish_date_help" placeholder="">
+                    <small id="unpublish_date_help" class="form-text text-muted">The date at which this article will be no longer viewable.</small>
                 </div>
             </div>
         </div>
