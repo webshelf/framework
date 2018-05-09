@@ -26,7 +26,7 @@ class MayUpdateOne extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function(Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->dropColumn('unpublish_date');
             $table->dropColumn('publish_date');
         });
