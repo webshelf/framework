@@ -52,7 +52,7 @@ class Article extends BaseModel implements Linkable
      * Article is viewable by all visitors.
      */
     const STATUS_PUBLIC = 1;
-    
+
     /**
      * Article is only viewable by those authenticated.
      */
@@ -64,7 +64,7 @@ class Article extends BaseModel implements Linkable
      * @var array
      */
     protected $attributes = [
-        'status' => SELF::STATUS_PUBLIC
+        'status' => SELF::STATUS_PUBLIC,
     ];
 
     /**
