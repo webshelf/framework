@@ -13,7 +13,9 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ mix('assets/backend.css') }}">
 
+        <!-- Application webpack -->
         <script src="{{ mix('assets/backend.js') }}"></script>
+
     </head>
 
     <body>

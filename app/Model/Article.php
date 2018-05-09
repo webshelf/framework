@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Account $creator
  * @property Account $editor
  *
+ * @property Carbon $publish_date
+ * @property Carbon $unpublish_date
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -47,10 +49,23 @@ class Article extends BaseModel implements Linkable
     use Searchable;
 
     /*
-     * Status conditions column.
+     * Article is viewable by all visitors.
      */
     const STATUS_PUBLIC = 1;
+    
+    /**
+     * Article is only viewable by those authenticated.
+     */
     const STATUS_PRIVATE = 0;
+
+    /**
+     * Default attributes associated with the model.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'status' => SELF::STATUS_PUBLIC
+    ];
 
     /**
      * The table associated with the model.

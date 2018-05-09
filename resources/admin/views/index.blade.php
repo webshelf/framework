@@ -2,60 +2,77 @@
 
 @section('content')
 
-    <div class="overview">
+    <div class="dashboard">
+            <div class="panel" id="welcome">
 
-        <div class="avatar">
+                <h3 class="title">Welcome {{ account()->fullName() }}</h3>
+        
+                <p>Welcome back to Webshelf CMS, Your last sign in was</p>
+        
+                <p class="last-login">{{  account()->last_login->format('D, M dS, Y, H:i') }}</p>
+        
+                <a href="#">View Access Logs [Coming Soon]</a>
+        
+            </div>
+        
+            <div class="panel" id="status">
+        
+                <h3 class="title">Platform Status</h3>
+        
+                <ul>
+                    <li>
+                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                        <span class="status text">Software is up to date</span>
+                        <span class="status message"> v{{  framework()->version }}</span>
+                    </li>
+                    <li>
+                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                        <span class="status text">No warnings to display</span>
+                        <span class="status badge">0</span>
+                    </li>
+                    <li>
+                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                        <span class="status text">Migration service active</span>
+                        {{-- <span class="status badge">0</span> --}}
+                    </li>
+                    <li>
+                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                        <span class="status text">Website is currently online</span>
+                        {{-- <span class="status message">Not Available</span> --}}
+                    </li>
+                </ul>
+        
+            </div>
 
-            <img src="{{ url(settings()->getDefault('website_logo')) }}">
+            <div class="panel" id="activity">
 
-        </div>
+                <h3 class="title">Activity Log</h3>
 
-        <div class="title">
+                    <div class="content-table">
 
-            <h3>{{ settings()->getDefault('website_name') }}</h3>
+                        @foreach ($activities as $activity)
 
-        </div>
+                        <div class="row">
 
-        <div class="buttons">
+                                <span class="avatar">
+                                    <img src="{{ $activity->account->makeGravatarImage() }}"alt="{{ $activity->account->fullName() }} Image">
+                                </span>
 
+                                <div class="event">
+                                    <div class="title">{{ $activity->account->fullName() }}</span> {{ $activity->eventName() }} {{ ucfirst($activity->model->getTable()) }}</div>
+                                    <div class="description">{{ $activity->model->name() }}</div>
+                                </div>
+        
+                                <div class="details">
+                                    {{ $activity->created_at->diffForHumans() }}
+                                </div>
+                        </div>
 
-        </div>
+                        @endforeach
 
+                    </div>
+                
+            </div>
     </div>
-
-    <hr>
-
-        <p class="text-center">{{ url('/') }}</p>
-
-    <hr>
-
-    <div class="webshelf-table">
-
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Account</th>
-                <th scope="col">Action</th>
-                <th scope="col">Table</th>
-                <th scope="col">Name</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <?php /** @var \App\Model\Activity $activity */ ?>
-            @foreach ($activities as $activity)
-                <tr>
-                    <td>{{ $activity->account->fullName() }}</td>
-                    <td>{{ $activity->eventName() }}</td>
-                    <td>{{ $activity->model->getTable() }}</td>
-                    <td>{{ $activity->model->name() }}</td>
-                </tr>
-            @endforeach
-
-            </tbody>
-        </table>
-
-    </div>
-
 
 @endsection

@@ -27,16 +27,6 @@ header {
   background-color: $accentColor;
 }
 
-.breadcrumb-container {
-  padding: 8px 0;
-  border-bottom: 1px solid #e5e5e5;
-  font-size:12px;
-  margin-bottom: 20px;
-}
-.breadcrumbs-list>li:not(:last-child) {
-  padding-right: 20px;
-}
-
 .navbar-toggler {
   border: 0;
   font-size: 12px;
@@ -113,9 +103,6 @@ header {
   background-color: rgba(60, 69, 115, 0.09019607843137255);
   border-bottom: 1px solid rgba(128, 128, 128, 0.12156862745098039);
 }
-#nav-sidebar ul li a.inactive {
-  // empty
-}
 
 #nav-sidebar ul li a:hover {
   color: #464646;
@@ -152,19 +139,6 @@ header {
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.78);
-}
-
-
-.breadcrumbs-list {
-  margin: 0;
-
-  li::before {
-    display: inline-block;
-    padding-right: .5rem;
-    padding-left: .5rem;
-    color: #868e96;
-    content: ">";
-  }
 }
 
 .overview {
@@ -376,10 +350,113 @@ header {
   flex: 1;
 }
 
+.button-reset {
+  cursor: pointer;
+}
+
 .content {
   .heading {
-    border: 1px dashed #ced4da;
-    padding: 20px 20px 9px 20px;
-    background-color: #dcdde024;
+    padding-top: 1.6em;
+    padding-bottom: 1.6em;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: rgb(250, 250, 250);
+    margin-bottom: 16px;
+    padding-left: 1.4em;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.dashboard {
+  .panel {
+    padding: 1.6em;
+    //background-color: #f9f9f9;
+    margin: 5px;
+    //border: 1px solid grey;
+
+    ul {
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: flex;
+        padding: 9px 0;
+        border-bottom: 1px solid #f0f0f0;
+
+        .status.icon {
+          margin-right: 10px;
+        }
+        .status.message {
+          text-align: right;
+        }
+        .status.badge {
+          text-align: center;
+        }
+        .status.text {
+          flex: 1;
+        }
+      }
+
+      .badge {
+        border-radius: 7px;
+        color: white;
+        background-color: #2b4162;
+      }
+    }
+
+    .icon.green {
+      color: green;
+    }
+    .icon.red {
+      color: red;
+    }
+
+    &#welcome {
+      .last-login {
+        font-weight: bold;
+      }
+    }
+    &#status {
+
+    }
+  }
+}
+
+.content-table {
+  //display: flex;
+
+  .row {
+    display: flex;
+    padding: 9px;
+    border-bottom: 1px solid #f0f0f0;
+
+    .details {
+      text-align: right;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      margin-top: 5px;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .event {
+      .title {
+        font-weight: 600;
+      }
+    }
+
+    &>div {
+      flex: 1;
+    }
   }
 }

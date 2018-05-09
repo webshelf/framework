@@ -61,7 +61,18 @@ class BackendController extends PluginEngine
      */
     public function create()
     {
-        return $this->make('create')->with('categories', $this->categories->all());
+        return $this->form(new Article);
+    }
+
+    /**
+     * Generate a form for editing or creating a model.
+     *
+     * @param Article $article model to be used.
+     * @return void
+     */
+    public function form(Article $article)
+    {
+        return $this->make('form')->with('categories', $this->categories->all())->with('article', $article);
     }
 
     /**
@@ -98,13 +109,10 @@ class BackendController extends PluginEngine
      *
      * @param $slug
      * @return \Illuminate\Contracts\View\View
-     * @internal param int $id
      */
     public function edit($slug)
     {
-        $article = $this->articles->whereSlug($slug);
-
-        return $this->make('edit')->with(['categories' => $this->categories->all(), 'article' => $article]);
+        return $this->form($this->articles->whereSlug($slug));
     }
 
     /**

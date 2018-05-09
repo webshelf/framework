@@ -1,21 +1,31 @@
 <div id="content-wrapper" class="container">
 
-        <div class="breadcrumb-container">
-        <div class="breadcrumbs">
-                <ul class="list-unstyled breadcrumbs-list js-breadcrumbs-list d-flex">
+        <div class="breadcrumbs-container">
+                <div class="breadcrumbs-links">
+                        <ul class="breadcrumbs-list">
 
-                @if($breadcrumbs)
+                                @if($breadcrumbs)
+                                
+                                @foreach($breadcrumbs->crumbs() as $crumb)
 
-                        @foreach($breadcrumbs->crumbs() as $crumb)
+                                <li>
+                                        @if ($loop->last)
+                                                <a href="{{  $crumb->path }}">{{  $crumb->title }}</a>
+                                        @else
+                                                <a href="{{  $crumb->path }}">{{  $crumb->title }}</a>
+                                        @endif
+                                       
+                                        @if (! $loop->last)
+                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        @endif
+                                </li>
 
-                                <li><a href="{{ $crumb->path }}">{{ $crumb->title }}</a></li>
+                                @endforeach
 
-                        @endforeach
+                                @endif
 
-                @endif
-
-                </ul>
-        </div>
+                        </ul>
+                </div>
         </div>
 
         <div class="content">
@@ -28,8 +38,6 @@
                                 <p>@yield('information')</p>
 
                         </div>
-
-                        <hr>
                 @endif
 
                 @yield('content')

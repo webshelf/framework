@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
         $plugin->handler->version();
 
-        $activities = $repository->paginate(25);
+        $activities = $repository->paginate(7);
 
         return view('dashboard::index')->with(['activities'=>$activities]);
     }

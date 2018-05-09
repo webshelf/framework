@@ -19,6 +19,9 @@ window.colorbox = require('jquery-colorbox');
 // Compile files for the editor.
 require('./editor');
 
+// Applications date and time related functions.
+require('./datetime');
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
