@@ -13,7 +13,7 @@ class MayUpdateOne extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function(Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->timestamp('unpublish_date')->after('featured_img');
             $table->timestamp('publish_date')->after('featured_img');
         });
@@ -26,7 +26,7 @@ class MayUpdateOne extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function(Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->dropColumn('unpublish_date');
             $table->dropColumn('publish_date');
         });
