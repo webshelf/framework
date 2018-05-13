@@ -15,7 +15,7 @@ class MayUpdateOne extends Migration
     {
         Schema::table('articles', function(Blueprint $table) {
             $table->timestamp('unpublish_date')->after('featured_img')->default(null)->nullable();
-            $table->timestamp('publish_date')->after('featured_img')->default(null)->nullable();
+            $table->timestamp('publish_date')->after('featured_img')->useCurrent();
         });
     }
 
