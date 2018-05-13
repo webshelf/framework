@@ -95342,15 +95342,6 @@ var moment = __webpack_require__("./node_modules/moment/moment.js");
 window.datetimepicker = __webpack_require__("./node_modules/pc-bootstrap4-datetimepicker/src/js/bootstrap-datetimepicker.js");
 
 $(document).ready(function () {
-
-    // load datetime picker to this class.
-    $('.datetimepicker').datetimepicker({
-        format: 'DD/MM/YYYY'
-    });
-
-    // pre-formate publish date with current time and date.
-    $('#publish_date').val(moment().format("DD/MM/YYYY"));
-
     // default a clear button on the datetimepicker reset.
     $(".btn-clear-form").bind('click', function () {
         var element = $(this).parents(".input-group").children("input");

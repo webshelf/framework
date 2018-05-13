@@ -86,7 +86,7 @@ class Article extends BaseModel implements Linkable
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'publish_date', 'unpublish_date'];
 
     /**
      * Attributes to exclude from the Audit.

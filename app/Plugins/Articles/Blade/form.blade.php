@@ -22,8 +22,13 @@
 
     @include('dashboard::structure.validation')
 
-    <form action="{{ route('admin.articles.store') }}" method="post">
-
+    @if($article->exists)
+        <form action="{{ route('admin.articles.update', $article->slug) }}" method="post">
+        <input type="hidden" name="_method" value="PATCH">
+    @else
+        <form action="{{ route('admin.articles.store') }}" method="post">
+    @endif
+    
         {{ csrf_field() }}
 
         <div class="row">
@@ -59,6 +64,15 @@
                     <small class="form-text text-muted">Set the visibility of this article to others.</small>
                 </div>
             </div>
+            <script>
+                $(document).ready(function () {
+                    // load datetime picker to this class.
+                    $('#publish_date').datetimepicker({
+                        format : 'DD/MM/YYYY',
+                        defaultDate: '{{  old('publish_date', optional($article)->publish_date->format("m/d/y")) }}',
+                    });
+                })
+            </script>
             <div class="col-4">
                 <div class="form-group">
                     <label for="">Publish Date</label>
@@ -66,11 +80,19 @@
                         <div class="input-group-prepend btn-clear-form">
                             <div class="input-group-text"><i class="fa fa-refresh" aria-hidden="true"></i></div>
                         </div>
-                        <input type="datetime" class="form-control datetimepicker" name="publish_date" id="publish_date" aria-describedby="publish_date_help" value="{{  old('publish_date', optional($article)->publish_date) }}">
+                        <input type="datetime" class="form-control datetimepicker" name="publish_date" id="publish_date" aria-describedby="publish_date_help">
                     </div>
                     <small id="publish_date_help" class="form-text text-muted">The starting date that this article will be viewable on.</small>
                 </div>
             </div>
+            <script>
+                $(document).ready(function () {
+                    $('#unpublish_date').datetimepicker({
+                        format : 'DD/MM/YYYY',
+                        defaultDate: '{{  old('publish_date', optional($article)->unpublish_date->format("m/d/y")) }}',
+                    });
+                });
+                </script>
             <div class="col-4">
                 <div class="form-group">
                     <label for="">Unpublish Date</label>
@@ -78,7 +100,7 @@
                         <div class="input-group-prepend btn-clear-form">
                             <div class="input-group-text"><i class="fa fa-refresh" aria-hidden="true"></i></div>
                         </div>
-                        <input type="datetime" class="form-control datetimepicker" name="unpublish_date" id="unpublish_date" aria-describedby="unpublish_date_help" value="{{  old('unpublish_date', optional($article)->unpublish_date) }}">
+                        <input type="datetime" class="form-control datetimepicker" name="unpublish_date" id="unpublish_date" aria-describedby="unpublish_date_help">
                     </div>
                     <small id="unpublish_date_help" class="form-text text-muted">The date at which this article will be no longer viewable.</small>
                 </div>
@@ -106,7 +128,11 @@
 
         <div class="form-actions">
 
-            <button type="submit" class="btn btn-create">Create Article</button>
+            @if ($article->exists)
+                <button type="submit" class="btn btn-create">Edit Article</button>
+            @else
+                <button type="submit" class="btn btn-create">Create Article</button>
+            @endif
 
             <div class="pull-right">
                 <button type="reset" class="btn btn-reset">Reset</button>

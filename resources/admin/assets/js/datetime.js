@@ -6,15 +6,6 @@ var moment = require('moment');
 window.datetimepicker = require('pc-bootstrap4-datetimepicker');
 
 $(document).ready(function() {
-
-    // load datetime picker to this class.
-    $('.datetimepicker').datetimepicker({
-        format : 'DD/MM/YYYY'
-    });
-
-    // pre-formate publish date with current time and date.
-    $('#publish_date').val(moment().format("DD/MM/YYYY"));
-
     // default a clear button on the datetimepicker reset.
     $(".btn-clear-form").bind('click', function() {
         var element = $(this).parents(".input-group").children("input");
@@ -29,6 +20,5 @@ $(document).ready(function() {
 
         return element.val("");
 
-    });
-    
+    }); 
 });

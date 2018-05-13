@@ -11,7 +11,7 @@
         
                 <p class="last-login">{{  account()->last_login->format('D, M dS, Y, H:i') }}</p>
         
-                <a href="#">View Access Logs [Coming Soon]</a>
+                <a href="https://github.com/webshelf/framework/issues">View Platform Issue Tracker</a>
         
             </div>
         
