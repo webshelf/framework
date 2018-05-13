@@ -8,6 +8,7 @@
 
 namespace App\Plugins\Articles;
 
+use Carbon\Carbon;
 use App\Model\Article;
 use App\Model\Activity;
 use Illuminate\Http\Request;
@@ -16,7 +17,6 @@ use App\Model\ArticleCategory;
 use Illuminate\Validation\Rule;
 use App\Classes\Repositories\ArticleRepository;
 use App\Classes\Repositories\ArticleCategoryRepository;
-use Carbon\Carbon;
 
 /**
  * Class Controller.
@@ -215,7 +215,7 @@ class BackendController extends PluginEngine
         $article->setAttribute('featured_img', $request['image']);
 
         // 09/05/2018 $publish_date =
-        $publish_date   = $request['publish_date']   ? Carbon::createFromFormat('d/m/Y', $request['publish_date']) : null;
+        $publish_date = $request['publish_date'] ? Carbon::createFromFormat('d/m/Y', $request['publish_date']) : null;
         $unpublish_date = $request['unpublish_date'] ? Carbon::createFromFormat('d/m/Y', $request['unpublish_date']) : null;
 
         // Store the carbon dates to the database.
