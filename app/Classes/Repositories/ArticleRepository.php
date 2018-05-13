@@ -156,11 +156,17 @@ class ArticleRepository extends BaseRepository
 
     public function whereCreatorId(int $creator_id, int $paginate = 5)
     {
-        return $this->publicArticles()->orderBy('created_at', 'desc')->where('creator_id', $creator_id)->simplePaginate($paginate);
+        return $this->publicArticles()
+            ->orderBy('created_at', 'desc')
+            ->where('creator_id', $creator_id)
+            ->simplePaginate($paginate);
     }
 
     public function whereCategoryId(int $id, int $paginate = 5)
     {
-        return $this->publicArticles()->where('category_id', $id)->orderBy('created_at', 'desc')->simplePaginate($paginate);
+        return $this->publicArticles()
+            ->where('category_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate($paginate);
     }
 }
