@@ -11,8 +11,8 @@ namespace App\Classes\Repositories;
 use App\Model\Menu;
 use App\Model\Article;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class ArticleRepository.
@@ -46,11 +46,11 @@ class ArticleRepository extends BaseRepository
         return $this->model->where([
             ['status', Article::STATUS_PUBLIC],
             ['publish_date', '<=', DB::raw('NOW()')],
-            ['unpublish_date', '>=', DB::raw('NOW()')]
+            ['unpublish_date', '>=', DB::raw('NOW()')],
         ])->orWhere([
             ['status', Article::STATUS_PUBLIC],
             ['publish_date', '<=', DB::raw('NOW()')],
-            ['unpublish_date', '=', null]]
+            ['unpublish_date', '=', null], ]
         );
     }
 
