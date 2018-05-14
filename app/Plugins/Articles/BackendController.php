@@ -8,6 +8,7 @@
 
 namespace App\Plugins\Articles;
 
+use Carbon\Carbon;
 use App\Model\Article;
 use App\Model\Activity;
 use Illuminate\Http\Request;
@@ -16,7 +17,6 @@ use App\Model\ArticleCategory;
 use Illuminate\Validation\Rule;
 use App\Classes\Repositories\ArticleRepository;
 use App\Classes\Repositories\ArticleCategoryRepository;
-use Carbon\Carbon;
 
 /**
  * Class Controller.
