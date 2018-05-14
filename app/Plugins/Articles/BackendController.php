@@ -222,7 +222,7 @@ class BackendController extends PluginEngine
         $article->setAttribute('featured_img', $request['image']);
 
         // 09/05/2018 $publish_date =
-        $publish_date   = $request['publish_date']   ? Carbon::createFromFormat('m/d/Y', $request['publish_date']) : null;
+        $publish_date = $request['publish_date'] ? Carbon::createFromFormat('m/d/Y', $request['publish_date']) : null;
         $unpublish_date = $request['unpublish_date'] ? Carbon::createFromFormat('m/d/Y', $request['unpublish_date']) : null;
 
         // Store the carbon dates to the database.
