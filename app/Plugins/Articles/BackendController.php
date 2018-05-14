@@ -205,7 +205,14 @@ class BackendController extends PluginEngine
      */
     public function save(Request $request, Article $article)
     {
-        $this->validate($request, ['title' => ['min:3|max:255', Rule::unique('articles')->ignore($article->id)], 'content' => ['min:3']]);
+        $this->validate($request, [
+            'title' => ['min:3|max:255', Rule::unique('articles')->ignore($article->id)], 'content' => ['min:3'],
+            'publish_date' => 'required|date',
+        ]);
+
+        if ($request['unpublish_date']) {
+            $this->validate($request, ['unpublish_date' => 'sometimes|date|after:publish_date']);
+        }
 
         // set attribute for the model.
         $article->setAttribute('title', $request['title']);
@@ -215,8 +222,8 @@ class BackendController extends PluginEngine
         $article->setAttribute('featured_img', $request['image']);
 
         // 09/05/2018 $publish_date =
-        $publish_date   = $request['publish_date']   ? Carbon::createFromFormat('d/m/Y', $request['publish_date']) : null;
-        $unpublish_date = $request['unpublish_date'] ? Carbon::createFromFormat('d/m/Y', $request['unpublish_date']) : null;
+        $publish_date   = $request['publish_date']   ? Carbon::createFromFormat('m/d/Y', $request['publish_date']) : null;
+        $unpublish_date = $request['unpublish_date'] ? Carbon::createFromFormat('m/d/Y', $request['unpublish_date']) : null;
 
         // Store the carbon dates to the database.
         $article->setAttribute('publish_date', $publish_date);

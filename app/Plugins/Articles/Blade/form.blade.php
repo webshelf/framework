@@ -68,8 +68,8 @@
                 $(document).ready(function () {
                     // load datetime picker to this class.
                     $('#publish_date').datetimepicker({
-                        format : 'DD/MM/YYYY',
-                        defaultDate: '{{  old('publish_date', optional($article)->publish_date->format("m/d/y")) }}',
+                        format : 'MM/DD/YYYY',
+                        defaultDate: '{{  old('publish_date', optional($article->publish_date)->format("m/d/y")) ?: \Carbon\Carbon::now()->format("m/d/y")}}',
                     });
                 })
             </script>
@@ -82,14 +82,14 @@
                         </div>
                         <input type="datetime" class="form-control datetimepicker" name="publish_date" id="publish_date" aria-describedby="publish_date_help">
                     </div>
-                    <small id="publish_date_help" class="form-text text-muted">The starting date that this article will be viewable on.</small>
+                    <small id="publish_date_help" class="form-text text-muted">[Month, Day, Year] The Starting point for uploading the article.</small>
                 </div>
             </div>
             <script>
                 $(document).ready(function () {
                     $('#unpublish_date').datetimepicker({
-                        format : 'DD/MM/YYYY',
-                        defaultDate: '{{  old('publish_date', optional($article)->unpublish_date->format("m/d/y")) }}',
+                        format : 'MM/DD/YYYY',
+                        defaultDate: '{{  old('unpublish_date', optional($article->unpublish_date)->format("m/d/y")) }}',
                     });
                 });
                 </script>
@@ -102,7 +102,7 @@
                         </div>
                         <input type="datetime" class="form-control datetimepicker" name="unpublish_date" id="unpublish_date" aria-describedby="unpublish_date_help">
                     </div>
-                    <small id="unpublish_date_help" class="form-text text-muted">The date at which this article will be no longer viewable.</small>
+                    <small id="unpublish_date_help" class="form-text text-muted">[Month, Day, Year] The Ending point for removing the article.</small>
                 </div>
             </div>
         </div>

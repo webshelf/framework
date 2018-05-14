@@ -11,7 +11,7 @@ $(document).ready(function() {
         var element = $(this).parents(".input-group").children("input");
 
         if (element.is("#publish_date")) {
-            return element.val(moment().format("DD/MM/YYYY"));
+            return element.val(moment().format("MM/DD/YYYY"));
         }
 
         if (element.is("#unpublish_date")) {
