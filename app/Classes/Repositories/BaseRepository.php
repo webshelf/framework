@@ -31,7 +31,7 @@ class BaseRepository
     }
 
     /**
-     * Get all the articles from the repository in descending order
+     * Get all the articles from the repository in descending order.
      *
      * @return mixed
      */
