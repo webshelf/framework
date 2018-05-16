@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-5">
                 <div class="form-group">
-                    <label for="linkable_object">Select Linkable Content</label>
+                    <label for="linkable_object">Link Internal Resource</label>
                     <select class="form-control" name="linkable_object" id="linkable_object" aria-describedby="pageHelp">
 
                         <?php /** @var \App\Classes\Interfaces\Linkable $item */ ?>
@@ -65,7 +65,7 @@
                         {{--@endforeach--}}
                         {{--<option value="" {{ !$menu->page ? 'selected' : 'null'}}></option>--}}
                     </select>
-                    <small id="pageHelp" class="form-text text-muted">Link the navigation to the page.</small>
+                    <small id="pageHelp" class="form-text text-muted">Internal resources are those that exist on your website.</small>
                 </div>
             </div>
 
@@ -75,12 +75,12 @@
 
             <div class="col-5">
                 <div class="form-group">
-                    <label for="hyperlinkUrl">Hyperlink:</label>
+                    <label for="hyperlinkUrl">Link External Website</label>
                     <input type="url" class="form-control is-valid|is-invalid" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp" readonly>
                     <div class="invalid-feedback">
                         Validation message
                     </div>
-                    <small id="hyperlinkUrlHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
+                    <small id="hyperlinkUrlHelp" class="form-text text-muted">This will link the menu to the assigned URL web address</small>
                 </div>
             </div>
         </div>
