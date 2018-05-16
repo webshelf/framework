@@ -65,7 +65,7 @@ class UpgradePageMenuLinks extends Command
 
             $page->setAttribute('prefix', $prefix)->save();
 
-            $link->connect($menu, $page)->save();
+            $link->model($menu, $page)->save();
 
             $this->info($menu->title.' => '.$page->getAttribute('seo_title').' ('.$page->getAttribute('prefix').'/'.$page->getAttribute('slug').')');
         }

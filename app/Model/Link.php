@@ -54,7 +54,10 @@ class Link extends Model
     }
 
     /**
-     * @return string
+     * Return the link URL based on the condition of it being internal or externally
+     * based.
+     *
+     * @return void
      */
     public function url()
     {
@@ -66,7 +69,9 @@ class Link extends Model
     }
 
     /**
-     * @return bool
+     * Is the current model external or internally linked.
+     *
+     * @return boolean
      */
     public function isExternal()
     {
@@ -74,33 +79,40 @@ class Link extends Model
     }
 
     /**
+     * Link two internal resources together using the linker model (url).
+     *
      * @param Linker $model
-     * @param Linkable|null $object
-     * @param string $external
-     * @return $this
+     * @param Linkable $object
+     * @return Link
      */
-    public function connect(Linker $model, Linkable $object = null, string $external = '')
+    public function model(Linker $model, Linkable $object)
     {
-        if ($model && $object) {
-            $this->setAttribute('from_id', $model->getKey());
+        $this->setAttribute('from_id', $model->getKey());
 
-            $this->setAttribute('from_type', $model->getMorphClass());
+        $this->setAttribute('from_type', $model->getMorphClass());
 
-            $this->setAttribute('to_id', $object->getKey());
+        $this->setAttribute('to_id', $object->getKey());
 
-            $this->setAttribute('to_type', $object->getMorphClass());
+        $this->setAttribute('to_type', $object->getMorphClass());
 
-            return $this;
-        }
+        return $this;
+    }
 
-        if ($model && $external) {
-            $this->setAttribute('from_id', $model->getKey());
+    /**
+     * Link a model reosurce to an external url.
+     *
+     * @param Linker $model
+     * @param string $external
+     * @return Link
+     */
+    public function external(Linker $model, string $external)
+    {
+        $this->setAttribute('from_id', $model->getKey());
 
-            $this->setAttribute('from_type', $model->getMorphClass());
+        $this->setAttribute('from_type', $model->getMorphClass());
 
-            $this->setAttribute('external', $external);
+        $this->setAttribute('external', $external);
 
-            return $this;
-        }
+        return $this;
     }
 }

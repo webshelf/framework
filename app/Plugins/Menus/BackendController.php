@@ -192,41 +192,63 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Menu $menu)
     {
-        if (! $request['hyperlinkUrl']) {
-            $model = json_decode($request['linkable_object']);
+        if ($request['hyperlinkUrl'])
+            $menu = $this->externalMenu($request, $menu);
+        else
+            $menu = $this->internalmenu($request, $menu);
 
-            $menu->hyperlink = null;
-            $menu->title = $request['title'];
-            $menu->page_id = $request['page_id'];
-            $menu->parent_id = $request['menu_id'];
-            $menu->target = $request['target'];
-            $menu->status = true;
-            $menu->creator_id = account()->id;
+        return $menu;
+    }
 
-            DB::transaction(function () use ($menu, $model) {
-                $menu->save();
+    /**
+     * External menus use the menu resource linked to an external url.
+     *
+     * @param Menu $menu
+     * @return boolean
+     */
+    private function externalMenu(Request $request, Menu $menu)
+    {
+        $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
 
-                if ($menu->link) {
-                    $menu->link->connect($menu, getMorphedModel($model->class, $model->key))->save();
-                } else {
-                    (new Link)->connect($menu, getMorphedModel($model->class, $model->key))->save();
-                }
-            }, 5);
+        $menu->page_id = null;
+        $menu->title = $request['title'];
+        $menu->parent_id = $request['menu_id'];
+        $menu->hyperlink = $request['hyperlinkUrl'];
+        $menu->target = $request['target'];
+        $menu->status = true;
+        $menu->creator_id = account()->id;
+        $menu->save();
+        
+        // save the new external link to the model.
+        (new Link)->external($menu, $request['hyperlinkUrl'])->save();
 
-            return true;
-        } else {
-            // we expect this to be a hyperlink.
-            $request->validate(['hyperlinkUrl' => 'required|max:255|active_url']);
+        return true;
+    }
 
-            $menu->page_id = null;
-            $menu->title = $request['title'];
-            $menu->parent_id = $request['menu_id'];
-            $menu->hyperlink = $request['hyperlinkUrl'];
-            $menu->target = $request['target'];
-            $menu->status = true;
-            $menu->creator_id = account()->id;
+    /**
+     * Internal Menus are linked to a linable object.
+     *
+     * @param Menu $menu
+     * @return boolean
+     */
+    private function internalMenu(Request $request, Menu $menu)
+    {
+        $model = json_decode($request['linkable_object']);
+        $menu->hyperlink = null;
+        $menu->title = $request['title'];
+        $menu->page_id = $request['page_id'];
+        $menu->parent_id = $request['menu_id'];
+        $menu->target = $request['target'];
+        $menu->status = true;
+        $menu->creator_id = account()->id;
+        $menu->save();
 
-            $menu->save();
-        }
+        // save the model resource link to the other resource.
+        if ($menu->link)
+            $menu->link->model($menu, getMorphedModel($model->class, $model->key))->save();
+        else 
+            (new Link)->model($menu, getMorphedModel($model->class, $model->key))->save();
+
+        return true;
     }
 }
