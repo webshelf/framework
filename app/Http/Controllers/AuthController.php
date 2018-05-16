@@ -26,21 +26,21 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required',
-        ]);
 
+        // Only the password and email are the only required credentials.
         $credentials = $request->only('email', 'password');
 
+        /**
+         * We do not require validation as we do not want to give away what the issue with logging in is exactly.
+         * If the user does not enter the correct username or password then they will be giving a genertic error
+         * message.
+         */
         if (auth()->attempt($credentials, $request->has('remember'))) {
 
             // log login activity.
             $this->trackAccountLogin(account());
 
-            // track login activity.?
-
-            // redirec to dashboard after login.
+            // redirect to dashboard after login.
             return redirect()->intended(route('dashboard'));
         }
 

@@ -49,7 +49,7 @@
 
                             <div class="form-group">
                                 <label for="emailAddress">Email Address</label>
-                                <input type="text" class="form-control" name="email" id="emailAddress"
+                                <input type="email" class="form-control" name="email" id="emailAddress"
                                        aria-describedby="emailAddressHelp"
                                        placeholder="" required>
                                 <small id="emailAddressHelp" class="form-text text-muted">The email address you associate with.</small>
