@@ -14,7 +14,6 @@ use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use App\Classes\Repositories\LinkRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
@@ -192,10 +191,11 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Menu $menu)
     {
-        if ($request['hyperlinkUrl'])
+        if ($request['hyperlinkUrl']) {
             $menu = $this->externalMenu($request, $menu);
-        else
+        } else {
             $menu = $this->internalmenu($request, $menu);
+        }
 
         return $menu;
     }
@@ -204,7 +204,7 @@ class BackendController extends PluginEngine
      * External menus use the menu resource linked to an external url.
      *
      * @param Menu $menu
-     * @return boolean
+     * @return bool
      */
     private function externalMenu(Request $request, Menu $menu)
     {
@@ -218,7 +218,7 @@ class BackendController extends PluginEngine
         $menu->status = true;
         $menu->creator_id = account()->id;
         $menu->save();
-        
+
         // save the new external link to the model.
         (new Link)->external($menu, $request['hyperlinkUrl'])->save();
 
@@ -229,7 +229,7 @@ class BackendController extends PluginEngine
      * Internal Menus are linked to a linable object.
      *
      * @param Menu $menu
-     * @return boolean
+     * @return bool
      */
     private function internalMenu(Request $request, Menu $menu)
     {
@@ -244,10 +244,11 @@ class BackendController extends PluginEngine
         $menu->save();
 
         // save the model resource link to the other resource.
-        if ($menu->link)
+        if ($menu->link) {
             $menu->link->model($menu, getMorphedModel($model->class, $model->key))->save();
-        else 
+        } else {
             (new Link)->model($menu, getMorphedModel($model->class, $model->key))->save();
+        }
 
         return true;
     }
