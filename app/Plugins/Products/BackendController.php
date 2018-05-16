@@ -62,7 +62,7 @@ class BackendController extends PluginEngine
             }, 5);
         }
 
-        return response()->redirectToRoute('products.index');
+        return response()->redirectToRoute('admin.products.index');
     }
 
     /**
@@ -88,6 +88,6 @@ class BackendController extends PluginEngine
             }, 5);
         }
 
-        return response()->redirectToRoute('products.index');
+        return response()->redirectToRoute('admin.products.index');
     }
 }
