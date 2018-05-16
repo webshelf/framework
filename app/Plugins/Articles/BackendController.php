@@ -52,7 +52,7 @@ class BackendController extends PluginEngine
      */
     public function index()
     {
-        return $this->make('index')->with('articles', $this->articles->all());
+        return $this->make('index')->with('articles', $this->articles->allDescendingOrder());
     }
 
     /**
