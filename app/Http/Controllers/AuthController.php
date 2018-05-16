@@ -30,7 +30,7 @@ class AuthController extends Controller
         // Only the password and email are the only required credentials.
         $credentials = $request->only('email', 'password');
 
-        /**
+        /*
          * We do not require validation as we do not want to give away what the issue with logging in is exactly.
          * If the user does not enter the correct username or password then they will be giving a genertic error
          * message.
