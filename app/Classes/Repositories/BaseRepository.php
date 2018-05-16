@@ -31,6 +31,16 @@ class BaseRepository
     }
 
     /**
+     * Get all the articles from the repository in descending order
+     *
+     * @return mixed
+     */
+    public function allDescendingOrder()
+    {
+        return $this->model->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
      * @param int $integer
      * @return Menu
      */
