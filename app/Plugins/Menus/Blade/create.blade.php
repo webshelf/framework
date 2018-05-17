@@ -37,6 +37,17 @@
             <small id="menuHelp" class="form-text text-muted">Attach this navigation menu to a menu.</small>
         </div>
 
+        <script>
+            $(document).ready(function() {
+                $("#hyperlinkUrl").on("change paste keyup", function() {
+                    $("#linkable_object").val("");
+                });
+                $('#linkable_object').on('change', function() {
+                    $("#hyperlinkUrl").val("");
+                });
+            });
+        </script>
+
         <div class="row">
             <div class="col-5">
                 <div class="form-group">
@@ -70,12 +81,9 @@
             <div class="col-5">
                 <div class="form-group">
                     <label for="hyperlinkUrl">Link External Website</label>
-                    <input type="url" class="form-control is-valid|is-invalid" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp" readonly>
-                    <div class="invalid-feedback">
-                        Validation message
-                    </div>
-                    <small id="hyperlinkUrlHelp" class="form-text text-muted">This will link the menu to the assigned URL web address</small>
-                </div>    
+                    <input type="text" class="form-control" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp" value="{{ optional($menu->link)->external }}">
+                    <small id="hyperlinkUrlHelp" class="form-text text-muted">This will link the menu to the assigned URL web address (# for Empty)</small>
+                </div>
             </div>
         </div>
     
