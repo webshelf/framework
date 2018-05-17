@@ -8,13 +8,12 @@
 
 namespace App\Plugins\Pages;
 
-use \DB;
+use App\Model\Link;
 use App\Model\Page;
 use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
-use App\Model\Link;
 
 /**
  * Class Controller.
@@ -133,7 +132,7 @@ class BackendController extends PluginEngine
     {
         $page = $repository->whereName($slug);
 
-       // Disconnect the linked page from the parent link.
+        // Disconnect the linked page from the parent link.
         if ($page->linked) {
             foreach ($page->linked as $link) {
                 $link->disconnect();
