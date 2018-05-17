@@ -85,9 +85,10 @@ class Link extends Model
      */
     public function disconnect()
     {
-        $this->setAttribute('to_id', NULL);
-        $this->setAttribute('to_type', NULL);
+        $this->setAttribute('to_id', null);
+        $this->setAttribute('to_type', null);
         $this->setAttribute('external', '#');
+
         return $this->save();
     }
 

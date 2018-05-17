@@ -17,7 +17,6 @@ use Illuminate\Validation\Rule;
 use App\Classes\Repositories\LinkRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use PhpParser\Error;
 
 /**
  * Class Controller.
@@ -194,15 +193,15 @@ class BackendController extends PluginEngine
     {
         $this->validate($request, ['title => required|min:3|max:255']);
 
-        DB::transaction(function () use ($request, $menu){
-            if ($request['linkable_object'])
+        DB::transaction(function () use ($request, $menu) {
+            if ($request['linkable_object']) {
                 $menu = $this->internalMenu($request, $menu);
-            else if ($request['hyperlinkUrl'])
+            } elseif ($request['hyperlinkUrl']) {
                 $menu = $this->externalMenu($request, $menu);
-            else
-                $menu = $this->recursiveMenu($request, $menu);        
+            } else {
+                $menu = $this->recursiveMenu($request, $menu);
+            }
         }, 5);
-    
     }
 
     /**
@@ -213,9 +212,9 @@ class BackendController extends PluginEngine
      */
     private function externalMenu(Request $request, Menu $menu)
     {
-        if ($request['hyperlinkUrl'] != "#") {
+        if ($request['hyperlinkUrl'] != '#') {
             $this->validate($request, ['hyperlinkUrl' => 'sometimes|max:255|string|active_url'], [
-                'hyperlinkUrl.active_url' => 'Hyperlink url is not a valid address, please use http:// or https://'
+                'hyperlinkUrl.active_url' => 'Hyperlink url is not a valid address, please use http:// or https://',
             ]);
         }
 
@@ -229,7 +228,7 @@ class BackendController extends PluginEngine
         $menu->save();
 
         // save the new external link to the model.
-        app(Link::Class)->external($menu, $request['hyperlinkUrl']);
+        app(Link::class)->external($menu, $request['hyperlinkUrl']);
 
         return true;
     }
@@ -252,10 +251,11 @@ class BackendController extends PluginEngine
         $menu->save();
 
         // save the model resource link to the other resource.
-        if ($menu->link)
+        if ($menu->link) {
             $menu->link->model($menu, getMorphedModel($model->class, $model->key));
-        else 
+        } else {
             app(Link::class)->model($menu, getMorphedModel($model->class, $model->key));
+        }
 
         return true;
     }
@@ -265,7 +265,7 @@ class BackendController extends PluginEngine
      *
      * @param Request $request
      * @param Menu $menu
-     * @return boolean
+     * @return bool
      */
     private function recursiveMenu(Request $request, Menu $menu)
     {
@@ -275,7 +275,7 @@ class BackendController extends PluginEngine
         $menu->creator_id = account()->id;
         $menu->save();
 
-        app(Link::Class)->external($menu, '#');
+        app(Link::class)->external($menu, '#');
 
         return true;
     }
