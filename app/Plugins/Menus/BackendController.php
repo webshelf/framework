@@ -14,7 +14,6 @@ use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use App\Classes\Repositories\LinkRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
@@ -210,7 +209,7 @@ class BackendController extends PluginEngine
      * External menus use the menu resource linked to an external url.
      *
      * @param Menu $menu
-     * @return boolean
+     * @return bool
      */
     private function externalMenu(Request $request, Menu $menu)
     {
@@ -228,7 +227,7 @@ class BackendController extends PluginEngine
         $menu->status = true;
         $menu->creator_id = account()->id;
         $menu->save();
-        
+
         // save the new external link to the model.
         app(Link::Class)->external($menu, $request['hyperlinkUrl']);
 
@@ -239,7 +238,7 @@ class BackendController extends PluginEngine
      * Internal Menus are linked to a linable object.
      *
      * @param Menu $menu
-     * @return boolean
+     * @return bool
      */
     private function internalMenu(Request $request, Menu $menu)
     {

@@ -71,7 +71,7 @@ class Link extends Model
     /**
      * Is the current model external or internally linked.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExternal()
     {
