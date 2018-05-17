@@ -67,6 +67,13 @@ class Account extends Authenticatable implements UserResolver
     protected $dates = ['last_login', 'created_at'];
 
     /**
+     * The attributes that are not mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['remember_token', 'password'];
+
+    /**
      * Return the full name of the account.
      *
      * @return string

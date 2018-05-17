@@ -79,6 +79,19 @@ class Link extends Model
     }
 
     /**
+     * Disconnect a resource from its linked resource.
+     *
+     * @return void
+     */
+    public function disconnect()
+    {
+        $this->setAttribute('to_id', NULL);
+        $this->setAttribute('to_type', NULL);
+        $this->setAttribute('external', '#');
+        return $this->save();
+    }
+
+    /**
      * Link two internal resources together using the linker model (url).
      *
      * @param Linker $model
@@ -87,13 +100,10 @@ class Link extends Model
      */
     public function model(Linker $model, Linkable $object)
     {
-        $this->setAttribute('from_id', $model->getKey());
-
-        $this->setAttribute('from_type', $model->getMorphClass());
-
-        $this->setAttribute('to_id', $object->getKey());
-
-        $this->setAttribute('to_type', $object->getMorphClass());
+        $this->updateOrCreate(
+            ['from_id' => $model->getKey(), 'from_type' => $model->getMorphClass()],
+            ['external' => null, 'to_id' => $object->getKey(), 'to_type' => $object->getMorphClass()]
+        );
 
         return $this;
     }
@@ -107,11 +117,10 @@ class Link extends Model
      */
     public function external(Linker $model, string $external)
     {
-        $this->setAttribute('from_id', $model->getKey());
-
-        $this->setAttribute('from_type', $model->getMorphClass());
-
-        $this->setAttribute('external', $external);
+        $this->updateOrCreate(
+            ['from_id' => $model->getKey(), 'from_type' => $model->getMorphClass()],
+            ['external' => $external, 'to_id' => null, 'to_type' => null]
+        );
 
         return $this;
     }

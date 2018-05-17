@@ -81,7 +81,7 @@
             <div class="col-5">
                 <div class="form-group">
                     <label for="hyperlinkUrl">Link External Website</label>
-                    <input type="text" class="form-control" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp" value="{{ optional($menu->link)->external }}">
+                    <input type="text" class="form-control" name="hyperlinkUrl" id="hyperlinkUrl" aria-describedby="hyperlinkUrlHelp">
                     <small id="hyperlinkUrlHelp" class="form-text text-muted">This will link the menu to the assigned URL web address (# for Empty)</small>
                 </div>
             </div>

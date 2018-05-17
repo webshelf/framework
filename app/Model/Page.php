@@ -138,6 +138,8 @@ class Page extends EloquentModel implements Linkable
     }
 
     /**
+     * The resource that is linked to this.
+     * 
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne|Collection
      */
     public function link()
@@ -146,6 +148,8 @@ class Page extends EloquentModel implements Linkable
     }
 
     /**
+     * The resource to which this is linked to.
+     * 
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany|Collection
      */
     public function linked()
