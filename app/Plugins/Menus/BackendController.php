@@ -8,7 +8,7 @@
 
 namespace App\Plugins\Menus;
 
-use \DB;
+use DB;
 use App\Model\Link;
 use App\Model\Menu;
 use App\Model\Activity;
