@@ -163,6 +163,16 @@ class Article extends BaseModel implements Linkable
     }
 
     /**
+     * Check if the article has a featured image available for viewing.
+     *
+     * @return boolean Condition of the image being available.
+     */
+    public function hasFeaturedImage()
+    {
+        return $this->getAttribute('featured_img') != "";
+    }
+
+    /**
      * Return the estimated read time of the article.
      *
      * @return double The estimation of time.
