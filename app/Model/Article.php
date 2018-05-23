@@ -8,6 +8,7 @@ use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Classes\ReadTime;
 
 /**
  * Class Article.
@@ -159,5 +160,25 @@ class Article extends BaseModel implements Linkable
     public function incrementView(int $amount = 1)
     {
         return $this->increment('views', $amount);
+    }
+
+    /**
+     * Return the estimated read time of the article.
+     *
+     * @return double The estimation of time.
+     */
+    public function readTime()
+    {
+        return ReadTime::InMinutes($this->getAttribute('content'));
+    }
+
+    /**
+     * Get the total count of typed words in the article.
+     *
+     * @return int The total count of words.
+     */
+    public function countWords()
+    {
+        return ReadTime::countWords($this->getAttribute('content'));
     }
 }
