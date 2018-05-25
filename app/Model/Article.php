@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use App\Classes\ReadTime;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
@@ -159,5 +160,35 @@ class Article extends BaseModel implements Linkable
     public function incrementView(int $amount = 1)
     {
         return $this->increment('views', $amount);
+    }
+
+    /**
+     * Check if the article has a featured image available for viewing.
+     *
+     * @return bool Condition of the image being available.
+     */
+    public function hasFeaturedImage()
+    {
+        return $this->getAttribute('featured_img') != '';
+    }
+
+    /**
+     * Return the estimated read time of the article.
+     *
+     * @return float The estimation of time.
+     */
+    public function readTime()
+    {
+        return ReadTime::InMinutes($this->getAttribute('content'));
+    }
+
+    /**
+     * Get the total count of typed words in the article.
+     *
+     * @return int The total count of words.
+     */
+    public function countWords()
+    {
+        return ReadTime::countWords($this->getAttribute('content'));
     }
 }
