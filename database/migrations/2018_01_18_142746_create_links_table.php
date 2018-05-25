@@ -20,23 +20,18 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-
             $table->unsignedInteger('from_id');
             $table->string('from_type');
             $table->index(['from_id', 'from_type']);
-
             $table->unsignedInteger('to_id')->nullable();
             $table->string('to_type')->nullable();
             $table->index(['to_id', 'to_type']);
-
             $table->string('external')->nullable();
-
             $table->timestamps();
         });
 
         Schema::table('menus', function (Blueprint $table) {
             $table->removeColumn('hyperlink');
-
             $table->removeColumn('page_id');
         });
 
