@@ -3,12 +3,12 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use App\Classes\ReadTime;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Classes\ReadTime;
 
 /**
  * Class Article.
@@ -165,17 +165,17 @@ class Article extends BaseModel implements Linkable
     /**
      * Check if the article has a featured image available for viewing.
      *
-     * @return boolean Condition of the image being available.
+     * @return bool Condition of the image being available.
      */
     public function hasFeaturedImage()
     {
-        return $this->getAttribute('featured_img') != "";
+        return $this->getAttribute('featured_img') != '';
     }
 
     /**
      * Return the estimated read time of the article.
      *
-     * @return double The estimation of time.
+     * @return float The estimation of time.
      */
     public function readTime()
     {
