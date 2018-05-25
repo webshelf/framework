@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-        
+
         $this->mapPluginRoutes();
 
         $this->mapModulesRoutes();
@@ -48,7 +48,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapVendorRoutes();
 
         \Log::useFiles('php://stderr');
-
     }
 
     /**
