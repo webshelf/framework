@@ -74,7 +74,7 @@ class Menu extends EloquentModel implements Linker
      *
      * @var array
      */
-    protected $with = ['link.to'];
+    protected $with = [];
 
     /**
      * The attributes that should be mutated to dates.

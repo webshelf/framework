@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
+        
         $this->mapPluginRoutes();
 
         $this->mapModulesRoutes();
@@ -49,7 +49,6 @@ class RouteServiceProvider extends ServiceProvider
 
         \Log::useFiles('php://stderr');
 
-        //  dd((app(\Illuminate\Routing\Router::class))->getRoutes());
     }
 
     /**
