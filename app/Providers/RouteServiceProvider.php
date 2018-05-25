@@ -48,8 +48,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapVendorRoutes();
 
         \Log::useFiles('php://stderr');
-
-        //  dd((app(\Illuminate\Routing\Router::class))->getRoutes());
     }
 
     /**

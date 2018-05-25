@@ -49,7 +49,7 @@ class CreateLinksTable extends Migration
         /** @var Link $link */
         $link = app(Link::class);
 
-        $link->model($menu, $page)->save();
+        $link->model($menu, $page);
     }
 
     /**

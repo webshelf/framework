@@ -47,7 +47,7 @@ class InstanceServiceProvider extends ServiceProvider
                     return new SettingsManager;
                 }
 
-                throw new EngineBootException('Could not perform query on the `settings database`, do we have proper connection settings?');
+                throw new EngineBootException('Database Error.');
             }
         });
     }
@@ -62,7 +62,7 @@ class InstanceServiceProvider extends ServiceProvider
                     return new PluginManager;
                 }
 
-                throw new EngineBootException('Could not perform query on the `plugins database`, do we have proper connection settings?');
+                throw new EngineBootException('Database Error.');
             }
         });
     }
