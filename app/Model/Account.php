@@ -10,7 +10,6 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\UserResolver;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,7 +44,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $login_count
  * @property string $ip_address
  */
-class Account extends Authenticatable implements UserResolver
+class Account extends Authenticatable
 {
     /*
      * Soft Delete trait
