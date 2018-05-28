@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Debug\Dumper;
 
-    /**
+/**
      * Return the auth account instance class.
      *
      * @return \App\Model\Account|\Illuminate\Contracts\Auth\Authenticatable
@@ -106,7 +106,7 @@ use Illuminate\Support\Debug\Dumper;
         }
     }
 
-     /**
+    /**
      * Dump the object information without halting execution.
      *
      * @param  mixed  $args
