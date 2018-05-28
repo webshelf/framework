@@ -1,9 +1,8 @@
 <?php
 
+use App\Model\Account;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use App\Model\Account;
 
 class MayUpdateTwo extends Migration
 {
@@ -16,11 +15,10 @@ class MayUpdateTwo extends Migration
     {
         Schema::dropIfExists('audits');
 
-        
         // Create a new standard account for new tables.
         $account = Account::find(1);
 
-        if (!$account) {
+        if (! $account) {
             $account = new Account;
             $account->setAttribute('forename', 'Root');
             $account->setAttribute('surname', 'Account');
