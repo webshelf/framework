@@ -25,8 +25,7 @@ class CreateAuditsTable extends Migration
      */
     public function up()
     {
-        Schema::create('audits', function(Blueprint $table)
-        {
+        Schema::create('audits', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger(Config::get('audit.user.foreign_key', 'user_id'))->nullable();
             $table->string('event');
