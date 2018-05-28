@@ -13,7 +13,7 @@ class MayUpdateTwo extends Migration
      */
     public function up()
     {
-        Schema::drop('audits');
+        Schema::dropIfExists('audits');
     }
 
     /**
