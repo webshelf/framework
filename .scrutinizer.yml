@@ -2,7 +2,7 @@ build:
     environment:
         php: '7.2'
         mysql: '5.7'
-        node: '6.11.0'
+        node: '8.9.1'
         hosts:
             laravel.dev: '127.0.0.1'
         variables:
