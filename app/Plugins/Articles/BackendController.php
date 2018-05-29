@@ -208,7 +208,7 @@ class BackendController extends PluginEngine
         $this->validate($request, [
             'title' => ['min:3|max:255', Rule::unique('articles')->ignore($article->id)], 'content' => ['min:3'],
             'publish_date' => 'required|date',
-            'category' => 'required'
+            'category' => 'required',
         ]);
 
         if ($request['unpublish_date']) {
