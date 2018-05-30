@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://fonts.googleapis.com/css?family=Bowlby+One+SC|Patua+One);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
@@ -13464,5 +13464,80 @@ a.text-dark:focus {
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+
+body {
+  color: #172A3D;
+  background-color: rgba(255, 249, 242, 0.5);
+}
+
+.heading .menu-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  background: #004966;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  border-radius: 3px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.heading .menu-bar .brand,
+.heading .menu-bar .menu {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.heading .menu-bar .menu ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.heading .menu-bar .menu ul li {
+  margin: 0 1em;
+}
+
+.heading .menu-bar .menu ul li a {
+  border-radius: 0;
+}
+
+.heading .menu-bar .brand h2 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.button {
+  font-family: 'Patua One', cursive;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border-radius: 0;
+  color: #fff !important;
+  display: inline-block;
+  font-size: .85rem;
+  padding: 0 1em;
+  line-height: 45px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: none !important;
+}
+
+.button:hover {
+  background-color: #075b7a;
+}
+
+.button.active {
+  background-color: #1480a1;
 }
 
