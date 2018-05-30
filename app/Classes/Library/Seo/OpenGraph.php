@@ -2,13 +2,11 @@
 
 namespace App\Classes\Library\Seo;
 
-
 /**
  * Class Plugins.
  */
 class OpenGraph
 {
-
     /**
      * The title of your object as it should appear within the graph, e.g., "The Rock".
      *
@@ -26,7 +24,6 @@ class OpenGraph
      */
     public function type()
     {
-
     }
 
     /**
