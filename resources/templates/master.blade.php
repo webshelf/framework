@@ -6,11 +6,14 @@
     <?php /** @var \App\Classes\Library\PageLoader\Webpage $webpage */ ?>
 
     <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial -scale=1">
+    
+    {{-- Normal page loading meta tags. --}}
     <title>@yield("webpage.title", $webpage->title())</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="keywords" value="@yield('webpage.keywords', $webpage->keywords())">
+    <meta name="description" value="@yield('webpage.description', $webpage->description())">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -27,15 +30,13 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117148224-1"></script>
 
     @if (settings()->getValue('google_site_tag'))
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', '{{ settings()->getValue('google_site_tag') }}');
-    </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ settings()->getValue('google_site_tag') }}');
+        </script>
     @endif
-
 
 </head>
 

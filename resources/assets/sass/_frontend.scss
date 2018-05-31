@@ -1,68 +1,79 @@
-html, body {
-  background-color: #fff;
-  color: #8f8f8f;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 100;
-  height: 100vh;
-  margin: 0;
+// frontend.scss
+
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC|Patua+One');
+
+body {
+    color: #172A3D;
+    background-color: rgba(255,249,242,0.5);
 }
 
-.full-height {
-  height: 100vh;
+.heading {
+    .menu-bar {
+        display: flex;
+        width: 100%;
+        background: #004966;
+        -moz-transition: all .5s ease-in-out;
+        -o-transition: all .5s ease-in-out;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+        border-radius: 3px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+
+        .brand, .menu {
+            flex: 1;
+        }
+
+        .menu {
+            ul {
+                display: flex;
+                justify-content: flex-end;
+
+                li {
+                    margin: 0 1em;
+
+                    a {
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+
+        .brand {
+            h2 {
+                margin: 0;
+            }
+        }
+    }
 }
 
-.flex-center {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.position-ref {
-  position: relative;
-}
+.button {
+    font-family: 'Patua One', cursive;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    border-radius: 0;
+    color: #fff !important;  
+    display: inline-block;
+    font-size: .85rem;
+    padding: 0 1em;
+    line-height: 45px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    border: none !important;
 
-.top-right {
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
+    &:hover {
+        background-color: #075b7a;
+    }
 
-.content {
-  text-align: center;
-}
-
-.framework {
-  color: #e57319;
-  font-size: 84px;
-}
-
-.content-page {
-  color: #19bbe5;
-  font-size: 25px;
-}
-
-.links > a {
-  color: #636b6f;
-  padding: 0 25px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .1rem;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.m-b-md {
-  margin-bottom: 30px;
-}
-
-.links > a {
-  padding:15px;
-}
-
-.links > a.active {
-  background-color:#636b6f1c;
-}
-
-.links > a:hover {
-  background-color: #abe3ff24;
+    &.active {
+        background-color: #1480a1;
+    }
 }

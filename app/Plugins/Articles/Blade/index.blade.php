@@ -35,20 +35,20 @@
 
                 <div class="details">
                     <div class="title">
-                        <a href="{{ route('admin.articles.edit', ["name"=>$article->slug]) }}">{{ $article->title }}</a>
+                        <a href="{{ route('admin.articles.edit', ["name"=>$article->slug]) }}">{{ ucwords( $article->title) }}</a>
                     </div>
                     <div class="website">
-                        {{ $article->route() }}
+                       {{ $article->route() }}
                     </div>
                 </div>
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li>{!! css()->link->edit(route('admin.articles.edit', $article->slug)) !!}</li>
-                        <li>{!! css()->status->sitemap($article->sitemap) !!}</li>
-                        <li>{!! css()->status->visibility($article->status) !!}</li>
-                        <li>{!! css()->link->destroy(route('admin.articles.destroy', $article->slug)) !!}</li>
-                        <li>{!! css()->link->view(url($article->route())) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.articles.edit', $article->slug)) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($article->sitemap) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->visibility($article->status) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.articles.destroy', $article->slug)) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="View Online">{!! css()->link->view(url($article->route())) !!}</li>
                     </ul>
                 </div>
 

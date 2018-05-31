@@ -1,6 +1,8 @@
 <?php
 
-    /**
+use Illuminate\Support\Debug\Dumper;
+
+/**
      * Return the auth account instance class.
      *
      * @return \App\Model\Account|\Illuminate\Contracts\Auth\Authenticatable
@@ -101,5 +103,18 @@
             return '<span class="status green">'.($trueMessage ?: 'Active').'</span>';
         } else {
             return '<span class="status red">'.($falseMessage ?: 'Inactive').'</span>';
+        }
+    }
+
+    /**
+     * Dump the object information without halting execution.
+     *
+     * @param  mixed  $args
+     * @return void
+     */
+    function debugVar(...$args)
+    {
+        foreach ($args as $x) {
+            (new Dumper)->dump($x);
         }
     }

@@ -15,12 +15,12 @@
         <ul class="list-unstyled">
 
             <li class="item">
-                <a href="{{ route('admin.pages.index') }}">
+                <a href="{{ route('admin.pages.index') }}" class="{{ Request::segment(3) == '' ? 'active' : null }}">
                     <span class="title">Normal</span>
                 </a>
             </li>
             <li class="item">
-                <a href="{{ route('admin.pages.special') }}">
+                <a href="{{ route('admin.pages.special') }}" class="{{ Request::segment(3) == 'special' ? 'active' : null }}">
                     <span class="title">Special</span>
                 </a>
             </li>
@@ -58,11 +58,11 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li>{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
-                        <li>{!! css()->status->sitemap($page->sitemap) !!}</li>
-                        <li>{!! css()->status->status($page->enabled) !!}</li>
-                        <li>{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
-                        <li>{!! css()->link->view(url($page->route())) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($page->sitemap) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($page->enabled) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="View Onlineedit">{!! css()->link->view(url($page->route())) !!}</li>
                     </ul>
                 </div>
 

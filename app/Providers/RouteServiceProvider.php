@@ -46,8 +46,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapModulesRoutes();
 
         $this->mapVendorRoutes();
-
-        \Log::useFiles('php://stderr');
     }
 
     /**
