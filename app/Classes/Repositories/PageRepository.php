@@ -10,9 +10,9 @@ namespace App\Classes\Repositories;
 
 use App\Model\Page;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
-use App\Plugins\Pages\Model\PageOptions;
 use App\Plugins\Pages\Model\PageTypes;
+use App\Plugins\Pages\Model\PageOptions;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PageRepository.
@@ -37,19 +37,19 @@ class PageRepository extends BaseRepository
     }
 
     /**
-     * Return all pages with the bitmask of page standard
+     * Return all pages with the bitmask of page standard.
      *
      * @return $collection
      */
     public function allNormalPages()
-    {        
+    {
         $bitmask = PageTypes::TYPE_STANDARD;
 
         return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
     }
 
     /**
-     * Return all plugin pages with the bitmask of page standard
+     * Return all plugin pages with the bitmask of page standard.
      *
      * @return $collection
      */
@@ -71,11 +71,12 @@ class PageRepository extends BaseRepository
 
         return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
     }
+
     /**
-     * Return a page where the identifier matches the parameter
+     * Return a page where the identifier matches the parameter.
      *
      * @param string $string The identifier string to lookip
-     * 
+     *
      * @return $data
      */
     public function whereIdentifier(string $string)
