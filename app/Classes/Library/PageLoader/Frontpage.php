@@ -13,8 +13,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\ErrorController;
 use App\Classes\Repositories\MenuRepository;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Classes\Repositories\PageRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 /**
  * Class Frontpage.
@@ -128,8 +128,8 @@ class Frontpage
      * @param string $title Title of the error.
      * @param string $description Description of the error.
      * @param string $template The error blade view to be used.
-     * @param integer $response The response header that will be shown.
-     * 
+     * @param int $response The response header that will be shown.
+     *
      * @return Frontpage
      */
     public static function error(string $title, string $description, string $template, int $response)
@@ -144,7 +144,7 @@ class Frontpage
      *
      * @param string $identifier The unique name that identifies the page in DB.
      * @param int $response The response header that will be shown.
-     * 
+     *
      * @return Frontpage
      */
     public static function identify(string $identifier, int $response = 200)
@@ -156,8 +156,8 @@ class Frontpage
      * Build the webpage response on the framework using a page model.
      *
      * @param Page $page The page model object that has data available.
-     * @param integer $response The response header that will be shown.
-     * 
+     * @param int $response The response header that will be shown.
+     *
      * @return FrontPage
      */
     public static function build(Page $page, int $response = 200)

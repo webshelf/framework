@@ -10,8 +10,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use App\Classes\Repositories\MenuRepository;
-use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 
 /**
