@@ -1,5 +1,7 @@
 @extends('dashboard::frame')
 
+<?php use App\Plugins\Pages\Model; ?>
+
 @section('title')
     Pages
 @endsection
@@ -16,12 +18,17 @@
 
             <li class="item">
                 <a href="{{ route('admin.pages.index') }}" class="{{ Request::segment(3) == '' ? 'active' : null }}">
-                    <span class="title">Normal</span>
+                    <span class="title">Normal Pages</span>
                 </a>
             </li>
             <li class="item">
-                <a href="{{ route('admin.pages.special') }}" class="{{ Request::segment(3) == 'special' ? 'active' : null }}">
-                    <span class="title">Special</span>
+                <a href="{{ route('admin.pages.plugin') }}" class="{{ Request::segment(3) == 'plugin' ? 'active' : null }}">
+                    <span class="title">Plugin Pages</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="{{ route('admin.pages.error') }}" class="{{ Request::segment(3) == 'error' ? 'active' : null }}">
+                    <span class="title">Error Pages</span>
                 </a>
             </li>
 
@@ -59,8 +66,10 @@
                 <div class="console">
                     <ul class="list-unstyled">
                         <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($page->sitemap) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($page->enabled) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($page->hasOption('sitemap')) !!}</li>
+                        {{ debugVar($page->hasOption('sitemap')) }}
+                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($page->hasOption('public')) !!}</li>
+                        {{ debugVar($page->hasOption('public')) }}
                         <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
                         <li data-toggle="tooltip" data-placement="bottom" title="View Onlineedit">{!! css()->link->view(url($page->route())) !!}</li>
                     </ul>

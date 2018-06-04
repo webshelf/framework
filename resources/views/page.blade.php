@@ -2,6 +2,9 @@
 
 @section('content')
 
-    Page
+    <div class="container">
+        <p>{!!  $webpage->content() !!}</p>
+        {{ debugVar($webpage) }}
+    </div>
 
 @endsection

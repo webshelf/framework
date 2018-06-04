@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Plugins\Pages\Model\PageConstants;
+use App\Plugins\Pages\Model\PageOptions;
+use App\Plugins\Pages\Model\PageTypes;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * Class Pages.
@@ -29,11 +33,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property string $description
  * @property string $keywords
  * @property int $views
- * @property bool $sitemap
- * @property bool $enabled
- * @property string $plugin
- * @property bool $editable
- * @property bool $special
+ * @property int $type
+ * @property int $option
  * @property int $creator_id
  * @property int $editor_id
  *
@@ -45,6 +46,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  */
 class Page extends EloquentModel implements Linkable
 {
+    
     /*
      * Laravel Deleting.
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
@@ -220,5 +222,41 @@ class Page extends EloquentModel implements Linkable
     public function getKeywordsAttribute()
     {
         return $this->attributes['seo_keywords'];
+    }
+
+    /**
+     * Return the status if the page has the options specified
+     *
+     * @param PageOptions $options Values of the required options
+     * 
+     * @return boolean the returned condition
+     */
+    public function hasOption($options)
+    {
+        $options = explode('|', $options);
+
+        foreach ($options as $option) {            
+            $constant = constant(sprintf("%s::OPTION_%s", PageOptions::class, strtoupper($option)));
+
+            if ($this->option & $constant) {
+                return $constant;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return if the current page type matches the condition giving.
+     *
+     * @param PageTypes $type The type required for the condition
+     * 
+     * @return boolean The condition of the function.
+     */
+    public function isType(string $type)
+    {
+        $constant = constant(sprintf("%s::TYPE_%s", PageTypes::class, strtoupper($type)));
+
+        return $this->type & $constant;
     }
 }

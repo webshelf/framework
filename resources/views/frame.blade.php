@@ -1,6 +1,6 @@
 @extends("webpage::master")
 
-@section('webpage.title', sprintf("%s Landing v%s", framework()->package, framework()->version))
+{{-- @section('webpage.title', sprintf("%s Landing v%s", framework()->package, framework()->version)) --}}
 
 @section('webpage.content')
 
@@ -75,6 +75,8 @@
             </div>
         </div>
     </div>
+
+    @yield('content')
 </body>
 
 @endsection

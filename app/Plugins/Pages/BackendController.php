@@ -12,8 +12,13 @@ use App\Model\Link;
 use App\Model\Page;
 use App\Model\Activity;
 use Illuminate\Http\Request;
+
+use Illuminate\Validation\Rule;
+
 use App\Plugins\PluginEngine;
 use App\Classes\Repositories\PageRepository;
+use App\Plugins\Pages\Model\PageOptions;
+use App\Plugins\Pages\Model\PageTypes;
 
 /**
  * Class Controller.
@@ -42,9 +47,19 @@ class BackendController extends PluginEngine
         return $this->make('index')->with('pages', $this->repository->allNormalPages());
     }
 
-    public function indexSpecial()
+    public function indexPlugin()
     {
-        return $this->make('index')->with('pages', $this->repository->allSpecialPages());
+        return $this->make('index')->with('pages', $this->repository->allPluginPages());
+    }
+
+    /**
+     * List all the error pages for user editing such as 404, etc..
+     *
+     * @return Response $response The response giving from the method.
+     */
+    public function indexError()
+    {
+        return $this->make('index')->with('pages', $this->repository->allErrorPages());
     }
 
     /**
@@ -67,8 +82,6 @@ class BackendController extends PluginEngine
     public function store(Request $request, Page $page)
     {
         $this->validate($request, ['title' => 'required|unique:pages,seo_title,NULL,id,deleted_at,NULL|min:3|max:255']);
-
-        $page->editable = true;
 
         $this->save($request, $page);
 
@@ -111,7 +124,7 @@ class BackendController extends PluginEngine
     {
         $page = $repository->whereName($name);
 
-        $this->validate($request, ['title'=>'required|min:3|max:255|unique:pages,seo_title,'.$page->id.',id,deleted_at,NULL']);
+        $this->validate($request, ['title'=>'required|min:3|max:255', Rule::unique('pages')->ignore($page->id)]);
 
         $this->save($request, $page);
 
@@ -156,20 +169,26 @@ class BackendController extends PluginEngine
      */
     private function save(Request $request, Page $page)
     {
-        $page->seo_title = $request['title'];
+        // Standard for all pages.
+        $page->heading = $request['title'];
         $page->prefix = strtolower($request['prefix']);
         $page->creator_id = $request['creator'] ?: account()->id;
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
         $page->content = $request['content'];
-        $page->sitemap = true; //$request['sitemap'] ? true : false;
-        $page->enabled = true; //$request['enabled'] ? true : false;
 
-        // we should not allow important slugs to be changed.
-        if ($page->editable == true) {
-            $page->slug = str_slug($page->seo_title);
+        // if the page alreayd exists setup a basic option and type.
+        if (! $page->exists) {
+            $page->type = PageTypes::TYPE_STANDARD;
+            $page->option = PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP;
         }
 
+        // We do not allow framework slugs to change.
+        if (! $page->isType('framework')) {
+            $page->slug = str_slug($page->heading);
+        }
+
+        // save the page.
         $page->save();
     }
 }

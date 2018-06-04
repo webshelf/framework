@@ -11,6 +11,8 @@ namespace App\Classes\Repositories;
 use App\Model\Page;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use App\Plugins\Pages\Model\PageOptions;
+use App\Plugins\Pages\Model\PageTypes;
 
 /**
  * Class PageRepository.
@@ -34,16 +36,48 @@ class PageRepository extends BaseRepository
         $this->model = $model;
     }
 
+    /**
+     * Return all pages with the bitmask of page standard
+     *
+     * @return $collection
+     */
     public function allNormalPages()
-    {
-        return $this->model->where('special', '=', false)->get();
+    {        
+        $bitmask = PageTypes::TYPE_STANDARD;
+
+        return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
     }
 
-    public function allSpecialPages()
+    /**
+     * Return all plugin pages with the bitmask of page standard
+     *
+     * @return $collection
+     */
+    public function allPluginPages()
     {
-        return $this->model->where('special', '=', true)->get();
+        $bitmask = PageTypes::TYPE_PLUGIN;
+
+        return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
     }
 
+    /**
+     * Return all error pages with the bitmask of page error.
+     *
+     * @return $collection
+     */
+    public function allErrorPages()
+    {
+        $bitmask = PageTypes::TYPE_ERROR;
+
+        return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
+    }
+    /**
+     * Return a page where the identifier matches the parameter
+     *
+     * @param string $string The identifier string to lookip
+     * 
+     * @return $data
+     */
     public function whereIdentifier(string $string)
     {
         return $this->model->where('identifier', $string)->first();
@@ -118,7 +152,9 @@ class PageRepository extends BaseRepository
      */
     public function whereSitemap() : Collection
     {
-        return $this->model->where('sitemap', true)->where('enabled', true)->get();
+        $bitmask = PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP;
+
+        return $this->model->whereRaw('`option` & '.$bitmask.'='.$bitmask)->get();
     }
 
     /**

@@ -77,7 +77,7 @@ class Frontpage
      */
     private function isDisabledPage(Page $page)
     {
-        return $page->enabled == false;
+        return ! $page->hasOption('public');
     }
 
     /**

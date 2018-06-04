@@ -13,7 +13,9 @@
     |
     */
 
-    Route::get('/admin/pages/special')->uses('BackendController@indexSpecial')->name('admin.pages.special');
+    Route::get('/admin/pages/plugin')->uses('BackendController@indexPlugin')->name('admin.pages.plugin');
+    Route::get('/admin/pages/error')->uses('BackendController@indexError')->name('admin.pages.error');
+    
     Route::get('/admin/pages/normal')->uses('BackendController@index')->name('admin.pages.index');
 
     Route::resource('admin/pages', 'BackendController', ['as' => 'admin']);

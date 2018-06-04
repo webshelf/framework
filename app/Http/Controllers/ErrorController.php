@@ -12,6 +12,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Classes\Library\PageLoader\Frontpage;
 
+use App\Classes\Repositories\PageRepository;
+use App\Classes\Repositories\MenuRepository;
+
 /**
  * Class ErrorController.
  *
@@ -32,7 +35,9 @@ class ErrorController extends Controller
      */
     public static function unknown()
     {
-        return Frontpage::build('404 Page Not Found', '404 : Cannot find the page.', '404', Response::HTTP_NOT_FOUND);
+        $page = app(PageRepository::class)->whereIdentifier('error.404');
+        
+        return (new Frontpage($page, app(MenuRepository::class)->allParentsWithChildren()))->publish(null, false, Response::HTTP_NOT_FOUND);
     }
 
     /**
