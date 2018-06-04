@@ -12,13 +12,11 @@ use App\Model\Link;
 use App\Model\Page;
 use App\Model\Activity;
 use Illuminate\Http\Request;
-
-use Illuminate\Validation\Rule;
-
 use App\Plugins\PluginEngine;
-use App\Classes\Repositories\PageRepository;
-use App\Plugins\Pages\Model\PageOptions;
+use Illuminate\Validation\Rule;
 use App\Plugins\Pages\Model\PageTypes;
+use App\Plugins\Pages\Model\PageOptions;
+use App\Classes\Repositories\PageRepository;
 
 /**
  * Class Controller.

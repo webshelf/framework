@@ -10,10 +10,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use App\Classes\Library\PageLoader\Frontpage;
-
-use App\Classes\Repositories\PageRepository;
 use App\Classes\Repositories\MenuRepository;
+use App\Classes\Repositories\PageRepository;
+use App\Classes\Library\PageLoader\Frontpage;
 
 /**
  * Class ErrorController.

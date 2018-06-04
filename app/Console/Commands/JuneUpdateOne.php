@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Model\Page;
+use Illuminate\Console\Command;
 use App\Plugins\Pages\Model\PageTypes;
 use App\Plugins\Pages\Model\PageOptions;
 use App\Classes\Repositories\PageRepository;
@@ -25,9 +25,9 @@ class JuneUpdateOne extends Command
     protected $description = 'Upgrades to the new binary bitwise settings.';
 
     /**
-     * Pages Repository
+     * Pages Repository.
      *
-     * @return PageRepository 
+     * @return PageRepository
      */
     public $pages;
 
@@ -51,28 +51,21 @@ class JuneUpdateOne extends Command
     public function handle()
     {
         /** @var Page $page */
-        foreach ($this->pages->all() as $page)
-        {
+        foreach ($this->pages->all() as $page) {
             if ($page->slug == 'index') {
                 $page->identifier = 'index';
             }
-            
-            if (!$page->editable && !$page->special) {
+
+            if (! $page->editable && ! $page->special) {
                 $page->type = (PageTypes::TYPE_FRAMEWORK | PageTypes::TYPE_STANDARD);
                 $page->option = PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP;
-            }
-
-            else if ($page->plugin) {
+            } elseif ($page->plugin) {
                 $page->type = PageTypes::TYPE_PLUGIN;
                 $page->option = PageOptions::OPTION_DEFAULT;
-            }
-
-            else if ($page->identifier == 'newsletter.success') {
+            } elseif ($page->identifier == 'newsletter.success') {
                 $page->type = PageTypes::TYPE_PLUGIN;
                 $page->option = PageOptions::OPTION_PUBLIC;
-            }
-
-            else {
+            } else {
                 $page->type = PageTypes::TYPE_STANDARD;
                 if ($page->enabled) {
                     $page->option = PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP;
@@ -80,8 +73,8 @@ class JuneUpdateOne extends Command
             }
 
             $this->error($page->seo_title);
-            
-            $this->info("Type: " . $page->type . " Option: " . $page->option);
+
+            $this->info('Type: '.$page->type.' Option: '.$page->option);
 
             $page->save();
         }

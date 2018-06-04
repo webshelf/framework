@@ -1,11 +1,11 @@
 <?php
 
+use App\Model\Page;
+use App\Plugins\Pages\Model\PageTypes;
 use Illuminate\Support\Facades\Schema;
+use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Plugins\Pages\Model\PageOptions;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Model\Page;
 
 class JuneUpdateOne extends Migration
 {
@@ -16,11 +16,11 @@ class JuneUpdateOne extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function(Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             // $table->renameColumn('seo_title', 'title');
             // $table->renameColumn('seo_description', 'description');
             // $table->renameColumn('seo_keywords', 'keywords');
-            
+
             $table->binary('option')->after('views');
             $table->binary('type')->after('views');
 
@@ -34,8 +34,8 @@ class JuneUpdateOne extends Migration
         Artisan::call('upgrade:june_one');
 
         $page = app(Page::class);
-        $page->title = "404 Page Not Found";
-        $page->content = "<h1>404 - Page not found</h1>";
+        $page->title = '404 Page Not Found';
+        $page->content = '<h1>404 - Page not found</h1>';
         $page->identifier = 'error.404';
         $page->type = PageTypes::TYPE_ERROR;
         $page->option = PageOptions::OPTION_PUBLIC;
@@ -49,7 +49,7 @@ class JuneUpdateOne extends Migration
      */
     public function down()
     {
-        Schema::table('pages', function(Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             $table->dropColumn('type');
             $table->dropColumn('option');
         });
