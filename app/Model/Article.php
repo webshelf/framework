@@ -134,7 +134,7 @@ class Article extends BaseModel implements Linkable
     public function route()
     {
         /** @var Page $page */
-        $page = app(PageRepository::class)->wherePlugin('Articles');
+        $page = app(PageRepository::class)->whereidentifier('articles');
 
         if ($this->category) {
             return "{$page->route()}/{$this->getAttribute('slug')}";

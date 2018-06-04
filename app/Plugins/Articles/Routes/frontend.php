@@ -18,7 +18,7 @@ use App\Classes\Repositories\ArticleCategoryRepository;
     */
 
     /** @var Page $page */
-    $page = app(PageRepository::class)->wherePlugin('articles');
+    $page = app(PageRepository::class)->whereIdentifier('articles');
 
     // The articles page should route to the articles frontend controller handler.
     Route::get($page->route())->name('articles.index')->uses('App\Plugins\Articles\FrontendController@index');

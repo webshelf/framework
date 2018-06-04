@@ -28,16 +28,15 @@ use App\Classes\Repositories\MenuRepository;
 class ErrorController extends Controller
 {
     /**
-     * 404 Errors will use this method to return a valid view to the user.
+     * 404 Errors occur when a page can not be found, these are now dynamically
+     * generated on the dashboard and thus will be loaded from there.
      *
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
     public static function unknown()
     {
-        $page = app(PageRepository::class)->whereIdentifier('error.404');
-        
-        return (new Frontpage($page, app(MenuRepository::class)->allParentsWithChildren()))->publish(null, false, Response::HTTP_NOT_FOUND);
+        return Frontpage::identify('error.404', Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -49,7 +48,7 @@ class ErrorController extends Controller
      */
     public static function disabled()
     {
-        return Frontpage::build('Page Moved', 'Page is unable to be located.', 'disabled', Response::HTTP_NOT_FOUND);
+        return Frontpage::error('Page Moved', 'Page is unable to be located.', 'disabled', Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -60,7 +59,7 @@ class ErrorController extends Controller
      */
     public static function maintenance()
     {
-        return Frontpage::build('Maintenance Mode', 'The website is currently offline and will return shortly', 'maintenance', Response::HTTP_SERVICE_UNAVAILABLE);
+        return Frontpage::error('Maintenance Mode', 'The website is currently offline and will return shortly', 'maintenance', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
     /**
@@ -72,7 +71,7 @@ class ErrorController extends Controller
      */
     public static function database()
     {
-        return Frontpage::build('Database Connection Issue', 'Thee was a problem with the database and must be resolved.', 'database', Response::HTTP_INTERNAL_SERVER_ERROR);
+        return Frontpage::error('Database Connection Issue', 'Thee was a problem with the database and must be resolved.', 'database', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -84,6 +83,6 @@ class ErrorController extends Controller
      */
     public static function developer()
     {
-        return Frontpage::build('Development Error', 'The application was unable to continue', '500', Response::HTTP_INTERNAL_SERVER_ERROR);
+        return Frontpage::error('Development Error', 'The application was unable to continue', '500', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

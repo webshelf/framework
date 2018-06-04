@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 use App\Http\Controllers\ErrorController;
 use App\Classes\Repositories\MenuRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use App\Classes\Repositories\PageRepository;
 
 /**
  * Class Frontpage.
@@ -121,19 +122,57 @@ class Frontpage
     }
 
     /**
-     * @param string $title
-     * @param string $description
-     * @param string $template
-     * @param int $response
-     * @return Response
+     * Build a error webpage to be loaded into the framework, these are usually hardcoded
+     * as the symptons usually do not allow the webpage to load from the database.
+     *
+     * @param string $title Title of the error.
+     * @param string $description Description of the error.
+     * @param string $template The error blade view to be used.
+     * @param integer $response The response header that will be shown.
+     * 
+     * @return Frontpage
      */
-    public static function build(string $title, string $description, string $template, int $response)
+    public static function error(string $title, string $description, string $template, int $response)
     {
         $page = new Page(['seo_title' => $title, 'seo_description' => $description]);
 
-        $navigation = app(MenuRepository::class)->allParentsWithChildren();
+        return (new self($page, SELF::loadNavigationFromDB()))->publish("errors::{$template}", false, $response, true);
+    }
 
-        return (new self($page, $navigation))->publish("errors::{$template}", false, $response, true);
+    /**
+     * Load a webpage into the framework from DB, based on its identifier.
+     *
+     * @param string $identifier The unique name that identifies the page in DB.
+     * @param int $response The response header that will be shown.
+     * 
+     * @return Frontpage
+     */
+    public static function identify(string $identifier, int $response = 200)
+    {
+        return self::build(app(PageRepository::class)->whereIdentifier($identifier), $response);
+    }
+
+    /**
+     * Build the webpage response on the framework using a page model.
+     *
+     * @param Page $page The page model object that has data available.
+     * @param integer $response The response header that will be shown.
+     * 
+     * @return FrontPage
+     */
+    public static function build(Page $page, int $response = 200)
+    {
+        return (new self($page, SELF::loadNavigationFromDB()))->publish(null, false, $response);
+    }
+
+    /**
+     * Return the frontpage navigation that is generated from the database.
+     *
+     * @return collection Collection of menu models with thier relations
+     */
+    private static function loadNavigationFromDB()
+    {
+        return app(MenuRepository::class)->allParentsWithChildren();
     }
 
     /**

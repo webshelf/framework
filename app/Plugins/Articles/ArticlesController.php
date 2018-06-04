@@ -12,6 +12,8 @@ use App\Model\Page;
 use App\Plugins\PluginHandler;
 use App\Classes\Interfaces\Installable;
 use App\Classes\Repositories\PageRepository;
+use App\Plugins\Pages\Model\PageTypes;
+use App\Plugins\Pages\Model\PageOptions;
 
 /**
  * Class ArticleController.
@@ -44,14 +46,10 @@ class ArticlesController extends PluginHandler implements Installable
     {
         /** @var Page $page */
         $page = app(Page::class);
-
-        $page->seo_title = 'News';
-        $page->slug = 'news';
-        $page->enabled = true;
-        $page->sitemap = false;
-        $page->plugin = $this->pluginName();
-
-        // status of the operation
+        $page->title = 'articles';
+        $page->identifier = 'articles';
+        $page->type = PageTypes::TYPE_PLUGIN;
+        $page->option = PageOptions::OPTION_PUBLIC;
         return $page->save();
     }
 
@@ -65,10 +63,10 @@ class ArticlesController extends PluginHandler implements Installable
     public function uninstall()
     {
         /** @var PageRepository $repository */
-        $repository = app(PageRepository::class);
+        $pages = app(PageRepository::class);
 
         /** @var Page $page */
-        $page = $repository->wherePlugin($this->pluginName());
+        $page = $pages->whereIdentifier('articles');
 
         // status of the operation.
         return $page->forceDelete();

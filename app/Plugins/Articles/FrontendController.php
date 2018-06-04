@@ -44,7 +44,7 @@ class FrontendController extends PluginEngine implements Sitemap
     {
         $this->view = $view;
 
-        $this->currentPage = $pages->whereIdentifier('news');
+        $this->currentPage = $pages->whereIdentifier('articles');
     }
 
     /**

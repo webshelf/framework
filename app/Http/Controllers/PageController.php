@@ -60,21 +60,10 @@ class PageController extends Controller
      */
     public function index()
     {
-        $this->trackEvents($this->currentPage);
-
-        return (new Frontpage($this->currentPage, app(MenuRepository::class)->allParentsWithChildren()))->publish();
-    }
-
-    /**
-     * @param Page $page
-     * @return bool
-     */
-    private function trackEvents(Page $page)
-    {
-        event(new PageWasVisited($page));
+        event(new PageWasVisited($this->currentPage));
 
         event(new WebsiteWasVisited(request()));
 
-        return true;
+        return Frontpage::build($this->currentPage);
     }
 }
