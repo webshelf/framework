@@ -9,7 +9,7 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
-use App\Model\Article;
+use App\Plugins\Articles\Model\Article;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,15 +19,15 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class ArticleRepository extends BaseRepository
 {
-    /**
-     * @var Article|Builder|Collection
+ /**
+     * @var model|Builder|Collection
      */
     protected $model;
 
     /**
      * PageRepository constructor.
      *
-     * @param Article|Menu $model
+     * @param model|Menu $model
      */
     public function __construct(Article $model)
     {
@@ -35,23 +35,13 @@ class ArticleRepository extends BaseRepository
     }
 
     /**
-     * Load all the articles that will be displayed dont he front page based on the criteria of being an public post.
+     * Retrive all the available model for administration use
      *
-     * @ver 5.2.0
-     * @date 14/05/2018
-     * @return Builder|Collection
+     * @return Collection
      */
-    private function publicArticles()
+    public function all()
     {
-        return $this->model->where([
-            ['status', Article::STATUS_PUBLIC],
-            ['publish_date', '<=', DB::raw('NOW()')],
-            ['unpublish_date', '>=', DB::raw('NOW()')],
-        ])->orWhere([
-            ['status', Article::STATUS_PUBLIC],
-            ['publish_date', '<=', DB::raw('NOW()')],
-            ['unpublish_date', '=', null], ]
-        );
+        return $this->model->withoutGlobalScope('public')->all();
     }
 
     public function whereSitemappable()
@@ -67,7 +57,7 @@ class ArticleRepository extends BaseRepository
      */
     public function latest($count = 7)
     {
-        return $this->publicArticles()->take($count)->orderBy('created_at', 'desc')->get();
+        return $this->model->take($count)->orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -78,7 +68,7 @@ class ArticleRepository extends BaseRepository
      */
     public function mostViewed($count = 7)
     {
-        return $this->publicArticles()->orderBy('views', 'desc')->take($count)->get();
+        return $this->model->orderBy('views', 'desc')->take($count)->get();
     }
 
     /**
@@ -98,7 +88,7 @@ class ArticleRepository extends BaseRepository
      */
     public function viewable()
     {
-        return $this->model->where('status', Article::STATUS_PUBLIC)->get();
+        return $this->model->where('status', model::STATUS_PUBLIC)->get();
     }
 
     /**
@@ -107,7 +97,7 @@ class ArticleRepository extends BaseRepository
      */
     public function paginateLatest(int $count)
     {
-        return $this->publicArticles()->orderBy('created_at', 'desc')->simplePaginate($count);
+        return $this->model->orderBy('created_at', 'desc')->simplePaginate($count);
     }
 
     /**
@@ -117,7 +107,7 @@ class ArticleRepository extends BaseRepository
      */
     public function activeCategories()
     {
-        return app(ArticleCategoryRepository::class)->whereStatusActive();
+        return app(modelCategoryRepository::class)->whereStatusActive();
     }
 
     /**
@@ -126,9 +116,9 @@ class ArticleRepository extends BaseRepository
      * @param int $creator_id
      * @return int
      */
-    public function publishedArticlesCount(int $creator_id)
+    public function publishedmodelCount(int $creator_id)
     {
-        return $this->publicArticles()->where('creator_id', $creator_id)->count();
+        return $this->model->where('creator_id', $creator_id)->count();
     }
 
     /**
@@ -141,7 +131,7 @@ class ArticleRepository extends BaseRepository
 
     public function collectArticle(string $slug)
     {
-        return $this->publicArticles()->where('slug', $slug)->orderBy('created_at', 'desc')->first();
+        return $this->model->where('slug', $slug)->orderBy('created_at', 'desc')->first();
     }
 
     /**
@@ -151,22 +141,28 @@ class ArticleRepository extends BaseRepository
      */
     public function searchThenPaginate(string $text, int $paginate = 7)
     {
-        return $this->publicArticles()->search($text)->orderBy('created_at', 'desc')->paginate($paginate);
+        return $this->model->search($text)->orderBy('created_at', 'desc')->paginate($paginate);
     }
 
     public function whereCreatorId(int $creator_id, int $paginate = 5)
     {
-        return $this->publicArticles()
+        return $this->model
             ->orderBy('created_at', 'desc')
             ->where('creator_id', $creator_id)
             ->simplePaginate($paginate);
     }
 
-    public function whereCategoryId(int $id, int $paginate = 5)
+    /**
+     * Undocumented function
+     *
+     * @param string $string
+     * @param integer $paginate
+     * @return void
+     */
+    public function whereCategoryTitle(string $string, int $paginate = 5)
     {
-        return $this->publicArticles()
-            ->where('category_id', $id)
-            ->orderBy('created_at', 'desc')
-            ->simplePaginate($paginate);
+        return $this->model->whereHas('category', function($query) {
+            $query->where('title', 'general');
+        })->orderBy('created_at', 'desc')->simplePaginate($paginate);
     }
 }

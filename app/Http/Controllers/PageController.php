@@ -16,6 +16,7 @@ use App\Events\WebsiteWasVisited;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
+use App\Jobs\IncrementViews;
 
 /**
  * Class PageController.
@@ -60,9 +61,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        event(new PageWasVisited($this->currentPage));
-
-        event(new WebsiteWasVisited(request()));
+        IncrementViews::dispatch($this->currentPage);
 
         return Frontpage::build($this->currentPage);
     }

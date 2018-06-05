@@ -9,7 +9,7 @@
 namespace App\Plugins\Articles;
 
 use App\Model\Page;
-use App\Model\Article;
+use App\Plugins\Articles\Model\Article;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
@@ -19,6 +19,8 @@ use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
+use App\Jobs\IncrementViews;
+use App\Classes\Repositories\ArticleCategoryRepository;
 
 /**
  * Class UserController.
@@ -65,41 +67,56 @@ class FrontendController extends PluginEngine implements Sitemap
     {
         $this->view->share('articles', $repository->paginateLatest(7));
 
-        return $this->articleFrontPage();
+        return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
-    public function article(ArticleRepository $repository, string $slug)
+    /**
+     * Load a single article from the news plugin.
+     *
+     * @param ArticleRepository $repository
+     * @param string $category The category type of the url.
+     * @param string $slug The slug of the url article.
+     * 
+     * @return void
+     */
+    public function article(ArticleRepository $repository, string $category, string $slug)
     {
         /** @var Article $article */
         $article = $repository->collectArticle($slug);
 
-        $article->incrementView(1);
-
-        $article->save();
+        IncrementViews::dispatch($article);
 
         $this->currentPage->heading = $article->title;
 
         $this->view->share('articles', collect([0 => $article]));
 
-        return $this->articleFrontPage();
+        return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
+    /**
+     * Search for an array of articles based on title and content.
+     *
+     * @param ArticleRepository $repository
+     * @param Request $request
+     * 
+     * @return void
+     */
     public function search(ArticleRepository $repository, Request $request)
     {
         $this->view->share('articles', $repository->searchThenPaginate($request->get('search')));
 
         $this->currentPage->heading = 'Article Search';
 
-        return $this->articleFrontPage();
+        return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
-    public function category(ArticleRepository $repository, int $id)
+    public function category(ArticleRepository $repository, string $string)
     {
-        $this->view->share('articles', $repository->whereCategoryId($id));
+        $this->view->share('articles', $repository->whereCategoryTitle($string));
 
         $this->currentPage->heading = 'Browse Categories';
 
-        return $this->articleFrontPage();
+        return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
     public function creator(ArticleRepository $repository, int $id)
@@ -108,14 +125,8 @@ class FrontendController extends PluginEngine implements Sitemap
 
         $this->currentPage->heading = 'Browse Creators';
 
-        return $this->articleFrontPage();
+        return Frontpage::build($this->currentPage, 200, 'articles');
     }
-
-    private function articleFrontPage()
-    {
-        return (new Frontpage($this->currentPage, $this->navigationData()))->publish('articles', false, 200);
-    }
-
     /**
      * The sitemap function allows plugins to quickly and effectively
      * show their content for search engines in a modular way.

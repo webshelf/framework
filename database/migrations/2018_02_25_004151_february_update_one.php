@@ -2,7 +2,7 @@
 
 use App\Model\Plugin;
 use App\Model\Setting;
-use App\Model\ArticleCategory;
+use App\Plugins\Articles\Model\Categories;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;

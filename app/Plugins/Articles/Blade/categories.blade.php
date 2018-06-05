@@ -30,7 +30,7 @@
 
     <div class="webshelf-table">
 
-        <?php /** @var \App\Model\ArticleCategory $category */ ?>
+        <?php /** @var App\Mo $category */ ?>
 
         @foreach($categories as $category)
             <div class="row">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Plugins\Articles\Model;
 
 use Carbon\Carbon;
 use App\Classes\ReadTime;
@@ -9,6 +9,9 @@ use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Plugins\Articles\Model\PublicScope;
+use App\Model\BaseModel;
+use App\Plugins\Articles\Model\Categories;
 
 /**
  * Class Article.
@@ -23,7 +26,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $creator_id
  * @property bool $status
  *
- * @property ArticleCategory $category
+ * @property Categories $category
  *
  * @property Account $creator
  * @property Account $editor
@@ -97,11 +100,11 @@ class Article extends BaseModel implements Linkable
     protected $auditExclude = [];
 
     /**
-     * @return ArticleCategory|HasOne
+     * @return Categories|HasOne
      */
     public function category()
     {
-        return $this->hasOne(ArticleCategory::class, 'id', 'category_id');
+        return $this->hasOne(Categories::class, 'id', 'category_id');
     }
 
     public function creator()
@@ -128,8 +131,9 @@ class Article extends BaseModel implements Linkable
 
     /**
      * The url that is used to view this model.
+     * The category will be prefixed if one exists.
      *
-     * @return string
+     * @return string The string route that was created.
      */
     public function route()
     {
@@ -137,7 +141,9 @@ class Article extends BaseModel implements Linkable
         $page = app(PageRepository::class)->whereidentifier('articles');
 
         if ($this->category) {
-            return "{$page->route()}/{$this->getAttribute('slug')}";
+            $category = str_slug($this->category->title);
+
+            return "{$page->route()}/{$category}/{$this->getAttribute('slug')}";
         }
 
         return "{$page->route()}/{$this->getAttribute('slug')}";

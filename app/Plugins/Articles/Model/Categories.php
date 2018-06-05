@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Model;
+namespace App\Plugins\Articles\Model;
 
 use Carbon\Carbon;
+use App\Model\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class ArticleCategory extends BaseModel
+class Categories extends BaseModel
 {
     /*
      * Laravel Deleting.

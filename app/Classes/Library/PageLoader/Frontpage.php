@@ -118,6 +118,11 @@ class Frontpage
             $template = "website::plugin.{$this->model->slug}";
         }
 
+        // if view does not exist try load from plugin?
+        // if (! view()->exists("{$template}")) {
+        //     $template = "plugins::articles.blade.template.index";
+        // }
+
         return $template;
     }
 
@@ -160,9 +165,9 @@ class Frontpage
      * 
      * @return FrontPage
      */
-    public static function build(Page $page, int $response = 200)
+    public static function build(Page $page, int $response = 200, string $template = null, bool $override = false)
     {
-        return (new self($page, SELF::loadNavigationFromDB()))->publish(null, false, $response);
+        return (new self($page, SELF::loadNavigationFromDB()))->publish($template, $override, $response);
     }
 
     /**
