@@ -90,8 +90,6 @@ class BackendController extends PluginEngine
 
         $this->save($request, $menu);
 
-        account()->record(Activity::$created, $menu);
-
         return redirect()->route('admin.menus.index');
     }
 
@@ -134,8 +132,6 @@ class BackendController extends PluginEngine
 
         $this->save($request, $menu);
 
-        account()->record(Activity::$updated, $menu);
-
         return redirect(route('admin.menus.index'));
     }
 
@@ -158,8 +154,6 @@ class BackendController extends PluginEngine
         }
 
         $menu->link->delete();
-
-        account()->record(Activity::$deleted, $menu);
 
         $menu->delete();
 

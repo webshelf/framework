@@ -83,8 +83,6 @@ class BackendController extends PluginEngine
 
         $this->save($request, $page);
 
-        account()->record(Activity::$created, $page);
-
         return redirect()->route('admin.pages.index');
     }
 
@@ -126,8 +124,6 @@ class BackendController extends PluginEngine
 
         $this->save($request, $page);
 
-        account()->record(Activity::$updated, $page);
-
         return redirect()->route('admin.pages.index');
     }
 
@@ -153,7 +149,6 @@ class BackendController extends PluginEngine
         // Remove the page and log the disconnection.
         if ($page->editable && ! $page->plugin) {
             $repository->whereName($slug)->delete();
-            account()->record(Activity::$deleted, $page);
         }
 
         return redirect()->route('admin.pages.index');

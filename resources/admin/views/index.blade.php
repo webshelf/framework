@@ -55,12 +55,12 @@
                         <div class="row">
 
                                 <span class="avatar">
-                                    <img src="{{ $activity->account->makeGravatarImage() }}"alt="{{ $activity->account->fullName() }} Image">
+                                    <img src="{{ $activity->causer->makeGravatarImage() }}"alt="{{ $activity->causer->fullName() }} Image">
                                 </span>
 
                                 <div class="event">
-                                    <div class="title">{{ $activity->account->fullName() }}</span> {{ $activity->eventName() }} {{ ucfirst($activity->model->getTable()) }}</div>
-                                    <div class="description">{{ $activity->model->name() }}</div>
+                                    <div class="title">{{ $activity->causer->fullName() }}</span> {{ $activity->description }} {{ ucfirst($activity->subject->table) }}</div>
+                                    <div class="description">Activity Logged @ {{ $activity->created_at }}</div>
                                 </div>
         
                                 <div class="details">

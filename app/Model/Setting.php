@@ -9,23 +9,34 @@
 namespace App\Model;
 
 use App\Model\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Setting.
  */
 class Setting extends Model
 {
+    /*
+     * Log users activity on this model.
+     * 
+     * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
+     */
+    use LogsActivity;
+
     protected $table = 'settings';
 
     protected $dates = ['updated_at'];
 
     /**
-     * ==========================================================.
-     *
-     *   GET THE ATTRIBUTES OF THE MODEL
-     *
-     * ==========================================================
+     * The activity logging strings to be used.
+     * 
+     * @return string
      */
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "{$eventName} the setting for {$this->key}";
+    }
+
     public function id()
     {
         return $this->getAttribute('id');

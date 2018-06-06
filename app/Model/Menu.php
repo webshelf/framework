@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use App\Model\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Menus.
@@ -48,6 +49,13 @@ class Menu extends Model implements Linker
      */
     use Searchable;
 
+    /*
+     * Log users activity on this model.
+     * 
+     * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
+     */
+    use LogsActivity;
+
     /**
      * Status if current menu.
      *
@@ -82,6 +90,16 @@ class Menu extends Model implements Linker
      * @var array
      */
     protected $dates = ['updated_at', 'created_at', 'deleted_at'];
+
+    /**
+     * The activity logging strings to be used.
+     * 
+     * @return string
+     */
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "{$eventName} a menu named {$this->title}";
+    }
 
     /**
      * Return the page that this menu has.

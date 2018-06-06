@@ -12,6 +12,7 @@ use App\Model\Plugin;
 use App\Classes\Library\Services\Facebook;
 use App\Classes\Repositories\PluginRepository;
 use App\Classes\Repositories\ActivityRepository;
+use App\Model\Activity;
 
 /**
  * Class AdminController.
@@ -34,7 +35,7 @@ class DashboardController extends Controller
 
         $plugin->handler->version();
 
-        $activities = $repository->paginate(7);
+        $activities = Activity::simplePaginate(20);
 
         return view('dashboard::index')->with(['activities'=>$activities]);
     }

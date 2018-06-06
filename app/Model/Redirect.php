@@ -5,6 +5,7 @@ namespace App\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Redirect.
@@ -27,6 +28,13 @@ class Redirect extends Model
      */
     use SoftDeletes;
 
+    /*
+     * Log users activity on this model.
+     * 
+     * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
+     */
+    use LogsActivity;
+
     /**
      * The table associated with the model.
      *
@@ -40,6 +48,16 @@ class Redirect extends Model
      * @var array
      */
     protected $fillable = ['from', 'to'];
+
+    /**
+     * The activity logging strings to be used.
+     * 
+     * @return string
+     */
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "{$eventName} a redirect to {$this->toPage->seo_title}";
+    }
 
     /**
      * The table date columns, casted to Carbon.

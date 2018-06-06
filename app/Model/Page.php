@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Model\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Pages.
@@ -46,6 +47,7 @@ class Page extends Model implements Linkable
 {
     /*
      * Laravel Deleting.
+     * 
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
@@ -55,6 +57,13 @@ class Page extends Model implements Linkable
      * @ https://laravel.com/docs/5.3/scout#installation
      */
     use Searchable;
+
+    /*
+     * Log users activity on this model.
+     * 
+     * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
+     */
+    use LogsActivity;
 
     /**
      * The table associated with the model.
@@ -78,22 +87,13 @@ class Page extends Model implements Linkable
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Attributes to exclude from the Audit.
-     *
-     * @var array
+     * The activity logging strings to be used.
+     * 
+     * @return string
      */
-    protected $auditExclude = [
-        'views',
-    ];
-
-    /**
-     * Increment the view count of the page.
-     *
-     * @return int
-     */
-    public function incrementViews()
+    public function getDescriptionForEvent(string $eventName): string
     {
-        return $this->views = $this->views + 1;
+        return "{$eventName} a page titled {$this->seo_title}";
     }
 
     /**
@@ -170,7 +170,7 @@ class Page extends Model implements Linkable
         return "{$this->slug}";
     }
 
-    /**
+        /**
      * The name of the current model object.
      *
      * @deprecated
