@@ -10,7 +10,7 @@ use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Plugins\Articles\Model\PublicScope;
-use App\Model\BaseModel;
+use App\Model\Model;
 use App\Plugins\Articles\Model\Categories;
 
 /**
@@ -37,7 +37,7 @@ use App\Plugins\Articles\Model\Categories;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Article extends BaseModel implements Linkable
+class Article extends Model implements Linkable
 {
     /*
      * Laravel Deleting.

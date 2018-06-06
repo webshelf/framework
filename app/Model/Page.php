@@ -11,7 +11,7 @@ use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Model\Model;
 
 /**
  * Class Pages.
@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @return Page|Collection|Builder
  */
-class Page extends EloquentModel implements Linkable
+class Page extends Model implements Linkable
 {
     /*
      * Laravel Deleting.

@@ -172,7 +172,7 @@ class BackendController extends PluginEngine
 
         $category = new ArticleCategory;
         $category->title = $request['name'];
-        $category->auditSave();
+        $category->save();
 
         account()->record(Activity::$created, $category);
 
@@ -231,6 +231,6 @@ class BackendController extends PluginEngine
         $article->setAttribute('unpublish_date', $unpublish_date);
 
         // save the article as an audit.
-        return $article->auditSave();
+        return $article->save();
     }
 }

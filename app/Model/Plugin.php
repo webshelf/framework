@@ -9,7 +9,7 @@
 namespace App\Model;
 
 use App\Plugins\PluginHandler;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Model\Model;
 
 /**
  * Class Plugins.
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * @property Plugin $options
  */
-class Plugin extends EloquentModel
+class Plugin extends Model
 {
     /**
      * The table associated with the model.

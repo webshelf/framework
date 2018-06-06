@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Model\Model;
 
 /**
  * Class Redirect.
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Redirect extends EloquentModel
+class Redirect extends Model
 {
     /*
      * Laravel Deleting.

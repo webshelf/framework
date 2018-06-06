@@ -9,7 +9,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * Class Request
  */
-class Agent extends EloquentModel
+class Agent extends Model
 {
     /**
      * The table associated with the model.

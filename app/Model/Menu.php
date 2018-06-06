@@ -8,7 +8,7 @@ use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Model\Model;
 
 /**
  * Class Menus.
@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Menu extends EloquentModel implements Linker
+class Menu extends Model implements Linker
 {
     /*
      * Laravel Deleting.

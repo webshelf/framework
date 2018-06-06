@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  *
  * Class Migrations.
  */
-class Update extends EloquentModel
+class Update extends Model
 {
     /**
      * The table associated with the model.

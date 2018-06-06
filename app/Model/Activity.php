@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Classes\Interfaces\Linker;
 use App\Classes\Interfaces\Linkable;
-use Illuminate\Database\Eloquent\Model;
+use App\Model\Model;
 
 /**
  * Class Activity.

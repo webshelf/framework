@@ -5,7 +5,7 @@ namespace App\Model;
 use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
 use App\Classes\Interfaces\Linkable;
-use Illuminate\Database\Eloquent\Model;
+use App\Model\Model;
 
 /**
  * Class Link.
