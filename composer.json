@@ -14,6 +14,7 @@
         "laravel/tinker": "^1.0",
         "league/glide": "^1.2",
         "owen-it/laravel-auditing": "^7.0",
+        "sentry/sentry-laravel": "^0.9.0",
         "spatie/laravel-activitylog": "2.5.1",
         "yab/laravel-scout-mysql-driver": "^2.0"
     },
