@@ -66,16 +66,6 @@ class FebruaryUpdateOne extends Migration
         });
 
         /**
-         * Store a General category.
-         */
-        $category = new ArticleCategory;
-        $category->setAttribute('title', 'General');
-        $category->setAttribute('editor_id', 1);
-        $category->setAttribute('creator_id', 1);
-        $category->touch();
-        $category->save();
-
-        /**
          * Store youtube url.
          */
         $setting = new Setting;
