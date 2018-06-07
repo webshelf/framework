@@ -20,21 +20,6 @@ class CreateRolesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        $role = new Role;
-        $role->setTitle('Super User');
-        $role->setDescription('System-wide access to engine properties.');
-        $role->save();
-
-        $role = new Role;
-        $role->setTitle('Administrator');
-        $role->setDescription('This is the top level user with full application control.');
-        $role->save();
-
-        $role = new Role;
-        $role->setTitle('Content Creator');
-        $role->setDescription('This user can manage content, but not settings.');
-        $role->save();
     }
 
     /**
