@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use App\Model\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Model\Traits\LogsActivity;
 
 /**
  * Class Menus.

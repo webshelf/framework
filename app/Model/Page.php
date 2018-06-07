@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Model\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Model\Traits\LogsActivity;
 
 /**
  * Class Pages.

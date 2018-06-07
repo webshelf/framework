@@ -5,7 +5,7 @@ namespace App\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Model\Traits\LogsActivity;
 
 /**
  * Class Redirect.

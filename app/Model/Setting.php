@@ -9,7 +9,7 @@
 namespace App\Model;
 
 use App\Model\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Model\Traits\LogsActivity;
 
 /**
  * Class Setting.
