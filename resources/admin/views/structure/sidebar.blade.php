@@ -21,46 +21,36 @@
                 </a>
 
             </li>
-
-            {{--<li class="heading">--}}
-
-                {{--<h5>Plugins</h5>--}}
-
-            {{--</li>--}}
-
+            
             @foreach(plugins()->viewable() as $plugin)
 
                 <li>
-                        <a href="{{ $plugin->adminUrl() }}" class="{{ $breadcrumbs->contain($plugin->name(), 2) ? 'active' : 'inactive' }}">
+                    <a href="{{ $plugin->adminUrl() }}" class="{{ $breadcrumbs->contain($plugin->name(), 2) ? 'active' : 'inactive' }}">
 
-                            <i class="nav-icon fa {{ $plugin->icon() }}" aria-hidden="true"></i>
+                        <i class="nav-icon fa {{ $plugin->icon() }}" aria-hidden="true"></i>
 
-                            <span class="nav-title">{{ ucfirst($plugin->name()) }}</span>
+                        <span class="nav-title">{{ ucfirst($plugin->name()) }}</span>
 
-                        </a>
+                    </a>
                 </li>
 
             @endforeach
 
-            {{--<li class="heading">--}}
-
-                {{--<h5>Modules</h5>--}}
-
-            {{--</li>--}}
-
             @foreach(config('modules') as $module)
 
+                @if ($module['role'] == '' || account()->hasPermissionTo($module['role']))
                 <li>
 
-                        <a href="{{ url($module['url']) }}" class="{{ $breadcrumbs->contain($module['title'], 2) ? 'active' : 'inactive' }}">
+                    <a href="{{ url($module['url']) }}" class="{{ $breadcrumbs->contain($module['title'], 2) ? 'active' : 'inactive' }}">
 
-                            <i class="nav-icon fa {{ $module['icon'] }}" aria-hidden="true"></i>
+                        <i class="nav-icon fa {{ $module['icon'] }}" aria-hidden="true"></i>
 
-                            <span class="nav-title">{{ $module['title'] }}</span>
+                        <span class="nav-title">{{ $module['title'] }}</span>
 
-                        </a>
+                    </a>
 
                 </li>
+                @endif
 
             @endforeach
 

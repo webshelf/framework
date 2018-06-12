@@ -57,6 +57,17 @@ class Controller extends ModuleEngine
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param string $id
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     */
+    public function edit(int $id)
+    {
+        return $this->make('form')->with(['account' => $this->accounts->whereID($id), 'roles' => $this->roles->all()]);
+    }
+
+    /**
      * Form to create a new account.
      *
      * @param RoleRepository $roleRepository
@@ -64,7 +75,7 @@ class Controller extends ModuleEngine
      */
     public function create(RoleRepository $roleRepository)
     {
-        return $this->make('create')->with('groups', $roleRepository->get());
+        return $this->make('form')->with(['account' => new Account, 'roles' => $this->roles->all()]);
     }
 
     /**

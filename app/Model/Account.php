@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class Accounts.
@@ -38,7 +39,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $surname
  * @property string $address
  * @property string $number
- * @property int $role_id
  * @property int $status
  * @property int $verified
  * @property int $login_count
@@ -47,9 +47,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Account extends Authenticatable
 {
     /*
-     * Soft Delete trait
+     * Laravel Deleting.
+     * 
+     * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
+
+    /**
+     * Spatie Roles and Permissions.
+     * 
+     * @ https://github.com/spatie/laravel-permission
+     */
+    use HasRoles;
 
     /**
      * The table associated with the model.
@@ -83,22 +92,20 @@ class Account extends Authenticatable
     }
 
     /**
-     * Check if the user has the role.
-     * @info Role::groups.
-     *
-     * @param int $role_id
-     * @param bool $rule
-     * @return bool
-     */
-    public function hasRole(int $role_id, bool $rule = true)
-    {
-        return ($this->role->id() <= $role_id) == $rule;
-    }
-
-    /**
+     * @deprecated 5.7
      * @return string
      */
     public function makeGravatarImage()
+    {
+        return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->email)));
+    }
+
+    /**
+     * Return the url to link the users email to a profile picture.
+     *
+     * @return string
+     */
+    public function gravatarUrl()
     {
         return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->email)));
     }
@@ -117,14 +124,6 @@ class Account extends Authenticatable
     public function menus()
     {
         return $this->hasMany(Menu::class, 'creator_id', 'id');
-    }
-
-    /**
-     * @return Role|BelongsTo
-     */
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'role_id');
     }
 
     /**
@@ -169,17 +168,5 @@ class Account extends Authenticatable
     public static function resolveId()
     {
         return auth()->check() ? auth()->user()->getAuthIdentifier() : null;
-    }
-
-    /**
-     * Record an activity action the user has taken on the backend.
-     *
-     * @param int $activity_event
-     * @param Model $model
-     * @return mixed
-     */
-    public function record(int $activity_event, Model $model)
-    {
-        return app(Activity::class)->log($activity_event, $model, $this);
     }
 }

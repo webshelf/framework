@@ -29,6 +29,8 @@ class Controller extends ModuleEngine
     public function __construct(SettingsRepository $settings)
     {
         $this->settings = $settings;
+
+        $this->middleware(['permission:configure']);
     }
 
     /**

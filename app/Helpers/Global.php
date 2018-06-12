@@ -118,3 +118,20 @@ use Illuminate\Support\Debug\Dumper;
             (new Dumper)->dump($x);
         }
     }
+
+    /**
+     * Easier font awesome icon handling, with conditional statemnet
+     *
+     * @param string $icon The icon to use if the condition is true or no condition is giving.
+     * @param string $opposite The icon to use if the condition is false.
+     * @param boolean $condition The condition to check on icon to be used.
+     * @return string
+     */
+    function useIcon(string $icon, string $opposite = "", bool $condition = true) {
+
+        if ($condition == false) {
+            return "<i class='fas fa-{$opposite}'></i>";
+        }
+
+        return "<i class='fas fa-{$icon}'></i>";
+    }

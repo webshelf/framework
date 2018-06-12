@@ -15,30 +15,36 @@ return [
         'title' => 'Updates',
         'icon'  => 'fa fa-history',
         'url'   => 'admin/updates',
+        'role'  => '',
     ],
 
     [
         'title' => 'Sitemap',
         'icon'  => 'fa fa-sitemap',
         'url'   => 'admin/sitemap',
+        'role'  => '',
+    ],
+    
+    [
+        'title' => 'Accounts',
+        'icon'  => 'fa fa-users',
+        'url'   => 'admin/accounts',
+        'role'  => 'configure',
     ],
 
     [
         'title' => 'Settings',
         'icon'  => 'fa fa-cogs',
         'url'   => 'admin/settings',
+        'role'  => 'configure',
     ],
 
-//    [
-//        'title' => 'Accounts',
-//        'icon'  => 'fa fa-users',
-//        'url'   => 'admin/accounts',
-//    ],
 
     [
         'title'   => 'Filemanager',
         'icon'    => 'fa fa-microchip',
         'url'     => 'admin/filemanager',
+        'role'    => '',
     ],
 
 ];

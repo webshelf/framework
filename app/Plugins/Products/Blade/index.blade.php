@@ -29,13 +29,23 @@
                 <div class="console">
                     <ul class="list-unstyled">
 
-                        @if($product->required == false)
-                            @if ($product->enabled)
-                                <li><a href="{{ route('products.uninstall', $product->name) }}">Uninstall</a></li>
+                        @role('developer')
+                            @if($product->required == false)
+                                @if ($product->enabled)
+                                    <li><a href="{{ route('products.uninstall', $product->name) }}">Uninstall</a></li>
+                                @else
+                                    <li><a href="{{ route('products.install', $product->name) }}">Install</a></li>
+                                @endif
                             @else
-                                <li><a href="{{ route('products.install', $product->name) }}">Install</a></li>
+                                <li>Framework Requirement</li>
                             @endif
-                        @endif
+                        @else
+                            @if ($product->enabled)
+                                <li>Currently Active</li>
+                            @else
+                                <li>Disabled</li>
+                            @endif
+                        @endrole
 
                         {{--<li>{!! css()->status->installed($product->isEnabled()) !!}</li>--}}
                         {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}

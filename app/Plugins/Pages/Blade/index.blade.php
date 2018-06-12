@@ -3,11 +3,11 @@
 <?php use App\Plugins\Pages\Model; ?>
 
 @section('title')
-    Pages
+    Website Pages
 @endsection
 
 @section('information')
-    View the pages that your website currently holds along with the status of each.
+    A Page represents the information that will be shown on the url link when visited, these can be attached to the navigation through the menus modules.
 @endsection
 
 @section('content')
@@ -54,12 +54,16 @@
         @foreach($pages as $page)
             <div class="row">
 
+                <div class="avatar">
+                    <img data-toggle="tooltip" data-placement="left" title="Updated by {{ $page->editor->fullName() }}" src="{{ $page->editor->gravatarUrl() }}" alt="">
+                </div>
+
                 <div class="details">
                     <div class="title">
                         <a href="{{ route('admin.pages.edit', ["name"=>$page->slug]) }}">{{ $page->seo_title }}</a>
                     </div>
                     <div class="website">
-                        {{ $page->route() }}
+                        Updated {{ $page->updated_at->diffForHumans() }}
                     </div>
                 </div>
 
@@ -67,20 +71,18 @@
                     <ul class="list-unstyled">
                         <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
                         <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($page->hasOption('sitemap')) !!}</li>
-                        {{ debugVar($page->hasOption('sitemap')) }}
                         <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($page->hasOption('public')) !!}</li>
-                        {{ debugVar($page->hasOption('public')) }}
                         <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="View Onlineedit">{!! css()->link->view(url($page->route())) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="View Online">{!! css()->link->view(url($page->route())) !!}</li>
                     </ul>
                 </div>
 
                 <div class="stats">
                     <div class="views">
-                        <i class="fa fa-eye" aria-hidden="true"></i> {{ $page->views }}
+                        <i class="fa fa-eye" aria-hidden="true"></i> Total Views: {{ $page->views }}
                     </div>
                     <div class="timestamp">
-                        updated {{ $page->updated_at->diffForHumans() }}
+                        {{ url($page->route()) }}
                     </div>
                 </div>
             </div>

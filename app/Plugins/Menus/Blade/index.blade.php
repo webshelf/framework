@@ -1,11 +1,11 @@
 @extends('dashboard::frame')
 
 @section('title')
-    Menus
+    Website Menus
 @endsection
 
 @section('information')
-    Menus are what allow users to click through your web pages.
+    The navigation bar is made up from a collection of menus, this module controls the layout and structure of that navigation bar.
 @endsection
 
 @section('content')

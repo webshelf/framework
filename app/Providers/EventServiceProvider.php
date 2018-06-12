@@ -13,9 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\PageWasVisited' => [
-            'App\Listeners\IncrementPageView',
-        ],
+        'App\Events\AccountAccessed' => [
+            'App\Listeners\LogAccountDetails'
+        ]
     ];
 
     /**

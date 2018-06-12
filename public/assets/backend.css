@@ -16900,6 +16900,10 @@ header {
   font-size: 14px;
 }
 
+.webshelf-table {
+  color: #2e2e2e;
+}
+
 .webshelf-table .row {
   margin: 0;
   display: -webkit-box;
@@ -16907,6 +16911,21 @@ header {
   display: flex;
   padding: 20px 16px;
   border-bottom: 1px solid #eee;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.webshelf-table .row .avatar {
+  float: left;
+}
+
+.webshelf-table .row .avatar img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 1px solid #f5f5f5;
 }
 
 .webshelf-table .row .title {
@@ -16951,7 +16970,26 @@ header {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  color: #e8e8e8;
+  color: grey;
+}
+
+.webshelf-table .row .console ul li a {
+  color: #2e2e2e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.webshelf-table .row .console ul li a:hover {
+  color: purple;
+  text-decoration: none;
 }
 
 .webshelf-table .row .stats {
@@ -17223,6 +17261,21 @@ header {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.form-group small ul {
+  list-style: decimal;
+  padding-left: 20px;
+}
+
+.resource-detail-header {
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  color: #2e2e2e;
+  line-height: 34px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .breadcrumbs-container {

@@ -5,7 +5,7 @@
     <div class="dashboard">
             <div class="panel" id="welcome">
 
-                <h3 class="title">Welcome {{ account()->fullName() }}</h3>
+                <h3 class="title">Welcome {{ account()->fullName() }} ({{ ucfirst(account()->getRoleNames()->first()) }})</h3>
         
                 <p>Welcome back to Webshelf CMS, Your last sign in was</p>
         

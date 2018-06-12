@@ -2,30 +2,35 @@
 
 namespace App\Events;
 
-use App\Model\Page;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\Model\Account;
 
-class PageWasVisited
+class AccountAccessed
 {
+    /**
+     * Traits for the event.
+     */
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var Page
+     * @var Account
      */
-    public $page;
+    public $account;
 
     /**
      * Create a new event instance.
      *
-     * @param Page $page
+     * @return void
      */
-    public function __construct(Page $page)
+    public function __construct(Account $account)
     {
-        $this->page = $page;
+        $this->account = $account;
     }
 
     /**

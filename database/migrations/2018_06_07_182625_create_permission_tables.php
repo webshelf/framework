@@ -5,6 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Model\Permission;
 use App\Model\Role;
+use App\Model\Account;
+use Illuminate\Support\Facades\Artisan;
 
 class CreatePermissionTables extends Migration
 {
@@ -19,8 +21,6 @@ class CreatePermissionTables extends Migration
         Schema::dropIfExists('roles');
         Schema::dropIfExists('permissions');
 
-
-
         // create new tables.
         $tableNames = config('permission.table_names');
 
@@ -28,15 +28,17 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
-            $table->string('description')->default('No description available.');
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('title');
             $table->string('guard_name');
-            $table->string('description')->default('No description available.');
+            $table->text('description');
             $table->timestamps();
         });
 
@@ -87,44 +89,50 @@ class CreatePermissionTables extends Migration
         // Reset cached roles and permissions
         app()['cache']->forget('spatie.permission.cache');
 
-        // create permissions
-        Permission::create(['name' => 'view', 'description' => 'Permission to view content on the platform.']);
-        Permission::create(['name' => 'update', 'description' => 'Permission to edit or update content on the platform.']);
-        Permission::create(['name' => 'delete', 'description' => 'Permission to delete content on the platform.']);
-        Permission::create(['name' => 'create', 'description' => 'Permission to create new content on the platform.']);
-        Permission::create(['name' => 'configure', 'description' => 'Permission to configure the settings on the platform']);
-        Permission::create(['name' => 'debug', 'description' => 'Permission to use the platform debug tools and properties available.']);
+        /*
+        |--------------------------------------------------------------------------
+        | Create the permissions for the platform.
+        |--------------------------------------------------------------------------
+        */
+        Permission::create(['name' => 'debug',     'title' => 'Debug', 'description' => 'Permission to use the platform debug tools and properties available.']);
+        Permission::create(['name' => 'configure', 'title' => 'Configure', 'description' => 'Permission to configure the settings on the platform']);
 
-        // create roles and assign created permissions
-
-        // Role for developer
-        $developer = Role::create(['name' => 'developer', 'description' => 'System wide access to engine properties and tools.']);
-        // Permission for developer.
+        /*
+        |--------------------------------------------------------------------------
+        | Create the roles for the platform
+        |--------------------------------------------------------------------------
+        */
+        
+        $developer     = Role::create(['name' => 'developer',     'title' => 'Developer',       'description' => 'System wide access to engine properties, debugging and tools.']);
+        $administrator = Role::create(['name' => 'administrator', 'title' => 'Administrator',   'description' => 'Administrators have super user access to the entire site.']);
+        $manager       = Role::create(['name' => 'manager',       'title' => 'Content Manager', 'description' => 'Content Managers have the ability to manage all content on the platform without access to settings.']);
+        $user          = Role::create(['name' => 'user',          'title' => 'Registered User', 'description' => 'Registered Users are those who have completed your site’s user registration form to gain access to your website material.']);
+        
+        /*
+        |--------------------------------------------------------------------------
+        | Assign the permissions to the roles.
+        |--------------------------------------------------------------------------
+        */
         $developer->givePermissionTo(Permission::all());
-
-        // Role for administrator
-        $administrator = Role::create(['name' => 'administrator', 'description' => 'Full permissions to the platform and the content.']);
-        // Permission for administartor
         $administrator->givePermissionTo(Permission::all());
+        $manager->givePermissionTo(Permission::all());
+
+        // remove the permissions not viable
         $administrator->revokePermissionTo('debug');
+        $manager->revokePermissionTo('debug');
+        $manager->revokePermissionTo('configure');
 
-        // Role for author
-        $author = Role::create(['name' => 'author', 'description' => 'Permission to create, edit and delete on the platform without settings access.']);
-        // Permission for author
-        $author->givePermissionTo(Permission::all());
-        $author->revokePermissionTo('configure');
-        $author->revokePermissionTo('debug');
+        foreach (Account::all() as $account)
+        {
+            if ($account->id == 1) {
+                $account->assignRole('developer');
+            } else {
+                $account->assignRole('administrator');
+            }
+        }
 
-        // Role for editor
-        $editor = Role::create(['name' => 'editor', 'description' => 'Permission to only edit existing content on the platform without settings access.']);
-        // Permission for editor/
-        $editor->revokePermissionTo('configure');
-        $editor->revokePermissionTo('create');
-        $editor->revokePermissionTo('delete');
-        $editor->revokePermissionTo('debug');
-
-        // Role for members.
-        $member = Role::create(['name' => 'member', 'description' => 'A user who has joined your website by registering, they have no permissions to the platform']);
+        // recache due to changed in config file.
+        Artisan::call('config:cache');
     }
 
     /**

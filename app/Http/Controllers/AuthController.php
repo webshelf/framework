@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Model\Account;
 use Illuminate\Http\Request;
+use App\Events\AccountAccessed;
 
 /**
  * Class AuthController.
@@ -37,8 +38,7 @@ class AuthController extends Controller
          */
         if (auth()->attempt($credentials, $request->has('remember'))) {
 
-            // log login activity.
-            $this->trackAccountLogin(account());
+            event(new AccountAccessed(account()));
 
             // redirect to dashboard after login.
             return redirect()->intended(route('dashboard'));
@@ -69,22 +69,5 @@ class AuthController extends Controller
     public function form()
     {
         return view()->make('dashboard::login');
-    }
-
-    /**
-     * Sometimes we need to verify login entries.
-     * Here we will assign all the fields and logs.
-     *
-     * @return bool
-     */
-    public function trackAccountLogin(Account $account)
-    {
-        $account->login_count++;
-
-        $account->ip_address = request()->getClientIp();
-
-        $account->last_login = Carbon::now();
-
-        return $account->save();
     }
 }

@@ -8,14 +8,15 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Page;
 
-class IncrementViews implements ShouldQueue
+class IncrementViews
 {
 
     /**
      * Class traits.
      */
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, SerializesModels;
 
     /**
      * @param Model $model
@@ -27,7 +28,7 @@ class IncrementViews implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Model $model)
+    public function __construct(Page $model)
     {
         $this->model = $model;
     }
@@ -41,7 +42,7 @@ class IncrementViews implements ShouldQueue
     {
         $this->model->increment('views');
 
-        return $this->model->save();
+        $this->model->save();
     }
 
     /**
