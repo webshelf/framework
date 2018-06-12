@@ -14,7 +14,7 @@
         <div class="searchbar">
             <div class="text form-row">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" placeholder="Search..." id="search-table">
                 </div>
             </div>
             <div class="pull-right ml-2">

@@ -39,7 +39,7 @@
     <div class="searchbar">
         <div class="text form-row">
             <div class="col">
-                <input type="text" class="form-control" placeholder="Search...">
+                <input type="text" class="form-control" placeholder="Search..." id="search-table">
             </div>
         </div>
         <div class="pull-right ml-2">
@@ -70,7 +70,7 @@
                 <ul class="list-unstyled">
                     <li><a href="{{ route('admin.accounts.edit', $account->id) }}">{!! useIcon('user-shield') !!}Administrator</a></li>
                     <li><a href="{{ route('admin.accounts.edit', $account->id) }}">{!! useIcon('user-edit') !!}Edit</a></li>
-                    <li><a href="">{!! useIcon('user-times') !!}Remove</a></li>
+                    <li><a href="{{ route('admin.accounts.destroy', $account->id) }}" data-type="alert" data-confirm="Are you sure you want to remove this account?" data-method="delete">{!! useIcon('user-times') !!}Remove</a></li>
                 </ul>
             </div>
 

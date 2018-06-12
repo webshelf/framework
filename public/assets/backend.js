@@ -95943,6 +95943,37 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/admin/assets/js/alerts.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__("./node_modules/axios/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+$(document).ready(function () {
+
+    $('[data-type=alert]').click(function (event) {
+        event.preventDefault();
+
+        var confirmed = confirm($(this).attr('data-confirm'));
+
+        if (confirmed) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete($(this).attr('href')).then(function (response) {
+                if (response.data.status = true) {
+                    window.location = response.data.redirect;
+                    console.log(response.data.redirect);
+                } else {
+                    alert("Something went wrong..");
+                }
+            });
+        }
+    });
+});
+
+/***/ }),
+
 /***/ "./resources/admin/assets/js/backend.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -95969,6 +96000,12 @@ __webpack_require__("./resources/admin/assets/js/editor.js");
 
 // Applications date and time related functions.
 __webpack_require__("./resources/admin/assets/js/datetime.js");
+
+// allows to filter out table data.
+__webpack_require__("./resources/admin/assets/js/search-tables.js");
+
+// alerts for deleting stuff.
+__webpack_require__("./resources/admin/assets/js/alerts.js");
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -96135,6 +96172,29 @@ tinymce.init({
 
     plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools"],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+});
+
+/***/ }),
+
+/***/ "./resources/admin/assets/js/search-tables.js":
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+    $('#search-table').keyup(function () {
+
+        // Search text
+        var text = $(this).val().toLowerCase();
+
+        // Hide all content class element
+        $('.webshelf-table .row').hide();
+
+        // Search 
+        $('.webshelf-table .row .title').each(function () {
+            if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                $(this).closest('.row').show();
+            }
+        });
+    });
 });
 
 /***/ }),

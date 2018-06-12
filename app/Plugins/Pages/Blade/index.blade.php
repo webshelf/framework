@@ -40,7 +40,7 @@
         <div class="searchbar">
             <div class="text form-row">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" placeholder="Search..." id="search-table">
                 </div>
             </div>
             <div class="pull-right ml-2">
@@ -72,7 +72,7 @@
                         <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
                         <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($page->hasOption('sitemap')) !!}</li>
                         <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($page->hasOption('public')) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.pages.destroy', $page->slug)) !!}</li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="Delete"><a href="{{ route('admin.pages.destroy', $page->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this page?" data-method="delete">Delete</a></li>
                         <li data-toggle="tooltip" data-placement="bottom" title="View Online">{!! css()->link->view(url($page->route())) !!}</li>
                     </ul>
                 </div>

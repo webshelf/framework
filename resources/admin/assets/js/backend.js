@@ -22,6 +22,12 @@ require('./editor');
 // Applications date and time related functions.
 require('./datetime');
 
+// allows to filter out table data.
+require('./search-tables');
+
+// alerts for deleting stuff.
+require('./alerts');
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });

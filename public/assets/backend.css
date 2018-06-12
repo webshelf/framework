@@ -17278,6 +17278,18 @@ header {
   display: flex;
 }
 
+.avatar-radius-50 {
+  float: left;
+}
+
+.avatar-radius-50 img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 1px solid #f5f5f5;
+}
+
 .breadcrumbs-container {
   display: -webkit-box;
   display: -ms-flexbox;

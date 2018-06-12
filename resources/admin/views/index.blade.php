@@ -54,7 +54,7 @@
 
                         <div class="row">
 
-                                <span class="avatar">
+                                <span class="avatar-radius-50">
                                     <img src="{{ $activity->causer->makeGravatarImage() }}"alt="{{ $activity->causer->fullName() }} Image">
                                 </span>
 

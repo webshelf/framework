@@ -68,6 +68,17 @@ class Controller extends ModuleEngine
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        dd($id);
+    }
+
+    /**
      * Form to create a new account.
      *
      * @param RoleRepository $roleRepository

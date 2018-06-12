@@ -529,3 +529,16 @@ header {
     //
   }
 }
+
+
+.avatar-radius-50 {
+    float:left;
+
+    img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 50%;
+      border: 1px solid #f5f5f5;
+    }
+}

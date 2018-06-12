@@ -151,7 +151,7 @@ class BackendController extends PluginEngine
             $repository->whereName($slug)->delete();
         }
 
-        return redirect()->route('admin.pages.index');
+        return response()->json(['status' => 'true', 'redirect' => route('admin.pages.index')]);
     }
 
     /**
