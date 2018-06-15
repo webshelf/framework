@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Failed;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Model\AccessLog;
+use Illuminate\Auth\Events\Failed;
 
 class LogFailedLogin
 {

@@ -5,8 +5,8 @@ namespace App\Model\Traits;
 use Illuminate\Support\Collection;
 use Spatie\Activitylog\ActivityLogger;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\DetectsChanges;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\DetectsChanges;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 

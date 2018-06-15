@@ -9,18 +9,17 @@
 namespace App\Plugins\Articles;
 
 use App\Model\Page;
-use App\Plugins\Articles\Model\Article;
+use App\Jobs\IncrementViews;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
 use Illuminate\View\Factory as View;
+use App\Plugins\Articles\Model\Article;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
-use App\Jobs\IncrementViews;
-use App\Classes\Repositories\ArticleCategoryRepository;
 
 /**
  * Class UserController.
@@ -76,7 +75,7 @@ class FrontendController extends PluginEngine implements Sitemap
      * @param ArticleRepository $repository
      * @param string $category The category type of the url.
      * @param string $slug The slug of the url article.
-     * 
+     *
      * @return void
      */
     public function article(ArticleRepository $repository, string $category, string $slug)
@@ -98,7 +97,7 @@ class FrontendController extends PluginEngine implements Sitemap
      *
      * @param ArticleRepository $repository
      * @param Request $request
-     * 
+     *
      * @return void
      */
     public function search(ArticleRepository $repository, Request $request)
@@ -127,6 +126,7 @@ class FrontendController extends PluginEngine implements Sitemap
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
+
     /**
      * The sitemap function allows plugins to quickly and effectively
      * show their content for search engines in a modular way.

@@ -10,7 +10,6 @@ namespace App\Plugins\Articles;
 
 use Carbon\Carbon;
 use App\Model\Article;
-use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Model\ArticleCategory;

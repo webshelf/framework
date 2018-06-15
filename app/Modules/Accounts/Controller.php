@@ -70,7 +70,7 @@ class Controller extends ModuleEngine
     /**
      * Destroy the account and return the ajax response.
      *
-     * @param integer $id The id that should be looked up
+     * @param int $id The id that should be looked up
      * @param AccountRepository $account Load the repository for looking up the ID
      * @return Response The response of the json deletion of the account.
      */
@@ -126,8 +126,8 @@ class Controller extends ModuleEngine
     {
         // Assign properties to the model.
         $account->forename = $request->input('forename');
-        $account->surname  = $request->input('surname');
-        $account->email    = $request->input('email');
+        $account->surname = $request->input('surname');
+        $account->email = $request->input('email');
         $account->password = $request->input('password');
         $account->save();
 

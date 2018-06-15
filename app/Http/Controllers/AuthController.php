@@ -8,13 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Model\Account;
 use Illuminate\Http\Request;
-use App\Events\AccountLogin;
-use App\Model\AccessLog;
-use App\Classes\Repositories\AccountRepository;
-use App\Events\AccessAttempt;
 
 /**
  * Class AuthController.

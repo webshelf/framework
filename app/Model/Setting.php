@@ -8,7 +8,6 @@
 
 namespace App\Model;
 
-use App\Model\Model;
 use App\Model\Traits\LogsActivity;
 
 /**
@@ -18,7 +17,7 @@ class Setting extends Model
 {
     /*
      * Log users activity on this model.
-     * 
+     *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use LogsActivity;
@@ -29,7 +28,7 @@ class Setting extends Model
 
     /**
      * The activity logging strings to be used.
-     * 
+     *
      * @return string
      */
     public function getDescriptionForEvent(string $eventName): string

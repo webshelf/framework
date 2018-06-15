@@ -2,18 +2,14 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Database\Eloquent\Model;
 use App\Model\Page;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 class IncrementViews
 {
-
-    /**
+    /*
      * Class traits.
      */
     use Dispatchable, SerializesModels;

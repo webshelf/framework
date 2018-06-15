@@ -10,7 +10,6 @@ namespace App\Plugins\Pages;
 
 use App\Model\Link;
 use App\Model\Page;
-use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use Illuminate\Validation\Rule;

@@ -3,15 +3,13 @@
 namespace App\Plugins\Articles\Model;
 
 use Carbon\Carbon;
+use App\Model\Model;
 use App\Classes\ReadTime;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Plugins\Articles\Model\PublicScope;
-use App\Model\Model;
-use App\Plugins\Articles\Model\Categories;
 
 /**
  * Class Article.
