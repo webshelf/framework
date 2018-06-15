@@ -85,6 +85,12 @@ class CreatePermissionTables extends Migration
             app('cache')->forget('spatie.permission.cache');
         });
 
+        // remove the old role_id column.
+        Schema::table('accounts', function(Blueprint $table) {
+            $table->dropColumn('role_id');
+            $table->integer('login_count')->default(0)->change();
+        });
+
 
         // Reset cached roles and permissions
         app()['cache']->forget('spatie.permission.cache');

@@ -68,14 +68,17 @@ class Controller extends ModuleEngine
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy the account and return the ajax response.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param integer $id The id that should be looked up
+     * @param AccountRepository $account Load the repository for looking up the ID
+     * @return Response The response of the json deletion of the account.
      */
-    public function destroy($id)
+    public function destroy($id, AccountRepository $account)
     {
-        dd($id);
+        $account->whereID($id)->delete();
+
+        return response()->json(['status' => 'true', 'redirect' => route('admin.accounts.index')]);
     }
 
     /**
@@ -96,16 +99,42 @@ class Controller extends ModuleEngine
      * @param Account $account
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Account $account)
+    public function store(Request $request)
     {
-        $this->validate($request, ['forename' => 'required|min:1|max:255', 'surname' => 'required|min:3|max:255', 'password' => 'required|min:3|max:255', 'email' => 'required|email', 'group' => 'required|integer']);
+        // validate entries.
+        $request->validate([
+            'forename' => 'required|min:3|max:255',
+            'surname'  => 'sometimes|min:3|max:255',
+            'email'    => 'required|email|unique:accounts',
+            'password' => 'required|confirmed|min:3|max:255',
+        ]);
 
-        $account->forename = $request['forename'];
-        $account->surname = $request['surname'];
-        $account->role_id = $request['group'];
-        $account->email = $request['email'];
-        $account->setPassword($request['password'])->save();
+        // store the new account data.
+        $this->storeDataFrom($request, new Account);
 
+        // redirect back to the accounts index.
         return redirect()->route('admin.accounts.index');
+    }
+
+    /**
+     * Store the data from the form request.
+     *
+     * @param Request $request
+     * @return Account $account
+     */
+    public function storeDataFrom(Request $request, Account $account)
+    {
+        // Assign properties to the model.
+        $account->forename = $request->input('forename');
+        $account->surname  = $request->input('surname');
+        $account->email    = $request->input('email');
+        $account->password = $request->input('password');
+        $account->save();
+
+        // assign the role from the request.
+        $account->assignRole($request->input('role_id'));
+
+        // return the data that was created.
+        return $account;
     }
 }

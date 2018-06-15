@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <?php use App\Model\AccessLog; ?>
+
     <div class="dashboard">
             <div class="panel" id="welcome">
 
@@ -9,7 +11,7 @@
         
                 <p>Welcome back to Webshelf CMS, Your last sign in was</p>
         
-                <p class="last-login">{{  account()->last_login->format('D, M dS, Y, H:i') }}</p>
+                <p class="last-login">{{  AccessLog::latestAttemptFrom(account())->created_at->format('D, M dS, Y, H:i') }}</p>
         
                 <a href="https://github.com/webshelf/framework/issues">View Platform Issue Tracker</a>
         
@@ -55,7 +57,7 @@
                         <div class="row">
 
                                 <span class="avatar-radius-50">
-                                    <img src="{{ $activity->causer->makeGravatarImage() }}"alt="{{ $activity->causer->fullName() }} Image">
+                                    <img src="{{ $activity->causer->gravatarUrl() }}"alt="{{ $activity->causer->fullName() }} Image">
                                 </span>
 
                                 <div class="event">

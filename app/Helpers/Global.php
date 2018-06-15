@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Debug\Dumper;
 
-/**
+    /**
      * Return the auth account instance class.
      *
      * @return \App\Model\Account|\Illuminate\Contracts\Auth\Authenticatable
@@ -127,11 +127,23 @@ use Illuminate\Support\Debug\Dumper;
      * @param boolean $condition The condition to check on icon to be used.
      * @return string
      */
-    function useIcon(string $icon, string $opposite = "", bool $condition = true) {
-
+    function useIcon(string $icon, string $opposite = "", bool $condition = true) 
+    {
         if ($condition == false) {
             return "<i class='fas fa-{$opposite}'></i>";
         }
 
         return "<i class='fas fa-{$icon}'></i>";
+    }
+
+    /**
+     * Return a selector string for form selections, This allows smaller coding
+     *
+     * @param mixed $value The value to check that matches the matches.
+     * @param mixed $matches The value we want to compare against.
+     * @return string The selected match query.
+     */
+    function formSelect($value, $matches) 
+    {
+        return $value == $matches ? 'selected' : '';
     }

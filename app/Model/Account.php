@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Model\Traits\LogsActivity;
 
 /**
  * Class Accounts.
@@ -60,6 +61,13 @@ class Account extends Authenticatable
      */
     use HasRoles;
 
+    /*
+     * Log users activity on this model.
+     * 
+     * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
+     */
+    use LogsActivity;
+
     /**
      * The table associated with the model.
      *
@@ -82,6 +90,24 @@ class Account extends Authenticatable
     protected $guarded = ['remember_token', 'password'];
 
     /**
+     * If your model contains attributes whose change don't need to trigger an activity being logged 
+     * you can use $ignoreChangedAttributes
+     *
+     * @var array
+     */
+    protected static $ignoreChangedAttributes = ['remember_token', 'last_login', 'updated_at'];
+
+    /**
+     * The activity logging strings to be used.
+     * 
+     * @return string
+     */
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "{$eventName} the account belonging to {$this->fullName()}";
+    }
+
+    /**
      * Return the full name of the account.
      *
      * @return string
@@ -92,22 +118,24 @@ class Account extends Authenticatable
     }
 
     /**
-     * @deprecated 5.7
-     * @return string
+     * Set the password attribute field on the model.
+     *
+     * @param string $password
+     * @return boolean
      */
-    public function makeGravatarImage()
+    public function setPasswordAttribute($value)
     {
-        return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->email)));
+        return $this->attributes['password'] = bcrypt($value);
     }
 
     /**
      * Return the url to link the users email to a profile picture.
      *
-     * @return string
+     * @return string The generated url fromt he user email.
      */
     public function gravatarUrl()
     {
-        return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->email)));
+        return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->getAttribute('email'))));
     }
 
     /**
@@ -150,14 +178,13 @@ class Account extends Authenticatable
     }
 
     /**
-     * Generate a bCrpyt string for new password enties.
+     * Get the access logs from belonging to the model.
      *
-     * @param string $string
-     * @return $this
+     * @return AccessLog
      */
-    public function setPassword(string $string)
+    public function access()
     {
-        return $this->setAttribute('password', bcrypt($string));
+        return $this->hasMany(AccessLog::class, 'email', 'email');
     }
 
     /**

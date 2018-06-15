@@ -1,5 +1,7 @@
 @extends('dashboard::frame')
 
+<?php use App\Model\AccessLog; ?>
+
 @section('title')
     Account Management
 @endsection
@@ -76,10 +78,10 @@
 
             <div class="stats">
                 <div class="timestamp">
-                    Last Logged IP: {{ $account->ip_address }}
+                    Last Logged IP: {{ optional(AccessLog::latestAttemptFrom($account))->ip_address ?? 'Never' }}
                 </div>
                 <div class="views">
-                    Last Login: {{ $account->last_login->diffForHumans() }}
+                    Last Login: {{ optional($account->last_login)->diffForHumans() ?? 'Never' }}
                 </div>
             </div>
         </div>

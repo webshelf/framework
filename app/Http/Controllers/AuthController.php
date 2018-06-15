@@ -11,7 +11,10 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Model\Account;
 use Illuminate\Http\Request;
-use App\Events\AccountAccessed;
+use App\Events\AccountLogin;
+use App\Model\AccessLog;
+use App\Classes\Repositories\AccountRepository;
+use App\Events\AccessAttempt;
 
 /**
  * Class AuthController.
@@ -37,8 +40,6 @@ class AuthController extends Controller
          * message.
          */
         if (auth()->attempt($credentials, $request->has('remember'))) {
-
-            event(new AccountAccessed(account()));
 
             // redirect to dashboard after login.
             return redirect()->intended(route('dashboard'));

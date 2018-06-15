@@ -156,7 +156,7 @@
                         <li id="avatar" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Account profile for {{ account()->fullName() }} [{{ account()->role->title() }}]">
                                 <i class="fa profile-image small" aria-hidden="true">
-                                    <img src="{{ account()->makeGravatarImage() }}" width="24" height="24" alt="profile image">
+                                    <img src="{{ account()->gravatarUrl() }}" width="24" height="24" alt="profile image">
                                 </i>
                             </a>
                             <ul class="dropdown-menu pull-right">

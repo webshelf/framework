@@ -18,12 +18,16 @@
 
 @section('content')
 
+    @include('dashboard::structure.validation')
+
     @if($account->exists)
         <form action="{{ route('admin.accounts.update', $account->id) }}" method="post">
         <input type="hidden" name="_method" value="PATCH">
     @else
         <form action="{{ route('admin.accounts.store') }}" method="post">
     @endif
+
+    {{ csrf_field() }}
 
     <div class="row">
         <div class="col-4">
@@ -47,12 +51,12 @@
         </div>
         <div class="col-4">
             <div class="form-group">
-                <label for="email_address">Email Address</label>
+                <label for="email">Email Address</label>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">{!! useIcon('at') !!}</div>
                     </div>
-                    <input type="email" name="email_address" id="email_address" class="form-control" value="{{ old('email_address', optional($account)->email) }}" aria-describedby="emailAddressHelp" required>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email', optional($account)->email) }}" aria-describedby="emailAddressHelp" required>
                 </div>
                 <small id="emailAddressHelp" class="text-muted">The email that will be used for login access.</small>
             </div>
@@ -74,22 +78,22 @@
         </div>
         <div class="col-6">
             <div class="form-group">
-                <label for="confirm_password">Confirm password</label>
-                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="" aria-describedby="confirmPasswordHelp" required>
-                <small id="confirmPasswordHelp" class="text-muted">Confirm the password so we can be sure you entered it correctly.</small>
+                <label for="password_confirmation">Confirm password</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="" aria-describedby="passwordConfirmationHelp" required>
+                <small id="passwordConfirmationHelp" class="text-muted">Confirm the password so we can be sure you entered it correctly.</small>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-      <label for="permission">Choose a Role Permission</label>
+      <label for="role_id">Choose a Role Permission</label>
         <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <div class="input-group-text">{!! useIcon('project-diagram') !!}</div>
             </div>
-            <select class="form-control" name="permission" id="permission">
+            <select class="form-control" name="role_id" id="role_id">
                 @foreach ($roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->title }}</option>
+                    <option value="{{ $role->id }}" {{ formSelect(old('role_id', optional($account->role)->id), $role->id) }}>{{ $role->title }}</option>
                 @endforeach
             </select>
         </div>
