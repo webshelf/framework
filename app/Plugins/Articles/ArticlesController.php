@@ -10,10 +10,10 @@ namespace App\Plugins\Articles;
 
 use App\Model\Page;
 use App\Plugins\PluginHandler;
-use App\Classes\Interfaces\Installable;
-use App\Classes\Repositories\PageRepository;
 use App\Plugins\Pages\Model\PageTypes;
+use App\Classes\Interfaces\Installable;
 use App\Plugins\Pages\Model\PageOptions;
+use App\Classes\Repositories\PageRepository;
 
 /**
  * Class ArticleController.
@@ -50,6 +50,7 @@ class ArticlesController extends PluginHandler implements Installable
         $page->identifier = 'articles';
         $page->type = PageTypes::TYPE_PLUGIN;
         $page->option = PageOptions::OPTION_PUBLIC;
+
         return $page->save();
     }
 

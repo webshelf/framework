@@ -13,7 +13,6 @@ namespace App\Http\Controllers;
 use App\Model\Page;
 use App\Events\PageWasVisited;
 use App\Events\WebsiteWasVisited;
-use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Jobs\IncrementViews;
