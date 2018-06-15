@@ -9,11 +9,11 @@
 namespace App\Plugins\Articles;
 
 use Carbon\Carbon;
-use App\Model\Article;
+use App\Plugins\Articles\Model\Article;
 use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use App\Model\ArticleCategory;
+use App\Plugins\Articles\Model\Categories;
 use Illuminate\Validation\Rule;
 use App\Classes\Repositories\ArticleRepository;
 use App\Classes\Repositories\ArticleCategoryRepository;
@@ -164,7 +164,7 @@ class BackendController extends PluginEngine
     {
         $this->validate($request, ['unique:title']);
 
-        $category = new ArticleCategory;
+        $category = new Categories;
         $category->title = $request['name'];
         $category->save();
 

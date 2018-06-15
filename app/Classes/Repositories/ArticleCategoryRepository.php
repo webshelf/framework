@@ -3,7 +3,7 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
-use App\Model\ArticleCategory;
+use App\Plugins\Articles\Model\Categories;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -22,7 +22,7 @@ class ArticleCategoryRepository extends BaseRepository
      *
      * @param Menu $model
      */
-    public function __construct(ArticleCategory $model)
+    public function __construct(Categories $model)
     {
         $this->model = $model;
     }

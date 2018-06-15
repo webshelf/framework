@@ -12,8 +12,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Model\Model;
-use App\Model\Traits\LogsActivity;
 use Traits\Clickable;
+use App\Database\Concerns\HasAuthor;
+use App\Database\Concerns\HasActivity;
 
 /**
  * Class Pages.
@@ -64,8 +65,15 @@ class Page extends Model implements Linkable
      * 
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use LogsActivity;
+    use HasActivity;
     
+    /**
+     * Author tracks creator and editor IDs.
+     * 
+     * @ Webshelf Framework v5.6
+     */
+    use HasAuthor;
+
     /**
      * The table associated with the model.
      *

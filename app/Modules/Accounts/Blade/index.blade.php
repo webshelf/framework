@@ -56,12 +56,12 @@
         <div class="row">
 
             <div class="avatar">
-                <img src="{{ account()->gravatarUrl() }}" alt="">
+                <img src="{{ $account->placeholderAvatar() }}" alt="">
             </div>
 
             <div class="details">
                 <div class="title">
-                    <a href="{{ route('admin.accounts.edit', $account->id) }}">{{ $account->fullName() }}</a>
+                    <a href="{{ route('admin.accounts.edit', $account->id) }}">{{ $account->fullName() }} ({{ ucwords($account->getRoleNames()->first()) }})</a>
                 </div>
                 <div class="website">
                     Created {{ $account->created_at->diffForHumans() }}
@@ -70,9 +70,8 @@
 
             <div class="console">
                 <ul class="list-unstyled">
-                    <li><a href="{{ route('admin.accounts.edit', $account->id) }}">{!! useIcon('user-shield') !!}Administrator</a></li>
-                    <li><a href="{{ route('admin.accounts.edit', $account->id) }}">{!! useIcon('user-edit') !!}Edit</a></li>
-                    <li><a href="{{ route('admin.accounts.destroy', $account->id) }}" data-type="alert" data-confirm="Are you sure you want to remove this account?" data-method="delete">{!! useIcon('user-times') !!}Remove</a></li>
+                    <li><a href="{{ route('admin.accounts.edit', $account->id) }}">Edit</a></li>
+                    <li><a href="{{ route('admin.accounts.destroy', $account->id) }}" data-type="alert" data-confirm="Are you sure you want to remove this account?" data-method="delete">Remove</a></li>
                 </ul>
             </div>
 

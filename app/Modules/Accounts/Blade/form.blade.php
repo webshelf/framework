@@ -71,7 +71,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">{!! useIcon('key') !!}</div>
                         </div>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="{{ $account->exists ? 'Leave Blank to keep unchanged' : '' }}" aria-describedby="passwordHelp" requied>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="{{ $account->exists ? 'Leave Blank to keep unchanged' : '' }}" aria-describedby="passwordHelp">
                     </div>
                     <small id="passwordHelp" class="text-muted">The password that will be used for login access.</small>
                 </div>
@@ -79,7 +79,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="password_confirmation">Confirm password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="" aria-describedby="passwordConfirmationHelp" required>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="" aria-describedby="passwordConfirmationHelp">
                 <small id="passwordConfirmationHelp" class="text-muted">Confirm the password so we can be sure you entered it correctly.</small>
             </div>
         </div>
@@ -93,7 +93,7 @@
             </div>
             <select class="form-control" name="role_id" id="role_id">
                 @foreach ($roles as $role)
-                    <option value="{{ $role->id }}" {{ formSelect(old('role_id', optional($account->role)->id), $role->id) }}>{{ $role->title }}</option>
+                    <option value="{{ $role->id }}" {{ formSelect(old('role_id', optional($account->roles->first())->id), $role->id) }}>{{ $role->title }}</option>
                 @endforeach
             </select>
         </div>

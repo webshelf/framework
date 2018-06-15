@@ -243,10 +243,14 @@ header {
               display: flex;
               flex-direction: column;
               align-items: center;
+              padding: 3px 7px;
+              border: 1px solid #dcdcdc;
+              border-radius: 3px;
 
               &:hover {
-                color: purple;
+                color: white;
                 text-decoration: none;
+                background-color: $accentColor;
               }
             }
           }

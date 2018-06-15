@@ -57,8 +57,8 @@
                 <div class="form-group">
                     <label for="status">Visibility</label>
                     <select class="form-control" name="status" id="status">
-                        <option value="{{ \App\Model\Article::STATUS_PUBLIC }}" {{  old('status', optional($article)->status) == \App\Model\Article::STATUS_PUBLIC ? 'selected' : null }}>Public</option>
-                        <option value="{{ \App\Model\Article::STATUS_PRIVATE }}" {{  old('status', optional($article)->status) == \App\Model\Article::STATUS_PRIVATE ? 'selected' : null }}>Private</option>
+                        <option value="{{ App\Plugins\Articles\Model\Article::STATUS_PUBLIC }}" {{  old('status', optional($article)->status) == App\Plugins\Articles\Model\Article::STATUS_PUBLIC ? 'selected' : null }}>Public</option>
+                        <option value="{{ App\Plugins\Articles\Model\Article::STATUS_PRIVATE }}" {{  old('status', optional($article)->status) == App\Plugins\Articles\Model\Article::STATUS_PRIVATE ? 'selected' : null }}>Private</option>
                     </select>
                     <small class="form-text text-muted">Set the visibility of this article to others.</small>
                 </div>

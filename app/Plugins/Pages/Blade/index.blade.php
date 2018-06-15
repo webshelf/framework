@@ -69,11 +69,9 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.pages.edit', $page->slug)) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($page->hasOption('sitemap')) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($page->hasOption('public')) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Delete"><a href="{{ route('admin.pages.destroy', $page->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this page?" data-method="delete">Delete</a></li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="View Online">{!! css()->link->view(url($page->route())) !!}</li>
+                        <li><a href="{{ route('admin.pages.edit', $page->slug) }}">Edit</a></li>
+                        <li><a href="{{ url($page->route()) }}">View</a></li>
+                        <li><a href="{{ route('admin.pages.destroy', $page->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this page?" data-method="delete">Delete</a></li>
                     </ul>
                 </div>
 

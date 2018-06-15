@@ -9,7 +9,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use App\Model\Model;
-use App\Model\Traits\LogsActivity;
+use App\Database\Concerns\HasActivity;
+use App\Database\Concerns\HasAuthor;
 
 /**
  * Class Menus.
@@ -54,7 +55,14 @@ class Menu extends Model implements Linker
      * 
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use LogsActivity;
+    use HasActivity;
+
+    /**
+     * Log the author and editor of the model
+     * 
+     * @ Webshelf framework 5.6
+     */
+    use HasAuthor;
 
     /**
      * Status if current menu.

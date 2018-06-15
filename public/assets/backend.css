@@ -16985,11 +16985,15 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 3px 7px;
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
 }
 
 .webshelf-table .row .console ul li a:hover {
-  color: purple;
+  color: white;
   text-decoration: none;
+  background-color: #2b4162;
 }
 
 .webshelf-table .row .stats {

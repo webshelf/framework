@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  */
 abstract class Model extends Eloquent implements AuditContract
 {
-
     /**
      * Log the changes that occur on this model.
      */

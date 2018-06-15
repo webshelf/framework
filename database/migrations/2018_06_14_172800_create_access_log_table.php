@@ -24,7 +24,8 @@ class CreateAccessLogTable extends Migration
         Schema::table('accounts', function(Blueprint $table) {
             $table->dropColumn('ip_address');
             $table->dropColumn('login_count');
-        })
+            $table->string('surname')->nullable()->change();
+        });
     }
 
     /**

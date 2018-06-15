@@ -68,14 +68,8 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.menus.edit', ['name' => $menu])) !!}</li>
-                        {{--<li data-toggle="tooltip" data-placement="bottom" title="Edit attached Page">{!! css()->link->page(route('admin.pages.edit', $menu->page->slug)) !!}</li>--}}
-                        <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.menus.destroy', ['menu' => $menu->id])) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->status($menu->status) !!}</li>
-                        {{--<li>{!! css()->link->edit(route('admin.pages.edit', ["name"=>$page->slug])) !!}</li>--}}
-                        {{--<li>{!! css()->status->sitemap($page->sitemap) !!}</li>--}}
-                        {{--<li>{!! css()->status->status($page->enabled) !!}</li>--}}
-                        {{--<li>{!! css()->link->view(makeUrl($page)) !!}</li>--}}
+                        <li><a href="{{ route('admin.menus.edit', ['name' => $menu]) }}">Edit</a></li>
+                        <li><a href="{{ route('admin.menus.destroy', ['menu' => $menu->id]) }}" data-type="alert" data-confirm="Are you sure you want to remove this menu?" data-method="delete">Remove</a></li>
                     </ul>
                 </div>
 

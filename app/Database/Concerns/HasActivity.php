@@ -1,19 +1,11 @@
 <?php
 
-namespace App\Model\Traits;
-
-use Illuminate\Support\Collection;
-use Spatie\Activitylog\ActivityLogger;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\DetectsChanges;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\ActivitylogServiceProvider;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+namespace App\Database\Concerns;
 
 /**
- * Extension of Spatie Activity Logging.
+ * Undocumented trait
  */
-trait LogsActivity
+trait HasActivity
 {
     use DetectsChanges;
 

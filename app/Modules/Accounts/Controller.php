@@ -46,6 +46,8 @@ class Controller extends ModuleEngine
         $this->accounts = $accounts;
 
         $this->roles = $roles;
+
+        $this->middleware(['permission:configure']);
     }
 
     /**
@@ -104,15 +106,39 @@ class Controller extends ModuleEngine
         // validate entries.
         $request->validate([
             'forename' => 'required|min:3|max:255',
-            'surname'  => 'sometimes|min:3|max:255',
+            'surname'  => 'sometimes|nullable|min:3|max:255',
             'email'    => 'required|email|unique:accounts',
             'password' => 'required|confirmed|min:3|max:255',
+            'role_id'  => 'required|integer',
         ]);
 
         // store the new account data.
         $this->storeDataFrom($request, new Account);
 
         // redirect back to the accounts index.
+        return redirect()->route('admin.accounts.index');
+    }
+
+    /**
+    * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id, AccountRepository $repository)
+    {
+        // validate entries.
+        $request->validate([
+            'forename' => 'required|min:3|max:255',
+            'surname'  => 'sometimes|nullable|min:3|max:255',
+            'email'    => "required|email|unique:accounts,email,{$id}",
+            'password' => 'sometimes|nullable|confirmed|min:3|max:255',
+            'role_id'  => 'required|integer',
+        ]);
+
+        $this->storeDataFrom($request, $repository->whereID($id));
+
         return redirect()->route('admin.accounts.index');
     }
 
@@ -128,11 +154,15 @@ class Controller extends ModuleEngine
         $account->forename = $request->input('forename');
         $account->surname  = $request->input('surname');
         $account->email    = $request->input('email');
-        $account->password = $request->input('password');
+
+        if ($request->input('password') != null) {
+            $account->password = $request->input('password');
+        }
+
         $account->save();
 
         // assign the role from the request.
-        $account->assignRole($request->input('role_id'));
+        $account->syncRoles($request->input('role_id'));
 
         // return the data that was created.
         return $account;

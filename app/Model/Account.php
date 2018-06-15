@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-use App\Model\Traits\LogsActivity;
+use App\Database\Concerns\HasActivity;
 
 /**
  * Class Accounts.
@@ -66,7 +66,7 @@ class Account extends Authenticatable
      * 
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use LogsActivity;
+    use HasActivity;
 
     /**
      * The table associated with the model.
@@ -136,6 +136,16 @@ class Account extends Authenticatable
     public function gravatarUrl()
     {
         return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->getAttribute('email'))));
+    }
+
+    /**
+     * Generate an avatar Image for the user.
+     *
+     * @return void
+     */
+    public function placeholderAvatar()
+    {
+        return printf("http://placehold.jp/60/fafafa/2b4162/50X50.png?text=%s", $this->forename[0]);
     }
 
     /**
