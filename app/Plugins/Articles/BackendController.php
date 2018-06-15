@@ -9,12 +9,11 @@
 namespace App\Plugins\Articles;
 
 use Carbon\Carbon;
-use App\Plugins\Articles\Model\Article;
-use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use App\Plugins\Articles\Model\Categories;
 use Illuminate\Validation\Rule;
+use App\Plugins\Articles\Model\Article;
+use App\Plugins\Articles\Model\Categories;
 use App\Classes\Repositories\ArticleRepository;
 use App\Classes\Repositories\ArticleCategoryRepository;
 

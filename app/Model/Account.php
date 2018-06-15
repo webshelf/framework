@@ -9,13 +9,11 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use App\Model\Model;
+use App\Database\Concerns\HasActivity;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use App\Database\Concerns\HasActivity;
 
 /**
  * Class Accounts.
@@ -49,21 +47,19 @@ class Account extends Authenticatable
 {
     /*
      * Laravel Deleting.
-     * 
+     *
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
-    /**
+    /*
      * Spatie Roles and Permissions.
-     * 
+     *
      * @ https://github.com/spatie/laravel-permission
      */
     use HasRoles;
-
     /*
      * Log users activity on this model.
-     * 
+     *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use HasActivity;
@@ -90,8 +86,8 @@ class Account extends Authenticatable
     protected $guarded = ['remember_token', 'password'];
 
     /**
-     * If your model contains attributes whose change don't need to trigger an activity being logged 
-     * you can use $ignoreChangedAttributes
+     * If your model contains attributes whose change don't need to trigger an activity being logged
+     * you can use $ignoreChangedAttributes.
      *
      * @var array
      */
@@ -99,7 +95,7 @@ class Account extends Authenticatable
 
     /**
      * The activity logging strings to be used.
-     * 
+     *
      * @return string
      */
     public function getDescriptionForEvent(string $eventName): string
@@ -121,7 +117,7 @@ class Account extends Authenticatable
      * Set the password attribute field on the model.
      *
      * @param string $password
-     * @return boolean
+     * @return bool
      */
     public function setPasswordAttribute($value)
     {
@@ -145,7 +141,7 @@ class Account extends Authenticatable
      */
     public function placeholderAvatar()
     {
-        return printf("http://placehold.jp/60/fafafa/2b4162/50X50.png?text=%s", $this->forename[0]);
+        return printf('http://placehold.jp/60/fafafa/2b4162/50X50.png?text=%s', $this->forename[0]);
     }
 
     /**

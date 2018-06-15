@@ -6,15 +6,13 @@ use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use Illuminate\Support\Collection;
 use App\Classes\Interfaces\Linkable;
+use App\Database\Concerns\HasAuthor;
+use App\Database\Concerns\HasActivity;
 use App\Plugins\Pages\Model\PageTypes;
 use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Model\Model;
-use Traits\Clickable;
-use App\Database\Concerns\HasAuthor;
-use App\Database\Concerns\HasActivity;
 
 /**
  * Class Pages.
@@ -49,7 +47,7 @@ class Page extends Model implements Linkable
 {
     /*
      * Laravel Deleting.
-     * 
+     *
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
@@ -59,17 +57,15 @@ class Page extends Model implements Linkable
      * @ https://laravel.com/docs/5.3/scout#installation
      */
     use Searchable;
-
     /*
      * Log users activity on this model.
-     * 
+     *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use HasActivity;
-    
-    /**
+    /*
      * Author tracks creator and editor IDs.
-     * 
+     *
      * @ Webshelf Framework v5.6
      */
     use HasAuthor;
@@ -97,7 +93,7 @@ class Page extends Model implements Linkable
 
     /**
      * The activity logging strings to be used.
-     * 
+     *
      * @return string
      */
     public function getDescriptionForEvent(string $eventName): string
@@ -179,7 +175,7 @@ class Page extends Model implements Linkable
         return "{$this->slug}";
     }
 
-        /**
+    /**
      * The name of the current model object.
      *
      * @deprecated

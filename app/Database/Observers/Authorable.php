@@ -5,16 +5,15 @@ namespace App\Database\Observers;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Authorable Observing for the model tracking
+ * Authorable Observing for the model tracking.
  */
 class Authorable
 {
-
     /**
      * Update the creator id when the model is being created.
      *
      * @param Model $model
-     * @return boolean
+     * @return bool
      */
     public function creating(Model $model)
     {
@@ -26,7 +25,7 @@ class Authorable
      *
      * @param Model $model
      * @return void
-     */ 
+     */
     public function updating(Model $model)
     {
         return $model->setAttribute('editor_id', auth()->id());
@@ -37,7 +36,7 @@ class Authorable
      *
      * @param Model $model
      * @return void
-     */ 
+     */
     public function deleting(Model $model)
     {
         return $model->setAttribute('editor_id', auth()->id());

@@ -3,7 +3,7 @@
 namespace App\Database\Concerns;
 
 /**
- * Undocumented trait
+ * Undocumented trait.
  */
 trait HasActivity
 {

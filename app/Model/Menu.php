@@ -6,11 +6,10 @@ use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
+use App\Database\Concerns\HasAuthor;
+use App\Database\Concerns\HasActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use App\Model\Model;
-use App\Database\Concerns\HasActivity;
-use App\Database\Concerns\HasAuthor;
 
 /**
  * Class Menus.
@@ -49,17 +48,15 @@ class Menu extends Model implements Linker
      * @ https://laravel.com/docs/5.3/scout#installation
      */
     use Searchable;
-
     /*
      * Log users activity on this model.
-     * 
+     *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use HasActivity;
-
-    /**
+    /*
      * Log the author and editor of the model
-     * 
+     *
      * @ Webshelf framework 5.6
      */
     use HasAuthor;
@@ -101,7 +98,7 @@ class Menu extends Model implements Linker
 
     /**
      * The activity logging strings to be used.
-     * 
+     *
      * @return string
      */
     public function getDescriptionForEvent(string $eventName): string

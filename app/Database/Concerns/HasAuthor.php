@@ -5,12 +5,12 @@ namespace App\Database\Concerns;
 use App\Database\Observers\Authorable;
 
 /**
- * Undocumented trait
+ * Undocumented trait.
  */
 trait HasAuthor
 {
     /**
-     * Authorable Boot logic
+     * Authorable Boot logic.
      *
      * @return void
      */
