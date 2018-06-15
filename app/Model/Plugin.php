@@ -9,7 +9,6 @@
 namespace App\Model;
 
 use App\Plugins\PluginHandler;
-use App\Model\Model;
 
 /**
  * Class Plugins.

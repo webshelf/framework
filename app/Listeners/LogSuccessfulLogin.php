@@ -3,10 +3,8 @@
 namespace App\Listeners;
 
 use Carbon\Carbon;
-use Illuminate\Auth\Events\Login;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Model\AccessLog;
+use Illuminate\Auth\Events\Login;
 
 class LogSuccessfulLogin
 {

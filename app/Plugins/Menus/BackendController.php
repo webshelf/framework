@@ -11,7 +11,6 @@ namespace App\Plugins\Menus;
 use DB;
 use App\Model\Link;
 use App\Model\Menu;
-use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use Illuminate\Validation\Rule;

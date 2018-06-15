@@ -3,9 +3,8 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Model\Model;
 use App\Model\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Redirect.
@@ -27,10 +26,9 @@ class Redirect extends Model
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
     /*
      * Log users activity on this model.
-     * 
+     *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use LogsActivity;
@@ -51,7 +49,7 @@ class Redirect extends Model
 
     /**
      * The activity logging strings to be used.
-     * 
+     *
      * @return string
      */
     public function getDescriptionForEvent(string $eventName): string

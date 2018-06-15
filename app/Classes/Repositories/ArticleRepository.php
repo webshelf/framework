@@ -9,9 +9,8 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
-use App\Plugins\Articles\Model\Article;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
+use App\Plugins\Articles\Model\Article;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -19,7 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class ArticleRepository extends BaseRepository
 {
- /**
+    /**
      * @var model|Builder|Collection
      */
     protected $model;
@@ -35,7 +34,7 @@ class ArticleRepository extends BaseRepository
     }
 
     /**
-     * Retrive all the available model for administration use
+     * Retrive all the available model for administration use.
      *
      * @return Collection
      */
@@ -153,15 +152,15 @@ class ArticleRepository extends BaseRepository
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @param string $string
-     * @param integer $paginate
+     * @param int $paginate
      * @return void
      */
     public function whereCategoryTitle(string $string, int $paginate = 5)
     {
-        return $this->model->whereHas('category', function($query) {
+        return $this->model->whereHas('category', function ($query) {
             $query->where('title', 'general');
         })->orderBy('created_at', 'desc')->simplePaginate($paginate);
     }

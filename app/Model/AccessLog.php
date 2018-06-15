@@ -2,13 +2,9 @@
 
 namespace App\Model;
 
-use App\Model\Model;
-use App\Model\Account;
-use PhpParser\Node\Expr\Instanceof_;
-
 /**
  * Class Activity.
- * 
+ *
  * @property int $id
  * @property string $ip_address
  * @property string $email
@@ -16,13 +12,12 @@ use PhpParser\Node\Expr\Instanceof_;
  * @property Account $account
  * @property Carbon $updated_at
  * @property Carbon $created_at
- * 
+ *
  * @method AccessLog belongingTo
  * @method AccessLog byMessage
  */
 class AccessLog extends Model
 {
-
     /**
      * Login was good logged.
      */
@@ -32,7 +27,7 @@ class AccessLog extends Model
      * Login attempt was logged.
      */
     const LOGIN_STATUS_FAILED = 'Incorrect Password.';
-    
+
     /**
      * The table associated with the model.
      *
@@ -49,13 +44,13 @@ class AccessLog extends Model
 
     /**
      * The model belongsTo Relations.
-     * 
+     *
      * @var array Model Relations
      */
     public $belongsTo = ['account' => Account::class];
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @param Builder $query Laravel Model Builder.
      * @return void
@@ -66,7 +61,7 @@ class AccessLog extends Model
     }
 
     /**
-     * Scope the query down to a message entry
+     * Scope the query down to a message entry.
      *
      * @param Builder $query Laravel Model Builder.
      * @param string $message The comaprison constant
@@ -78,7 +73,7 @@ class AccessLog extends Model
     }
 
     /**
-     * Get the latest attempt from the account
+     * Get the latest attempt from the account.
      *
      * @param Account $account
      * @return Account The latest log entry of the account model.
@@ -89,10 +84,10 @@ class AccessLog extends Model
     }
 
     /**
-     * Get the total attemps made on the account since the last login occured,
+     * Get the total attemps made on the account since the last login occured,.
      *
      * @param Account $account The account to retrieve logs from.
-     * @return Integer The total count of failed login attempts.
+     * @return int The total count of failed login attempts.
      */
     public static function getAttemptsToLogin(Account $account)
     {

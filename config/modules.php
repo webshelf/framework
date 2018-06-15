@@ -24,7 +24,7 @@ return [
         'url'   => 'admin/sitemap',
         'role'  => '',
     ],
-    
+
     [
         'title' => 'Accounts',
         'icon'  => 'fa fa-users',
@@ -38,7 +38,6 @@ return [
         'url'   => 'admin/settings',
         'role'  => 'configure',
     ],
-
 
     [
         'title'   => 'Filemanager',

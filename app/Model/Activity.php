@@ -2,12 +2,8 @@
 
 namespace App\Model;
 
-use App\Classes\Interfaces\Linker;
 use App\Classes\Interfaces\Linkable;
-use App\Model\Model;
-use App\Classes\Interfaces\Loggable;
-
-use \Spatie\Activitylog\Models\Activity as ActivityLog;
+use Spatie\Activitylog\Models\Activity as ActivityLog;
 
 /**
  * Class Activity.
@@ -26,5 +22,4 @@ class Activity extends ActivityLog
      * @var string
      */
     protected $table = 'activity';
-
 }

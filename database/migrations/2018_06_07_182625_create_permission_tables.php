@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-use App\Model\Permission;
 use App\Model\Role;
 use App\Model\Account;
+use App\Model\Permission;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePermissionTables extends Migration
 {
@@ -86,11 +86,10 @@ class CreatePermissionTables extends Migration
         });
 
         // remove the old role_id column.
-        Schema::table('accounts', function(Blueprint $table) {
+        Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn('role_id');
             $table->integer('login_count')->default(0)->change();
         });
-
 
         // Reset cached roles and permissions
         app()['cache']->forget('spatie.permission.cache');
@@ -108,12 +107,12 @@ class CreatePermissionTables extends Migration
         | Create the roles for the platform
         |--------------------------------------------------------------------------
         */
-        
-        $developer     = Role::create(['name' => 'developer',     'title' => 'Developer',       'description' => 'System wide access to engine properties, debugging and tools.']);
+
+        $developer = Role::create(['name' => 'developer',     'title' => 'Developer',       'description' => 'System wide access to engine properties, debugging and tools.']);
         $administrator = Role::create(['name' => 'administrator', 'title' => 'Administrator',   'description' => 'Administrators have super user access to the entire site.']);
-        $manager       = Role::create(['name' => 'manager',       'title' => 'Content Manager', 'description' => 'Content Managers have the ability to manage all content on the platform without access to settings.']);
-        $user          = Role::create(['name' => 'user',          'title' => 'Registered User', 'description' => 'Registered Users are those who have completed your site’s user registration form to gain access to your website material.']);
-        
+        $manager = Role::create(['name' => 'manager',       'title' => 'Content Manager', 'description' => 'Content Managers have the ability to manage all content on the platform without access to settings.']);
+        $user = Role::create(['name' => 'user',          'title' => 'Registered User', 'description' => 'Registered Users are those who have completed your site’s user registration form to gain access to your website material.']);
+
         /*
         |--------------------------------------------------------------------------
         | Assign the permissions to the roles.
@@ -128,8 +127,7 @@ class CreatePermissionTables extends Migration
         $manager->revokePermissionTo('debug');
         $manager->revokePermissionTo('configure');
 
-        foreach (Account::all() as $account)
-        {
+        foreach (Account::all() as $account) {
             if ($account->id == 1) {
                 $account->assignRole('developer');
             } else {

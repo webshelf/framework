@@ -6,7 +6,7 @@ use Spatie\Permission\Models\Role as BaseRoles;
 
 /**
  * Class Migrations.
- * 
+ *
  * @property string $name
  * @property string $title
  * @property string $description
