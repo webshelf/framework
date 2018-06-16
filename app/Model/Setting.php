@@ -9,6 +9,7 @@
 namespace App\Model;
 
 use App\Model\Traits\LogsActivity;
+use App\Database\Concerns\ActivityLogging;
 
 /**
  * Class Setting.
@@ -20,7 +21,7 @@ class Setting extends Model
      *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use LogsActivity;
+    use ActivityLogging;
 
     protected $table = 'settings';
 

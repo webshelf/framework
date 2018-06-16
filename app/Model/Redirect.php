@@ -5,6 +5,7 @@ namespace App\Model;
 use Carbon\Carbon;
 use App\Model\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Database\Concerns\ActivityLogging;
 
 /**
  * Class Redirect.
@@ -31,7 +32,7 @@ class Redirect extends Model
      *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use LogsActivity;
+    use ActivityLogging;
 
     /**
      * The table associated with the model.

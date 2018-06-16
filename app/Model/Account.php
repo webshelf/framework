@@ -14,6 +14,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Database\Concerns\ActivityLogging;
 
 /**
  * Class Accounts.
@@ -62,7 +63,7 @@ class Account extends Authenticatable
      *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use HasActivity;
+    use ActivityLogging;
 
     /**
      * The table associated with the model.
