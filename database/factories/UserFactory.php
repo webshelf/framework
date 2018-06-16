@@ -1,10 +1,7 @@
 <?php
 
-use App\Model\Page;
-use App\Model\Account;
-use Faker\Generator as Faker;
-
 use App\Model as Model;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------

@@ -8,7 +8,6 @@
 
 namespace App\Model;
 
-use App\Model\Traits\LogsActivity;
 use App\Database\Concerns\ActivityLogging;
 
 /**

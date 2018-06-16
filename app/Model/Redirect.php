@@ -3,9 +3,8 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use App\Model\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Database\Concerns\ActivityLogging;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Redirect.

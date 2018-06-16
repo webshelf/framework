@@ -6,15 +6,13 @@ use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use Illuminate\Support\Collection;
 use App\Classes\Interfaces\Linkable;
-use App\Database\Concerns\HasAuthor;
-use App\Database\Concerns\HasActivity;
 use App\Plugins\Pages\Model\PageTypes;
 use App\Plugins\Pages\Model\PageOptions;
+use App\Database\Concerns\AuthorTracking;
 use Illuminate\Database\Eloquent\Builder;
+use App\Database\Concerns\ActivityLogging;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Database\Concerns\ActivityLogging;
-use App\Database\Concerns\AuthorTracking;
 
 /**
  * Class Pages.

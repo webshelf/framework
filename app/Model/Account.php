@@ -9,12 +9,11 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use App\Database\Concerns\HasActivity;
 use Spatie\Permission\Traits\HasRoles;
+use App\Database\Concerns\ActivityLogging;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Database\Concerns\ActivityLogging;
 
 /**
  * Class Accounts.

@@ -2,8 +2,6 @@
 
 namespace App\Database\Concerns;
 
-use App\Database\Observers\Authorable;
-
 /**
  * Undocumented trait.
  */
@@ -16,15 +14,15 @@ trait AuthorTracking
      */
     public static function bootAuthorable()
     {
-        static::creating(function($model) {
+        static::creating(function ($model) {
             return $model->setAttribute('creator_id', auth()->id());
         });
 
-        static::deleting(function($model) {
+        static::deleting(function ($model) {
             return $model->setAttribute('editor_id', auth()->id());
         });
 
-        static::updating(function($model) {
+        static::updating(function ($model) {
             return $model->setAttribute('editor_id', auth()->id());
         });
     }

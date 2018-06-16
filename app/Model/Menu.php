@@ -6,12 +6,10 @@ use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
-use App\Database\Concerns\HasAuthor;
-use App\Database\Concerns\HasActivity;
+use App\Database\Concerns\AuthorTracking;
+use App\Database\Concerns\ActivityLogging;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use App\Database\Concerns\ActivityLogging;
-use App\Database\Concerns\AuthorTracking;
 
 /**
  * Class Menus.
