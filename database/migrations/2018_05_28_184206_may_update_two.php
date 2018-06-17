@@ -26,7 +26,7 @@ class MayUpdateTwo extends Migration
             $account->setAttribute('verified', true);
             $account->setAttribute('status', true);
             $account->setAttribute('role_id', true);
-            $account->setAttribute('password', bcrypt('password'));
+            $account->setAttribute('password', 'password');
             $account->save();
         }
     }
