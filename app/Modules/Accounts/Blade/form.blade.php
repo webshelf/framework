@@ -29,6 +29,16 @@
 
     {{ csrf_field() }}
 
+    {{-- <div class="row">
+        <div class="profile-image">
+            <img src="https://placeimg.com/150/150/any" alt="">
+        </div>
+        <div class="statistics">
+            //
+        </div>
+
+    </div> --}}
+
     <div class="row">
         <div class="col-4">
             <div class="form-group">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Concerns;
+namespace App\Model\Concerns;
 
 use Illuminate\Support\Collection;
 use Spatie\Activitylog\ActivityLogger;
@@ -8,17 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\Activitylog\Traits\DetectsChanges;
 
-/**
- * Undocumented trait.
- */
-trait ActivityLogging
+trait ActivityFeed
 {
     use DetectsChanges;
 
     protected $enableLoggingModelsEvents = true;
 
-    protected static function bootLogsActivity()
+    protected static function bootActivityFeed()
     {
         static::eventsToBeRecorded()->each(function ($eventName) {
             return static::$eventName(function (Model $model) use ($eventName) {
@@ -112,7 +110,7 @@ trait ActivityLogging
         if (app()->runningInConsole()) {
             return false;
         }
-
+        
         if (! $this->enableLoggingModelsEvents) {
             return false;
         }

@@ -25,7 +25,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
         // Only the password and email are the only required credentials.
         $credentials = $request->only('email', 'password');
 

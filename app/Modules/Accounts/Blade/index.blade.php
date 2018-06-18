@@ -56,7 +56,7 @@
         <div class="row">
 
             <div class="avatar">
-                <img src="{{ $account->placeholderAvatar() }}" alt="">
+                <img src="{{ $account->avatar }}" alt="">
             </div>
 
             <div class="details">

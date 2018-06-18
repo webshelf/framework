@@ -6,12 +6,13 @@ use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
-use App\Database\Concerns\HasAuthor;
-use App\Database\Concerns\HasActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use App\Database\Concerns\ActivityLogging;
-use App\Database\Concerns\AuthorTracking;
+use App\Model\Concerns\ActivityLogging;
+use App\Model\Concerns\AuthorTracking;
+use App\Model\Concerns\LogsActivity;
+use App\Model\Concerns\ActivityFeed;
+use App\Model\Concerns\Publishers;
 
 /**
  * Class Menus.
@@ -55,13 +56,13 @@ class Menu extends Model implements Linker
      *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use ActivityLogging;
+    use ActivityFeed;
     /*
      * Log the author and editor of the model
      *
      * @ Webshelf framework 5.6
      */
-    use AuthorTracking;
+    use Publishers;
 
     /**
      * Status if current menu.

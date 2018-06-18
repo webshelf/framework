@@ -3,7 +3,7 @@
 namespace App\Model;
 
 /**
- * Class Activity.
+ * Class AccessLog.
  *
  * @property int $id
  * @property string $ip_address

@@ -15,7 +15,7 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/admin/products')->uses('BackendController@index')->name('admin.products.index');
+    Route::get('/admin/products/index', 'BackendController@index')->name('admin.products.index');
 
     /*
      * Login for plugins.

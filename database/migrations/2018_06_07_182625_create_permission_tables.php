@@ -136,7 +136,7 @@ class CreatePermissionTables extends Migration
         }
 
         // recache due to changed in config file.
-        Artisan::call('config:cache');
+        // Artisan::call('config:cache');
     }
 
     /**

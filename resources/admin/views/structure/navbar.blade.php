@@ -21,17 +21,16 @@
 
                     <a class="dropdown-item" href="{{ route('admin.menus.create') }}">New Menu</a>
                     <a class="dropdown-item" href="{{ route('admin.pages.create') }}">New Page</a>
-                    <a class="dropdown-item" href="{{ route('admin.redirects.create') }}">New Redirect</a>
 
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="profile-image"><img src="{{ account()->gravatarUrl() }}" width="24" height="24" alt="profile image"></div>
+                    <div class="profile-image"><img src="{{ account()->avatar }}" width="24" height="24" alt="profile image"></div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    {{--<a class="dropdown-item" href="#">Profile</a>--}}
-                    {{-- <div class="dropdown-divider"></div> --}}
+                    <a class="dropdown-item" href="{{ route('admin.accounts.edit', account()->id) }}">My Account</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('AuthLogout') }}">Log out</a>
                 </div>
             </li>

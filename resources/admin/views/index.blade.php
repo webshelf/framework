@@ -57,7 +57,7 @@
                         <div class="row">
 
                                 <span class="avatar-radius-50">
-                                    <img src="{{ $activity->causer->gravatarUrl() }}"alt="{{ $activity->causer->fullName() }} Image">
+                                    <img src="{{ $activity->causer->avatar }}" alt="{{ $activity->causer->fullName() }} Image">
                                 </span>
 
                                 <div class="event">

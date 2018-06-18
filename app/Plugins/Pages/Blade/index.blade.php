@@ -55,7 +55,7 @@
             <div class="row">
 
                 <div class="avatar">
-                    <img data-toggle="tooltip" data-placement="left" title="Updated by {{ $page->editor->fullName() }}" src="{{ $page->editor->gravatarUrl() }}" alt="">
+                    <img data-toggle="tooltip" data-placement="left" title="Updated by {{ $page->editor->fullName() }}" src="{{ $page->editor->avatar }}" alt="">
                 </div>
 
                 <div class="details">

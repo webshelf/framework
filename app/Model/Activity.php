@@ -22,4 +22,15 @@ class Activity extends ActivityLog
      * @var string
      */
     protected $table = 'activity';
+
+    /**
+     * Return a feed of activity models.
+     *
+     * @param integer $models
+     * @return Collection
+     */
+    public static function feed($models = 12)
+    {
+        return self::latest()->paginate($models);
+    }
 }

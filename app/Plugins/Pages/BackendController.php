@@ -115,10 +115,8 @@ class BackendController extends PluginEngine
      * @param PageRepository $repository
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $name, PageRepository $repository)
+    public function update(Request $request, Page $page)
     {
-        $page = $repository->whereName($name);
-
         $this->validate($request, ['title'=>'required|min:3|max:255', Rule::unique('pages')->ignore($page->id)]);
 
         $this->save($request, $page);
@@ -164,7 +162,6 @@ class BackendController extends PluginEngine
         // Standard for all pages.
         $page->heading = $request['title'];
         $page->prefix = strtolower($request['prefix']);
-        $page->creator_id = $request['creator'] ?: account()->id;
         $page->seo_keywords = $request['keywords'];
         $page->seo_description = $request['description'];
         $page->content = $request['content'];

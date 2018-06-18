@@ -31,12 +31,8 @@ class DashboardController extends Controller
      */
     public function index(ActivityRepository $repository)
     {
-        $plugin = (new PluginRepository(new Plugin))->whereName('articles');
+        $activities = Activity::feed(12);
 
-        $plugin->handler->version();
-
-        $activities = Activity::simplePaginate(20);
-
-        return view('dashboard::index')->with(['activities'=>$activities]);
+        return view('dashboard::index', compact('activities'));
     }
 }

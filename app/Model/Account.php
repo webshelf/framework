@@ -9,12 +9,13 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use App\Database\Concerns\HasActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Database\Concerns\ActivityLogging;
+use App\Model\Concerns\ActivityLogging;
+use App\Model\Concerns\LogsActivity;
+use App\Model\Concerns\ActivityFeed;
 
 /**
  * Class Accounts.
@@ -32,6 +33,7 @@ use App\Database\Concerns\ActivityLogging;
  * @property Carbon $updated_at
  *
  * @property int $id
+ * @property string $avatar
  * @property string $email
  * @property string $password
  * @property string $remember_token
@@ -63,7 +65,7 @@ class Account extends Authenticatable
      *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
-    use ActivityLogging;
+    use ActivityFeed;
 
     /**
      * The table associated with the model.
@@ -130,7 +132,7 @@ class Account extends Authenticatable
      *
      * @return string The generated url fromt he user email.
      */
-    public function gravatarUrl()
+    private function getGravatar()
     {
         return 'https://secure.gravatar.com/avatar/'.md5(strtolower(trim($this->getAttribute('email'))));
     }
@@ -140,9 +142,9 @@ class Account extends Authenticatable
      *
      * @return void
      */
-    public function placeholderAvatar()
+    public function getAvatarAttribute()
     {
-        return printf('http://placehold.jp/60/fafafa/2b4162/50X50.png?text=%s', $this->forename[0]);
+        return url("images/avatar-default.png");
     }
 
     /**
