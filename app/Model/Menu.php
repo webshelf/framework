@@ -5,14 +5,11 @@ namespace App\Model;
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
+use App\Model\Concerns\Publishers;
 use Illuminate\Support\Collection;
+use App\Model\Concerns\ActivityFeed;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use App\Model\Concerns\ActivityLogging;
-use App\Model\Concerns\AuthorTracking;
-use App\Model\Concerns\LogsActivity;
-use App\Model\Concerns\ActivityFeed;
-use App\Model\Concerns\Publishers;
 
 /**
  * Class Menus.

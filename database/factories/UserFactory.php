@@ -1,11 +1,8 @@
 <?php
 
-use App\Model\Page;
-use App\Model\Account;
 use Faker\Generator as Faker;
-
-use App\Plugins\Pages\Model\PageOptions;
 use App\Plugins\Pages\Model\PageTypes;
+use App\Plugins\Pages\Model\PageOptions;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +24,11 @@ $factory->define(App\Model\Account::class, function (Faker $faker) {
         'number' => $faker->phoneNumber,
         'last_login' => $faker->dateTimeBetween('-4 months'),
         'password' => 'password', // secret
-        'remember_token' => str_random(10),        
+        'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(App\Model\Page::class, function(Faker $faker) {
-
+$factory->define(App\Model\Page::class, function (Faker $faker) {
     $title = $faker->sentence;
     $account = factory(App\Model\Account::class)->create();
 
@@ -42,12 +38,11 @@ $factory->define(App\Model\Page::class, function(Faker $faker) {
         'seo_description' => $faker->paragraph(2),
         'prefix' => $faker->word,
         'slug' => str_slug($title),
-        'views' => $faker->numberBetween(75,900),
+        'views' => $faker->numberBetween(75, 900),
         'content' => $faker->paragraph(12),
         'type' => PageTypes::TYPE_STANDARD,
-        'option' => PageOptions::OPTION_PUBLIC|PageOptions::OPTION_SITEMAP,
+        'option' => PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP,
         'editor_id' => $account->id,
         'creator_id' => $account->id,
     ];
-
 });

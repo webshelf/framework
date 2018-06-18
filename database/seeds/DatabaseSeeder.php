@@ -1,8 +1,5 @@
 <?php
 
-use App\Model\Menu;
-use App\Model\Page;
-use App\Model\Account;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

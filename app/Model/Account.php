@@ -9,13 +9,11 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use App\Model\Concerns\ActivityFeed;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Model\Concerns\ActivityLogging;
-use App\Model\Concerns\LogsActivity;
-use App\Model\Concerns\ActivityFeed;
 
 /**
  * Class Accounts.
@@ -144,7 +142,7 @@ class Account extends Authenticatable
      */
     public function getAvatarAttribute()
     {
-        return url("images/avatar-default.png");
+        return url('images/avatar-default.png');
     }
 
     /**

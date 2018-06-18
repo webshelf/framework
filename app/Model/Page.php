@@ -4,17 +4,15 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
+use App\Model\Concerns\Publishers;
 use Illuminate\Support\Collection;
 use App\Classes\Interfaces\Linkable;
+use App\Model\Concerns\ActivityFeed;
 use App\Plugins\Pages\Model\PageTypes;
 use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Model\Concerns\ActivityLogging;
-use App\Model\Concerns\LogsActivity;
-use App\Model\Concerns\ActivityFeed;
-use App\Model\Concerns\Publishers;
 
 /**
  * Class Pages.
@@ -65,10 +63,9 @@ class Page extends Model implements Linkable
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use ActivityFeed;
-
-    /**
+    /*
      * Track the editor and creator publishers
-     * 
+     *
      * @ Webshelf Framewrok 5.6
      */
     use Publishers;
@@ -105,7 +102,7 @@ class Page extends Model implements Linkable
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return void
      */

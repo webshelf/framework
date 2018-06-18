@@ -6,9 +6,9 @@ use Illuminate\Support\Collection;
 use Spatie\Activitylog\ActivityLogger;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\DetectsChanges;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Spatie\Activitylog\Traits\DetectsChanges;
 
 trait ActivityFeed
 {
@@ -110,7 +110,7 @@ trait ActivityFeed
         if (app()->runningInConsole()) {
             return false;
         }
-        
+
         if (! $this->enableLoggingModelsEvents) {
             return false;
         }

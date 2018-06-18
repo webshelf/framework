@@ -26,7 +26,7 @@ class Activity extends ActivityLog
     /**
      * Return a feed of activity models.
      *
-     * @param integer $models
+     * @param int $models
      * @return Collection
      */
     public static function feed($models = 12)

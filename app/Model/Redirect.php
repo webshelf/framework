@@ -3,10 +3,8 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Model\Concerns\ActivityLogging;
-use App\Model\Concerns\LogsActivity;
 use App\Model\Concerns\ActivityFeed;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Redirect.
