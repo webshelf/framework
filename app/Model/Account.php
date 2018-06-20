@@ -72,13 +72,6 @@ class Account extends Authenticatable
      * @var string
      */
     protected $table = 'accounts';
-
-    /**
-     * Eager Load Relationship
-     *
-     * @var array
-     */
-    protected $with = ['role'];
     
     /**
      * Default attributes for the model.
