@@ -1,7 +1,7 @@
 @extends('dashboard::frame')
 
 @section('title')
-    Plugin Overview
+    Product Overview
 @endsection
 
 @section('information')

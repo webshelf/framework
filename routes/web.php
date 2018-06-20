@@ -26,7 +26,7 @@
     | contains the "web" middleware group. Now create something great!
     |
     */
-    Route::get('/admin')->uses('DashboardController@index')->name('dashboard')->middleware('auth');
+    Route::get('/admin')->uses('DashboardController@index')->name('dashboard')->middleware(['web', 'auth', 'gateway']);
 
     /*
     |--------------------------------------------------------------------------

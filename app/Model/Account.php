@@ -9,13 +9,16 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Model\Concerns\ActivityLogging;
 use App\Model\Concerns\LogsActivity;
 use App\Model\Concerns\ActivityFeed;
+use App\Model\Role;
+use App\Classes\Roles\Interfaces\RoleInterface;
+use App\Classes\Roles\Disabled;
+use App\Classes\Roles\Exceptions\InvalidRoleType;
 
 /**
  * Class Accounts.
@@ -40,6 +43,7 @@ use App\Model\Concerns\ActivityFeed;
  * @property string $forename
  * @property string $surname
  * @property string $address
+ * @property int $role_id
  * @property string $number
  * @property int $status
  * @property int $verified
@@ -54,12 +58,7 @@ class Account extends Authenticatable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-    /*
-     * Spatie Roles and Permissions.
-     *
-     * @ https://github.com/spatie/laravel-permission
-     */
-    use HasRoles;
+
     /*
      * Log users activity on this model.
      *
@@ -73,6 +72,20 @@ class Account extends Authenticatable
      * @var string
      */
     protected $table = 'accounts';
+
+    /**
+     * Eager Load Relationship
+     *
+     * @var array
+     */
+    protected $with = ['role'];
+    
+    /**
+     * Default attributes for the model.
+     *
+     * @var array
+     */
+    protected $attributes = [];
 
     /**
      * The attributes that should be mutated to dates.
@@ -104,6 +117,16 @@ class Account extends Authenticatable
     public function getDescriptionForEvent(string $eventName): string
     {
         return "{$eventName} the account belonging to {$this->fullName()}";
+    }
+
+    /**
+     * Get the role attached to the account.
+     *
+     * @return Role $model
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -204,5 +227,45 @@ class Account extends Authenticatable
     public static function resolveId()
     {
         return auth()->check() ? auth()->user()->getAuthIdentifier() : null;
+    }
+
+    /**
+     * Check if the account has a role.
+     *
+     * @param string $name
+     * @return boolean
+     */
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            $class = sprintf('App\Classes\Roles\%s', $role);
+            return $this->hasRole(app()->make($class));
+        }
+
+        if ($role instanceof RoleInterface) {
+            return $role->validate($this);
+        }
+
+        throw new InvalidRoleType("The role is not a correct format or does not exist.");
+    }
+
+    /**
+     * Apply a role to the account.
+     *
+     * @param RoleInterface $role
+     * @return void
+     */
+    public function setRole($role)
+    {
+        if (is_string($role)) {
+            $class = sprintf('App\Classes\Roles\%s', $role);
+            return $this->setRole(app()->make($class));
+        }
+
+        if ($role instanceof RoleInterface) {
+            return $role->apply($this);
+        }
+        
+        throw new InvalidRoleType("The role is not a correct format or does not exist.");
     }
 }

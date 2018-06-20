@@ -10,9 +10,13 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PermissionTest extends TestCase
 {
+
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -34,7 +38,7 @@ class PermissionTest extends TestCase
      */
     public function view_products_plugin_page()
     {
-        $this->dashboardAccessTest('/admin/products');
+        $this->dashboardAccessTest('/admin/products/index');
     }
 
     /**
@@ -75,6 +79,14 @@ class PermissionTest extends TestCase
     public function view_filemanager_modules_page()
     {
         $this->dashboardAccessTest('/admin/filemanager');
+    }
+
+    /**
+     * @test
+     */
+    public function view_accounts_modules_page()
+    {
+        $this->dashboardAccessTest('/admin/accounts');
     }
 
     /**

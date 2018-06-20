@@ -8,6 +8,7 @@ use App\Http\Controllers\ErrorController;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Classes\Roles\Exceptions\UnauthorizedRoleException;
 
 class Handler extends ExceptionHandler
 {
@@ -54,9 +55,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (app()->isLocal() && ! $exception instanceof NotFoundHttpException) {
-            return parent::render($request, $exception);
-        }
+        // if (app()->isLocal() && ! $exception instanceof NotFoundHttpException) {
+        //     return parent::render($request, $exception);
+        // }
 
         if ($this->hasDisabledSite()) {
             return ErrorController::maintenance();

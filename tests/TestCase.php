@@ -37,7 +37,9 @@ abstract class TestCase extends BaseTestCase
     {
         $this->call('GET', $url)->assertStatus(302)->assertSee('/admin/login');
 
-        auth()->login(factory(Account::class)->make());
+        $account = factory('App\Model\Account')->create();
+
+        auth()->login($account);
 
         $this->call('GET', $url)->assertStatus(200);
     }
@@ -47,9 +49,9 @@ abstract class TestCase extends BaseTestCase
      *
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
-    protected function login()
+    protected function signIn($properties = [])
     {
-        return auth()->login(factory(Account::class)->create());
+        return auth()->login(factory('App\Model\Account')->create($properties));
     }
 
     /**

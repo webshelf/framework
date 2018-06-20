@@ -96,14 +96,14 @@
     </div>
 
     <div class="form-group">
-      <label for="role_id">Choose a Role Permission</label>
+      <label for="role">Choose a Role Permission</label>
         <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <div class="input-group-text">{!! useIcon('project-diagram') !!}</div>
             </div>
-            <select class="form-control" name="role_id" id="role_id">
+            <select class="form-control" name="role" id="role">
                 @foreach ($roles as $role)
-                    <option value="{{ $role->id }}" {{ formSelect(old('role_id', optional($account->roles->first())->id), $role->id) }}>{{ $role->title }}</option>
+                    <option value="{{ $role->name }}" {{ formSelect(old('role', optional($account->role)->name), $role->name) }}>{{ $role->title }}</option>
                 @endforeach
             </select>
         </div>

@@ -3,9 +3,10 @@
 use App\Model\Page;
 use App\Model\Account;
 use Faker\Generator as Faker;
-
 use App\Plugins\Pages\Model\PageOptions;
 use App\Plugins\Pages\Model\PageTypes;
+use App\Model\Role;
+use App\Classes\Roles\Administrator;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,8 @@ $factory->define(App\Model\Account::class, function (Faker $faker) {
         'number' => $faker->phoneNumber,
         'last_login' => $faker->dateTimeBetween('-4 months'),
         'password' => 'password', // secret
-        'remember_token' => str_random(10),        
+        'remember_token' => str_random(10),
+        'role_id' => Administrator::$key
     ];
 });
 

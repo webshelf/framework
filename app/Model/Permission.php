@@ -2,12 +2,12 @@
 
 namespace App\Model;
 
-use Spatie\Permission\Models\Permission as BasePermissions;
+use App\Model\Model;
 
 /**
  * Class Migrations.
  */
-class Permission extends BasePermissions
+class Permission extends Model
 {
     /**
      * The table associated with the model.

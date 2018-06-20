@@ -61,7 +61,7 @@
 
             <div class="details">
                 <div class="title">
-                    <a href="{{ route('admin.accounts.edit', $account->id) }}">{{ $account->fullName() }} ({{ ucwords($account->getRoleNames()->first()) }})</a>
+                    <a href="{{ route('admin.accounts.edit', $account->id) }}">{{ $account->fullName() }} ({{ ucwords($account->role->title) }})</a>
                 </div>
                 <div class="website">
                     Created {{ $account->created_at->diffForHumans() }}

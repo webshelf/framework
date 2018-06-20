@@ -28,6 +28,8 @@ class Controller extends ModuleEngine
     public function __construct(UpdateRepository $migrations)
     {
         $this->migrations = $migrations;
+
+        $this->middleware(['role:developer']);
     }
 
     /**

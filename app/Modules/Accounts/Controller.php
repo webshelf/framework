@@ -47,7 +47,7 @@ class Controller extends ModuleEngine
 
         $this->roles = $roles;
 
-        $this->middleware(['permission:configure']);
+        $this->middleware(['role:administrator']);
     }
 
     /**
@@ -109,7 +109,7 @@ class Controller extends ModuleEngine
             'surname'  => 'sometimes|nullable|min:3|max:255',
             'email'    => 'required|email|unique:accounts',
             'password' => 'required|confirmed|min:3|max:255',
-            'role_id'  => 'required|integer',
+            'role'     => 'required|string|exists:system_roles,name',
         ]);
 
         // store the new account data.
@@ -134,7 +134,7 @@ class Controller extends ModuleEngine
             'surname'  => 'sometimes|nullable|min:3|max:255',
             'email'    => "required|email|unique:accounts,email,{$id}",
             'password' => 'sometimes|nullable|confirmed|min:3|max:255',
-            'role_id'  => 'required|integer',
+            'role'     => 'required|string|exists:system_roles,name',
         ]);
 
         $this->storeDataFrom($request, $repository->whereID($id));
@@ -162,7 +162,7 @@ class Controller extends ModuleEngine
         $account->save();
 
         // assign the role from the request.
-        $account->syncRoles($request->input('role_id'));
+        $account->setRole($request->input('role'));
 
         // return the data that was created.
         return $account;

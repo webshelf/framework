@@ -94,7 +94,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware(['web'])->group($frontendRoute);
 
-            Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);
+            Route::middleware(['web', 'auth', 'gateway'])->namespace($namespace)->group($backendRoute);
         }
     }
 
@@ -120,7 +120,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web'])->group($frontendRoute);
 
             // Backend are routes that can only be accessed to those with access.
-            Route::middleware(['web', 'auth'])->namespace($namespace)->group($backendRoute);
+            Route::middleware(['web', 'auth', 'gateway'])->namespace($namespace)->group($backendRoute);
         }
     }
 

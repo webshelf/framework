@@ -30,7 +30,7 @@ class Controller extends ModuleEngine
     {
         $this->settings = $settings;
 
-        $this->middleware(['permission:configure']);
+        $this->middleware(['role:administrator']);
     }
 
     /**

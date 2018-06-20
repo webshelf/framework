@@ -38,7 +38,7 @@
 
             @foreach(config('modules') as $module)
 
-                @if ($module['role'] == '' || account()->hasPermissionTo($module['role']))
+                @role($module['role'])
                 <li>
 
                     <a href="{{ url($module['url']) }}" class="{{ $breadcrumbs->contain($module['title'], 2) ? 'active' : 'inactive' }}">

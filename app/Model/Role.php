@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use Spatie\Permission\Models\Role as BaseRoles;
+use App\Model\Model;
 
 /**
  * Class Migrations.
@@ -11,12 +11,19 @@ use Spatie\Permission\Models\Role as BaseRoles;
  * @property string $title
  * @property string $description
  */
-class Role extends BaseRoles
+class Role extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'roles';
+    protected $table = 'system_roles';
+
+    /**
+     * The attributes that are not mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 }
