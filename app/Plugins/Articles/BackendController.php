@@ -82,10 +82,10 @@ class BackendController extends PluginEngine
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Article $article, Request $request)
+    public function store(Request $request)
     {
         // use the global save function.
-        $this->save($request, $article);
+        $this->save($request, new Article);
 
         // redirect back to articles index.
         return redirect()->route('admin.articles.index');
@@ -194,20 +194,19 @@ class BackendController extends PluginEngine
      */
     public function save(Request $request, Article $article)
     {
-        $this->validate($request, [
-            'title' => ['min:3|max:255', Rule::unique('articles')->ignore($article->id)], 'content' => ['min:3'],
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'content' => 'required|min:3|max:255',
+            'status' => 'required|integer',
+            'category_id' => 'required|integer|exists:article_categories,id',
             'publish_date' => 'required|date',
-            'category' => 'required',
+            'unpublish_date' => 'sometimes|nullable|date|after:publish_date'
         ]);
-
-        if ($request['unpublish_date']) {
-            $this->validate($request, ['unpublish_date' => 'sometimes|date|after:publish_date']);
-        }
 
         // set attribute for the model.
         $article->setAttribute('title', $request['title']);
         $article->setAttribute('content', $request['content']);
-        $article->setAttribute('category_id', $request['category']);
+        $article->setAttribute('category_id', $request['category_id']);
         $article->setAttribute('status', $request['status']);
         $article->setAttribute('featured_img', $request['image']);
 

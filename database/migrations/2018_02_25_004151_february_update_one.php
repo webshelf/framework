@@ -88,7 +88,7 @@ class FebruaryUpdateOne extends Migration
         /*
          * INDEX ALL NEW MATERIAL FOR SEARCHING.
          */
-        Artisan::call('scout:mysql-index');
+        // Artisan::call('scout:mysql-index');
     }
 
     /**

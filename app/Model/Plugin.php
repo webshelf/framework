@@ -9,6 +9,7 @@
 namespace App\Model;
 
 use App\Plugins\PluginHandler;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class Plugins.
@@ -16,9 +17,7 @@ use App\Plugins\PluginHandler;
  * @property string $name
  *
  * @property bool $required
- * @property bool $enabled
- *
- * @property PluginHandler $handler
+ * @property string $controller
  *
  * @property Plugin $options
  */
@@ -32,11 +31,11 @@ class Plugin extends Model
     protected $table = 'plugins';
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are not mass assignable.
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $guarded = [];
 
     /**
      * The table date columns, casted to Carbon.
@@ -53,16 +52,54 @@ class Plugin extends Model
     protected $casts = ['enabled' => 'boolean', 'required' => 'boolean'];
 
     /**
-     * Return the plugins namespace.
+     * Undocumented function
      *
-     * @return string
+     * @return void
      */
-    protected function dirNamespace()
+    public function getRouteKeyName()
     {
-        return sprintf("App\Plugins\%s", ucfirst($this->name));
+        return 'name';
     }
 
     /**
+     * Toggle the enabled status of the plugin.
+     *
+     * @return boolean
+     */
+    public function toggle()
+    {
+        return $this->update(['enabled' => !$this->enabled]);
+    }
+
+    /**
+     * Return the namespace path to the controller of the plugin
+     *
+     * @return string
+     */
+    public function getControllerAttribute()
+    {
+        return app()->make(sprintf("App\Plugins\%s\%sController", $this->name, $this->name));
+    }
+
+    /**
+     * Call the install method on the plugins controller
+     *
+     * @param string $plugin_name The plugin name to install
+     * @return Plugin The model instance of the installed plugin
+     */
+    public static function install(string $plugin_name)
+    {
+        $plugin = self::whereName($plugin_name)->first();
+
+        $plugin->update(['enabled' => true]);
+
+        $plugin->controller->install();
+
+        return $plugin;
+    }
+
+    /**
+     * @deprecated
      * @return PluginHandler
      */
     protected function getHandlerAttribute()
@@ -79,7 +116,7 @@ class Plugin extends Model
      */
     public function icon()
     {
-        return $this->handler->icon();
+        return $this->controller->icon();
     }
 
     public function name()
@@ -89,7 +126,7 @@ class Plugin extends Model
 
     public function version()
     {
-        return $this->handler->version();
+        return $this->controller->version();
     }
 
     public function isEnabled()
@@ -258,12 +295,5 @@ class Plugin extends Model
     public function feeds()
     {
         return $this->hasMany(PluginFeed::class, 'plugin_id', 'id');
-    }
-
-    public function install()
-    {
-        $controller = app(printf("App\Plugins\%s", $this->name));
-
-        $controller->install();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Laravel\Scout\Searchable;
 use Illuminate\Support\Collection;
 use App\Classes\Interfaces\Linkable;
 use App\Plugins\Pages\Model\PageTypes;
@@ -15,6 +14,7 @@ use App\Model\Concerns\ActivityLogging;
 use App\Model\Concerns\LogsActivity;
 use App\Model\Concerns\ActivityFeed;
 use App\Model\Concerns\Publishers;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Pages.
@@ -53,12 +53,14 @@ class Page extends Model implements Linkable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
+
     /*
      * Laravel Searchable Model.
      *
      * @ https://laravel.com/docs/5.3/scout#installation
      */
     use Searchable;
+
     /*
      * Log users activity on this model.
      *
@@ -68,7 +70,7 @@ class Page extends Model implements Linkable
 
     /**
      * Track the editor and creator publishers
-     * 
+     *
      * @ Webshelf Framewrok 5.6
      */
     use Publishers;
@@ -112,6 +114,32 @@ class Page extends Model implements Linkable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     * Return the path to the page, these can sometimes have a prefix
+     * attached.
+     *
+     * @return void
+     */
+    public function path()
+    {
+        if ($this->prefix) {
+            return "{$this->prefix}/{$this->slug}";
+        }
+
+        return "{$this->slug}";
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $string
+     * @return void
+     */
+    public static function whereIdentifier(string $string)
+    {
+        return Page::where('identifier', $string)->first();
     }
 
     /**
@@ -177,6 +205,7 @@ class Page extends Model implements Linkable
     /**
      * The url that is used to view this model.
      *
+     * @deprecated version
      * @return string
      */
     public function route()

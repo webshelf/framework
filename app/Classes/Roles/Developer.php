@@ -49,6 +49,7 @@ class Developer implements RoleInterface
      */
     public function handle($request, Closure $next)
     {
+        if ($this->validate())
         return $next($request);
     }
 

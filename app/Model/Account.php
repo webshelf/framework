@@ -19,6 +19,7 @@ use App\Model\Role;
 use App\Classes\Roles\Interfaces\RoleInterface;
 use App\Classes\Roles\Disabled;
 use App\Classes\Roles\Exceptions\InvalidRoleType;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Accounts.
@@ -72,7 +73,7 @@ class Account extends Authenticatable
      * @var string
      */
     protected $table = 'accounts';
-    
+
     /**
      * Default attributes for the model.
      *
@@ -258,7 +259,7 @@ class Account extends Authenticatable
         if ($role instanceof RoleInterface) {
             return $role->apply($this);
         }
-        
+
         throw new InvalidRoleType("The role is not a correct format or does not exist.");
     }
 }

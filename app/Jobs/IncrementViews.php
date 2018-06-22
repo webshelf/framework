@@ -4,8 +4,8 @@ namespace App\Jobs;
 
 use App\Model\Page;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Model\Model;
 
 class IncrementViews
 {
@@ -24,7 +24,7 @@ class IncrementViews
      *
      * @return void
      */
-    public function __construct(Page $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
@@ -37,8 +37,6 @@ class IncrementViews
     public function handle()
     {
         $this->model->increment('views');
-
-        $this->model->save();
     }
 
     /**

@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    { 
         parent::boot();
     }
 
@@ -57,6 +57,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
+        $tom = array();
+        
         Route::middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
     }
 
@@ -88,12 +90,10 @@ class RouteServiceProvider extends ServiceProvider
 
             $namespace = sprintf('App\Plugins\%s', $plugin_name);
 
-            $backendRoute = base_path(sprintf('app/Plugins/%s/Routes/backend.php', $plugin_name));
-
             $frontendRoute = base_path(sprintf('app/Plugins/%s/Routes/frontend.php', $plugin_name));
-
             Route::middleware(['web'])->group($frontendRoute);
-
+        
+            $backendRoute = base_path(sprintf('app/Plugins/%s/Routes/backend.php', $plugin_name));
             Route::middleware(['web', 'auth', 'gateway'])->namespace($namespace)->group($backendRoute);
         }
     }

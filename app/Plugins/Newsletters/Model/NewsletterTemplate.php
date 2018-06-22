@@ -2,7 +2,6 @@
 
 namespace App\Plugins\Newsletters\Model;
 
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,7 +14,7 @@ class NewsletterTemplate extends Model
     *
     * @ https://laravel.com/docs/5.3/scout#installation
     */
-    use Searchable;
+    // use Searchable;
 
     /**
      * The table associated with the model.

@@ -51,5 +51,57 @@ $factory->define(App\Model\Page::class, function(Faker $faker) {
         'editor_id' => $account->id,
         'creator_id' => $account->id,
     ];
-
 });
+
+$factory->define(App\Model\Plugin::class, function(Faker $faker) {
+
+    return [
+        'name' => $faker->word,
+        'enabled' => false,
+        'installed' => false,
+        'hidden' => false,
+        'required' => false,
+        'is_frontend' => false,
+        'is_backend' => false,
+    ];
+});
+
+$factory->define(App\Plugins\Articles\Model\Article::class, function(Faker $faker) {
+
+    $creator = factory('App\Model\Account')->create();
+    $title = $faker->sentence;
+
+    return [
+        'title' => $title,
+        'slug' => str_slug($title),
+        'content' => $faker->paragraph,
+        'featured_img' => $faker->imageUrl(),
+        'publish_date' => $faker->dateTimeBetween('-1 months'),
+        'unpublish_date' => null,
+        'views' => $faker->numberBetween(100, 9999),
+        'sitemap' => $faker->boolean,
+        'category_id' => factory('App\Plugins\Articles\Model\Categories')->create()->id,
+        'editor_id' => $creator->id,
+        'creator_id' => $creator->id,
+        'status' => $faker->boolean,
+        'deleted_at' => null,
+        'created_at' => $faker->dateTimeBetween('-12 months'),
+        'updated_at' => $faker->dateTimeBetween('-5 months')
+    ];
+});
+
+$factory->define(App\Plugins\Articles\Model\Categories::class, function(Faker $faker) {
+
+    $creator = factory('App\Model\Account')->create()->id;
+
+    return [
+        'title' => $faker->word,
+        'status' => $faker->boolean,
+        'editor_id' => $creator,
+        'creator_id' => $creator,
+        'deleted_at' => null,
+        'created_at' => $faker->dateTimeBetween('-12 months'),
+        'updated_at' => $faker->dateTimeBetween('-5 months')
+    ];
+});
+

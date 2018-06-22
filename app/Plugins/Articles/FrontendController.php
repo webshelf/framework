@@ -14,23 +14,19 @@ use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
-use Illuminate\View\Factory as View;
 use App\Plugins\Articles\Model\Article;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
+use App\Plugins\Articles\Model\Categories;
+use Illuminate\Support\Facades\View;
 
 /**
  * Class UserController.
  */
 class FrontendController extends PluginEngine implements Sitemap
 {
-    /**
-     * @var View
-     */
-    private $view;
-
     /**
      * @var Page
      */
@@ -41,88 +37,105 @@ class FrontendController extends PluginEngine implements Sitemap
      * @param PageRepository $pages
      * @param View $view
      */
-    public function __construct(PageRepository $pages, View $view)
+    public function __construct()
     {
-        $this->view = $view;
-
-        $this->currentPage = $pages->whereIdentifier('articles');
+        $this->currentPage = Page::whereIdentifier('articles');
     }
 
     /**
-     * @return mixed
-     */
-    private function navigationData()
-    {
-        return app(MenuRepository::class)->allParentsWithChildren();
-    }
-
-    /**
-     * Usually the place for listing all the articles. (index).
+     * List all available articles.
      *
      * @param ArticleRepository $repository
      * @return \Illuminate\Http\Response
      */
-    public function index(ArticleRepository $repository)
+    public function allArticles(ArticleRepository $repository)
     {
-        $this->view->share('articles', $repository->paginateLatest(7));
+        View::share('articles', $repository->paginateLatest(7));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
     /**
-     * Load a single article from the news plugin.
+     * View a single article.
      *
-     * @param ArticleRepository $repository
-     * @param string $category The category type of the url.
-     * @param string $slug The slug of the url article.
+     * @param Categories $category The articles category.
+     * @param Article $article The article model to interact with.
      *
      * @return void
      */
-    public function article(ArticleRepository $repository, string $category, string $slug)
+    public function viewArticle($category, Article $article)
     {
-        /** @var Article $article */
-        $article = $repository->collectArticle($slug);
-
         IncrementViews::dispatch($article);
 
         $this->currentPage->heading = $article->title;
 
-        $this->view->share('articles', collect([0 => $article]));
+        View::share('articles', collect([0 => $article]));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
     /**
-     * Search for an array of articles based on title and content.
+     * View all articles in the category.
      *
      * @param ArticleRepository $repository
-     * @param Request $request
-     *
+     * @param string $string
      * @return void
      */
-    public function search(ArticleRepository $repository, Request $request)
+    public function allArticlesInCategory(Categories $category)
     {
-        $this->view->share('articles', $repository->searchThenPaginate($request->get('search')));
-
-        $this->currentPage->heading = 'Article Search';
-
-        return Frontpage::build($this->currentPage, 200, 'articles');
-    }
-
-    public function category(ArticleRepository $repository, string $string)
-    {
-        $this->view->share('articles', $repository->whereCategoryTitle($string));
+        View::share('articles', $category->articles->all());
 
         $this->currentPage->heading = 'Browse Categories';
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
+    /**
+     * Search all articles and return results.
+     *
+     * @param ArticleRepository $repository
+     * @param Request $request
+     *
+     * @return void
+     */
+    public function searchArticles(Request $request)
+    {
+        View::share('articles', Article::searchForString($request->get('query')));
+
+        $this->currentPage->heading = 'Article Search';
+
+        return Frontpage::build($this->currentPage, 200, 'articles');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function creator(ArticleRepository $repository, int $id)
     {
-        $this->view->share('articles', $repository->whereCreatorId($id));
-
         $this->currentPage->heading = 'Browse Creators';
+
+        $this->view->share('articles', $repository->whereCreatorId($id));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }

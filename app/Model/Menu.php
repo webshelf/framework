@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +12,7 @@ use App\Model\Concerns\AuthorTracking;
 use App\Model\Concerns\LogsActivity;
 use App\Model\Concerns\ActivityFeed;
 use App\Model\Concerns\Publishers;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Menus.
@@ -45,24 +45,28 @@ class Menu extends Model implements Linker
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-    /*
-     * Laravel Searchable Model.
-     *
-     * @ https://laravel.com/docs/5.3/scout#installation
-     */
-    use Searchable;
+
     /*
      * Log users activity on this model.
      *
      * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
      */
     use ActivityFeed;
+
     /*
      * Log the author and editor of the model
      *
      * @ Webshelf framework 5.6
      */
     use Publishers;
+
+    /*
+     * Laravel Searchable Model.
+     *
+     * @ https://laravel.com/docs/5.3/scout#installation
+     */
+    use Searchable;
+
 
     /**
      * Status if current menu.

@@ -5,6 +5,7 @@ namespace App\Plugins\Articles\Model;
 use Carbon\Carbon;
 use App\Model\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\Concerns\Publishers;
 
 /**
  * Class ArticleCategory.
@@ -29,6 +30,13 @@ class Categories extends Model
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
+
+    /**
+     * Publishers
+     *
+     * @ fromework 5.6
+     */
+    use Publishers;
 
     /**
      * The table associated with the model.
@@ -59,6 +67,16 @@ class Categories extends Model
     protected $auditExclude = [];
 
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function articles()
@@ -84,25 +102,5 @@ class Categories extends Model
     public function editor()
     {
         return $this->belongsTo(Account::class, 'editor_id', 'id');
-    }
-
-    /**
-     * Slug the title for url usage.
-     *
-     * @return string
-     */
-    public function getSlugAttribute()
-    {
-        return str_slug($this->getAttribute('title'));
-    }
-
-    /**
-     * The name of the current model object.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return $this->getAttribute('title');
     }
 }

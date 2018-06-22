@@ -44,14 +44,15 @@ class ArticlesController extends PluginHandler implements Installable
      */
     public function install()
     {
-        /** @var Page $page */
-        $page = app(Page::class);
-        $page->title = 'articles';
-        $page->identifier = 'articles';
-        $page->type = PageTypes::TYPE_PLUGIN;
-        $page->option = PageOptions::OPTION_PUBLIC;
+        $page = Page::firstOrCreate([
+            'seo_title' => 'Articles',
+            'identifier' => 'articles',
+            'slug' => 'articles',
+            'type' => PageTypes::TYPE_PLUGIN,
+            'option' => PageOptions::OPTION_PUBLIC
+        ]);
 
-        return $page->save();
+        return $page;
     }
 
     /**

@@ -6,11 +6,20 @@ use Mockery;
 use Faker\Factory;
 use App\Model\Account;
 use Illuminate\Database\Eloquent\Collection;
+use App\Exceptions\Handler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->disableExceptionHandling();
+    }
 
     protected function visit(string $url, int $status = null, string $redirect = null)
     {
@@ -23,6 +32,27 @@ abstract class TestCase extends BaseTestCase
         }
 
         return $this->call('GET', $url);
+    }
+
+    protected function withExceptionHandling()
+    {
+        $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
+
+        return $this;
+    }
+
+    // Hat tip, @adamwathan.
+    protected function disableExceptionHandling()
+    {
+        $this->oldExceptionHandler = $this->app->make(ExceptionHandler::class);
+
+        $this->app->instance(ExceptionHandler::class, new class extends Handler {
+            public function __construct() {}
+            public function report(\Exception $e) {}
+            public function render($request, \Exception $e) {
+                throw $e;
+            }
+        });
     }
 
     /**
@@ -51,7 +81,9 @@ abstract class TestCase extends BaseTestCase
      */
     protected function signIn($properties = [])
     {
-        return auth()->login(factory('App\Model\Account')->create($properties));
+        auth()->login(factory('App\Model\Account')->create($properties));
+
+        return $this;
     }
 
     /**

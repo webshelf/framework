@@ -41,8 +41,8 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label for="category">Category</label>
-                    <select class="form-control" name="category" id="category">
+                    <label for="category_id">Category</label>
+                    <select class="form-control" name="category_id" id="category_id">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ old('category', optional($article->category)->id) == $category->id ? 'selected' : null }}>{{ $category->title }}</option>
                         @endforeach

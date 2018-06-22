@@ -5,11 +5,13 @@ namespace App\Plugins\Articles\Model;
 use Carbon\Carbon;
 use App\Model\Model;
 use App\Classes\ReadTime;
-use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Model\Concerns\Publishers;
+use App\Model\Page;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Article.
@@ -50,6 +52,13 @@ class Article extends Model implements Linkable
      */
     use Searchable;
 
+    /**
+     * Publisher tracking
+     *
+     * @framework 5.6
+     */
+    use Publishers;
+
     /*
      * Article is viewable by all visitors.
      */
@@ -84,6 +93,13 @@ class Article extends Model implements Linkable
     protected $guarded = [];
 
     /**
+     * Attributes to exclude from the Audit.
+     *
+     * @var array
+     */
+    protected $auditExclude = [];
+
+    /**
      * The table date columns, casted to Carbon.
      *
      * @var array
@@ -91,11 +107,14 @@ class Article extends Model implements Linkable
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'publish_date', 'unpublish_date'];
 
     /**
-     * Attributes to exclude from the Audit.
+     * Undocumented function
      *
-     * @var array
+     * @return void
      */
-    protected $auditExclude = [];
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * @return Categories|HasOne
@@ -158,12 +177,23 @@ class Article extends Model implements Linkable
     }
 
     /**
-     * @param int $amount
-     * @return int
+     * Undocumented function
+     *
+     * @return void
      */
-    public function incrementView(int $amount = 1)
+    public function getPageAttribute()
     {
-        return $this->increment('views', $amount);
+        return Page::whereIdentifier('articles');
+    }
+
+    /**
+     * Get the path to the article
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return $this->page->path() . '/' . $this->category->title . '/' . $this->slug;
     }
 
     /**
@@ -194,5 +224,16 @@ class Article extends Model implements Linkable
     public function countWords()
     {
         return ReadTime::countWords($this->getAttribute('content'));
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $query
+     * @return void
+     */
+    public static function searchForString(string $query, int $paginate = 7)
+    {
+        return Article::search("test")->orderBy('created_at', 'desc')->paginate($paginate);
     }
 }

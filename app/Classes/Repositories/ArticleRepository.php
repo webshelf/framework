@@ -133,16 +133,6 @@ class ArticleRepository extends BaseRepository
         return $this->model->where('slug', $slug)->orderBy('created_at', 'desc')->first();
     }
 
-    /**
-     * @param string $text
-     * @param int $paginate
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function searchThenPaginate(string $text, int $paginate = 7)
-    {
-        return $this->model->search($text)->orderBy('created_at', 'desc')->paginate($paginate);
-    }
-
     public function whereCreatorId(int $creator_id, int $paginate = 5)
     {
         return $this->model

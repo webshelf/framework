@@ -18,6 +18,3 @@
     Route::get('admin/articles/categories/destroy/{id}')->uses('BackendController@categories_destroy')->name('admin.articles.categories.destroy');
 
     Route::resource('admin/articles', 'BackendController', ['as' => 'admin']);
-
-    // Allow destruction without using forms.
-    Route::get('/admin/articles/destroy/{slug}')->uses('BackendController@destroy')->name('admin.articles.destroy');

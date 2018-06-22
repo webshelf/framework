@@ -11,6 +11,8 @@ namespace App\Plugins\Products;
 use App\Plugins\PluginEngine;
 use App\Classes\Interfaces\Installable;
 use App\Classes\Repositories\PluginRepository;
+use App\Model\Plugin;
+use App\Plugins\Products\Exceptions\PluginNotInstanceOfInstallable;
 
 /**
  * Class AdminController.
@@ -29,6 +31,8 @@ class BackendController extends PluginEngine
     public function __construct(PluginRepository $plugins)
     {
         $this->plugins = $plugins;
+
+        $this->middleware(['role:developer']);
     }
 
     /**
@@ -46,23 +50,19 @@ class BackendController extends PluginEngine
      * @param string $plugin_name
      * @return mixed
      */
-    public function install(string $plugin_name)
+    public function install(Plugin $plugin)
     {
-        $plugin = $this->plugins->whereName($plugin_name);
+        if ($plugin->controller instanceof Installable) 
+        {
+            $plugin->controller->install();
 
-        if ($plugin->enabled == false) {
-            \DB::transaction(function () use ($plugin) {
-                if ($plugin->handler instanceof Installable) {
-                    $plugin->handler->install();
-                }
+            $plugin->toggle();
 
-                $plugin->enabled = true;
-
-                $plugin->save();
-            }, 5);
+            return response()->redirectToRoute('admin.products.index');
         }
 
-        return response()->redirectToRoute('admin.products.index');
+        throw new PluginNotInstanceOfInstallable;
+
     }
 
     /**
@@ -72,22 +72,17 @@ class BackendController extends PluginEngine
      * @param string $plugin_name
      * @return mixed
      */
-    public function uninstall(string $plugin_name)
+    public function uninstall(Plugin $plugin)
     {
-        $plugin = $this->plugins->whereName($plugin_name);
+        if ($plugin->controller instanceof Installable) 
+        {
+            $plugin->controller->uninstall();
 
-        if ($plugin->enabled == true) {
-            \DB::transaction(function () use ($plugin) {
-                if ($plugin->handler instanceof Installable) {
-                    $plugin->handler->uninstall();
-                }
+            $plugin->toggle();
 
-                $plugin->enabled = false;
-
-                $plugin->save();
-            }, 5);
+            return response()->redirectToRoute('admin.products.index');
         }
 
-        return response()->redirectToRoute('admin.products.index');
+        throw new PluginNotInstanceOfInstallable;
     }
 }

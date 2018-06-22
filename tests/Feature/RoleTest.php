@@ -72,7 +72,9 @@ class RoleTest extends TestCase
         account()->setRole(new Disabled);
         $this->get('/admin')
             ->assertRedirect(route('login'))
-            ->assertSessionHasErrors(['error' => 'Access to dashboard disabled']);
+            ->assertSessionHasErrors([
+                'error' => 'Access to dashboard disabled'
+            ]);
     }
 
     /**
@@ -85,5 +87,23 @@ class RoleTest extends TestCase
         $user->setRole('developer');
 
         $this->assertTrue($user->hasRole('developer'));
+    }
+
+    /**
+    * @test
+    */
+    public function only_developers_can_modify_modules()
+    {
+        $this->signIn();
+
+        $this->get('/admin/products/index')->assertDontSee('install');
+
+        $this->get('/admin/products/install/articles')->assertRedirect('/admin');
+
+        account()->setRole('developer');
+
+        $this->get('/admin/products/index')->assertSee('install');
+
+        $this->get('/admin/products/install/articles')->assertRedirect('/admin/products/index');
     }
 }

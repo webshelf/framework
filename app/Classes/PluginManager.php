@@ -139,7 +139,7 @@ class PluginManager
      */
     private function checkStatus($plugin, $status)
     {
-        return $plugin['enabled'] === $status;
+        return $plugin['enabled'] == $status;
     }
 
     /**
