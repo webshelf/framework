@@ -114,6 +114,16 @@ class Account extends Authenticatable
     }
 
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
+    /**
      * Get the role attached to the account.
      *
      * @return Role $model
@@ -200,7 +210,7 @@ class Account extends Authenticatable
      */
     public function articles()
     {
-        return $this->hasMany(Article::class, 'creator_id', 'id');
+        return $this->hasMany('App\Plugins\Articles\Model\Article', 'creator_id')->latest('created_at');
     }
 
     /**

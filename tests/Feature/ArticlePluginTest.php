@@ -41,8 +41,8 @@ class ArticlePluginTest extends TestCase
     protected $faker;
 
     /**
-    * @test
-    */
+     * Setup the testing for this test.
+     */
     public function setUp()
     {
         parent::setUp();
@@ -110,28 +110,17 @@ t     */
         $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
     }
 
-//     /**
-//     * @test
-//     */
-//     public function a_new_article_can_be_created()
-//     {
-//         $this->signIn();
+    /**
+     * @test
+     */
+    public function view_all_articles_by_creator_on_the_frontpage()
+    {
+        $account = factory('App\Model\Account')->create();
 
-//         $article = factory('App\Plugins\Articles\Model\Article')->make();
+        $articles = factory('App\Plugins\Articles\Model\Article', 3)->create(['creator_id' => $account->id]);
 
-//         $response = $this->post('/admin/articles', [
-//             'title' => $article->title,
-//             'content' => $article->content,
-//             'category' => $article->category_id,
-//             'publish_date' => $article->publish_date,
-//         ]);
+        $response = $this->get('/articles/creator/' . $account->username);
 
-//         $this->assertDatabaseHas('articles', [
-//             'title' => $article->title,
-//             'content' => $article->content
-//         ]);
-
-//         $response->assertRedirect("admin/articles");
-
-//     }
+        $response->assertSee($articles->random()->title)->assertViewIs('articles')->assertOk();
+    }
 }

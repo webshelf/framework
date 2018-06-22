@@ -8,6 +8,7 @@
 
 namespace App\Plugins\Articles;
 
+use App\Model\Account;
 use App\Model\Page;
 use App\Jobs\IncrementViews;
 use Illuminate\Http\Request;
@@ -15,7 +16,6 @@ use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
 use App\Plugins\Articles\Model\Article;
-use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
@@ -81,7 +81,7 @@ class FrontendController extends PluginEngine implements Sitemap
      * @param string $string
      * @return void
      */
-    public function allArticlesInCategory(Categories $category)
+    public function categoryArticles(Categories $category)
     {
         View::share('articles', $category->articles->all());
 
@@ -100,42 +100,25 @@ class FrontendController extends PluginEngine implements Sitemap
      */
     public function searchArticles(Request $request)
     {
-        View::share('articles', Article::searchForString($request->get('query')));
+        View::share('articles', Article::searchModelsByString($request->get('query')));
 
         $this->currentPage->heading = 'Article Search';
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function creator(ArticleRepository $repository, int $id)
+    /**
+     * Get all the articles created by an account.
+     *
+     * @param ArticleRepository $repository
+     * @param int $id
+     * @return Frontpage
+     */
+    public function allCreatorsArticles(ArticleRepository $repository, Account $account)
     {
         $this->currentPage->heading = 'Browse Creators';
 
-        $this->view->share('articles', $repository->whereCreatorId($id));
+        View::share('articles', $account->articles()->paginate(7));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }

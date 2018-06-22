@@ -97,7 +97,7 @@ return [
     |
     */
     'mysql' => [
-        'mode' => 'NATURAL_LANGUAGE',
+        'mode' => 'LIKE',
         'model_directories' => [
             'App\Model\\',
             'App\Plugins\Articles\Model\\'

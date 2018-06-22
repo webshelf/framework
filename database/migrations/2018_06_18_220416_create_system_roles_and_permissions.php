@@ -91,6 +91,16 @@ class CreateSystemRolesAndPermissions extends Migration
 
         // Update indexing for model searching. (Laravel Scout)
         \Illuminate\Support\Facades\Artisan::call('scout:mysql-index');
+
+        Schema::table('accounts', function(Blueprint $table) {
+            $table->string('username')->after('id')->default(str_slug(Faker\Factory::create()->userName));
+        });
+
+        foreach (Account::all() as $account) {
+            $parts = explode("@", $account->email);
+            $username = str_slug($parts[0]);
+            $account->update(['username' => $username]);
+        }
     }
 
     /**

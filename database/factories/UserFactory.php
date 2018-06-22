@@ -21,6 +21,7 @@ use App\Classes\Roles\Administrator;
 
 $factory->define(App\Model\Account::class, function (Faker $faker) {
     return [
+        'username' => $faker->userName,
         'forename' => $faker->firstName,
         'surname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
@@ -33,8 +34,7 @@ $factory->define(App\Model\Account::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Model\Page::class, function(Faker $faker) {
-
+$factory->define(App\Model\Page::class, function (Faker $faker) {
     $title = $faker->sentence;
     $account = factory(App\Model\Account::class)->create();
 
@@ -44,7 +44,7 @@ $factory->define(App\Model\Page::class, function(Faker $faker) {
         'seo_description' => $faker->paragraph(2),
         'prefix' => $faker->word,
         'slug' => str_slug($title),
-        'views' => $faker->numberBetween(75,900),
+        'views' => $faker->numberBetween(75, 900),
         'content' => $faker->paragraph(12),
         'type' => PageTypes::TYPE_STANDARD,
         'option' => PageOptions::OPTION_PUBLIC|PageOptions::OPTION_SITEMAP,
@@ -53,8 +53,7 @@ $factory->define(App\Model\Page::class, function(Faker $faker) {
     ];
 });
 
-$factory->define(App\Model\Plugin::class, function(Faker $faker) {
-
+$factory->define(App\Model\Plugin::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'enabled' => false,
@@ -66,8 +65,7 @@ $factory->define(App\Model\Plugin::class, function(Faker $faker) {
     ];
 });
 
-$factory->define(App\Plugins\Articles\Model\Article::class, function(Faker $faker) {
-
+$factory->define(App\Plugins\Articles\Model\Article::class, function (Faker $faker) {
     $creator = factory('App\Model\Account')->create();
     $title = $faker->sentence;
 
@@ -90,13 +88,14 @@ $factory->define(App\Plugins\Articles\Model\Article::class, function(Faker $fake
     ];
 });
 
-$factory->define(App\Plugins\Articles\Model\Categories::class, function(Faker $faker) {
-
+$factory->define(App\Plugins\Articles\Model\Categories::class, function (Faker $faker) {
+    $title = $faker->word;
     $creator = factory('App\Model\Account')->create()->id;
 
     return [
-        'title' => $faker->word,
+        'title' => $title,
         'status' => $faker->boolean,
+        'slug' => str_slug($title),
         'editor_id' => $creator,
         'creator_id' => $creator,
         'deleted_at' => null,
@@ -104,4 +103,3 @@ $factory->define(App\Plugins\Articles\Model\Categories::class, function(Faker $f
         'updated_at' => $faker->dateTimeBetween('-5 months')
     ];
 });
-

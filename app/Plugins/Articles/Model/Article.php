@@ -7,6 +7,7 @@ use App\Model\Model;
 use App\Classes\ReadTime;
 use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Model\Concerns\Publishers;
@@ -230,10 +231,10 @@ class Article extends Model implements Linkable
      * Undocumented function
      *
      * @param string $query
-     * @return void
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function searchForString(string $query, int $paginate = 7)
+    public static function searchModelsByString(string $query, int $paginate = 7)
     {
-        return Article::search("test")->orderBy('created_at', 'desc')->paginate($paginate);
+        return Article::search($query)->paginate();
     }
 }
