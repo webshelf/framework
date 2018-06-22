@@ -8,10 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Plugin;
 use App\Model\Activity;
 use App\Classes\Library\Services\Facebook;
-use App\Classes\Repositories\PluginRepository;
 use App\Classes\Repositories\ActivityRepository;
 
 /**

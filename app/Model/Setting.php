@@ -8,8 +8,6 @@
 
 namespace App\Model;
 
-use App\Model\Concerns\ActivityLogging;
-use App\Model\Concerns\LogsActivity;
 use App\Model\Concerns\ActivityFeed;
 
 /**

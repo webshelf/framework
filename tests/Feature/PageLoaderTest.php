@@ -16,14 +16,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Classes\Library\PageLoader\Frontpage;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
+
 /**
  * Class FrontpageTest.
  */
 class PageLoaderTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**
