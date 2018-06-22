@@ -3,15 +3,15 @@
 namespace App\Plugins\Articles\Model;
 
 use Carbon\Carbon;
+use App\Model\Page;
 use App\Model\Model;
 use App\Classes\ReadTime;
+use Laravel\Scout\Searchable;
+use App\Model\Concerns\Publishers;
 use App\Classes\Interfaces\Linkable;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Model\Concerns\Publishers;
-use App\Model\Page;
-use Laravel\Scout\Searchable;
 
 /**
  * Class Article.
@@ -51,8 +51,7 @@ class Article extends Model implements Linkable
      * @ https://laravel.com/docs/5.3/scout#installation
      */
     use Searchable;
-
-    /**
+    /*
      * Publisher tracking
      *
      * @framework 5.6
@@ -107,7 +106,7 @@ class Article extends Model implements Linkable
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'publish_date', 'unpublish_date'];
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return void
      */
@@ -177,7 +176,7 @@ class Article extends Model implements Linkable
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return void
      */
@@ -187,13 +186,13 @@ class Article extends Model implements Linkable
     }
 
     /**
-     * Get the path to the article
+     * Get the path to the article.
      *
      * @return string
      */
     public function path()
     {
-        return $this->page->path() . '/' . $this->category->title . '/' . $this->slug;
+        return $this->page->path().'/'.$this->category->title.'/'.$this->slug;
     }
 
     /**
@@ -227,13 +226,13 @@ class Article extends Model implements Linkable
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @param string $query
      * @return void
      */
     public static function searchForString(string $query, int $paginate = 7)
     {
-        return Article::search("test")->orderBy('created_at', 'desc')->paginate($paginate);
+        return self::search('test')->orderBy('created_at', 'desc')->paginate($paginate);
     }
 }

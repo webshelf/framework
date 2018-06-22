@@ -6,7 +6,7 @@ use Closure;
 use App\Model\Account;
 
 /**
- * Undocumented class
+ * Undocumented class.
  */
 interface RoleInterface
 {
@@ -14,17 +14,16 @@ interface RoleInterface
      * Apply the role logic to the account.
      *
      * @param Account $account
-     * @return boolean
+     * @return bool
      */
     public function apply(Account $account);
-    
-    /**
-     * Validate the role logic
-     *
-     * @return boolean
-     */ 
-    public function validate(Account $account);
 
+    /**
+     * Validate the role logic.
+     *
+     * @return bool
+     */
+    public function validate(Account $account);
 
     /**
      * Handle an incoming request.

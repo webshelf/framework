@@ -3,21 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Model\Plugin;
-use App\Plugins\Articles\Model\Article;
 use App\Classes\Roles\Developer;
 use App\Plugins\Articles\ArticlesController;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleInstallationTest extends TestCase
 {
-    
     use RefreshDatabase;
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function the_article_plugin_exists_in_the_database()
     {
         $plugin = Plugin::whereName('articles')->first();
@@ -26,8 +23,8 @@ class ArticleInstallationTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function the_article_plugin_can_be_toggled()
     {
         $plugin = Plugin::whereName('articles')->first();
@@ -38,8 +35,8 @@ class ArticleInstallationTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function the_article_plugin_has_a_controller_class()
     {
         $plugin = Plugin::whereName('articles')->first();
@@ -48,8 +45,8 @@ class ArticleInstallationTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function the_article_plugin_exists_on_the_dashboard()
     {
         $this->signIn();
@@ -59,8 +56,8 @@ class ArticleInstallationTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function the_article_plugin_can_be_installed()
     {
         $this->signIn(['role_id' => Developer::$key]);
@@ -69,7 +66,7 @@ class ArticleInstallationTest extends TestCase
             ->assertRedirect('/admin/products/index');
 
         $this->assertDatabaseHas('plugins', ['name'       => 'articles', 'enabled' => true]);
-        $this->assertDatabaseHas('pages',   ['identifier' => 'articles']);
+        $this->assertDatabaseHas('pages', ['identifier' => 'articles']);
     }
 
     /**
@@ -80,7 +77,7 @@ class ArticleInstallationTest extends TestCase
         $this->signIn(['role_id' => Developer::$key]);
 
         $this->get('/admin/products/install/articles');
-        
+
         $this->get('/admin/products/uninstall/articles')
             ->assertRedirect('/admin/products/index');
 

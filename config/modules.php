@@ -31,15 +31,14 @@ return [
         'url'     => 'admin/filemanager',
         'role'    => 'publisher',
     ],
-    
-    
+
     [
         'title' => 'Updates',
         'icon'  => 'fa fa-history',
         'url'   => 'admin/updates',
         'role'  => 'developer',
     ],
-    
+
     [
         'title' => 'Sitemap',
         'icon'  => 'fa fa-sitemap',

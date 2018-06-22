@@ -14,13 +14,12 @@ use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
+use Illuminate\Support\Facades\View;
 use App\Plugins\Articles\Model\Article;
-use App\Classes\Repositories\MenuRepository;
+use App\Plugins\Articles\Model\Categories;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
-use App\Plugins\Articles\Model\Categories;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class UserController.
@@ -106,30 +105,6 @@ class FrontendController extends PluginEngine implements Sitemap
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function creator(ArticleRepository $repository, int $id)
     {

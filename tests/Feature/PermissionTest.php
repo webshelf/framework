@@ -14,7 +14,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PermissionTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**

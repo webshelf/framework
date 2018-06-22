@@ -52,7 +52,7 @@ class Plugin extends Model
     protected $casts = ['enabled' => 'boolean', 'required' => 'boolean'];
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return void
      */
@@ -64,15 +64,15 @@ class Plugin extends Model
     /**
      * Toggle the enabled status of the plugin.
      *
-     * @return boolean
+     * @return bool
      */
     public function toggle()
     {
-        return $this->update(['enabled' => !$this->enabled]);
+        return $this->update(['enabled' => ! $this->enabled]);
     }
 
     /**
-     * Return the namespace path to the controller of the plugin
+     * Return the namespace path to the controller of the plugin.
      *
      * @return string
      */
@@ -82,7 +82,7 @@ class Plugin extends Model
     }
 
     /**
-     * Call the install method on the plugins controller
+     * Call the install method on the plugins controller.
      *
      * @param string $plugin_name The plugin name to install
      * @return Plugin The model instance of the installed plugin

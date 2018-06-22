@@ -1,12 +1,9 @@
 <?php
 
-use App\Model\Page;
-use App\Model\Account;
 use Faker\Generator as Faker;
-use App\Plugins\Pages\Model\PageOptions;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Model\Role;
 use App\Classes\Roles\Administrator;
+use App\Plugins\Pages\Model\PageTypes;
+use App\Plugins\Pages\Model\PageOptions;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +26,11 @@ $factory->define(App\Model\Account::class, function (Faker $faker) {
         'last_login' => $faker->dateTimeBetween('-4 months'),
         'password' => 'password', // secret
         'remember_token' => str_random(10),
-        'role_id' => Administrator::$key
+        'role_id' => Administrator::$key,
     ];
 });
 
-$factory->define(App\Model\Page::class, function(Faker $faker) {
-
+$factory->define(App\Model\Page::class, function (Faker $faker) {
     $title = $faker->sentence;
     $account = factory(App\Model\Account::class)->create();
 
@@ -44,17 +40,16 @@ $factory->define(App\Model\Page::class, function(Faker $faker) {
         'seo_description' => $faker->paragraph(2),
         'prefix' => $faker->word,
         'slug' => str_slug($title),
-        'views' => $faker->numberBetween(75,900),
+        'views' => $faker->numberBetween(75, 900),
         'content' => $faker->paragraph(12),
         'type' => PageTypes::TYPE_STANDARD,
-        'option' => PageOptions::OPTION_PUBLIC|PageOptions::OPTION_SITEMAP,
+        'option' => PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP,
         'editor_id' => $account->id,
         'creator_id' => $account->id,
     ];
 });
 
-$factory->define(App\Model\Plugin::class, function(Faker $faker) {
-
+$factory->define(App\Model\Plugin::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'enabled' => false,
@@ -66,8 +61,7 @@ $factory->define(App\Model\Plugin::class, function(Faker $faker) {
     ];
 });
 
-$factory->define(App\Plugins\Articles\Model\Article::class, function(Faker $faker) {
-
+$factory->define(App\Plugins\Articles\Model\Article::class, function (Faker $faker) {
     $creator = factory('App\Model\Account')->create();
     $title = $faker->sentence;
 
@@ -86,12 +80,11 @@ $factory->define(App\Plugins\Articles\Model\Article::class, function(Faker $fake
         'status' => $faker->boolean,
         'deleted_at' => null,
         'created_at' => $faker->dateTimeBetween('-12 months'),
-        'updated_at' => $faker->dateTimeBetween('-5 months')
+        'updated_at' => $faker->dateTimeBetween('-5 months'),
     ];
 });
 
-$factory->define(App\Plugins\Articles\Model\Categories::class, function(Faker $faker) {
-
+$factory->define(App\Plugins\Articles\Model\Categories::class, function (Faker $faker) {
     $creator = factory('App\Model\Account')->create()->id;
 
     return [
@@ -101,7 +94,6 @@ $factory->define(App\Plugins\Articles\Model\Categories::class, function(Faker $f
         'creator_id' => $creator,
         'deleted_at' => null,
         'created_at' => $faker->dateTimeBetween('-12 months'),
-        'updated_at' => $faker->dateTimeBetween('-5 months')
+        'updated_at' => $faker->dateTimeBetween('-5 months'),
     ];
 });
-

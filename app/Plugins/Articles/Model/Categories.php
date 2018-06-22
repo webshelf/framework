@@ -4,8 +4,8 @@ namespace App\Plugins\Articles\Model;
 
 use Carbon\Carbon;
 use App\Model\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\Concerns\Publishers;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ArticleCategory.
@@ -30,8 +30,7 @@ class Categories extends Model
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
-    /**
+    /*
      * Publishers
      *
      * @ fromework 5.6
@@ -67,7 +66,7 @@ class Categories extends Model
     protected $auditExclude = [];
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return void
      */

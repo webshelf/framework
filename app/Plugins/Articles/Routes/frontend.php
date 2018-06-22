@@ -2,7 +2,6 @@
 
 use App\Model\Page;
 use Illuminate\Support\Facades\Route;
-use App\Classes\Repositories\PageRepository;
 
 /*
     |--------------------------------------------------------------------------
@@ -28,5 +27,5 @@ use App\Classes\Repositories\PageRepository;
 
     Route::get($page->path().'/{category}')->uses('App\Plugins\Articles\FrontendController@allArticlesInCategory')->name('category.articles');
     Route::get($page->path().'/{category}/{article}')->uses('App\Plugins\Articles\FrontendController@viewArticle')->name('articles.view');
-    
+
     Route::get($page->route().'/creator/{id}')->uses('App\Plugins\Articles\FrontendController@creator')->name('articles.creator');

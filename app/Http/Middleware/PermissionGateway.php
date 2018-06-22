@@ -3,9 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Exception;
 use App\Classes\Roles\Disabled;
-use App\Classes\Roles\Exceptions\UnauthorizedRoleException;
 use Illuminate\Support\Facades\Auth;
 
 class PermissionGateway
@@ -21,6 +19,7 @@ class PermissionGateway
     {
         if (account()->hasRole(new Disabled)) {
             Auth::logout();
+
             return redirect()->route('login')->withErrors(['error' => 'Access to dashboard disabled']);
         }
 
