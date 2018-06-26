@@ -49,7 +49,7 @@ class ArticlesController extends PluginHandler implements Installable
             'identifier' => 'articles',
             'slug' => 'articles',
             'type' => PageTypes::TYPE_PLUGIN,
-            'option' => PageOptions::OPTION_PUBLIC
+            'option' => PageOptions::OPTION_PUBLIC,
         ]);
 
         return $page;

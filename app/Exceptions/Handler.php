@@ -8,7 +8,6 @@ use App\Http\Controllers\ErrorController;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Classes\Roles\Exceptions\UnauthorizedRoleException;
 
 class Handler extends ExceptionHandler
 {

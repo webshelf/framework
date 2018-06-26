@@ -8,10 +8,10 @@
 
 namespace App\Plugins\Products;
 
+use App\Model\Plugin;
 use App\Plugins\PluginEngine;
 use App\Classes\Interfaces\Installable;
 use App\Classes\Repositories\PluginRepository;
-use App\Model\Plugin;
 use App\Plugins\Products\Exceptions\PluginNotInstanceOfInstallable;
 
 /**
@@ -52,8 +52,7 @@ class BackendController extends PluginEngine
      */
     public function install(Plugin $plugin)
     {
-        if ($plugin->controller instanceof Installable) 
-        {
+        if ($plugin->controller instanceof Installable) {
             $plugin->controller->install();
 
             $plugin->toggle();
@@ -62,7 +61,6 @@ class BackendController extends PluginEngine
         }
 
         throw new PluginNotInstanceOfInstallable;
-
     }
 
     /**
@@ -74,8 +72,7 @@ class BackendController extends PluginEngine
      */
     public function uninstall(Plugin $plugin)
     {
-        if ($plugin->controller instanceof Installable) 
-        {
+        if ($plugin->controller instanceof Installable) {
             $plugin->controller->uninstall();
 
             $plugin->toggle();

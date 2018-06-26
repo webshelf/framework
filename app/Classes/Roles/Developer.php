@@ -7,15 +7,14 @@ use App\Model\Account;
 use App\Classes\Roles\Interfaces\RoleInterface;
 
 /**
- * Undocumented class
+ * Undocumented class.
  */
 class Developer implements RoleInterface
 {
-
     /**
-     * The role ID of the administrator
+     * The role ID of the administrator.
      *
-     * @var integer
+     * @var int
      */
     public static $key = 1;
 
@@ -23,7 +22,7 @@ class Developer implements RoleInterface
      * Apply the role logic to the account.
      *
      * @param Account $account
-     * @return boolean
+     * @return bool
      */
     public function apply(Account $account)
     {
@@ -31,10 +30,10 @@ class Developer implements RoleInterface
     }
 
     /**
-     * Validate the role logic
+     * Validate the role logic.
      *
-     * @return boolean
-     */ 
+     * @return bool
+     */
     public function validate(Account $account)
     {
         return $account->role_id <= self::$key;
@@ -49,8 +48,8 @@ class Developer implements RoleInterface
      */
     public function handle($request, Closure $next)
     {
-        if ($this->validate())
-        return $next($request);
+        if ($this->validate()) {
+            return $next($request);
+        }
     }
-
 }

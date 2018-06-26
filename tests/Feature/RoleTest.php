@@ -3,17 +3,15 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Model\Role;
 use App\Model\Account;
 use App\Classes\Roles\Disabled;
-use App\Classes\Roles\Administrator;
 use App\Classes\Roles\Developer;
 use App\Classes\Roles\Publisher;
+use App\Classes\Roles\Administrator;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
- * Undocumented class
+ * Undocumented class.
  */
 class RoleTest extends TestCase
 {
@@ -42,8 +40,8 @@ class RoleTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function a_disabled_account_cannot_access_dashboard()
     {
         $this->signIn(['role_id' => Disabled::$key]);
@@ -73,7 +71,7 @@ class RoleTest extends TestCase
         $this->get('/admin')
             ->assertRedirect(route('login'))
             ->assertSessionHasErrors([
-                'error' => 'Access to dashboard disabled'
+                'error' => 'Access to dashboard disabled',
             ]);
     }
 
@@ -90,8 +88,8 @@ class RoleTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function only_developers_can_modify_modules()
     {
         $this->signIn();

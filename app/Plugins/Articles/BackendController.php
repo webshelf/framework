@@ -11,7 +11,6 @@ namespace App\Plugins\Articles;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
-use Illuminate\Validation\Rule;
 use App\Plugins\Articles\Model\Article;
 use App\Plugins\Articles\Model\Categories;
 use App\Classes\Repositories\ArticleRepository;
@@ -200,7 +199,7 @@ class BackendController extends PluginEngine
             'status' => 'required|integer',
             'category_id' => 'required|integer|exists:article_categories,id',
             'publish_date' => 'required|date',
-            'unpublish_date' => 'sometimes|nullable|date|after:publish_date'
+            'unpublish_date' => 'sometimes|nullable|date|after:publish_date',
         ]);
 
         // set attribute for the model.

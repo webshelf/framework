@@ -9,17 +9,12 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use App\Model\Concerns\ActivityFeed;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Classes\Roles\Interfaces\RoleInterface;
+use App\Classes\Roles\Exceptions\InvalidRoleType;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Model\Concerns\ActivityLogging;
-use App\Model\Concerns\LogsActivity;
-use App\Model\Concerns\ActivityFeed;
-use App\Model\Role;
-use App\Classes\Roles\Interfaces\RoleInterface;
-use App\Classes\Roles\Disabled;
-use App\Classes\Roles\Exceptions\InvalidRoleType;
-use Laravel\Scout\Searchable;
 
 /**
  * Class Accounts.
@@ -59,7 +54,6 @@ class Account extends Authenticatable
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
-
     /*
      * Log users activity on this model.
      *
@@ -171,7 +165,7 @@ class Account extends Authenticatable
      */
     public function getAvatarAttribute()
     {
-        return url("images/avatar-default.png");
+        return url('images/avatar-default.png');
     }
 
     /**
@@ -237,12 +231,13 @@ class Account extends Authenticatable
      * Check if the account has a role.
      *
      * @param string $name
-     * @return boolean
+     * @return bool
      */
     public function hasRole($role)
     {
         if (is_string($role)) {
             $class = sprintf('App\Classes\Roles\%s', $role);
+
             return $this->hasRole(app()->make($class));
         }
 
@@ -250,7 +245,7 @@ class Account extends Authenticatable
             return $role->validate($this);
         }
 
-        throw new InvalidRoleType("The role is not a correct format or does not exist.");
+        throw new InvalidRoleType('The role is not a correct format or does not exist.');
     }
 
     /**
@@ -263,6 +258,7 @@ class Account extends Authenticatable
     {
         if (is_string($role)) {
             $class = sprintf('App\Classes\Roles\%s', $role);
+
             return $this->setRole(app()->make($class));
         }
 
@@ -270,6 +266,6 @@ class Account extends Authenticatable
             return $role->apply($this);
         }
 
-        throw new InvalidRoleType("The role is not a correct format or does not exist.");
+        throw new InvalidRoleType('The role is not a correct format or does not exist.');
     }
 }

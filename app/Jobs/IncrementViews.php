@@ -2,10 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Model\Page;
+use App\Model\Model;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Model\Model;
 
 class IncrementViews
 {

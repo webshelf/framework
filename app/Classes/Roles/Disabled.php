@@ -7,15 +7,14 @@ use App\Model\Account;
 use App\Classes\Roles\Interfaces\RoleInterface;
 
 /**
- * Undocumented class
+ * Undocumented class.
  */
 class Disabled implements RoleInterface
 {
-
     /**
-     * The role ID of the administrator
+     * The role ID of the administrator.
      *
-     * @var integer
+     * @var int
      */
     public static $key = 4;
 
@@ -23,7 +22,7 @@ class Disabled implements RoleInterface
      * Apply the role logic to the account.
      *
      * @param Account $account
-     * @return boolean
+     * @return bool
      */
     public function apply(Account $account)
     {
@@ -31,10 +30,10 @@ class Disabled implements RoleInterface
     }
 
     /**
-     * Validate the role logic
+     * Validate the role logic.
      *
-     * @return boolean
-     */ 
+     * @return bool
+     */
     public function validate(Account $account)
     {
         return $account->role_id == self::$key;

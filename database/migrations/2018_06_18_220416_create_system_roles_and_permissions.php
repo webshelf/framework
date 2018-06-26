@@ -1,17 +1,13 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-use Doctrine\DBAL\Schema\Schema as Doctrine;
-use Illuminate\Support\Facades\Schema;
 use App\Model\Role;
-use App\Model\Page;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
-use App\Plugins\Articles\Model\Categories;
-use App\Plugins\Articles\Model\Article;
 use App\Model\Account;
 use App\Classes\Roles\Developer;
+use Illuminate\Support\Facades\Schema;
+use App\Plugins\Articles\Model\Article;
+use Illuminate\Database\Schema\Blueprint;
+use App\Plugins\Articles\Model\Categories;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateSystemRolesAndPermissions extends Migration
 {
@@ -25,7 +21,7 @@ class CreateSystemRolesAndPermissions extends Migration
         Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn('role_id');
         });
-        
+
         Schema::table('accounts', function (Blueprint $table) {
             $table->unsignedInteger('role_id')->after('verified');
             $table->integer('login_count')->default(0);
@@ -42,25 +38,25 @@ class CreateSystemRolesAndPermissions extends Migration
         Role::create([
             'name' => 'developer',
             'title' => 'Developer',
-            'description' => 'System wide access to engine properties, debugging and tools.'
+            'description' => 'System wide access to engine properties, debugging and tools.',
         ]);
 
         Role::create([
             'name' => 'administrator',
             'title' => 'Administrator',
-            'description' => 'Administrators have super user access to the entire site.'
+            'description' => 'Administrators have super user access to the entire site.',
         ]);
 
         Role::create([
             'name' => 'publisher',
             'title' => 'Publisher',
-            'description' => 'Publishers have the ability to manage all content on the platform without access to settings.'
+            'description' => 'Publishers have the ability to manage all content on the platform without access to settings.',
         ]);
 
         Role::create([
             'name' => 'disabled',
             'title' => 'Disabled',
-            'description' => 'A disabled account will have no access to the dashboard and lose all permissions.'
+            'description' => 'A disabled account will have no access to the dashboard and lose all permissions.',
         ]);
 
         Schema::table('plugins', function (Blueprint $table) {
@@ -76,11 +72,11 @@ class CreateSystemRolesAndPermissions extends Migration
 
         $category = Categories::firstOrCreate([
             'title' => 'General',
-            'status' => true
+            'status' => true,
         ]);
-        
+
         foreach (Article::all() as $article) {
-            if (!$article->category) {
+            if (! $article->category) {
                 $article->category->save($category);
             }
         }
