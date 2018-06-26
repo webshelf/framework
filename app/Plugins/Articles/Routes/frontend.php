@@ -2,7 +2,6 @@
 
 use App\Model\Page;
 use Illuminate\Support\Facades\Route;
-use App\Classes\Repositories\PageRepository;
 
 /*
     |--------------------------------------------------------------------------
