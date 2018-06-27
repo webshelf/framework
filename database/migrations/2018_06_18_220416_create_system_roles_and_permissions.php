@@ -1,5 +1,6 @@
 <?php
 
+use App\Classes\StringGenerator;
 use App\Model\Role;
 use App\Model\Account;
 use App\Classes\Roles\Developer;
@@ -93,9 +94,7 @@ class CreateSystemRolesAndPermissions extends Migration
         });
 
         foreach (Account::all() as $account) {
-            $parts = explode("@", $account->email);
-            $username = str_slug($parts[0]);
-            $account->update(['username' => $username]);
+            $account->update(['username' => StringGenerator::stripEmail($account->email)]);
         }
     }
 

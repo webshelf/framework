@@ -253,6 +253,7 @@ class Account extends Authenticatable
      *
      * @param RoleInterface $role
      * @return void
+     * @throws InvalidRoleType
      */
     public function setRole($role)
     {
