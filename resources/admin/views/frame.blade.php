@@ -21,15 +21,19 @@
 
     <body>
 
-        @include('dashboard::structure.navbar')
+        <div id="root">
 
-        <section id="body-margin-top-40">
+            @include('dashboard::structure.navbar')
 
-            @include('dashboard::structure.sidebar')
-            
-            @include('dashboard::structure.content')
+            <section id="body-margin-top-40">
 
-        </section>
+                @include('dashboard::structure.sidebar')
+
+                @include('dashboard::structure.content')
+
+            </section>
+
+        </div>
 
     </body>
 

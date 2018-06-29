@@ -20,7 +20,7 @@ class RedirectsController extends PluginHandler
      */
     public function icon()
     {
-        return 'fa-magic';
+        return 'fas fa-exchange-alt';
     }
 
     /**

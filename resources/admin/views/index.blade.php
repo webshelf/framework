@@ -16,36 +16,35 @@
                 <a href="https://github.com/webshelf/framework/issues">View Platform Issue Tracker</a>
         
             </div>
-        
-            <div class="panel" id="status">
-        
-                <h3 class="title">Platform Status</h3>
-        
-                <ul>
-                    <li>
-                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                        <span class="status text">Software is up to date</span>
-                        <span class="status message"> v{{  framework()->version }}</span>
-                    </li>
-                    <li>
-                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                        <span class="status text">No warnings to display</span>
-                        <span class="status badge">0</span>
-                    </li>
-                    <li>
-                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                        <span class="status text">Migration service active</span>
-                        {{-- <span class="status badge">0</span> --}}
-                    </li>
-                    <li>
-                        <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                        <span class="status text">Website is currently online</span>
-                        {{-- <span class="status message">Not Available</span> --}}
-                    </li>
-                </ul>
-        
-            </div>
 
+        <div class="panel" id="status">
+
+            <h3 class="title">Platform Status</h3>
+
+            <ul>
+                <li>
+                    <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                    <span class="status text">Software is up to date</span>
+                    <span class="status message"> v{{  framework()->version }}</span>
+                </li>
+                <li>
+                    <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                    <span class="status text">No warnings to display</span>
+                    <span class="status badge">0</span>
+                </li>
+                <li>
+                    <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                    <span class="status text">Migration service active</span>
+                    {{-- <span class="status badge">0</span> --}}
+                </li>
+                <li>
+                    <span class="status icon green"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                    <span class="status text">Website is currently online</span>
+                    {{-- <span class="status message">Not Available</span> --}}
+                </li>
+            </ul>
+
+        </div>
             <div class="panel" id="activity">
 
                 <h3 class="title">Activity Log</h3>

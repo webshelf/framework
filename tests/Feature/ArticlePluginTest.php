@@ -57,6 +57,18 @@ class ArticlePluginTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function an_articles_views_are_incremented_after_being_viewed()
+    {
+        $article = factory('App\Plugins\Articles\Model\Article')->create(['views' => 0]);
+
+        $this->get($article->path());
+
+        $this->assertDatabaseHas('articles', ['views' => 1]);
+    }
+
+    /**
     * @test
     */
     public function a_single_article_can_be_viewed_on_the_frontpage()
@@ -65,15 +77,13 @@ class ArticlePluginTest extends TestCase
 
         $response = $this->get($article->path());
 
-        $this->assertDatabaseHas('articles', ['views' => 1]);
-
         $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
     }
 
     /**
      * @test
 t     */
-    public function all_articles_can_be_viewed_on_the_frontpage()
+    public function a_collection_of_articles_can_be_viewed_on_the_frontpage()
     {
         $collection = factory('App\Plugins\Articles\Model\Article', 5)->create();
 
@@ -85,7 +95,7 @@ t     */
     /**
      * @test
      */
-    public function all_articles_inside_a_category_can_be_viewed_on_the_frontpage()
+    public function a_category_can_have_a_collection_of_articles_on_the_frontpage()
     {
         $category = factory('App\Plugins\Articles\Model\Categories')->create();
 

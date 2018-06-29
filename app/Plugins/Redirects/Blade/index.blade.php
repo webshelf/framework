@@ -28,28 +28,32 @@
         @foreach($redirects as $redirect)
             <div class="row">
 
+                <div class="avatar">
+                    <img data-toggle="tooltip" data-placement="left" title="Updated by {{ $redirect->editor->fullName() }}" src="{{ $redirect->editor->avatar }}" alt="">
+                </div>
+
                 <div class="details">
                     <div class="title">
-                        <a href="{{ route('admin.redirects.edit', $redirect->id) }}">{{ url($redirect->from()) }}</a>
+                        Redirect from: <a href="{{ route('admin.redirects.edit', $redirect->id) }}">{{ url($redirect->from()) }}</a>
                     </div>
                     <div class="website">
-                        => {{ url($redirect->to()) }}
+                        Redirect to: {{ url($redirect->to()) }}
                     </div>
                 </div>
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li>{!! css()->link->edit(route('admin.redirects.edit', $redirect->id)) !!}</li>
-                        <li>{!! css()->link->destroy(route('admin.redirects.destroy', $redirect->id)) !!}</li>
+                        <li><a href="{{ route('admin.redirects.edit', ['name' => $redirect->id]) }}">Edit</a></li>
+                        <li><a href="{{ route('admin.redirects.destroy', ['menu' => $redirect->id]) }}" data-type="alert" data-confirm="Are you sure you want to remove this menu?" data-method="delete">Remove</a></li>
                     </ul>
                 </div>
 
                 <div class="stats">
                     <div class="views">
-                        {{--<i class="fa fa-eye" aria-hidden="true"></i> {{ $page->views }}--}}
+                        Clicks: Untracked
                     </div>
                     <div class="timestamp">
-                        updated {{ $redirect->updated_at->diffForHumans() }}
+                        updated {{ $menu->updated_at->diffForHumans() }}
                     </div>
                 </div>
             </div>

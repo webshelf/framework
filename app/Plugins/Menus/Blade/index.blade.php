@@ -57,6 +57,8 @@
         @foreach($list as $menu)
             <div class="row" data-id="{{ $menu->id }}">
 
+                {{--<i class="fas fa-list"></i>--}}
+
                 <div class="details">
                     <div class="title">
                         <a href="">{{ $menu->title }}</a>
@@ -75,7 +77,7 @@
 
                 <div class="stats">
                     <div class="views">
-                        {{--<i class="fa fa-eye" aria-hidden="true"></i> {{ $page->views }}--}}
+                        Clicks: Untracked
                     </div>
                     <div class="timestamp">
                         updated {{ $menu->updated_at->diffForHumans() }}

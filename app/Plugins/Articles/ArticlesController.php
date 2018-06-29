@@ -25,7 +25,7 @@ class ArticlesController extends PluginHandler implements Installable
      */
     public function icon()
     {
-        return 'fa-file-text';
+        return 'fas fa-glasses';
     }
 
     /**

@@ -132,8 +132,9 @@ class BackendController extends PluginEngine
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy($slug)
     {
@@ -141,7 +142,7 @@ class BackendController extends PluginEngine
 
         $article->delete();
 
-        return redirect()->route('admin.articles.index');
+        return response()->json(['status' => 'true', 'redirect' => route('admin.articles.index')]);
     }
 
     /**

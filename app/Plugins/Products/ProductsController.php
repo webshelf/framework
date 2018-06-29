@@ -20,7 +20,7 @@ class ProductsController extends PluginHandler
      */
     public function icon()
     {
-        return 'fa-book';
+        return 'fas fa-box';
     }
 
     /**

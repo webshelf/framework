@@ -8,7 +8,7 @@ use App\Classes\Roles\Developer;
 use App\Plugins\Articles\ArticlesController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ArticleInstallationTest extends TestCase
+class PluginInstallationTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -95975,8 +95975,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ "./resources/admin/assets/js/backend.js":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -96019,21 +96020,27 @@ $(function () {
 
 //Vue.component('example', require('./components/Example.vue'));
 
-// new Vue({
-//     el: '.webshelf-table'
-//     // data: {
-//     //     email: {
-//     //         value: '',
-//     //         status: false,
-//     //     },
-//     //     password: {
-//     //         value: '',
-//     //         status: false,
-//     //     }
-//     // },
-//     // // define methods under the `methods` object
-//     // methods: {
-//     // }
+// import VueCharts from 'vue-chartjs'
+//
+// Vue.component('bar-chart', {
+//     extends: VueCharts.Line,
+//     mounted () {
+//         this.renderChart({
+//             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//             datasets: [
+//                 {
+//                     label: 'Data One',
+//                     backgroundColor: '#2b4162',
+//                     data: [40, 39, 10, 40, 39, 50, 50]
+//                 }
+//             ]
+//         }, {responsive: true, maintainAspectRatio: false})
+//     }
+//
+// });
+//
+// var vm = new Vue({
+//     el: '#root'
 // });
 
 /***/ }),

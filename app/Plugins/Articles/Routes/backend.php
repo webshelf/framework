@@ -15,6 +15,5 @@
 
     Route::get('admin/articles/categories')->uses('BackendController@categories')->name('admin.articles.categories.index');
     Route::post('admin/articles/categories')->uses('BackendController@categories_store')->name('admin.articles.categories.store');
-    Route::get('admin/articles/categories/destroy/{id}')->uses('BackendController@categories_destroy')->name('admin.articles.categories.destroy');
 
     Route::resource('admin/articles', 'BackendController', ['as' => 'admin']);

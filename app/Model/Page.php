@@ -200,7 +200,7 @@ class Page extends Model implements Linkable
     /**
      * The url that is used to view this model.
      *
-     * @deprecated version
+     * @deprecated This is now obtained using the link?
      * @return string
      */
     public function route()

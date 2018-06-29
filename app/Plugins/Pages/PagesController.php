@@ -20,7 +20,7 @@ class PagesController extends PluginHandler
      */
     public function icon()
     {
-        return 'fa-paperclip';
+        return 'fab fa-readme';
     }
 
     /**

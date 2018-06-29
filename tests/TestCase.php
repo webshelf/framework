@@ -63,25 +63,6 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * Test dashboard access urls.
-     *
-     * Unauthenticated users should be redirected to login.
-     * Authenticated users should be allowed to view the page.
-     *
-     * @param string $url
-     */
-    protected function dashboardAccessTest(string $url)
-    {
-        $this->call('GET', $url)->assertStatus(302)->assertSee('/admin/login');
-
-        $account = factory('App\Model\Account')->create();
-
-        auth()->login($account);
-
-        $this->call('GET', $url)->assertStatus(200);
-    }
-
-    /**
      * Login using the test account on the database.
      *
      * @return \Illuminate\Contracts\Auth\Authenticatable

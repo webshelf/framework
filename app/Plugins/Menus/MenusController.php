@@ -20,7 +20,7 @@ class MenusController extends PluginHandler
      */
     public function icon()
     {
-        return 'fa-bars';
+        return 'fas fa-compass';
     }
 
     /**

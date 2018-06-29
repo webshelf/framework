@@ -13,30 +13,6 @@
 
 @section('content')
 
-<div class="webshelf-scope-menu">
-
-    <ul class="list-unstyled">
-
-        {{-- <li class="item">
-            <a href="{{ route('admin.pages.index') }}" class="{{ Request::segment(3) == '' ? 'active' : null }}">
-                <span class="title">Normal Pages</span>
-            </a>
-        </li>
-        <li class="item">
-            <a href="{{ route('admin.pages.plugin') }}" class="{{ Request::segment(3) == 'plugin' ? 'active' : null }}">
-                <span class="title">Plugin Pages</span>
-            </a>
-        </li>
-        <li class="item">
-            <a href="{{ route('admin.pages.error') }}" class="{{ Request::segment(3) == 'error' ? 'active' : null }}">
-                <span class="title">Error Pages</span>
-            </a>
-        </li> --}}
-
-    </ul>
-
-</div>
-
 <form>
     <div class="searchbar">
         <div class="text form-row">

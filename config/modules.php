@@ -13,7 +13,7 @@ return [
 
     [
         'title' => 'Settings',
-        'icon'  => 'fa fa-cogs',
+        'icon'  => 'fas fa-wrench',
         'url'   => 'admin/settings',
         'role'  => 'administrator',
     ],
@@ -27,21 +27,21 @@ return [
 
     [
         'title'   => 'Filemanager',
-        'icon'    => 'fa fa-microchip',
+        'icon'    => 'fas fa-toolbox',
         'url'     => 'admin/filemanager',
         'role'    => 'publisher',
     ],
 
     [
         'title' => 'Updates',
-        'icon'  => 'fa fa-history',
+        'icon'  => 'fas fa-code',
         'url'   => 'admin/updates',
         'role'  => 'developer',
     ],
 
     [
         'title' => 'Sitemap',
-        'icon'  => 'fa fa-sitemap',
+        'icon'  => 'fas fa-globe',
         'url'   => 'admin/sitemap',
         'role'  => 'developer',
     ],

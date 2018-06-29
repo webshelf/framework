@@ -1,11 +1,11 @@
 @extends('dashboard::frame')
 
 @section('title')
-    Articles
+    Website Articles
 @endsection
 
 @section('information')
-    All the articles contained on your website.
+    Articles create the section of your website that contains the blog/news or related feature.
 @endsection
 
 @section('content')
@@ -33,31 +33,33 @@
         @foreach($articles as $article)
             <div class="row">
 
+                <div class="avatar">
+                    <img data-toggle="tooltip" data-placement="left" title="Updated by {{ $article->editor->fullName() }}" src="{{ $article->editor->avatar }}" alt="">
+                </div>
+
                 <div class="details">
                     <div class="title">
                         <a href="{{ route('admin.articles.edit', ["name"=>$article->slug]) }}">{{ ucwords( $article->title) }}</a>
                     </div>
                     <div class="website">
-                       {{ $article->route() }}
+                        Updated {{ $article->updated_at->diffForHumans() }}
                     </div>
                 </div>
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        <li data-toggle="tooltip" data-placement="bottom" title="Edit">{!! css()->link->edit(route('admin.articles.edit', $article->slug)) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Sitemap Status">{!! css()->status->sitemap($article->sitemap) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Visibility Status">{!! css()->status->visibility($article->status) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="Delete">{!! css()->link->destroy(route('admin.articles.destroy', $article->slug)) !!}</li>
-                        <li data-toggle="tooltip" data-placement="bottom" title="View Online">{!! css()->link->view(url($article->route())) !!}</li>
+                        <li><a href="{{ route('admin.articles.edit', $article->slug) }}">Edit</a></li>
+                        @if ($article->isPublished()) <li><a href="{{ url($article->route()) }}">View</a></li> @endif
+                        <li><a href="{{ route('admin.articles.destroy', $article->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this article?" data-method="delete">Delete</a></li>
                     </ul>
                 </div>
 
                 <div class="stats">
                     <div class="views">
-                        <i class="fa fa-eye" aria-hidden="true"></i> {{ $article->views }}
+                        <i class="fa fa-eye" aria-hidden="true"></i> Total Views: {{ $article->views }}
                     </div>
                     <div class="timestamp">
-                        updated {{ $article->updated_at->diffForHumans() }}
+                        Publish Status: {!! $article->isPublished() ? '<b style="color: #2dc751">Public</b>' : '<b style="color: #dc3545">Private</b>' !!}
                     </div>
                 </div>
             </div>

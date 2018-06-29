@@ -2,6 +2,8 @@
 
 namespace App\Plugins\Articles\Model;
 
+use App\Model\Account;
+use App\Model\Concerns\ActivityFeed;
 use Carbon\Carbon;
 use App\Model\Model;
 use App\Classes\ReadTime;
@@ -59,7 +61,12 @@ class Article extends Model implements Linkable
      * @framework 5.6
      */
     use Publishers;
-
+    /*
+     * Log users activity on this model.
+     *
+     * @ https://docs.spatie.be/laravel-activitylog/v2/advanced-usage/logging-model-events
+     */
+    use ActivityFeed;
     /*
      * Article is viewable by all visitors.
      */
@@ -115,6 +122,16 @@ class Article extends Model implements Linkable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     * The activity logging strings to be used.
+     *
+     * @return string
+     */
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "{$eventName} an article called {$this->title}";
     }
 
     /**
@@ -236,5 +253,15 @@ class Article extends Model implements Linkable
     public static function searchModelsByString(string $query, int $paginate = 7)
     {
         return Article::search($query)->paginate();
+    }
+
+    /**
+     * Check if the article is published.
+     *
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->status;
     }
 }

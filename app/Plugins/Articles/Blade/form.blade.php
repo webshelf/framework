@@ -55,12 +55,12 @@
         <div class="row">
         <div class="col-4">
                 <div class="form-group">
-                    <label for="status">Visibility</label>
+                    <label for="status">Publish Status</label>
                     <select class="form-control" name="status" id="status">
                         <option value="{{ App\Plugins\Articles\Model\Article::STATUS_PUBLIC }}" {{  old('status', optional($article)->status) == App\Plugins\Articles\Model\Article::STATUS_PUBLIC ? 'selected' : null }}>Public</option>
                         <option value="{{ App\Plugins\Articles\Model\Article::STATUS_PRIVATE }}" {{  old('status', optional($article)->status) == App\Plugins\Articles\Model\Article::STATUS_PRIVATE ? 'selected' : null }}>Private</option>
                     </select>
-                    <small class="form-text text-muted">Set the visibility of this article to others.</small>
+                    <small class="form-text text-muted">Set the visability status of this article to others.</small>
                 </div>
             </div>
             <script>
@@ -77,7 +77,7 @@
                     <label for="">Publish Date</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend btn-clear-form">
-                            <div class="input-group-text"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+                            <div class="input-group-text"><i class="fas fa-sync"></i></div>
                         </div>
                         <input type="datetime" class="form-control datetimepicker" name="publish_date" id="publish_date" aria-describedby="publish_date_help">
                     </div>
@@ -97,7 +97,7 @@
                     <label for="">Unpublish Date</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend btn-clear-form">
-                            <div class="input-group-text"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+                            <div class="input-group-text"><i class="fas fa-sync"></i></div>
                         </div>
                         <input type="datetime" class="form-control datetimepicker" name="unpublish_date" id="unpublish_date" aria-describedby="unpublish_date_help">
                     </div>
