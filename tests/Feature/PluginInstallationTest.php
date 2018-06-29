@@ -49,7 +49,7 @@ class ArticleInstallationTest extends TestCase
      */
     public function the_article_plugin_exists_on_the_dashboard()
     {
-        $this->signIn();
+        $this->signIn(['role_id' => Developer::$key]);
 
         $this->get('admin/products/index')
             ->assertSee('Articles');
