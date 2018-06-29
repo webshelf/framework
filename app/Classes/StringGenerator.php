@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Marky
  * Date: 27/06/2018
- * Time: 19:07
+ * Time: 19:07.
  */
 
 namespace App\Classes;
-
 
 class StringGenerator
 {

@@ -1,9 +1,9 @@
 <?php
 
-use App\Classes\StringGenerator;
 use App\Model\Role;
 use App\Model\Account;
 use App\Classes\Roles\Developer;
+use App\Classes\StringGenerator;
 use Illuminate\Support\Facades\Schema;
 use App\Plugins\Articles\Model\Article;
 use Illuminate\Database\Schema\Blueprint;
@@ -89,7 +89,7 @@ class CreateSystemRolesAndPermissions extends Migration
         // Update indexing for model searching. (Laravel Scout)
         \Illuminate\Support\Facades\Artisan::call('scout:mysql-index');
 
-        Schema::table('accounts', function(Blueprint $table) {
+        Schema::table('accounts', function (Blueprint $table) {
             $table->string('username')->after('id')->default(str_slug(Faker\Factory::create()->userName));
         });
 

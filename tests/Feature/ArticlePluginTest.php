@@ -2,26 +2,19 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\ServiceProvider;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Artisan;
+use App\Model\Plugin;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Model\Plugin;
-use App\Providers\RouteServiceProvider;
-use Symfony\Component\Routing\RouteCollectionBuilder;
-use Symfony\Component\Routing\Tests\RouteCollectionTest;
-use Illuminate\Support\Facades\Route;
 
 class ArticlePluginTest extends TestCase
 {
-
-    /**
+    /*
      * Provide fake content
      */
     use WithFaker;
-
-    /**
+    /*
      * Reset database after each test.
      */
     use RefreshDatabase;
@@ -69,8 +62,8 @@ class ArticlePluginTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function a_single_article_can_be_viewed_on_the_frontpage()
     {
         $article = factory('App\Plugins\Articles\Model\Article')->create(['views' => 0]);
@@ -82,7 +75,7 @@ class ArticlePluginTest extends TestCase
 
     /**
      * @test
-t     */
+     * t     */
     public function a_collection_of_articles_can_be_viewed_on_the_frontpage()
     {
         $collection = factory('App\Plugins\Articles\Model\Article', 5)->create();
@@ -101,7 +94,7 @@ t     */
 
         $collection = factory('App\Plugins\Articles\Model\Article', 5)->create(['category_id' => $category->id]);
 
-        $response = $this->get('articles/' . $category->slug);
+        $response = $this->get('articles/'.$category->slug);
 
         $response->assertSee($collection->random()->title)->assertViewIs('articles')->assertOk();
     }
@@ -115,7 +108,7 @@ t     */
 
         $article = $collection->random();
 
-        $response = $this->get('/articles/search?query=' . $article->title);
+        $response = $this->get('/articles/search?query='.$article->title);
 
         $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
     }
@@ -129,7 +122,7 @@ t     */
 
         $articles = factory('App\Plugins\Articles\Model\Article', 3)->create(['creator_id' => $account->id]);
 
-        $response = $this->get('/articles/creator/' . $account->username);
+        $response = $this->get('/articles/creator/'.$account->username);
 
         $response->assertSee($articles->random()->title)->assertViewIs('articles')->assertOk();
     }

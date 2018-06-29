@@ -2,15 +2,15 @@
 
 namespace App\Plugins\Articles\Model;
 
-use App\Model\Account;
-use App\Model\Concerns\ActivityFeed;
 use Carbon\Carbon;
 use App\Model\Page;
 use App\Model\Model;
+use App\Model\Account;
 use App\Classes\ReadTime;
 use Laravel\Scout\Searchable;
 use App\Model\Concerns\Publishers;
 use App\Classes\Interfaces\Linkable;
+use App\Model\Concerns\ActivityFeed;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
