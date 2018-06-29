@@ -108,7 +108,7 @@ class Account extends Authenticatable
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return void
      */

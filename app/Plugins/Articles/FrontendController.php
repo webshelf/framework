@@ -8,19 +8,19 @@
 
 namespace App\Plugins\Articles;
 
-use App\Model\Account;
 use App\Model\Page;
+use App\Model\Account;
 use App\Jobs\IncrementViews;
 use Illuminate\Http\Request;
 use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
+use Illuminate\Support\Facades\View;
 use App\Plugins\Articles\Model\Article;
+use App\Plugins\Articles\Model\Categories;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
-use App\Plugins\Articles\Model\Categories;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class UserController.
