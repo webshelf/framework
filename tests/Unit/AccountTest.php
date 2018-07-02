@@ -2,11 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Classes\Roles\Administrator;
-use App\Classes\Roles\Developer;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Classes\Roles\Developer;
+use App\Classes\Roles\Administrator;
 
 class AccountTest extends TestCase
 {
