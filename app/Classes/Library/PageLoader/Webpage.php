@@ -13,7 +13,6 @@ use Illuminate\Support\Collection;
 use App\Classes\Library\PageLoader\Coordinators\Frame;
 use App\Classes\Library\PageLoader\Coordinators\Social;
 use App\Classes\Library\PageLoader\Coordinators\Contact;
-use App\Classes\Library\PageLoader\Coordinators\Modules;
 use App\Classes\Library\PageLoader\Coordinators\Navigation;
 
 /**
