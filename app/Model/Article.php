@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Plugins\Articles\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
-use App\Model\Page;
-use App\Model\Model;
-use App\Model\Account;
 use App\Classes\ReadTime;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Scout\Searchable;
 use App\Model\Concerns\Publishers;
 use App\Classes\Interfaces\Linkable;
@@ -163,6 +161,17 @@ class Article extends Model implements Linkable
     }
 
     /**
+     * Scope the collection to only published.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopePublished(Builder $query)
+    {
+        return $query->where('status', true);
+    }
+
+    /**
      * The url that is used to view this model.
      * The category will be prefixed if one exists.
      *
@@ -209,7 +218,7 @@ class Article extends Model implements Linkable
      */
     public function path()
     {
-        return $this->page->path().'/'.$this->category->title.'/'.$this->slug;
+        return $this->page->path().'/'.$this->category->slug.'/'.$this->slug;
     }
 
     /**

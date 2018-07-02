@@ -5,9 +5,9 @@ use App\Model\Account;
 use App\Classes\Roles\Developer;
 use App\Classes\StringGenerator;
 use Illuminate\Support\Facades\Schema;
-use App\Plugins\Articles\Model\Article;
+use App\Model\Article;
 use Illuminate\Database\Schema\Blueprint;
-use App\Plugins\Articles\Model\Categories;
+use App\Model\Categories;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateSystemRolesAndPermissions extends Migration

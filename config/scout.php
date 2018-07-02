@@ -100,7 +100,7 @@ return [
         'mode' => 'LIKE',
         'model_directories' => [
             'App\Model\\',
-            'App\Plugins\Articles\Model\\',
+            'App\Model\\',
         ],
         'min_search_length' => 0,
         'min_fulltext_search_length' => 4,

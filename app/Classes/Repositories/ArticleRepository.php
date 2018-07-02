@@ -10,7 +10,7 @@ namespace App\Classes\Repositories;
 
 use App\Model\Menu;
 use Illuminate\Support\Collection;
-use App\Plugins\Articles\Model\Article;
+use App\Model\Article;
 use Illuminate\Database\Eloquent\Builder;
 
 /**

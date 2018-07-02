@@ -13,11 +13,13 @@ use Illuminate\Support\Collection;
 use App\Classes\Library\PageLoader\Coordinators\Frame;
 use App\Classes\Library\PageLoader\Coordinators\Social;
 use App\Classes\Library\PageLoader\Coordinators\Contact;
-use App\Classes\Library\PageLoader\Coordinators\Plugins;
+use App\Classes\Library\PageLoader\Coordinators\Modules;
 use App\Classes\Library\PageLoader\Coordinators\Navigation;
 
 /**
  * Class Webpage.
+ *
+ * @property \Illuminate\Database\Eloquent\Collection $articles
  */
 class Webpage
 {
@@ -47,11 +49,6 @@ class Webpage
     public $contact;
 
     /**
-     * @var Plugins
-     */
-    public $plugins;
-
-    /**
      * @param Page $model
      * @param Collection $navigationRepository
      */
@@ -64,8 +61,6 @@ class Webpage
         $this->social = app(Social::class);
 
         $this->contact = app(Contact::class);
-
-        $this->plugins = app(Plugins::class);
 
         $this->navigation = new Navigation($model, $navigationRepository);
     }

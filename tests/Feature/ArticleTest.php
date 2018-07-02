@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ArticlePluginTest extends TestCase
+class ArticleTest extends TestCase
 {
     /*
      * Provide fake content
@@ -54,7 +54,7 @@ class ArticlePluginTest extends TestCase
      */
     public function an_articles_views_are_incremented_after_being_viewed()
     {
-        $article = factory('App\Plugins\Articles\Model\Article')->create(['views' => 0]);
+        $article = factory('App\Model\Article')->create(['views' => 0]);
 
         $this->get($article->path());
 
@@ -66,7 +66,7 @@ class ArticlePluginTest extends TestCase
      */
     public function a_single_article_can_be_viewed_on_the_frontpage()
     {
-        $article = factory('App\Plugins\Articles\Model\Article')->create(['views' => 0]);
+        $article = factory('App\Model\Article')->create(['views' => 0]);
 
         $response = $this->get($article->path());
 
@@ -78,7 +78,7 @@ class ArticlePluginTest extends TestCase
      * t     */
     public function a_collection_of_articles_can_be_viewed_on_the_frontpage()
     {
-        $collection = factory('App\Plugins\Articles\Model\Article', 5)->create();
+        $collection = factory('App\Model\Article', 5)->create();
 
         $response = $this->get('articles');
 
@@ -90,9 +90,9 @@ class ArticlePluginTest extends TestCase
      */
     public function a_category_can_have_a_collection_of_articles_on_the_frontpage()
     {
-        $category = factory('App\Plugins\Articles\Model\Categories')->create();
+        $category = factory('App\Model\Categories')->create();
 
-        $collection = factory('App\Plugins\Articles\Model\Article', 5)->create(['category_id' => $category->id]);
+        $collection = factory('App\Model\Article', 5)->create(['category_id' => $category->id]);
 
         $response = $this->get('articles/'.$category->slug);
 
@@ -104,7 +104,7 @@ class ArticlePluginTest extends TestCase
      */
     public function articles_can_be_searched_on_the_frontpage()
     {
-        $collection = factory('App\Plugins\Articles\Model\Article', 10)->create();
+        $collection = factory('App\Model\Article', 10)->create();
 
         $article = $collection->random();
 
@@ -120,7 +120,7 @@ class ArticlePluginTest extends TestCase
     {
         $account = factory('App\Model\Account')->create();
 
-        $articles = factory('App\Plugins\Articles\Model\Article', 3)->create(['creator_id' => $account->id]);
+        $articles = factory('App\Model\Article', 3)->create(['creator_id' => $account->id]);
 
         $response = $this->get('/articles/creator/'.$account->username);
 

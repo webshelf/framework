@@ -204,7 +204,7 @@ class Account extends Authenticatable
      */
     public function articles()
     {
-        return $this->hasMany('App\Plugins\Articles\Model\Article', 'creator_id')->latest('created_at');
+        return $this->hasMany('App\Model\Article', 'creator_id')->latest('created_at');
     }
 
     /**

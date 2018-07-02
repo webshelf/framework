@@ -62,7 +62,7 @@ $factory->define(App\Model\Plugin::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Plugins\Articles\Model\Article::class, function (Faker $faker) {
+$factory->define(App\Model\Article::class, function (Faker $faker) {
     $creator = factory('App\Model\Account')->create();
     $title = $faker->sentence;
 
@@ -75,7 +75,7 @@ $factory->define(App\Plugins\Articles\Model\Article::class, function (Faker $fak
         'unpublish_date' => null,
         'views' => $faker->numberBetween(100, 9999),
         'sitemap' => $faker->boolean,
-        'category_id' => factory('App\Plugins\Articles\Model\Categories')->create()->id,
+        'category_id' => factory('App\Model\Categories')->create()->id,
         'editor_id' => $creator->id,
         'creator_id' => $creator->id,
         'status' => $faker->boolean,
@@ -85,7 +85,7 @@ $factory->define(App\Plugins\Articles\Model\Article::class, function (Faker $fak
     ];
 });
 
-$factory->define(App\Plugins\Articles\Model\Categories::class, function (Faker $faker) {
+$factory->define(App\Model\Categories::class, function (Faker $faker) {
     $title = $faker->word;
     $creator = factory('App\Model\Account')->create()->id;
 

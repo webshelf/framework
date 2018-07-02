@@ -16,8 +16,8 @@ use App\Plugins\PluginEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
 use Illuminate\Support\Facades\View;
-use App\Plugins\Articles\Model\Article;
-use App\Plugins\Articles\Model\Categories;
+use App\Model\Article;
+use App\Model\Categories;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
 use App\Classes\Repositories\ArticleRepository;
@@ -45,12 +45,12 @@ class FrontendController extends PluginEngine implements Sitemap
     /**
      * List all available articles.
      *
-     * @param ArticleRepository $repository
-     * @return \Illuminate\Http\Response
+     * @param Article $article
+     * @return Frontpage
      */
-    public function allArticles(ArticleRepository $repository)
+    public function allArticles(Article $article)
     {
-        View::share('articles', $repository->paginateLatest(7));
+        View::share('paginate', $article->published()->latest('created_at')->paginate(7));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }

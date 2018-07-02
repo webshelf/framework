@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Model\Article;
 use Exception;
 use App\Classes\PluginManager;
 use App\Classes\SettingsManager;
@@ -35,6 +36,10 @@ class InstanceServiceProvider extends ServiceProvider
         $this->makeSettingsInstance();
 
         $this->makePluginInstance();
+
+        $this->app->singleton('articles', function() {
+            return Article::where('status', true)->with('category')->get();
+        });
     }
 
     private function makeSettingsInstance()
