@@ -3,9 +3,9 @@
 namespace App\Classes\Repositories;
 
 use App\Model\Menu;
+use App\Model\Categories;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use App\Model\Categories;
 
 /**
  * Class ArticleCategoryRepository.

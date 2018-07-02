@@ -4,11 +4,11 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use App\Classes\ReadTime;
-use Illuminate\Database\Eloquent\Builder;
 use Laravel\Scout\Searchable;
 use App\Model\Concerns\Publishers;
 use App\Classes\Interfaces\Linkable;
 use App\Model\Concerns\ActivityFeed;
+use Illuminate\Database\Eloquent\Builder;
 use App\Classes\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;

@@ -2,12 +2,12 @@
 
 use App\Model\Role;
 use App\Model\Account;
+use App\Model\Article;
+use App\Model\Categories;
 use App\Classes\Roles\Developer;
 use App\Classes\StringGenerator;
 use Illuminate\Support\Facades\Schema;
-use App\Model\Article;
 use Illuminate\Database\Schema\Blueprint;
-use App\Model\Categories;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateSystemRolesAndPermissions extends Migration

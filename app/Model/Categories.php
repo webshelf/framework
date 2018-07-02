@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use App\Model\Model;
 use App\Model\Concerns\Publishers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
