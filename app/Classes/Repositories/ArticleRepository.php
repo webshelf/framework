@@ -59,6 +59,11 @@ class ArticleRepository extends BaseRepository
         return $this->model->take($count)->orderBy('created_at', 'desc')->get();
     }
 
+    public function count()
+    {
+        return $this->model->count();
+    }
+
     /**
      * @ver 5.0.2
      * @date 08/03/2018
