@@ -208,7 +208,7 @@ class Article extends Model implements Linkable
      */
     public function getPageAttribute()
     {
-        return resolve('pages')->where('identifier', 'articles')->first();
+        return Page::whereIdentifier('articles');
     }
 
     /**
