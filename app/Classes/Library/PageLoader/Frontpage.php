@@ -9,6 +9,7 @@
 namespace App\Classes\Library\PageLoader;
 
 use App\Model\Page;
+use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\ErrorController;
@@ -78,7 +79,7 @@ class Frontpage
      */
     private function isDisabledPage(Page $page)
     {
-        return ! $page->hasOption('public');
+        return false;
     }
 
     /**
@@ -165,7 +166,7 @@ class Frontpage
      *
      * @return FrontPage
      */
-    public static function build(Page $page, int $response = 200, string $template = null, bool $override = false)
+    public static function build(Page $page, int $response = 200, string $template = null, bool $override = true)
     {
         return (new self($page, SELF::loadNavigationFromDB()))->publish($template, $override, $response);
     }
