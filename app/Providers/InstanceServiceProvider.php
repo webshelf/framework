@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use Exception;
 use App\Model\Article;
 use App\Model\Categories;
-use Exception;
 use App\Classes\PluginManager;
 use App\Classes\SettingsManager;
 use Illuminate\Foundation\Application;
@@ -38,11 +38,11 @@ class InstanceServiceProvider extends ServiceProvider
 
         $this->makePluginInstance();
 
-        $this->app->singleton('articles', function() {
+        $this->app->singleton('articles', function () {
             return Article::where('status', true)->with('category')->get();
         });
 
-        $this->app->singleton('article.categories', function() {
+        $this->app->singleton('article.categories', function () {
             return Categories::where('status', true)->get();
         });
 
