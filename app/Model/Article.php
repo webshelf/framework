@@ -208,7 +208,7 @@ class Article extends Model implements Linkable
      */
     public function getPageAttribute()
     {
-        return Page::whereIdentifier('articles');
+        return resolve('pages')->where('identifier', 'articles')->first();
     }
 
     /**
@@ -218,7 +218,7 @@ class Article extends Model implements Linkable
      */
     public function path()
     {
-        return $this->page->path().'/'.$this->category->slug.'/'.$this->slug;
+        return url($this->page->path().'/'.$this->category->slug.'/'.$this->slug);
     }
 
     /**

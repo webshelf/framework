@@ -45,6 +45,10 @@ class InstanceServiceProvider extends ServiceProvider
         $this->app->singleton('article.categories', function() {
             return Categories::where('status', true)->get();
         });
+
+        $this->app->singleton('article.creators', function () {
+            return Article::where('status', true)->with('creator')->get();
+        });
     }
 
     private function makeSettingsInstance()

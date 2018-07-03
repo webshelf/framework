@@ -50,7 +50,7 @@ class FrontendController extends PluginEngine implements Sitemap
      */
     public function allArticles(Article $article)
     {
-        View::share('paginate', $article->published()->latest('created_at')->paginate(7));
+        View::share('articles', $article->published()->latest('created_at')->paginate(7));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
@@ -83,7 +83,7 @@ class FrontendController extends PluginEngine implements Sitemap
      */
     public function categoryArticles(Categories $category)
     {
-        View::share('articles', $category->articles->all());
+        View::share('articles', $category->articles()->where('status', true)->paginate(7));
 
         $this->currentPage->heading = 'Browse Categories';
 
