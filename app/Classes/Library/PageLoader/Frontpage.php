@@ -9,7 +9,6 @@
 namespace App\Classes\Library\PageLoader;
 
 use App\Model\Page;
-use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\ErrorController;
