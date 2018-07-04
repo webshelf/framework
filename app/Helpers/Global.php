@@ -29,7 +29,7 @@ use Illuminate\Support\Debug\Dumper;
      */
     function settings()
     {
-        throw new Exception("Settings called...");
+        throw new Exception('Settings called...');
     }
 
     /**

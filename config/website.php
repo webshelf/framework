@@ -21,7 +21,7 @@ return [
         ],
         'description' => [
             'default' => '',
-        ]
+        ],
     ],
 
     /*
@@ -45,5 +45,5 @@ return [
         'google' => [
             'tracking' => '',
         ],
-    ]
+    ],
 ];

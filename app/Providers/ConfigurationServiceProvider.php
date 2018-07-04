@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Model\Configuration;
-use Doctrine\DBAL\Schema\Schema;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +22,7 @@ class ConfigurationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!$this->app->environment('testing') && !app()->configurationIsCached()) {
+        if (! $this->app->environment('testing') && ! app()->configurationIsCached()) {
             foreach (Configuration::all() as $key => $configuration) {
                 $this->app->make('config')->set($configuration->key, $configuration->value);
             }
