@@ -97,9 +97,9 @@ class Webpage
     {
         if (config()->has('website.tag.title.position')) {
             if (config('website.tag.title.position') == 'right') {
-                return ucfirst($this->page->seo_title).' '. config('website.tag.title.separator') . ' ' . config('website.tag.title.text');
+                return ucfirst($this->page->seo_title).' '.config('website.tag.title.separator').' '.config('website.tag.title.text');
             } else {
-                return config('website.tag.title.text') .' '. config('website.tag.title.separator') .' '.ucfirst($this->page->seo_title);
+                return config('website.tag.title.text').' '.config('website.tag.title.separator').' '.ucfirst($this->page->seo_title);
             }
         }
 

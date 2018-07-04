@@ -5,14 +5,13 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Undocumented class
+ * Undocumented class.
  *
  * @property string $key
  * @property string $value
  * @property string $description
  *
  * @property Carbon $updated_at
- *
  */
 class Configuration extends Model
 {
@@ -52,7 +51,7 @@ class Configuration extends Model
      */
     public static function describe(string $config)
     {
-        return Configuration::where('key', $config)->first()->description;
+        return self::where('key', $config)->first()->description;
     }
 
     /**
@@ -63,6 +62,6 @@ class Configuration extends Model
      */
     public static function set(string $key, $value)
     {
-        return Configuration::where('key', $key)->first()->update(['value' => $value]);
+        return self::where('key', $key)->first()->update(['value' => $value]);
     }
 }

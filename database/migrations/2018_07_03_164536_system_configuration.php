@@ -1,9 +1,9 @@
 <?php
 
+use App\Model\Configuration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Model\Configuration;
 
 class SystemConfiguration extends Migration
 {

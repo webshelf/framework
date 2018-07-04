@@ -1,7 +1,6 @@
 <?php
 
 use App\Model\Plugin;
-use App\Model\Setting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;

@@ -6,12 +6,10 @@ use Exception;
 use App\Model\Article;
 use App\Model\Categories;
 use App\Classes\PluginManager;
-use App\Classes\SettingsManager;
 use Illuminate\Foundation\Application;
 use App\Exceptions\EngineBootException;
 use Illuminate\Support\ServiceProvider;
 use App\Classes\Repositories\PluginRepository;
-use App\Classes\Repositories\SettingsRepository;
 
 /**
  * Created by PhpStorm.

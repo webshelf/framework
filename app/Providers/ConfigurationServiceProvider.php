@@ -22,7 +22,7 @@ class ConfigurationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!app()->configurationIsCached() && Schema::hasTable('system_config')) {
+        if (! app()->configurationIsCached() && Schema::hasTable('system_config')) {
             foreach (Configuration::all() as $key => $configuration) {
                 $this->app->make('config')->set($configuration->key, $configuration->value);
             }

@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class Controller extends ModuleEngine
 {
-
     /**
      * Controller constructor.
      */
