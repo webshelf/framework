@@ -8,28 +8,21 @@
 
 namespace App\Modules\Settings;
 
+use App\Model\Configuration;
 use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
-use App\Classes\Repositories\SettingsRepository;
 
 /**
  * Class Controller.
  */
 class Controller extends ModuleEngine
 {
-    /**
-     * @var SettingsRepository
-     */
-    private $settings;
 
     /**
      * Controller constructor.
-     * @param SettingsRepository $settings
      */
-    public function __construct(SettingsRepository $settings)
+    public function __construct()
     {
-        $this->settings = $settings;
-
         $this->middleware(['role:administrator']);
     }
 
@@ -56,18 +49,18 @@ class Controller extends ModuleEngine
     {
         if ($request['setting']['string']) {
             foreach ($request['setting']['string'] as $key => $value) {
-                $this->settings->firstKey($key)->setValue($value)->save();
+                Configuration::set($key, $value);
             }
         }
 
         if ($request['setting']['boolean']) {
             foreach ($request['setting']['boolean'] as $key => $value) {
-                $this->settings->firstKey($key)->setValue($value)->save();
+                Configuration::set($key, $value);
             }
         }
         if ($request['setting']['select']) {
             foreach ($request['setting']['select'] as $key => $value) {
-                $this->settings->firstKey($key)->setValue($value)->save();
+                Configuration::set($key, $value);
             }
         }
 

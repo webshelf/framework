@@ -34,8 +34,6 @@ class InstanceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->makeSettingsInstance();
-
         $this->makePluginInstance();
 
         $this->app->singleton('articles', function () {
@@ -48,21 +46,6 @@ class InstanceServiceProvider extends ServiceProvider
 
         $this->app->singleton('article.creators', function () {
             return Article::where('status', true)->with('creator')->get();
-        });
-    }
-
-    private function makeSettingsInstance()
-    {
-        $this->app->singleton(SettingsManager::class, function () {
-            try {
-                return (new SettingsManager)->collect(app(SettingsRepository::class)->all());
-            } catch (Exception $e) {
-                if ($this->app->runningInConsole()) {
-                    return new SettingsManager;
-                }
-
-                throw new EngineBootException('Database Error.');
-            }
         });
     }
 

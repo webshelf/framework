@@ -27,8 +27,8 @@
             <div id="website">
                 <div class="row">
                     <div class="col-11">
-                        <h4>Website Settings</h4>
-                        <p>Update your project name, description, avatar, and other general settings.</p>
+                        <h4>Application Settings</h4>
+                        <p>Modify the settings of your CMS Application..</p>
                     </div>
                     <div class="col-1">
                         <button class="btn" type="button" data-toggle="collapse" data-parent="#settings" href="#website-settings" aria-controls="website-settings">Expand</button>
@@ -37,33 +37,29 @@
 
                 <div id="website-settings" class="collapse item container" role="tabpanel">
                     <div class="form-group">
-                        <label for="setting[string][website_name]">Website Name</label>
-                        <input type="text" class="form-control" name="setting[string][website_name]" id="websiteName" aria-describedby="websiteNameHelp" placeholder="{{ settings()->getShadow('website_name') }}" value="{{ settings()->getValue('website_name') }}">
-                        <small id="websiteNameHelp" class="form-text text-muted">The name of your website.</small>
+                        <label for="setting[string][app.name]">Application Name</label>
+                        <input type="text" class="form-control" name="setting[string][app.name]" id="websiteName" aria-describedby="websiteNameHelp" value="{{ config('app.name') }}" required>
+                        <small id="websiteNameHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('app.name') }}</small>
                     </div>
                     <div class="form-group">
-                        <label for="setting[string][website_copyright]">Website Copyright</label>
-                        <input type="text" class="form-control" name="setting[string][website_copyright]" id="setting[string][website_copyright]" aria-describedby="helpId" placeholder="{{ settings()->getShadow('website_copyright') }}" value="{{ settings()->getValue('website_copyright') }}">
-                        <small id="helpId" class="form-text text-muted">Display the copyright license for your website.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="setting[boolean][maintenance_mode]">Website Status</label>
-                        <select class="form-control" name="setting[boolean][maintenance_mode]" id="setting[boolean][maintenance_mode]">
-                            <option value="1" {{ settings()->getValue('maintenance_mode') == true ? 'selected' : 'null' }}>Offline</option>
-                            <option value="0" {{ settings()->getValue('maintenance_mode') == false ? 'selected' : 'null' }}>Online</option>
+                        <label for="setting[string][app.mode]">Application Mode</label>
+                        <select class="form-control" name="setting[string][app.mode]" id="setting[boolean][maintenance_mode]" required>
+                            <option value="normal" {{ config('app.mode') == 'normal' ? 'selected' : 'null' }}>Normal</option>
+                            <option value="maintenance" {{ config('app.mode') == 'maintenance' ? 'selected' : 'null' }}>Maintenance</option>
                         </select>
+                        <small id="websiteModeHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('app.mode') }}</small>
                     </div>
                     <div class="form-group">
-                        <label for="setting[string][website_logo]">Website Logo</label>
+                        <label for="setting[string][app.logo]">Application Logo</label>
                         <div class="input-group">
                             <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-secondary popup_selector" data-inputid="website_logo" type="button">Choose Website Logo</button>
+                                <button class="btn btn-secondary popup_selector" data-inputid="app_logo" type="button">Choose App Logo</button>
                             </span>
-                                <input id="website_logo" type="text" class="form-control" name="setting[string][website_logo]" value="{{ settings()->getDefault('website_logo') }}">
+                                <input id="app_logo" type="text" class="form-control" name="setting[string][app.logo]" value="{{ config('app.logo') }}" required>
                             </div>
                         </div>
-                        <small id="helpId" class="form-text text-muted">Logo that represents your website. (URL is relative to the domain)</small>
+                        <small id="helpId" class="form-text text-muted">{{ App\Model\Configuration::getDescription('app.logo') }}</small>
                     </div>
                 </div>
 
@@ -74,8 +70,8 @@
             <div id="page">
                 <div class="row">
                     <div class="col-11">
-                        <h4>Page Settings</h4>
-                        <p>Control settings regarding your front end pages.</p>
+                        <h4>HTML Tag Settings</h4>
+                        <p>Control the settings that make up the html tag of your website.</p>
                     </div>
                     <div class="col-1">
                         <button class="btn" type="button" data-toggle="collapse" data-parent="#settings" href="#page-settings" aria-controls="page-settings">Expand</button>
@@ -84,60 +80,36 @@
 
                 <div id="page-settings" class="collapse item container" role="tabpanel">
                     <div class="form-group">
-                        <label for="setting[string][page_keywords]">Default Page Keywords</label>
-                        <input type="text" class="form-control" name="setting[string][page_keywords]" id="setting[string][page_keywords]" aria-describedby="defaultPageKeywordsHelp" placeholder="{{ settings()->getShadow('page_keywords') }}" value="{{ settings()->getValue('page_keywords') }}">
-                        <small id="defaultPageKeywordsHelp" class="form-text text-muted">This is the default set of keywords used on pages without keywords set.</small>
+                        <label for="setting[string][website.tag.title.text]">Append HTML Tag Title</label>
+                        <input type="text" class="form-control" name="setting[string][website.tag.title.text]" id="setting[string][website.tag.title.text]" aria-describedby="seoTextHelp" value="{{ config('website.tag.title.text') }}">
+                        <small id="seoTextHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.tag.title.text') }}</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="setting[string][page_description]">Default Page Description</label>
-                        <input type="text" class="form-control" name="setting[string][page_description]" id="setting[string][page_description]" aria-describedby="defaultPageDescriptionHelp" placeholder="{{ settings()->getShadow('page_description') }}" value="{{ settings()->getValue('page_description') }}">
-                        <small id="defaultPageDescriptionHelp" class="form-text text-muted">This is the default description used on pages without a description.</small>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-
-            <div id="seo">
-                <div class="row">
-                    <div class="col-11">
-                        <h4>SEO Settings</h4>
-                        <p>Search engine optimization settings allow you to control the interaction with google, yahoo & bing.</p>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn" type="button"  data-toggle="collapse" data-parent="#settings" href="#seo-settings" aria-controls="seo-settings">Expand</button>
-                    </div>
-                </div>
-
-                <div id="seo-settings" class="collapse item container" role="tabpanel">
-                    <div class="form-group">
-                        <label for="setting[string][seo_text]">SEO Text</label>
-                        <input type="text" class="form-control" name="setting[string][seo_text]" id="setting[string][seo_text]" aria-describedby="seoTextHelp" placeholder="{{ settings()->getShadow('seo_text') }}" value="{{ settings()->getValue('seo_text') }}">
-                        <small id="seoTextHelp" class="form-text text-muted">Append additional text to your website pages, globally.</small>
+                        <label for="setting[string][website.tag.keywords.default]">Default Page Keywords</label>
+                        <input type="text" class="form-control" name="setting[string][website.tag.keywords.default]" id="setting[string][website.tag.keywords.default]" aria-describedby="defaultPageKeywordsHelp" value="{{ config('website.tag.keywords.default') }}">
+                        <small id="defaultPageKeywordsHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.tag.keywords.default') }}</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="setting[select][seo_position]">Append Text Position</label>
-                        <select class="form-control" name="setting[select][seo_position]" id="setting[select][seo_position]" aria-describedby="seoTextPositionHelp">
-                            <option value="left" {{ settings()->getValue('seo_position') == 'left' ? 'selected' : 'null' }}>Left</option>
-                            <option value="right" {{ settings()->getValue('seo_position') == 'right' ? 'selected' : 'null' }}>Right</option>
+                        <label for="setting[string][website.tag.description.default]">Default Page Description</label>
+                        <input type="text" class="form-control" name="setting[string][website.tag.description.default]" id="setting[string][website.tag.description.default]" aria-describedby="defaultPageDescriptionHelp" value="{{ config('website.tag.description.default') }}">
+                        <small id="defaultPageDescriptionHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.tag.description.default') }}</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="setting[select][website.tag.title.position]">Append HTML Tag title to Position</label>
+                        <select class="form-control" name="setting[select][website.tag.title.position]" id="setting[select][website.tag.title.position]" aria-describedby="seoTextPositionHelp">
+                            <option value="left" {{ config('website.tag.title.position') == 'left' ? 'selected' : 'null' }}>Left</option>
+                            <option value="right" {{ config('website.tag.title.position') == 'right' ? 'selected' : 'null' }}>Right</option>
                         </select>
-                        <small id="seoTextPositionHelp" class="form-text text-muted">Append the text to which side of the page name.</small>
+                        <small id="seoTextPositionHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.tag.title.position') }}</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="setting[string][seo_separator]">Text Seperator</label>
-                        <input type="text" class="form-control" name="setting[string][seo_separator]" id="setting[string][seo_separator]" aria-describedby="textSeperatorHelp" placeholder="{{ settings()->getShadow('seo_separator') }}" value="{{ settings()->getValue('seo_separator') }}">
-                        <small id="textSeperatorHelp" class="form-text text-muted">Seperate the text with the page name with an symbol or character.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="setting[boolean][seo_indexing]">Allow search engine indexing</label>
-                        <select class="form-control" name="setting[boolean][seo_indexing]" id="setting[boolean][seo_indexing]">
-                            <option value="0" {{ settings()->getValue('seo_indexing') == '0' ? 'selected' : 'null' }}>Deny</option>
-                            <option value="1" {{ settings()->getValue('seo_indexing') == '1' ? 'selected' : 'null' }}>Allow</option>
-                        </select>
+                        <label for="setting[string][website.tag.title.separator]">Append Separator to HTML Tag Title</label>
+                        <input type="text" class="form-control" name="setting[string][website.tag.title.separator]" id="setting[string][website.tag.title.separator]" aria-describedby="textSeperatorHelp" value="{{ config('website.tag.title.separator') }}">
+                        <small id="textSeperatorHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.tag.title.separator') }}</small>
                     </div>
                 </div>
             </div>
@@ -147,8 +119,8 @@
             <div id="contact">
                 <div class="row">
                     <div class="col-11">
-                        <h4>Contact Settings</h4>
-                        <p>Contact settings allow you to modify your current details or allow new ways for your visitors to get in touch.</p>
+                        <h4>Website Contact Details</h4>
+                        <p>Define the details on your website that allows visitors to get in touch.</p>
                     </div>
                     <div class="col-1">
                         <button class="btn" type="button"  data-toggle="collapse" data-parent="#settings" href="#contact-settings" aria-controls="contact-settings">Expand</button>
@@ -157,27 +129,27 @@
 
                 <div id="contact-settings" class="collapse item container" role="tabpanel">
                     <div class="form-group">
-                        <label for="setting[string][address]">Address</label>
-                        <textarea class="form-control" name="setting[string][address]" id="setting[string][address]" rows="3" aria-describedby="addressHelp">{{ settings()->getValue('address') }}</textarea>
-                        <small id="addressHelp" class="form-text text-muted">Visitors can use this address to find your location.</small>
+                        <label for="setting[string][website.contact.address]">Address</label>
+                        <textarea class="form-control" name="setting[string][website.contact.address]" id="setting[string][website.contact.address]" rows="3" aria-describedby="addressHelp">{{ config('website.contact.address') }}</textarea>
+                        <small id="addressHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.contact.address') }}</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="setting[string][phone_number]">Telephone Number</label>
-                        <input class="form-control" type="text" name="setting[string][phone_number]" id="setting[string][phone_number]" aria-describedby="telephoneHelp" value="{{ settings()->getValue('phone_number') }}">
-                        <small id="telephoneHelp" class="form-text text-muted">Users can use this number to get in contact with you.</small>
+                        <label for="setting[string][website.contact.phone]">Telephone Number</label>
+                        <input class="form-control" type="text" name="setting[string][website.contact.phone]" id="setting[string][website.contact.phone]" aria-describedby="telephoneHelp" value="{{ config('website.contact.phone') }}">
+                        <small id="telephoneHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.contact.phone') }}</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="setting[string][fax_number]">Fax Number</label>
-                        <input type="text" class="form-control" name="setting[string][fax_number]" id="setting[string][fax_number]" aria-describedby="faxNumberHelp" value="{{ settings()->getValue('fax_number') }}">
-                        <small id="faxNumberHelp" class="form-text text-muted">Users can use this number to send fax messages to you.</small>
+                        <label for="setting[string][website.contact.fax]">Fax Number</label>
+                        <input type="text" class="form-control" name="setting[string][website.contact.fax]" id="setting[string][website.contact.fax]" aria-describedby="faxNumberHelp" value="{{ config('website.contact.fax') }}">
+                        <small id="faxNumberHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.contact.fax') }}</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="setting[string][email_address]">Email Address</label>
-                        <input type="email" class="form-control" name="setting[string][email_address]" id="setting[string][email_address]" aria-describedby="emailAddressHelp" value="{{ settings()->getValue('email_address') }}"">
-                        <small id="emailAddressHelp" class="form-text text-muted">Users can use this email address to send emails to you.</small>
+                        <label for="setting[string][website.contact.email]">Email Address</label>
+                        <input type="email" class="form-control" name="setting[string][website.contact.email]" id="setting[string][website.contact.email]" aria-describedby="emailAddressHelp" value="{{ config('website.contact.email') }}">
+                        <small id="emailAddressHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.contact.email') }}</small>
                     </div>
                 </div>
             </div>
@@ -188,7 +160,7 @@
                 <div class="row">
                     <div class="col-11">
                         <h4>Third Party Services</h4>
-                        <p>Control third party aspects of your website.</p>
+                        <p>Integrate interaction from third party services such as google, facebook etc.</p>
                     </div>
                     <div class="col-1">
                         <button class="btn" type="button" data-toggle="collapse" data-parent="#settings" href="#webmaster-settings" aria-controls="webmaster-settings">Expand</button>
@@ -197,40 +169,9 @@
 
                 <div id="webmaster-settings" class="collapse item" role="tabpanel">
                     <div class="form-group">
-                        <label for="setting[string][google_site_tag]">Google Site Tag</label>
-                        <input type="text" class="form-control" name="setting[string][google_site_tag]" id="setting[string][google_site_tag]" aria-describedby="googleHelp" value="{{ settings()->getValue('google_site_tag') }}">
-                        <small id="googleHelp" class="form-text text-muted">
-                            The Global Site Tag provides streamlined tagging across Google’s site measurement, conversion tracking, and remarketing products.
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="setting[string][facebook_id]">Facebook Page ID</label>
-                        <input type="text" class="form-control" name="setting[string][facebook_id]" id="setting[string][facebook_id]" aria-describedby="facebookPageIdHelp" value="{{ settings()->getValue('facebook_id') }}">
-                        <small id="facebookPageIdHelp" class="form-text text-muted">
-                            Provide public access to this platform by providing your facebook page id. <br>
-                            You can retrieve your facebook id following this link : findmyfbid.com
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="setting[string][facebook_url]">Facebook Page Url</label>
-                        <input type="text" class="form-control" name="setting[string][facebook_url]" id="setting[string][facebook_url]" aria-describedby="facebookPageHelp" value="{{ settings()->getValue('facebook_url') }}">
-                        <small id="facebookPageHelp" class="form-text text-muted">
-                            Set the Facebook connection links on your webpage.
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="setting[string][youtube_url]">Youtube Channel Url</label>
-                        <input type="text" class="form-control" name="setting[string][youtube_url]" id="setting[string][youtube_url]" aria-describedby="youtubeHelp" value="{{ settings()->getValue('youtube_url') }}">
-                        <small id="youtubeHelp" class="form-text text-muted">
-                            Set the Youtube connection links on your webpage.
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="setting[string][twitter_url]">Twitter Page Url</label>
-                        <input type="text" class="form-control" name="setting[string][twitter_url]" id="setting[string][twitter_url]" aria-describedby="twitterHelp" value="{{ settings()->getValue('twitter_url') }}">
-                        <small id="twitterHelp" class="form-text text-muted">
-                            Set the Twitter connection links on your webpage.
-                        </small>
+                        <label for="setting[string][website.webmaster.google.tracking]">Google Site Tag</label>
+                        <input type="text" class="form-control" name="setting[string][website.webmaster.google.tracking]" id="setting[string][website.webmaster.google.tracking]" aria-describedby="googleHelp" value="{{ config('website.webmaster.google.tracking') }}">
+                        <small id="googleHelp" class="form-text text-muted">{{ App\Model\Configuration::getDescription('website.webmaster.google.tracking') }}</small>
                     </div>
                 </div>
             </div>

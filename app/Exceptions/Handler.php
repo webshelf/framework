@@ -80,6 +80,6 @@ class Handler extends ExceptionHandler
      */
     private function hasDisabledSite()
     {
-        return settings()->getValue('maintenance_mode');
+        return config('app.mode') == 'maintenance';
     }
 }

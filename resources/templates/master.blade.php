@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial -scale=1">
-    
+
     {{-- Normal page loading meta tags. --}}
     <title>@yield("webpage.title", $webpage->title())</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,15 +26,16 @@
     <script src="{{ mix('assets/frontend.js') }}"></script>
     @stack("webpage.scripts")
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117148224-1"></script>
-
-    @if (settings()->getValue('google_site_tag'))
+    <!-- GOOGLE TRACKING INFORMATION -->
+    @if (config()->has('website.webmaster.google.tracking'))
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('website.webmaster.google.tracking') }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '{{ settings()->getValue('google_site_tag') }}');
+
+            gtag('config', '{{ config('website.webmaster.google.tracking') }}');
         </script>
     @endif
 

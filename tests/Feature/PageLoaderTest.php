@@ -48,7 +48,7 @@ class PageLoaderTest extends TestCase
      */
     public function frontpage_should_return_maintenance_mode_if_site_is_in_maintenance_mode()
     {
-        settings()->set('maintenance_mode', true);
+        config()->set('app.mode', 'maintenance');
 
         $page = new Page(['slug'=>'unit-testing', 'seo_title'=>'PHP Unit Testing', 'enabled'=>true]);
 
@@ -64,7 +64,7 @@ class PageLoaderTest extends TestCase
      */
     public function frontpage_should_bypass_maintenance_mode_if_permission_allowed()
     {
-        settings()->set('maintenance_mode', true);
+        config()->set('app.mode', 'maintenance');
 
         auth()->login(factory(Account::class)->make());
 
@@ -138,8 +138,7 @@ class PageLoaderTest extends TestCase
      */
     public function webpage_should_contain_keywords_or_default()
     {
-        // default
-        settings()->set('page_keywords', 'Unit, Test, Keywords');
+        config()->set('website.tag.keywords.default', 'Unit, Test, Keywords');
 
         $page = new Page(['slug'=>'unit-testing', 'seo_title'=>'PHP Unit Testing']);
 

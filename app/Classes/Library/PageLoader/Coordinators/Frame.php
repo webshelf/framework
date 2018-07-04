@@ -18,7 +18,7 @@ class Frame
      */
     public function name()
     {
-        return settings()->getValue('website_name');
+        return config('app.name');
     }
 
     /**
@@ -26,6 +26,6 @@ class Frame
      */
     public function copyright()
     {
-        return settings()->getValue('website_copyright');
+        return 'Unknown';
     }
 }

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'Webshelf CMS',
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +30,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Mode
+    |--------------------------------------------------------------------------
+    |
+    | This determines the mode to run the application in, suitable modes
+    | are; normal, maintenance
+    |
+    */
+    'mode' => 'normal',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Logo
+    |--------------------------------------------------------------------------
+    |
+    | The logo that determines and visualizes the application.
+    |
+    */
+    'logo' => 'uplods/logo.png',
+
+    /*
+    |-----------------------------------------eeeee---------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
@@ -163,6 +184,7 @@ return [
         /*
          * Webshelf Service Providers...
          */
+        App\Providers\ConfigurationServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\InstanceServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
