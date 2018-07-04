@@ -74,7 +74,7 @@ class Webpage
      */
     public function keywords()
     {
-        return $this->page->seo_keywords ?: settings()->getValue('page_keywords');
+        return $this->page->seo_keywords ?: config('website.tag.keywords.default');
     }
 
     /**
@@ -82,7 +82,7 @@ class Webpage
      */
     public function description()
     {
-        return $this->page->seo_description ?: settings()->getValue('page_description');
+        return $this->page->seo_description ?: config('website.tag.description.default');
     }
 
     /**
@@ -95,11 +95,11 @@ class Webpage
 
     public function title()
     {
-        if (settings()->getValue('seo_text') != '') {
-            if (settings()->getValue('seo_position') == 'right') {
-                return ucfirst($this->page->seo_title).' '.settings()->getValue('seo_separator').' '.settings()->getValue('seo_text');
+        if (config()->has('website.tag.title.position')) {
+            if (config('website.tag.title.position') == 'right') {
+                return ucfirst($this->page->seo_title).' '.config('website.tag.title.separator').' '.config('website.tag.title.text');
             } else {
-                return settings()->getValue('seo_text').' '.settings()->getValue('seo_separator').' '.ucfirst($this->page->seo_title);
+                return config('website.tag.title.text').' '.config('website.tag.title.separator').' '.ucfirst($this->page->seo_title);
             }
         }
 

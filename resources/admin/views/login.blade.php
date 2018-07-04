@@ -39,7 +39,7 @@
 
                     <div class="login-container">
 
-                        <p>Sign into {{ settings()->getDefault('website_name') }}</p>
+                        <p>Sign into {{ config('app.name') }}</p>
 
                         @include('dashboard::structure.validation')
 

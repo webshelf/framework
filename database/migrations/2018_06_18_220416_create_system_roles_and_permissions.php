@@ -7,6 +7,7 @@ use App\Model\Categories;
 use App\Classes\Roles\Developer;
 use App\Classes\StringGenerator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -96,6 +97,8 @@ class CreateSystemRolesAndPermissions extends Migration
         foreach (Account::all() as $account) {
             $account->update(['username' => StringGenerator::stripEmail($account->email)]);
         }
+
+        Artisan::call('scout:mysql-index');
     }
 
     /**

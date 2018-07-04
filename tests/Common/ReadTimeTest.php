@@ -6,7 +6,7 @@
  * Time: 22:45.
  */
 
-namespace Tests\Unit;
+namespace Tests\Common;
 
 use App\Classes\ReadTime;
 use PHPUnit\Framework\TestCase;

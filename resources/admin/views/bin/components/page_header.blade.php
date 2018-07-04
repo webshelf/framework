@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @if(settings()->getValue('search_engine_indexing') == FALSE)
-        <meta name="robots" content="noindex, nofollow" />
-    @endif
-
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 

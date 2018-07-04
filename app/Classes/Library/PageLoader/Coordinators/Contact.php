@@ -12,7 +12,7 @@ class Contact
      */
     public function address()
     {
-        return settings()->getValue('address');
+        return config('website.contact.address');
     }
 
     /**
@@ -20,7 +20,7 @@ class Contact
      */
     public function phone()
     {
-        return settings()->getValue('phone_number');
+        return config('website.contact.phone');
     }
 
     /**
@@ -28,7 +28,7 @@ class Contact
      */
     public function fax()
     {
-        return settings()->getValue('fax_number');
+        return config('website.contact.fax');
     }
 
     /**
@@ -36,6 +36,6 @@ class Contact
      */
     public function email()
     {
-        return settings()->getValue('email_address');
+        return config('website.contact.email');
     }
 }

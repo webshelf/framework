@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Article;
 
 use Tests\TestCase;
 use App\Model\Plugin;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ArticleTest extends TestCase
+class ArticleViewingTest extends TestCase
 {
     /*
      * Provide fake content

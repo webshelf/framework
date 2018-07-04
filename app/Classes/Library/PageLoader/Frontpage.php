@@ -89,7 +89,7 @@ class Frontpage
      */
     public function isMaintenanceMode()
     {
-        return settings()->getValue('maintenance_mode');
+        return config('app.mode') == 'maintenance';
     }
 
     /**

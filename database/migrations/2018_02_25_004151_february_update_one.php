@@ -1,7 +1,6 @@
 <?php
 
 use App\Model\Plugin;
-use App\Model\Setting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
@@ -63,27 +62,6 @@ class FebruaryUpdateOne extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        /**
-         * Store youtube url.
-         */
-        $setting = new Setting;
-        $setting->setAttribute('key', 'youtube_url');
-        $setting->save();
-
-        /**
-         * Store facebook url.
-         */
-        $setting = new Setting;
-        $setting->setAttribute('key', 'facebook_url');
-        $setting->save();
-
-        /**
-         * Store twitter url.
-         */
-        $setting = new Setting;
-        $setting->setAttribute('key', 'twitter_url');
-        $setting->save();
 
         /*
          * INDEX ALL NEW MATERIAL FOR SEARCHING.

@@ -23,11 +23,13 @@ use Illuminate\Support\Debug\Dumper;
     }
 
     /**
+     * @deprecated 5.4 Use Config Provider from Laravel.
+     *
      * @return \App\Classes\SettingsManager
      */
     function settings()
     {
-        return app(\App\Classes\SettingsManager::class);
+        throw new Exception('Settings called...');
     }
 
     /**
