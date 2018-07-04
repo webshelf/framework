@@ -47,21 +47,22 @@ class Configuration extends Model
     /**
      * Get the description of a configuration by its keyname.
      *
-     * @param string $configName
+     * @param string $config
      * @return mixed
      */
-    public static function getDescription(string $configName)
+    public static function describe(string $config)
     {
-        return Configuration::where('key', $configName)->first()->description;
+        return Configuration::where('key', $config)->first()->description;
     }
 
     /**
+     * Set a key value in the database.
      * @param string $key
      * @param string $value
      * @return mixed
      */
-    public static function set(string $key, string $value)
+    public static function set(string $key, $value)
     {
-        return Configuration::where('key', $key)->first()->update(['value', $value]);
+        return Configuration::where('key', $key)->first()->update(['value' => $value]);
     }
 }

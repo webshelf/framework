@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Account;
 
 use Tests\TestCase;
 use App\Classes\Roles\Developer;
 use App\Classes\Roles\Administrator;
 
-class AccountTest extends TestCase
+class AccountRoleTest extends TestCase
 {
     /**
      * @test

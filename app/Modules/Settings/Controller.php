@@ -47,21 +47,8 @@ class Controller extends ModuleEngine
      */
     public function update(Request $request)
     {
-        if ($request['setting']['string']) {
-            foreach ($request['setting']['string'] as $key => $value) {
-                Configuration::set($key, $value);
-            }
-        }
-
-        if ($request['setting']['boolean']) {
-            foreach ($request['setting']['boolean'] as $key => $value) {
-                Configuration::set($key, $value);
-            }
-        }
-        if ($request['setting']['select']) {
-            foreach ($request['setting']['select'] as $key => $value) {
-                Configuration::set($key, $value);
-            }
+        foreach ($request['setting'] as $key => $value) {
+            Configuration::set($key, $value);
         }
 
         return redirect()->intended(route('admin.settings.index'));

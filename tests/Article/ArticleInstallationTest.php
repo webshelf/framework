@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Article;
 
 use Tests\TestCase;
 use App\Model\Plugin;
@@ -8,7 +8,7 @@ use App\Classes\Roles\Developer;
 use App\Plugins\Articles\ArticlesController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class PluginInstallationTest extends TestCase
+class ArticleInstallationTest extends TestCase
 {
     use RefreshDatabase;
 

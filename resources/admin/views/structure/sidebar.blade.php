@@ -1,7 +1,7 @@
 <div id="nav-sidebar">
     <div class="head">
         <div class="logo">
-            <img src="{{ config('app.logo') }}" style="height: 100%; width: 100%; display:block;">
+            <img src="{{ url(config('app.logo')) }}" style="height: 100%; width: 100%; display:block;">
         </div>
         <div class="glance">
             <div class="website-name">{{ config('app.name') }}</div>
@@ -21,7 +21,7 @@
                 </a>
 
             </li>
-            
+
             @foreach(plugins()->viewable() as $plugin)
 
                 <li>
@@ -57,7 +57,7 @@
         </ul>
 
         <hr>
-        
+
     </div>
 
 </div>

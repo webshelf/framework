@@ -54,6 +54,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if (app()->environment('local')) {
+            return parent::render($request, $exception);
+        }
+
         if ($this->hasDisabledSite()) {
             return ErrorController::maintenance();
         }

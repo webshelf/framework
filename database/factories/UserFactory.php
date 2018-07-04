@@ -100,3 +100,12 @@ $factory->define(App\Model\Categories::class, function (Faker $faker) {
         'updated_at' => $faker->dateTimeBetween('-5 months'),
     ];
 });
+
+$factory->define(\App\Model\Configuration::class, function (Faker $faker) {
+    return [
+        'key' => $faker->word,
+        'value' => collect([$faker->word, $faker->numberBetween(0, 999), $faker->boolean(50)])->random(),
+        'description' => $faker->paragraph,
+        'updated_at' => $faker->dateTimeBetween('-3 months'),
+    ];
+});
