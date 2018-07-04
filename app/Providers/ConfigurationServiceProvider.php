@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use \Schema;
+use Schema;
 use App\Model\Configuration;
 use Illuminate\Support\ServiceProvider;
 

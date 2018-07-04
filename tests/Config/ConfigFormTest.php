@@ -7,9 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 /**
- * Class ConfigTest
- *
- * @package Tests\Feature
+ * Class ConfigTest.
  */
 class ConfigFormTest extends TestCase
 {
