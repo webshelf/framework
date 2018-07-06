@@ -2,16 +2,12 @@
 
 namespace App\Modules;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Larapack\ConfigWriter\Repository as WriteConfigTo;
-use Larapack\ConfigWriter\Repository;
 
 /**
- * Class ModuleServiceProvider
- *
- * @package App\Modules
+ * Class ModuleServiceProvider.
  */
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -32,7 +28,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ModuleManager::class, function() {
+        $this->app->singleton(ModuleManager::class, function () {
             return new ModuleManager(app(ModuleRepository::class));
         });
     }
@@ -44,8 +40,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public static function map()
     {
-        foreach (config('modules') as $module)
-        {
+        foreach (config('modules') as $module) {
             $namespace = sprintf('App\Modules\%s', $module['title']);
 
             if (config("modules.{$module['title']}.enabled")) {

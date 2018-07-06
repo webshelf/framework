@@ -2,19 +2,16 @@
 
 namespace Tests\Products;
 
+use Mockery;
+use Tests\TestCase;
 use App\Modules\ModuleManager;
 use Illuminate\Support\Facades\Config;
-use \Mockery;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Event;
-use Larapack\ConfigWriter\Repository;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class ProductInstallationTest extends TestCase
 {
-    /**
+    /*
      * Database traits.
      */
     use RefreshDatabase, WithoutMiddleware;
@@ -32,5 +29,4 @@ class ProductInstallationTest extends TestCase
 
         $response->assertRedirect('/admin/products')->assertSee('test');
     }
-
 }

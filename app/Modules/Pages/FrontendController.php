@@ -8,20 +8,19 @@
 
 namespace App\Modules\Pages;
 
-use App\Classes\Library\PageLoader\Frontpage;
-use App\Jobs\IncrementViews;
 use App\Model\Page;
+use App\Jobs\IncrementViews;
 use App\Modules\ModuleEngine;
 use App\Classes\SitemapGenerator;
 use App\Classes\Interfaces\Sitemap;
 use App\Classes\Repositories\PageRepository;
+use App\Classes\Library\PageLoader\Frontpage;
 
 /**
  * Class UserController.
  */
 class FrontendController extends ModuleEngine implements Sitemap
 {
-
     /**
      * @var Page
      */

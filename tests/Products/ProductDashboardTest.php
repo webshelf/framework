@@ -2,14 +2,13 @@
 
 namespace Tests\Products;
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class ProductDashboardTest extends TestCase
 {
-    /**
+    /*
      * Database traits.
      */
     use RefreshDatabase, WithoutMiddleware;
@@ -29,5 +28,4 @@ class ProductDashboardTest extends TestCase
 
         $response->assertOk();
     }
-
 }

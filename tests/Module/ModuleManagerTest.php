@@ -2,30 +2,27 @@
 
 namespace Tests\Module;
 
-use App\Model\Page;
-use App\Plugins\Pages\Model\PageOptions;
 use Exception;
-use App\Modules\ModuleRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
+use App\Model\Page;
+use Tests\TestCase;
 use App\Modules\ModuleManager;
+use App\Modules\ModuleRepository;
+use Illuminate\Support\Facades\Config;
+use App\Plugins\Pages\Model\PageOptions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Tests\TestCase;
 
 /**
- * Class ModuleManagerTest
- *
- * @package Tests\Module
+ * Class ModuleManagerTest.
  */
 class ModuleManagerTest extends TestCase
 {
-    /**
+    /*
      * Test traits.
      */
     use WithoutMiddleware, RefreshDatabase;
-
-    /**
+    /*
      * Mockery
      */
     use MockeryPHPUnitIntegration;
@@ -127,7 +124,8 @@ class ModuleManagerTest extends TestCase
     /**
      * @test
      */
-    public function a_module_will_enable_multiple_pages_attached_to_module(){
+    public function a_module_will_enable_multiple_pages_attached_to_module()
+    {
         /** @var Page $page */
         $pages = factory('App\Model\Page', 4)->create(['module' => 'unit-testing', 'option' => PageOptions::OPTION_DISABLED]);
 
@@ -137,7 +135,7 @@ class ModuleManagerTest extends TestCase
 
         app(ModuleManager::class)->enable('unit-testing');
 
-        foreach($pages as $page) {
+        foreach ($pages as $page) {
             $this->assertDatabaseHas('pages', ['id' => $page->id, 'option' => PageOptions::OPTION_DEFAULT]);
         }
 
@@ -147,7 +145,8 @@ class ModuleManagerTest extends TestCase
     /**
      * @test
      */
-    public function a_module_will_disable_multiple_pages_attached_to_module(){
+    public function a_module_will_disable_multiple_pages_attached_to_module()
+    {
         /** @var Page $page */
         $pages = factory('App\Model\Page', 4)->create(['module' => 'unit-testing', 'option' => PageOptions::OPTION_DEFAULT]);
 
@@ -157,13 +156,12 @@ class ModuleManagerTest extends TestCase
 
         app(ModuleManager::class)->disable('unit-testing');
 
-        foreach($pages as $page) {
+        foreach ($pages as $page) {
             $this->assertDatabaseHas('pages', ['id' => $page->id, 'option' => PageOptions::OPTION_DISABLED]);
         }
 
         $this->assertFalse(app(ModuleManager::class)->status('unit-testing'));
     }
-
 
     /**
      * Mock the instance of saving to a configuration file.

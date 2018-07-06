@@ -3,10 +3,10 @@
 namespace App\Model;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 use App\Model\Concerns\Publishers;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Classes\Interfaces\Linkable;
 use App\Model\Concerns\ActivityFeed;
 use App\Plugins\Pages\Model\PageTypes;
@@ -303,7 +303,7 @@ class Page extends Model implements Linkable
 
     /**
      * Toggle the disability of all the module pages.
-     * (Enable, Disable);
+     * (Enable, Disable);.
      *
      * If one page fails, do not toggle.
      *
@@ -313,7 +313,7 @@ class Page extends Model implements Linkable
      */
     public static function toggleModuleDisability(string $module, bool $active)
     {
-        DB::transaction(function() use ($module, $active){
+        DB::transaction(function () use ($module, $active) {
             if ($active == true) {
                 foreach (self::whereModule($module)->get() as $page) {
                     $page->update(['option' => $page->option & ~PageOptions::OPTION_DISABLED]);

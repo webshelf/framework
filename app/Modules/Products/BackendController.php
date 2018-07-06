@@ -4,12 +4,9 @@ namespace App\Modules\Products;
 
 use App\Modules\ModuleEngine;
 use App\Modules\ModuleManager;
-use Illuminate\Http\Request;
 
 /**
- * Class BackendController
- *
- * @package App\Modules\Products
+ * Class BackendController.
  */
 class BackendController extends ModuleEngine
 {

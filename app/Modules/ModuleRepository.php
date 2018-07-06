@@ -5,13 +5,10 @@ namespace App\Modules;
 use Larapack\ConfigWriter\Repository;
 
 /**
- * Class ConfigRepository
- *
- * @package App\Modules\Configs
+ * Class ConfigRepository.
  */
 class ModuleRepository extends Repository
 {
-
     /**
      * ConfigRepository constructor.
      */
@@ -43,7 +40,6 @@ class ModuleRepository extends Repository
      * @param null $to
      * @param bool $validate
      * @return bool
-     *
      */
     public function save($from = null, $to = null, $validate = true)
     {

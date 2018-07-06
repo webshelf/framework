@@ -1,17 +1,14 @@
 <?php
 
 namespace App\Modules;
+
 use App\Model\Page;
-use App\Modules\Pages\Model\PageOptions;
 
 /**
- * Class ModuleLoader
- *
- * @package App\Classes
+ * Class ModuleLoader.
  */
 class ModuleManager
 {
-
     /**
      * @var ModuleRepository
      */
@@ -65,7 +62,7 @@ class ModuleManager
      */
     public function toggle(string $module)
     {
-        $this->repository->set("{$module}.enabled", !$this->repository->get("{$module}.enabled"))->save();
+        $this->repository->set("{$module}.enabled", ! $this->repository->get("{$module}.enabled"))->save();
 
         $this->updatePageBelongingTo($module, $this->repository->get("{$module}.enabled"));
     }

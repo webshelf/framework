@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use App\Model\Plugin;
-use App\Modules\ModuleServiceProvider;
 use Illuminate\Support\Facades\Route;
+use App\Modules\ModuleServiceProvider;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**

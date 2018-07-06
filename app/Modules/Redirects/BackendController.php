@@ -3,8 +3,8 @@
 namespace App\Modules\Redirects;
 
 use App\Model\Redirect;
-use App\Modules\ModuleEngine;
 use Illuminate\Http\Request;
+use App\Modules\ModuleEngine;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Repositories\RedirectRepository;
 

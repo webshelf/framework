@@ -3,9 +3,7 @@
 namespace App\Plugins\Menus;
 
 /**
- * Class FrontendController
- *
- * @package App\Plugins\Menus
+ * Class FrontendController.
  */
 class FrontendController
 {

@@ -26,7 +26,7 @@ return [
         'icon' => 'fab fa-readme',
         'version' => '2.1',
         'url' => 'admin/pages',
-        'role' => 'publisher'
+        'role' => 'publisher',
     ],
 
     'redirects' => [

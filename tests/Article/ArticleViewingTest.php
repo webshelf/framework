@@ -2,8 +2,8 @@
 
 namespace Tests\Article;
 
-use Illuminate\Support\Facades\App;
 use Tests\TestCase;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;

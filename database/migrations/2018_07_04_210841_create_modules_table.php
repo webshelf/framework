@@ -1,9 +1,9 @@
 <?php
 
 use App\Model\Page;
-use App\Plugins\Pages\Model\PageOptions;
 use App\Plugins\Pages\Model\PageTypes;
 use Illuminate\Support\Facades\Schema;
+use App\Plugins\Pages\Model\PageOptions;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -24,7 +24,7 @@ class CreateModulesTable extends Migration
             'option' => PageOptions::OPTION_DISABLED,
         ]);
 
-        Schema::table('pages', function(Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             $table->string('module')->after('option')->nullable();
         });
     }
