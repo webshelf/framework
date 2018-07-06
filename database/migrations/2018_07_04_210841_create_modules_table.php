@@ -30,7 +30,7 @@ class CreateModulesTable extends Migration
 
         foreach (Page::all() as $page) {
             if ($page->type & PageTypes::TYPE_PLUGIN) {
-                $page->type = $page->type &~ PageTypes::TYPE_PLUGIN;
+                $page->type = $page->type & ~PageTypes::TYPE_PLUGIN;
                 $page->type = $page->type | PageTypes::TYPE_MODULE;
             }
 

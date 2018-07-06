@@ -14,7 +14,6 @@ class ArticleViewingTest extends TestCase
      * Provide fake content
      */
     use WithFaker;
-
     /*
      * Reset database after each test.
      */

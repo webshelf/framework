@@ -5,7 +5,6 @@ namespace Tests\Products;
 use Mockery;
 use Tests\TestCase;
 use App\Modules\ModuleManager;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 

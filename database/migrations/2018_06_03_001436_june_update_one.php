@@ -1,11 +1,11 @@
 <?php
 
 use App\Model\Page;
+use App\Modules\Pages\Model\PageTypes;
 use Illuminate\Support\Facades\Schema;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Modules\Pages\Model\PageTypes;
-use App\Modules\Pages\Model\PageOptions;
 
 class JuneUpdateOne extends Migration
 {
