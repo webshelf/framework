@@ -12,7 +12,7 @@ class ModuleManager
     /**
      * @var ModuleRepository
      */
-    private $repository;
+    public $repository;
 
     /**
      * ModuleLoader constructor.
@@ -29,7 +29,7 @@ class ModuleManager
      *
      * @param string $module
      *
-     * @return $this
+     * @return void
      *
      * @throws ModuleNotFoundException
      */
@@ -42,7 +42,7 @@ class ModuleManager
 
     /**
      * @param string $module
-     * @return $this
+     * @return void
      * @throws ModuleNotFoundException
      */
     public function disable(string $module)
@@ -77,6 +77,20 @@ class ModuleManager
     public function status(string $module)
     {
         return $this->repository->get("{$module}.enabled");
+    }
+
+    /**
+     * Update the route of a module configuration.
+     *
+     * @param string $module
+     * @param string $newRoute
+     *
+     * @return bool
+     * @throws ModuleNotFoundException
+     */
+    public function route(string $module, string $newRoute)
+    {
+        return $this->repository->set("{$module}.route", $newRoute)->save();
     }
 
     /**

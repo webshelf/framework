@@ -60,4 +60,16 @@ class PageTypes
     |
     */
     const TYPE_ERROR = 16;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Type Router
+    |--------------------------------------------------------------------------
+    |
+    | This page is responsible for routing of a module, the value
+    | of the page title and prefix, will be saved into configuration
+    | when it is changed.
+    |
+    */
+    const TYPE_ROUTER = 32;
 }

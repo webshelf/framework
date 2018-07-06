@@ -36,6 +36,7 @@ class CreateModulesTable extends Migration
 
             if ($page->identifier == 'articles') {
                 $page->module = 'articles';
+                $page->type = PageTypes::TYPE_MODULE|PageTypes::TYPE_ROUTER;
             }
 
             if ($page->identifier == 'newsletter.success') {

@@ -2,6 +2,7 @@
 
 namespace App\Modules;
 
+use App\Model\Page;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -18,7 +19,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Page::observe(ModuleRouteObservers::class);
     }
 
     /**
