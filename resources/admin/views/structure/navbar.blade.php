@@ -19,7 +19,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                    <a class="dropdown-item" href="{{ route('admin.menus.create') }}">New Menu</a>
+                    <a class="dropdown-item" href="{{ route('admin.navigation.create') }}">New Menu</a>
                     <a class="dropdown-item" href="{{ route('admin.pages.create') }}">New Page</a>
 
                 </div>

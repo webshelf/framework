@@ -15,23 +15,6 @@ class FebruaryUpdateOne extends Migration
      */
     public function up()
     {
-        $plugin = new Plugin;
-
-        $plugin->setAttribute('name', 'articles');
-        $plugin->setAttribute('version', '1.0');
-        $plugin->setAttribute('icon', 'fa-book');
-        $plugin->setAttribute('enabled', false);
-        $plugin->setAttribute('is_frontend', true);
-        $plugin->setAttribute('is_backend', true);
-        $plugin->setAttribute('required', false);
-        $plugin->save();
-
-        /** @var \App\Classes\Repositories\PluginRepository $pluginRepository */
-        $pluginRepository = app(\App\Classes\Repositories\PluginRepository::class);
-
-        $pluginRepository->whereName('menus')->setAttribute('required', true)->save();
-        $pluginRepository->whereName('pages')->setAttribute('required', true)->save();
-
         Schema::table('plugins', function (Blueprint $table) {
             $table->dropColumn('version');
             $table->dropColumn('icon');
@@ -62,11 +45,6 @@ class FebruaryUpdateOne extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        /*
-         * INDEX ALL NEW MATERIAL FOR SEARCHING.
-         */
-        // Artisan::call('scout:mysql-index');
     }
 
     /**

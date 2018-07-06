@@ -2,8 +2,8 @@
 
 namespace Tests\Article;
 
+use Illuminate\Support\Facades\App;
 use Tests\TestCase;
-use App\Model\Plugin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,13 +20,6 @@ class ArticleViewingTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * The plugin model for articles.
-     *
-     * @var Article
-     */
-    private $plugin;
-
-    /**
      * The Faker instance.
      *
      * @var \Faker\Generator
@@ -40,13 +33,9 @@ class ArticleViewingTest extends TestCase
     {
         parent::setUp();
 
-        $this->plugin = Plugin::install('articles');
+        Route::middleware('web', 'auth', 'gateway')->group(base_path(sprintf('app/Modules/%s/Routes/backend.php', 'Articles')));
 
-        Route::middleware('web', 'auth', 'gateway')->group(base_path(sprintf('app/Plugins/%s/Routes/backend.php', 'Articles')));
-
-        Route::middleware('web')->group(base_path(sprintf('app/Plugins/%s/Routes/frontend.php', 'Articles')));
-
-        // $this->app['router']->getRoutes()->refreshNameLookups();
+        Route::middleware('web')->group(base_path(sprintf('app/Modules/%s/Routes/frontend.php', 'Articles')));
     }
 
     /**

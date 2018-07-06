@@ -176,14 +176,11 @@ return [
         /*
          * Application Service Providers...
          */
+        App\Modules\ModuleServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-
-        /*
-         * Webshelf Service Providers...
-         */
         App\Providers\ConfigurationServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\InstanceServiceProvider::class,
@@ -212,7 +209,7 @@ return [
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
-        'Config' => Illuminate\Support\Facades\Config::class,
+        'Config' => Larapack\ConfigWriter\Facade::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,

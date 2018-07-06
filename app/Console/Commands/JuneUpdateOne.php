@@ -59,9 +59,6 @@ class JuneUpdateOne extends Command
             if (! $page->editable && ! $page->special) {
                 $page->type = (PageTypes::TYPE_FRAMEWORK | PageTypes::TYPE_STANDARD);
                 $page->option = PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP;
-            } elseif ($page->plugin) {
-                $page->type = PageTypes::TYPE_PLUGIN;
-                $page->option = PageOptions::OPTION_DEFAULT;
             } elseif ($page->identifier == 'newsletter.success') {
                 $page->type = PageTypes::TYPE_PLUGIN;
                 $page->option = PageOptions::OPTION_PUBLIC;

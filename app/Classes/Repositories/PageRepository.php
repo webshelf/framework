@@ -10,8 +10,8 @@ namespace App\Classes\Repositories;
 
 use App\Model\Page;
 use Illuminate\Support\Collection;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Database\Eloquent\Builder;
 
 /**

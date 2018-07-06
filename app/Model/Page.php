@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 use App\Model\Concerns\Publishers;
 use Illuminate\Support\Collection;
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $heading
  * @property string $description
  * @property string $keywords
+ * @property string $module
  * @property int $views
  * @property int $type
  * @property int $option
@@ -266,7 +268,7 @@ class Page extends Model implements Linkable
     /**
      * Return the status if the page has the options specified.
      *
-     * @param PageOptions $options Values of the required options
+     * @param string $options Values of the required options
      *
      * @return bool the returned condition
      */
@@ -278,7 +280,7 @@ class Page extends Model implements Linkable
             $constant = constant(sprintf('%s::OPTION_%s', PageOptions::class, strtoupper($option)));
 
             if ($this->option & $constant) {
-                return $constant;
+                return true;
             }
         }
 
@@ -297,5 +299,30 @@ class Page extends Model implements Linkable
         $constant = constant(sprintf('%s::TYPE_%s', PageTypes::class, strtoupper($type)));
 
         return $this->type & $constant;
+    }
+
+    /**
+     * Toggle the disability of all the module pages.
+     * (Enable, Disable);
+     *
+     * If one page fails, do not toggle.
+     *
+     * @param string $module
+     *
+     * @return mixed
+     */
+    public static function toggleModuleDisability(string $module, bool $active)
+    {
+        DB::transaction(function() use ($module, $active){
+            if ($active == true) {
+                foreach (self::whereModule($module)->get() as $page) {
+                    $page->update(['option' => $page->option & ~PageOptions::OPTION_DISABLED]);
+                }
+            } else {
+                foreach (self::whereModule($module)->get() as $page) {
+                    $page->update(['option' => $page->option | PageOptions::OPTION_DISABLED]);
+                }
+            }
+        });
     }
 }

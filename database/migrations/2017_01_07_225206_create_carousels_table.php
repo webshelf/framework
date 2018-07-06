@@ -38,14 +38,6 @@ class CreateCarouselsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        /** @var Plugin $plugin */
-        $plugin = new Plugin();
-        $plugin->setName('carousels');
-        $plugin->setVersion('1.0');
-        $plugin->setIcon('fa-fast-forward');
-        $plugin->setBackEnd(true);
-        $plugin->save();
     }
 
     /**
@@ -58,7 +50,5 @@ class CreateCarouselsTable extends Migration
         \Schema::drop('carousels');
 
         \Schema::drop('carousel_slides');
-
-        app(PluginRepository::class)->whereName('carousels')->delete();
     }
 }

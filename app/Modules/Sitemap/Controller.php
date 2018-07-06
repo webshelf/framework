@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 29/03/2016
- * Time: 17:59.
- */
 
 namespace App\Modules\Sitemap;
 

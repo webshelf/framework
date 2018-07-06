@@ -13,10 +13,7 @@ class EditFacebookPluginData extends Migration
      */
     public function up()
     {
-        /** @var Plugin $plugin */
-        $plugin = app(PluginRepository::class)->whereName('facebook');
-
-        $plugin->setHide(false)->save();
+        //
     }
 
     /**
@@ -26,9 +23,6 @@ class EditFacebookPluginData extends Migration
      */
     public function down()
     {
-        /** @var Plugin $plugin */
-        $plugin = app(PluginRepository::class)->whereName('facebook');
-
-        $plugin->setHide(true)->save();
+        //
     }
 }
