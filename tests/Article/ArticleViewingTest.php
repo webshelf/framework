@@ -14,6 +14,7 @@ class ArticleViewingTest extends TestCase
      * Provide fake content
      */
     use WithFaker;
+
     /*
      * Reset database after each test.
      */
@@ -33,9 +34,9 @@ class ArticleViewingTest extends TestCase
     {
         parent::setUp();
 
-        Route::middleware('web', 'auth', 'gateway')->group(base_path(sprintf('app/Modules/%s/Routes/backend.php', 'Articles')));
+        Route::middleware('web', 'auth', 'gateway')->group(base_path('app/Modules/Articles/Routes/backend.php'));
 
-        Route::middleware('web')->group(base_path(sprintf('app/Modules/%s/Routes/frontend.php', 'Articles')));
+        Route::middleware('web')->namespace('App\Modules\Articles')->group(base_path('app/Modules/Articles/Routes/frontend.php'));
     }
 
     /**

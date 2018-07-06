@@ -40,10 +40,10 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public static function map()
     {
-        foreach (config('modules') as $module) {
+        foreach (config('modules') as $key => $module) {
             $namespace = sprintf('App\Modules\%s', $module['title']);
 
-            if (config("modules.{$module['title']}.enabled")) {
+            if (config("modules.{$key}.enabled")) {
                 $backendRoute = base_path(sprintf('app/Modules/%s/Routes/backend.php', $module['title']));
                 if (file_exists($backendRoute)) {
                     Route::middleware(['web', 'auth', 'gateway'])->namespace($namespace)->group($backendRoute);

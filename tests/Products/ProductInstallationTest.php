@@ -19,11 +19,11 @@ class ProductInstallationTest extends TestCase
     /**
      * @test
      */
-    public function modules_can_be_enabled()
+    public function modules_can_be_toggled()
     {
-        Mockery::mock(ModuleManager::class)->shouldReceive('enable')->andReturn(true);
+        $mocked = Mockery::mock(ModuleManager::class)->shouldReceive('toggle')->andReturn(true)->getMock();
 
-        Config::set('modules.test', ['enabled' => false]);
+        $this->app->instance(ModuleManager::class, $mocked);
 
         $response = $this->get('/admin/products/test/toggle');
 

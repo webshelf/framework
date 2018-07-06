@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Plugins\Newsletters\Model;
+namespace App\Modules\Newsletters\Model;
 
 use Carbon\Carbon;
 use App\Model\Account;

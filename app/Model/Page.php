@@ -9,8 +9,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Classes\Interfaces\Linkable;
 use App\Model\Concerns\ActivityFeed;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -290,7 +290,7 @@ class Page extends Model implements Linkable
     /**
      * Return if the current page type matches the condition giving.
      *
-     * @param PageTypes $type The type required for the condition
+     * @param string $type The type required for the condition
      *
      * @return bool The condition of the function.
      */

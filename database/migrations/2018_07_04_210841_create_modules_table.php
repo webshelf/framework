@@ -1,9 +1,9 @@
 <?php
 
 use App\Model\Page;
-use App\Plugins\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageTypes;
 use Illuminate\Support\Facades\Schema;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -16,7 +16,11 @@ class CreateModulesTable extends Migration
      */
     public function up()
     {
-        $page = Page::firstOrCreate([
+        Schema::table('pages', function (Blueprint $table) {
+            $table->string('module')->after('option')->nullable();
+        });
+
+        Page::firstOrCreate([
             'seo_title' => 'Articles',
             'identifier' => 'articles',
             'slug' => 'articles',
@@ -24,9 +28,27 @@ class CreateModulesTable extends Migration
             'option' => PageOptions::OPTION_DISABLED,
         ]);
 
-        Schema::table('pages', function (Blueprint $table) {
-            $table->string('module')->after('option')->nullable();
-        });
+        foreach (Page::all() as $page) {
+            if ($page->type & PageTypes::TYPE_PLUGIN) {
+                $page->type = $page->type &~ PageTypes::TYPE_PLUGIN;
+                $page->type = $page->type | PageTypes::TYPE_MODULE;
+            }
+
+            if ($page->identifier == 'articles') {
+                $page->module = 'articles';
+            }
+
+            if ($page->identifier == 'newsletter.success') {
+                $page->module = 'newsletters';
+                $page->option = $page->option | PageOptions::OPTION_DISABLED;
+            }
+
+            if ($page->identifier == 'error.404') {
+                $page->module = 'errors';
+            }
+
+            $page->save();
+        }
     }
 
     /**

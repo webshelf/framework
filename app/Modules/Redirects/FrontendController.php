@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Plugins\Redirects;
+namespace App\Modules\Redirects;
 
 /**
  * Class UserController.

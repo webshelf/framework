@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Plugins\Menus;
+namespace App\Modules\Menus;
 
 /**
  * Class FrontendController.

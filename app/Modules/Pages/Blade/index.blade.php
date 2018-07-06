@@ -1,7 +1,5 @@
 @extends('dashboard::frame')
 
-<?php use App\Plugins\Pages\Model; ?>
-
 @section('title')
     Website Pages
 @endsection

@@ -45,7 +45,7 @@ class BackendController extends ModuleEngine
 
     public function indexPlugin()
     {
-        return $this->make('index')->with('pages', $this->repository->allPluginPages());
+        return $this->make('index')->with('pages', $this->repository->allModulePages());
     }
 
     /**

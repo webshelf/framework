@@ -31,9 +31,15 @@ class BackendController extends ModuleEngine
      *
      * @param string $module
      * @param ModuleManager $modules
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \App\Modules\ModuleNotFoundException
      */
     public function toggle(string $module, ModuleManager $modules)
     {
-        //
+        $modules->toggle(strtolower($module));
+
+        return response()->redirectToRoute('admin.products.index');
     }
 }

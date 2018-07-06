@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Model\Page;
 use Illuminate\Console\Command;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 use App\Classes\Repositories\PageRepository;
 
 class JuneUpdateOne extends Command

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
-use App\Plugins\Newsletters\Model\Newsletter;
-use App\Plugins\Newsletters\Model\NewsletterUser;
-use App\Plugins\Newsletters\Model\NewsletterRepository;
+use App\Modules\Newsletters\Model\Newsletter;
+use App\Modules\Newsletters\Model\NewsletterUser;
+use App\Modules\Newsletters\Model\NewsletterRepository;
 
 /**
  * Class FrontendController.

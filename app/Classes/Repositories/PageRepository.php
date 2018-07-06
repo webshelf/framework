@@ -53,9 +53,9 @@ class PageRepository extends BaseRepository
      *
      * @return $collection
      */
-    public function allPluginPages()
+    public function allModulePages()
     {
-        $bitmask = PageTypes::TYPE_PLUGIN;
+        $bitmask = PageTypes::TYPE_MODULE;
 
         return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
     }

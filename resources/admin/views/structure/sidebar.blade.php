@@ -24,7 +24,7 @@
 
             @foreach(config('modules') as $module)
 
-                @if(account()->hasRole($module['role']))
+                @if($module['enabled'] && account()->hasRole($module['role']))
 
                 <li>
 

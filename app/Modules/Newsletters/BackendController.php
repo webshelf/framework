@@ -4,7 +4,7 @@ namespace App\Modules\Newsletters;
 
 use Illuminate\Http\Request;
 use App\Modules\ModuleEngine;
-use App\Plugins\Newsletters\Model\NewsletterRepository;
+use App\Modules\Newsletters\Model\NewsletterRepository;
 
 /**
  * Class BackendController.

@@ -6,7 +6,7 @@
  * Time: 11:37.
  */
 
-namespace App\Plugins\Newsletters\Model;
+namespace App\Modules\Newsletters\Model;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;

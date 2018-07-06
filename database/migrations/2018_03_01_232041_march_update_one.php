@@ -4,6 +4,7 @@ use App\Model\Page;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Modules\Newsletters\Model\Newsletter;
 
 class MarchUpdateOne extends Migration
 {
