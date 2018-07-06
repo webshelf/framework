@@ -2,7 +2,6 @@
 
 namespace Tests\Module;
 
-use App\Modules\Pages\Model\PageTypes;
 use Exception;
 use App\Model\Page;
 use Tests\TestCase;

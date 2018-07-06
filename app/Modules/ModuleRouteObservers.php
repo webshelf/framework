@@ -4,11 +4,9 @@ namespace App\Modules;
 
 use App\Model\Page;
 use App\Modules\Pages\Model\PageTypes;
-use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ModuleObservers
- * @package App\Modules
+ * Class ModuleObservers.
  */
 class ModuleRouteObservers
 {
@@ -70,7 +68,8 @@ class ModuleRouteObservers
      * @param Page $page
      * @throws ModuleNotFoundException
      */
-    public function updateModuleRoute(Page $page) {
+    public function updateModuleRoute(Page $page)
+    {
         if ($this->isTypeRouter($page)) {
             $this->module->route($page->module, $page->slug);
         }
