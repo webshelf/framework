@@ -149,3 +149,11 @@ use Illuminate\Support\Debug\Dumper;
     {
         return $value == $matches ? 'selected' : '';
     }
+
+    /**
+     * @return \App\Modules\ModuleManager
+     */
+    function modules()
+    {
+        return app(\App\Modules\ModuleManager::class);
+    }

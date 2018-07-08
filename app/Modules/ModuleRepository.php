@@ -40,10 +40,16 @@ class ModuleRepository extends Repository
      * @param null $to
      * @param bool $validate
      * @return bool
+     *
+     * @throws ModuleNotFoundException
      */
     public function save($from = null, $to = null, $validate = true)
     {
-        parent::save($from, $to, $validate);
+        try {
+            parent::save($from, $to, $validate);
+        } catch (\Exception $e) {
+            throw new ModuleNotFoundException;
+        }
 
         return true;
     }

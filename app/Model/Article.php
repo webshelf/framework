@@ -218,7 +218,7 @@ class Article extends Model implements Linkable
      */
     public function path()
     {
-        return url($this->page->path().'/'.$this->category->slug.'/'.$this->slug);
+        return url(config('modules.articles.route') .'/'.$this->category->slug.'/'.$this->slug);
     }
 
     /**
