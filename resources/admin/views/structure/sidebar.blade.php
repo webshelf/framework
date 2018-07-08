@@ -22,23 +22,10 @@
 
             </li>
 
-            @foreach(plugins()->viewable() as $plugin)
-
-                <li>
-                    <a href="{{ $plugin->adminUrl() }}" class="{{ $breadcrumbs->contain($plugin->name(), 2) ? 'active' : 'inactive' }}">
-
-                        <i class="nav-icon {{ $plugin->icon() }}" aria-hidden="true"></i>
-
-                        <span class="nav-title">{{ ucfirst($plugin->name()) }}</span>
-
-                    </a>
-                </li>
-
-            @endforeach
-
             @foreach(config('modules') as $module)
 
-                @role($module['role'])
+                @if($module['enabled'] && account()->hasRole($module['role']))
+
                 <li>
 
                     <a href="{{ url($module['url']) }}" class="{{ $breadcrumbs->contain($module['title'], 2) ? 'active' : 'inactive' }}">

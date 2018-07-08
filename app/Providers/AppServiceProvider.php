@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,8 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->bootBladeDirectives();
-
         Schema::defaultStringLength(191);
     }
 
@@ -28,17 +25,5 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-    }
-
-    /**
-     * Boot blade directives.
-     *
-     * @return void
-     */
-    private function bootBladeDirectives()
-    {
-        Blade::if('role', function ($role) {
-            return account()->hasRole($role);
-        });
     }
 }

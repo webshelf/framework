@@ -1,9 +1,9 @@
 <?php
 
 use App\Model\Page;
-use App\Plugins\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageTypes;
 use Illuminate\Support\Facades\Schema;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 

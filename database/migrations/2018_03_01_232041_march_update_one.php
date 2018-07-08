@@ -3,7 +3,7 @@
 use App\Model\Page;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Plugins\Newsletters\Model\Newsletter;
+use App\Modules\Newsletters\Model\Newsletter;
 use Illuminate\Database\Migrations\Migration;
 
 class MarchUpdateOne extends Migration
@@ -15,15 +15,6 @@ class MarchUpdateOne extends Migration
      */
     public function up()
     {
-        $plugin = new \App\Model\Plugin();
-
-        $plugin->setAttribute('name', 'newsletters');
-        $plugin->setAttribute('enabled', false);
-        $plugin->setAttribute('is_frontend', true);
-        $plugin->setAttribute('is_backend', true);
-        $plugin->setAttribute('required', false);
-        $plugin->save();
-
         Schema::create('newsletters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');

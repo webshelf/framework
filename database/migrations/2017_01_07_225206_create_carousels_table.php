@@ -1,9 +1,7 @@
 <?php
 
-use App\Model\Plugin;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Classes\Repositories\PluginRepository;
 
 class CreateCarouselsTable extends Migration
 {
@@ -38,14 +36,6 @@ class CreateCarouselsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        /** @var Plugin $plugin */
-        $plugin = new Plugin();
-        $plugin->setName('carousels');
-        $plugin->setVersion('1.0');
-        $plugin->setIcon('fa-fast-forward');
-        $plugin->setBackEnd(true);
-        $plugin->save();
     }
 
     /**
@@ -58,7 +48,5 @@ class CreateCarouselsTable extends Migration
         \Schema::drop('carousels');
 
         \Schema::drop('carousel_slides');
-
-        app(PluginRepository::class)->whereName('carousels')->delete();
     }
 }

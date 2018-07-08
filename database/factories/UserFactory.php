@@ -2,8 +2,8 @@
 
 use Faker\Generator as Faker;
 use App\Classes\Roles\Administrator;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ $factory->define(App\Model\Page::class, function (Faker $faker) {
     return [
         'seo_title' => $title,
         'seo_keywords' => $faker->paragraph(1),
-        'seo_description' => $faker->paragraph(2),
+        'seo_description' => $faker->paragraph(1),
         'prefix' => $faker->word,
         'slug' => str_slug($title),
         'views' => $faker->numberBetween(75, 900),

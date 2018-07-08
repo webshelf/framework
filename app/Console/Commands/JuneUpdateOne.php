@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Model\Page;
 use Illuminate\Console\Command;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 use App\Classes\Repositories\PageRepository;
 
 class JuneUpdateOne extends Command
@@ -59,9 +59,6 @@ class JuneUpdateOne extends Command
             if (! $page->editable && ! $page->special) {
                 $page->type = (PageTypes::TYPE_FRAMEWORK | PageTypes::TYPE_STANDARD);
                 $page->option = PageOptions::OPTION_PUBLIC | PageOptions::OPTION_SITEMAP;
-            } elseif ($page->plugin) {
-                $page->type = PageTypes::TYPE_PLUGIN;
-                $page->option = PageOptions::OPTION_DEFAULT;
             } elseif ($page->identifier == 'newsletter.success') {
                 $page->type = PageTypes::TYPE_PLUGIN;
                 $page->option = PageOptions::OPTION_PUBLIC;

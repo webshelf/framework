@@ -10,8 +10,8 @@ namespace App\Classes\Repositories;
 
 use App\Model\Page;
 use Illuminate\Support\Collection;
-use App\Plugins\Pages\Model\PageTypes;
-use App\Plugins\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -53,9 +53,9 @@ class PageRepository extends BaseRepository
      *
      * @return $collection
      */
-    public function allPluginPages()
+    public function allModulePages()
     {
-        $bitmask = PageTypes::TYPE_PLUGIN;
+        $bitmask = PageTypes::TYPE_MODULE;
 
         return $this->model->whereRaw('`type` & '.$bitmask.'='.$bitmask)->get();
     }
