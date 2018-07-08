@@ -15,7 +15,7 @@
 
     // Get Requests.
     // ==================================================================================
-    Route::get('/sitemap.xml')->uses('Controller\SitemapController@index')->name('sitemap');
+    Route::get('/sitemap.xml')->uses('App\Modules\Sitemap\Controller@all')->name('sitemap');
 
     // Post Requests.
     // ==================================================================================
