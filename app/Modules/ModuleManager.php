@@ -21,7 +21,8 @@ class ModuleManager
      */
     public function __construct(ModuleRepository $repository)
     {
-        $this->repository = $repository;}
+        $this->repository = $repository;
+    }
 
     /**
      * Enable a module using the modules.php configuration.
@@ -99,7 +100,7 @@ class ModuleManager
      */
     public function getActive()
     {
-        return array_where($this->repository->all(), function($value) {
+        return array_where($this->repository->all(), function ($value) {
             return $value['enabled'] == true;
         });
     }
@@ -111,7 +112,7 @@ class ModuleManager
      */
     public function getInactive()
     {
-        return array_where($this->repository->all(), function($value) {
+        return array_where($this->repository->all(), function ($value) {
             return $value['enabled'] == false;
         });
     }
