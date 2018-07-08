@@ -2,6 +2,7 @@
 
 namespace Tests\Module;
 
+use App\Modules\ModuleNotFoundException;
 use Exception;
 use App\Model\Page;
 use Tests\TestCase;

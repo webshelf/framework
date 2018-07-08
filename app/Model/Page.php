@@ -106,7 +106,7 @@ class Page extends Model implements Linkable
     /**
      * Undocumented function.
      *
-     * @return void
+     * @return string
      */
     public function getRouteKeyName()
     {
