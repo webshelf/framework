@@ -3,7 +3,6 @@
 namespace Tests\Sitemap;
 
 use App\Model\Page;
-use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
