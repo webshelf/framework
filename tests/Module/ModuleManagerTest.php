@@ -2,7 +2,7 @@
 
 namespace Tests\Module;
 
-use App\Modules\ModuleNotFoundException;
+use Exception;
 use App\Model\Page;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
