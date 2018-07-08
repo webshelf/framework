@@ -6,13 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 /**
- * Class SitemapGenerator
- *
- * @package App\Modules\Sitemap
+ * Class SitemapGenerator.
  */
 class SitemapGenerator
 {
-
     /**
      * @var Collection
      */

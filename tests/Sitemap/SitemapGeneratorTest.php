@@ -1,4 +1,6 @@
-<?php /** @noinspection ALL */
+<?php
+
+/** @noinspection ALL */
 
 namespace Tests\Feature;
 
@@ -7,18 +9,14 @@ use Tests\TestCase;
 use Illuminate\Support\Collection;
 use App\Modules\Sitemap\SitemapGenerator;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Modules\Sitemap\SitemapConstants as Sitemap;
 
 /**
- * Class SitemapGeneratorTest
- *
- * @package Tests\Feature
+ * Class SitemapGeneratorTest.
  */
 class SitemapGeneratorTest extends TestCase
 {
-
-    /**
+    /*
      * Faker library.
      */
     use WithFaker;

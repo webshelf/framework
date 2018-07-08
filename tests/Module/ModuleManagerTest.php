@@ -4,20 +4,19 @@ namespace Tests\Module;
 
 use Exception;
 use App\Model\Page;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Modules\ModuleManager;
 use App\Modules\ModuleRepository;
 use Illuminate\Support\Facades\Config;
 use App\Modules\Pages\Model\PageOptions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
  * Class ModuleManagerTest.
  */
 class ModuleManagerTest extends TestCase
 {
-
-    /**
+    /*
      * Database Traits
      */
     use RefreshDatabase;
@@ -72,7 +71,7 @@ class ModuleManagerTest extends TestCase
     {
         Config::set('modules.config', ['enabled' => false]);
 
-         $module = $this->mockModuleManager();
+        $module = $this->mockModuleManager();
 
         $module->toggle('config');
 
@@ -233,7 +232,7 @@ class ModuleManagerTest extends TestCase
         // save method will return
         $mockedClass->method('save')->willReturn(true);
 
-        /** @var ModuleRepository $mockedClass */
+        /* @var ModuleRepository $mockedClass */
         return new ModuleManager($mockedClass);
     }
 }
