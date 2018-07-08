@@ -3,9 +3,7 @@
 namespace App\Modules\Sitemap;
 
 /**
- * Class SitemapConstants
- *
- * @package App\Modules\Sitemap
+ * Class SitemapConstants.
  */
 class SitemapConstants
 {

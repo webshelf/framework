@@ -3,8 +3,8 @@
 namespace App\Modules\Sitemap\Controller;
 
 use App\Modules\ModuleEngine;
-use App\Modules\Sitemap\SitemapGenerator;
 use Illuminate\Http\Response;
+use App\Modules\Sitemap\SitemapGenerator;
 
 /**
  * Class Controller.

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
     |--------------------------------------------------------------------------
     */
     Route::get(config('modules.articles.route'))->uses('FrontendController@allArticles')->name('articles.all');
-    Route::get(config('modules.articles.route') .'/search')->uses('FrontendController@searchArticles')->name('search.articles');
-    Route::get(config('modules.articles.route') .'/{category}')->uses('FrontendController@categoryArticles')->name('category.articles');
-    Route::get(config('modules.articles.route') .'/creator/{account}')->uses('FrontendController@allCreatorsArticles')->name('creator.articles');
-    Route::get(config('modules.articles.route') .'/{category}/{article}')->uses('FrontendController@viewArticle')->name('article.view');
+    Route::get(config('modules.articles.route').'/search')->uses('FrontendController@searchArticles')->name('search.articles');
+    Route::get(config('modules.articles.route').'/{category}')->uses('FrontendController@categoryArticles')->name('category.articles');
+    Route::get(config('modules.articles.route').'/creator/{account}')->uses('FrontendController@allCreatorsArticles')->name('creator.articles');
+    Route::get(config('modules.articles.route').'/{category}/{article}')->uses('FrontendController@viewArticle')->name('article.view');
