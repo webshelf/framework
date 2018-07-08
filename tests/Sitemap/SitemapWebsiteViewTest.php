@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class SitemapWebsiteViewTest extends TestCase
 {
 
+    use RefreshDatabase;
+
     /**
      * @test
      */
