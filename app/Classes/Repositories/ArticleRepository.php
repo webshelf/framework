@@ -30,7 +30,7 @@ class ArticleRepository extends BaseRepository
      */
     public function __construct(Article $model)
     {
-        $this->model = $model;
+        $this->model = $model->withoutGlobalScopes();
     }
 
     /**

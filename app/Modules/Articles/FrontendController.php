@@ -8,17 +8,14 @@ use App\Model\Article;
 use App\Model\Categories;
 use App\Jobs\IncrementViews;
 use Illuminate\Http\Request;
-use App\Classes\SitemapGenerator;
-use App\Classes\Interfaces\Sitemap;
 use Illuminate\Support\Facades\View;
 use App\Classes\Repositories\PageRepository;
 use App\Classes\Library\PageLoader\Frontpage;
-use App\Classes\Repositories\ArticleRepository;
 
 /**
  * Class UserController.
  */
-class FrontendController implements Sitemap
+class FrontendController
 {
     /**
      * @var Page
@@ -43,7 +40,7 @@ class FrontendController implements Sitemap
      */
     public function allArticles(Article $article)
     {
-        View::share('articles', $article->published()->latest('created_at')->paginate(7));
+        View::share('articles', $article->latest('created_at')->paginate(7));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
     }
@@ -54,7 +51,7 @@ class FrontendController implements Sitemap
      * @param Categories $category The articles category.
      * @param Article $article The article model to interact with.
      *
-     * @return void
+     * @return Frontpage
      */
     public function viewArticle($category, Article $article)
     {
@@ -70,13 +67,12 @@ class FrontendController implements Sitemap
     /**
      * View all articles in the category.
      *
-     * @param ArticleRepository $repository
      * @param string $string
-     * @return void
+     * @return Frontpage
      */
     public function categoryArticles(Categories $category)
     {
-        View::share('articles', $category->articles()->where('status', true)->paginate(7));
+        View::share('articles', $category->articles()->paginate(7));
 
         $this->currentPage->heading = 'Browse Categories';
 
@@ -84,12 +80,11 @@ class FrontendController implements Sitemap
     }
 
     /**
-     * Search all articles and return results.
+     * Search Articles.
      *
-     * @param ArticleRepository $repository
      * @param Request $request
      *
-     * @return void
+     * @return Frontpage
      */
     public function searchArticles(Request $request)
     {
@@ -103,36 +98,15 @@ class FrontendController implements Sitemap
     /**
      * Get all the articles created by an account.
      *
-     * @param ArticleRepository $repository
      * @param int $id
      * @return Frontpage
      */
-    public function allCreatorsArticles(ArticleRepository $repository, Account $account)
+    public function allCreatorsArticles(Account $account)
     {
         $this->currentPage->heading = 'Browse Creators';
 
         View::share('articles', $account->articles()->paginate(7));
 
         return Frontpage::build($this->currentPage, 200, 'articles');
-    }
-
-    /**
-     * The sitemap function allows plugins to quickly and effectively
-     * show their content for search engines in a modular way.
-     *
-     * @param SitemapGenerator $sitemap
-     * @return SitemapGenerator
-     */
-    public function sitemap(SitemapGenerator $sitemap)
-    {
-        /** @var ArticleRepository $repository */
-        $repository = app(ArticleRepository::class);
-
-        /** @var Article $article */
-        foreach ($repository->whereSitemappable() as $article) {
-            $sitemap->store(url($article->route()), $article->updated_at, 'weekly', '1.0');
-        }
-
-        return $sitemap;
     }
 }

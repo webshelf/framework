@@ -37,7 +37,7 @@ class BaseRepository
      */
     public function allDescendingOrder()
     {
-        return $this->model->orderBy('created_at', 'desc')->get();
+        return $this->model->withoutGlobalScopes()->orderBy('created_at', 'desc')->get();
     }
 
     /**

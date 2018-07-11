@@ -7,7 +7,9 @@ use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Controller.
+ * Class Controller
+ *
+ * @package App\Modules\Configs
  */
 class Controller extends ModuleEngine
 {
@@ -33,7 +35,7 @@ class Controller extends ModuleEngine
     }
 
     /**
-     * Save the changes for settings.
+     * Save the changes for system_config.
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse

@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Modules\ModuleManager;
 use App\Modules\ModuleRepository;
 use Illuminate\Support\Facades\Config;
+use App\Modules\ModuleNotFoundException;
 use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

@@ -111,9 +111,31 @@ class Article extends Model implements Linkable
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'publish_date', 'unpublish_date'];
 
     /**
-     * Undocumented function.
+     * The "booting" method of the model.
      *
      * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('published', function (Builder $builder) {
+            return $builder->where([
+                ['publish_date', '<=', Carbon::now()],
+                ['unpublish_date', '>', Carbon::now()],
+                ['status', '=', true]
+            ])->orWhere([
+                ['publish_date', '<=', Carbon::now()],
+                ['unpublish_date', '=', NULL],
+                ['status', '=', true]
+            ]);
+        });
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return string
      */
     public function getRouteKeyName()
     {
@@ -158,17 +180,6 @@ class Article extends Model implements Linkable
         $this->attributes['title'] = $value;
 
         $this->attributes['slug'] = str_slug($value);
-    }
-
-    /**
-     * Scope the collection to only published.
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopePublished(Builder $query)
-    {
-        return $query->where('status', true);
     }
 
     /**
