@@ -49,16 +49,6 @@ class InstanceServiceProvider extends ServiceProvider
 
     private function makePluginInstance()
     {
-        $this->app->singleton(PluginManager::class, function () {
-            try {
-                return (new PluginManager)->collect(app(PluginRepository::class)->all());
-            } catch (Exception $e) {
-                if ($this->app->runningInConsole()) {
-                    return new PluginManager;
-                }
-
-                throw new EngineBootException('Database Error.');
-            }
-        });
+       throw new \Exception("Depreciated, Use Modules instead.");
     }
 }
