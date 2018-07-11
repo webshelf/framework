@@ -2,14 +2,10 @@
 
 namespace App\Providers;
 
-use Exception;
 use App\Model\Article;
 use App\Model\Categories;
-use App\Classes\PluginManager;
 use Illuminate\Foundation\Application;
-use App\Exceptions\EngineBootException;
 use Illuminate\Support\ServiceProvider;
-use App\Classes\Repositories\PluginRepository;
 
 /**
  * Created by PhpStorm.
@@ -49,6 +45,6 @@ class InstanceServiceProvider extends ServiceProvider
 
     private function makePluginInstance()
     {
-       throw new \Exception("Depreciated, Use Modules instead.");
+        throw new \Exception('Depreciated, Use Modules instead.');
     }
 }
