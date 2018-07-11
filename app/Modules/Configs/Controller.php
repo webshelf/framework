@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 11/03/2016
- * Time: 17:32.
- */
 
-namespace App\Modules\Settings;
+namespace App\Modules\Configs;
 
 use App\Model\Configuration;
 use App\Modules\ModuleEngine;
