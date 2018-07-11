@@ -37,7 +37,7 @@ use Illuminate\Support\Debug\Dumper;
      */
     function plugins()
     {
-        return app(\App\Classes\PluginManager::class);
+        throw new Exception('Depreciated, Use modules instead');
     }
 
     /**
