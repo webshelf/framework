@@ -28,8 +28,6 @@ class InstanceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->makePluginInstance();
-
         $this->app->singleton('articles', function () {
             return Article::where('status', true)->with('category')->get();
         });
@@ -41,10 +39,5 @@ class InstanceServiceProvider extends ServiceProvider
         $this->app->singleton('article.creators', function () {
             return Article::where('status', true)->with('creator')->get();
         });
-    }
-
-    private function makePluginInstance()
-    {
-        throw new \Exception('Depreciated, Use Modules instead.');
     }
 }
