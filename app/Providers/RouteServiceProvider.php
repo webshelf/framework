@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Log;
+use \PDOException;
 use Illuminate\Support\Facades\Route;
 use App\Modules\ModuleServiceProvider;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -27,10 +29,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        ModuleServiceProvider::map();
+        try {
+            ModuleServiceProvider::map();
 
-        Route::middleware('web')->group(base_path('routes/web.php'));
+            Route::middleware('web')->group(base_path('routes/web.php'));
 
-        Route::middleware('web')->group(base_path('routes/vendor.php'));
+            Route::middleware('web')->group(base_path('routes/vendor.php'));
+        }
+        catch (PDOException $e)
+        {
+            Log::warning("Unable to process routes: " . $e->getMessage() . ", " . $e->getFile());
+        }
     }
 }

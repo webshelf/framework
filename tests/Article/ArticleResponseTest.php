@@ -2,13 +2,15 @@
 
 namespace Tests\Article;
 
+use App\Model\Page;
+use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ArticleViewingTest extends TestCase
+class ArticleResponseTest extends TestCase
 {
     /*
      * Provide fake content
@@ -53,7 +55,7 @@ class ArticleViewingTest extends TestCase
     /**
      * @test
      */
-    public function a_single_article_can_be_viewed_on_the_frontpage()
+    public function it_should_show_an_article_that_is_published()
     {
         $article = factory('App\Model\Article')->create(['views' => 0]);
 
@@ -64,28 +66,45 @@ class ArticleViewingTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_should_not_show_an_article_that_is_not_published()
+    {
+        $this->withExceptionHandling();
+
+        $article = factory('App\Model\Article')->create(['views' => 0, 'publish_date' => Carbon::yesterday(), 'unpublish_date' => Carbon::now()]);
+
+        $response = $this->get($article->path());
+
+        $response->assertStatus(404);
+
+    }
+
+    /**
+     * @test
      * t     */
-    public function a_collection_of_articles_can_be_viewed_on_the_frontpage()
+    public function a_collection_of_articles_can_be_viewed_on_the_frontpage_except_unpublished()
     {
         $collection = factory('App\Model\Article', 5)->create();
+        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
 
         $response = $this->get('articles');
 
-        $response->assertSee($collection->random()->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
     }
 
     /**
      * @test
      */
-    public function a_category_can_have_a_collection_of_articles_on_the_frontpage()
+    public function a_category_can_have_a_collection_of_articles_on_the_frontpage_except_unpublished()
     {
         $category = factory('App\Model\Categories')->create();
+        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
 
         $collection = factory('App\Model\Article', 5)->create(['category_id' => $category->id]);
 
         $response = $this->get('articles/'.$category->slug);
 
-        $response->assertSee($collection->random()->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
     }
 
     /**
@@ -105,14 +124,27 @@ class ArticleViewingTest extends TestCase
     /**
      * @test
      */
-    public function view_all_articles_by_creator_on_the_frontpage()
+    public function it_should_not_show_unpublished_articles_on_search()
+    {
+        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
+
+        $response = $this->get('/articles/search?query='.$unpublished->title);
+
+        $response->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+    }
+
+    /**
+     * @test
+     */
+    public function view_all_articles_by_creator_on_the_frontpage_except_unpublished()
     {
         $account = factory('App\Model\Account')->create();
 
         $articles = factory('App\Model\Article', 3)->create(['creator_id' => $account->id]);
+        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
 
         $response = $this->get('/articles/creator/'.$account->username);
 
-        $response->assertSee($articles->random()->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($articles->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
     }
 }

@@ -20,12 +20,14 @@ class ProductInstallationTest extends TestCase
      */
     public function modules_can_be_toggled()
     {
+        $this->signIn();
+
         $mocked = Mockery::mock(ModuleManager::class)->shouldReceive('toggle')->andReturn(true)->getMock();
 
         $this->app->instance(ModuleManager::class, $mocked);
 
         $response = $this->get('/admin/products/test/toggle');
 
-        $response->assertRedirect('/admin/products')->assertSee('test');
+        $response->assertRedirect('/admin/products');
     }
 }

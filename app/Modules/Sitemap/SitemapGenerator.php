@@ -72,7 +72,7 @@ class SitemapGenerator
      *
      * @return SitemapGenerator
      */
-    public function andPriority(int $priority)
+    public function andPriority(float $priority)
     {
         $this->items->push(array_merge($this->items->pop(), ['priority' => $priority]));
 

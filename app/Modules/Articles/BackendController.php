@@ -168,6 +168,8 @@ class BackendController extends ModuleEngine
      * @param int $id
      * @param ArticleCategoryRepository $categoryRepository
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function categories_destroy(int $id, ArticleCategoryRepository $categoryRepository)
     {

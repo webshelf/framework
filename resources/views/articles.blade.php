@@ -4,11 +4,11 @@
 
     <div class="container">
         <div class="alert alert-primary" role="alert">
-            Articles Loaded: {{ resolve('articles')->count() }}
+            Articles Loaded: {{ $articles->count() }}
         </div>
 
         <div class="row my-2 d-flex flex-column">
-            @foreach (resolve('articles') as $article)
+            @foreach ($articles as $article)
             <div class="card">
                     <div class="card-body">
                     <h5 class="card-title">{{ $article->title }}</h5>

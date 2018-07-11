@@ -43,6 +43,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
+ * @method static Builder sitemap() Query only pages that are for sitemap.
+ *
  * @return Page|Collection|Builder
  */
 class Page extends Model implements Linkable
@@ -117,22 +119,22 @@ class Page extends Model implements Linkable
      * Return the path to the page, these can sometimes have a prefix
      * attached.
      *
-     * @return void
+     * @return string
      */
     public function path()
     {
         if ($this->prefix) {
-            return "{$this->prefix}/{$this->slug}";
+            return url("{$this->prefix}/{$this->slug}");
         }
 
-        return "{$this->slug}";
+        return url("{$this->slug}");
     }
 
     /**
      * Undocumented function.
      *
      * @param string $string
-     * @return void
+     * @return Page
      */
     public static function whereIdentifier(string $string)
     {
@@ -197,6 +199,17 @@ class Page extends Model implements Linkable
     public function linked()
     {
         return $this->morphMany(Link::class, 'to');
+    }
+
+    /**
+     * Scope a query to only include sitemap pages.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSitemap($query)
+    {
+        return $query->where('option', '&', PageOptions::OPTION_SITEMAP);
     }
 
     /**

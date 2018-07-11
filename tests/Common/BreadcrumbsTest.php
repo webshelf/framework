@@ -88,7 +88,7 @@ class BreadcrumbsTest extends TestCase
 
         $this->call('GET', '/breadcrumb/test');
 
-        $this->assertCount(4, Breadcrumbs::fromCurrentRoute()->crumbs());
+        $this->assertCount(3, Breadcrumbs::fromCurrentRoute()->crumbs());
     }
 
     // @todo: Check the array for the correct return string.?

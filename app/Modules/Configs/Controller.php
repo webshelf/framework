@@ -1,19 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 11/03/2016
- * Time: 17:32.
- */
 
-namespace App\Modules\Settings;
+namespace App\Modules\Configs;
 
 use App\Model\Configuration;
 use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Controller.
+ * Class Controller
+ *
+ * @package App\Modules\Configs
  */
 class Controller extends ModuleEngine
 {
@@ -39,7 +35,7 @@ class Controller extends ModuleEngine
     }
 
     /**
-     * Save the changes for settings.
+     * Save the changes for system_config.
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
