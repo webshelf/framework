@@ -123,11 +123,11 @@ class Article extends Model implements Linkable
             return $builder->where([
                 ['publish_date', '<=', Carbon::now()],
                 ['unpublish_date', '>', Carbon::now()],
-                ['status', '=', true]
+                ['status', '=', true],
             ])->orWhere([
                 ['publish_date', '<=', Carbon::now()],
-                ['unpublish_date', '=', NULL],
-                ['status', '=', true]
+                ['unpublish_date', '=', null],
+                ['status', '=', true],
             ]);
         });
     }

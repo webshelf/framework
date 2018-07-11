@@ -2,22 +2,17 @@
 
 namespace Tests\Sitemap;
 
-use App\Model\Article;
-use App\Model\Page;
-use App\Modules\Pages\Model\PageOptions;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\Modules\Pages\Model\PageOptions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
- * Class SitemapResponseTest
- *
- * @package Tests\Sitemap
+ * Class SitemapResponseTest.
  */
 class SitemapResponseTest extends TestCase
 {
-
-    /**
+    /*
      * Database traits.
      */
     use RefreshDatabase;
@@ -39,8 +34,8 @@ class SitemapResponseTest extends TestCase
 
         $response = $this->get('/sitemap.xml');
 
-        $response->assertSee("<loc>" . $page->path() . "</loc>");
-        $response->assertSee("<lastmod>" . $page->updated_at->format('Y-m-d') . "</lastmod>");
+        $response->assertSee('<loc>'.$page->path().'</loc>');
+        $response->assertSee('<lastmod>'.$page->updated_at->format('Y-m-d').'</lastmod>');
 
         $this->assertCount(2, $response->getOriginalContent()->getData()['urlset']);
     }

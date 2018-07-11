@@ -2,12 +2,10 @@
 
 namespace Tests\Article;
 
-use App\Model\Article;
-use App\Model\Page;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\Model\Article;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

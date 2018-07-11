@@ -2,11 +2,10 @@
 
 namespace App\Modules\Sitemap;
 
-use App\Model\Article;
 use App\Model\Page;
+use App\Model\Article;
 use App\Modules\ModuleEngine;
 use Illuminate\Http\Response;
-use App\Modules\Sitemap\SitemapGenerator;
 use App\Modules\Sitemap\SitemapConstants as Sitemap;
 
 /**

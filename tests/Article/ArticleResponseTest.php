@@ -2,7 +2,6 @@
 
 namespace Tests\Article;
 
-use App\Model\Page;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Facades\App;
@@ -76,7 +75,6 @@ class ArticleResponseTest extends TestCase
         $response = $this->get($article->path());
 
         $response->assertStatus(404);
-
     }
 
     /**

@@ -7,9 +7,7 @@ use App\Modules\ModuleEngine;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Controller
- *
- * @package App\Modules\Configs
+ * Class Controller.
  */
 class Controller extends ModuleEngine
 {
