@@ -128,7 +128,7 @@ class Article extends Model implements Linkable
                 ['publish_date', '<=', Carbon::now()],
                 ['unpublish_date', '=', null],
                 ['status', '=', true],
-            ]);
+            ])->orderBy('created_at', 'desc');
         });
     }
 
