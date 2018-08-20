@@ -192,7 +192,7 @@ class BackendController extends ModuleEngine
     {
         $request->validate([
             'title' => 'required|min:3|max:255',
-            'content' => 'required|min:3|max:255',
+            'content' => 'required|min:3',
             'status' => 'required|integer',
             'category_id' => 'required|integer|exists:article_categories,id',
             'publish_date' => 'required|date',
