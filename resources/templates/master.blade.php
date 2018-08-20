@@ -23,11 +23,11 @@
 
     {{-- Styles --}}
     <link href="{{ mix('assets/frontend.css') }}" rel="stylesheet">
-    @stack("webpage.styles")
+    @stack("styles")
 
     {{-- Scripts --}}
     <script src="{{ mix('assets/frontend.js') }}"></script>
-    @stack("webpage.scripts")
+    @stack("scripts")
 
     {{-- Google analytics tracking --}}
     @if (config()->has('website.webmaster.google.tracking'))
