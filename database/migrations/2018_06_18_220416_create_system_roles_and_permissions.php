@@ -70,7 +70,7 @@ class CreateSystemRolesAndPermissions extends Migration
             $table->unsignedInteger('editor_id')->default(1)->change();
         });
 
-        (new Developer)->apply(Account::find(1)->first());
+        (new Developer)->apply(Account::first());
 
         $category = Categories::firstOrCreate([
             'title' => 'General',

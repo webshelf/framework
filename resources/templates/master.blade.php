@@ -15,18 +15,21 @@
     <meta name="keywords" value="@yield('webpage.keywords', $webpage->keywords())">
     <meta name="description" value="@yield('webpage.description', $webpage->description())">
 
-    <!-- Fonts -->
+    {{-- Favicon Image Icon --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('favicon.ico') }}"/>
+    
+    {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
+    {{-- Styles --}}
     <link href="{{ mix('assets/frontend.css') }}" rel="stylesheet">
-    @stack("webpage.styles")
+    @stack("styles")
 
-    <!-- Scripts -->
+    {{-- Scripts --}}
     <script src="{{ mix('assets/frontend.js') }}"></script>
-    @stack("webpage.scripts")
+    @stack("scripts")
 
-    <!-- GOOGLE TRACKING INFORMATION -->
+    {{-- Google analytics tracking --}}
     @if (config()->has('website.webmaster.google.tracking'))
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('website.webmaster.google.tracking') }}"></script>
