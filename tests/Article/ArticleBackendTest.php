@@ -2,16 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Modules\Articles\Events\ArticleCreated;
-use App\Modules\Articles\Events\ArticleUpdated;
-use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
+use App\Modules\Articles\Events\ArticleCreated;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleBackendTest extends TestCase
 {
-
     //use RefreshDatabase;
 
     /**
