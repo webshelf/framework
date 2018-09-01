@@ -14,7 +14,7 @@ trait Publishers
      */
     public static function bootPublishers()
     {
-        if (! app()->runningInConsole()) {
+        if (auth()->check()) {
             static::creating(function ($model) {
                 $model->setAttribute('creator_id', auth()->id());
                 $model->setAttribute('editor_id', auth()->id());

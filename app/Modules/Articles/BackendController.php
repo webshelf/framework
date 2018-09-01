@@ -2,6 +2,7 @@
 
 namespace App\Modules\Articles;
 
+use App\Modules\Articles\Events\ArticleCreated;
 use Carbon\Carbon;
 use App\Model\Article;
 use App\Model\Categories;
@@ -78,7 +79,9 @@ class BackendController extends ModuleEngine
     public function store(Request $request)
     {
         // use the global save function.
-        $this->save($request, new Article);
+        $article = $this->save($request, new Article);
+
+        event(new ArticleCreated($article));
 
         // redirect back to articles index.
         return redirect()->route('admin.articles.index');
@@ -185,7 +188,7 @@ class BackendController extends ModuleEngine
      *
      * @param Request $request
      * @param Article $article
-     * @return bool
+     * @return Article
      * @internal param Article $menu
      */
     public function save(Request $request, Article $article)
@@ -215,6 +218,8 @@ class BackendController extends ModuleEngine
         $article->setAttribute('unpublish_date', $unpublish_date);
 
         // save the article as an audit.
-        return $article->save();
+        $article->save();
+
+        return $article;
     }
 }
