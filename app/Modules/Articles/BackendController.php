@@ -2,14 +2,14 @@
 
 namespace App\Modules\Articles;
 
-use App\Modules\Articles\Events\ArticleCreated;
-use App\Modules\Articles\Events\ArticleUpdated;
 use Carbon\Carbon;
 use App\Model\Article;
 use App\Model\Categories;
 use Illuminate\Http\Request;
 use App\Modules\ModuleEngine;
 use App\Classes\Repositories\ArticleRepository;
+use App\Modules\Articles\Events\ArticleCreated;
+use App\Modules\Articles\Events\ArticleUpdated;
 use App\Classes\Repositories\ArticleCategoryRepository;
 
 /**
