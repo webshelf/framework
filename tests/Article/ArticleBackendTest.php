@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Model\Article;
+use Illuminate\Support\Facades\Event;
 use App\Modules\Articles\Events\ArticleCreated;
 use App\Modules\Articles\Events\ArticleDeleted;
 use App\Modules\Articles\Events\ArticleUpdated;
-use Illuminate\Support\Facades\Event;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleBackendTest extends TestCase
@@ -58,7 +58,7 @@ class ArticleBackendTest extends TestCase
         $this->put("admin/articles/{$article->slug}", $changes->toArray());
 
         // then the framework should store the changes in the database.
-        $this->assertDatabaseHas('articles', ['title' => "foo", 'content' => "bar"]);
+        $this->assertDatabaseHas('articles', ['title' => 'foo', 'content' => 'bar']);
     }
 
     /**
