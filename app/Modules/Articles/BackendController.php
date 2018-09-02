@@ -2,6 +2,7 @@
 
 namespace App\Modules\Articles;
 
+use App\Modules\Articles\Events\ArticleDeleted;
 use Carbon\Carbon;
 use App\Model\Article;
 use App\Model\Categories;
@@ -141,6 +142,8 @@ class BackendController extends ModuleEngine
         $article = $this->articles->whereSlug($slug);
 
         $article->delete();
+
+        event(new ArticleDeleted($article));
 
         return response()->json(['status' => 'true', 'redirect' => route('admin.articles.index')]);
     }

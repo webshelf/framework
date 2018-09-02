@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Model\Article;
 use App\Modules\Articles\Events\ArticleCreated;
+use App\Modules\Articles\Events\ArticleDeleted;
 use App\Modules\Articles\Events\ArticleUpdated;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
@@ -58,5 +59,27 @@ class ArticleBackendTest extends TestCase
 
         // then the framework should store the changes in the database.
         $this->assertDatabaseHas('articles', ['title' => "foo", 'content' => "bar"]);
+    }
+
+    /**
+     * @test
+     * @throws \Exception
+     */
+    public function an_already_existing_article_can_be_deleted_and_fire_an_event_once_saved()
+    {
+        // we expect an event to be fired.
+        $this->expectsEvents(ArticleDeleted::class);
+
+        // when the user is signed in.
+        $this->signIn();
+
+        // uses an already existing article.
+        $article = factory('App\Model\Article')->create(['title' => 'foo']);
+
+        // and deletes it.
+        $this->delete("admin/articles/{$article->slug}");
+
+        // it should be removed from the database.
+        $this->assertDatabaseHas('articles', ['title' => 'foo', 'deleted_at' => now()]);
     }
 }

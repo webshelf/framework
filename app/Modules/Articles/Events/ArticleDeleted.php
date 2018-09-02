@@ -2,6 +2,7 @@
 
 namespace App\Modules\Articles\Events;
 
+use App\Model\Article;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,13 +14,18 @@ class ArticleDeleted
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
+     * @var Article
+     */
+    private $article;
+
+    /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Article $article
      */
-    public function __construct()
+    public function __construct(Article $article)
     {
-        //
+        $this->article = $article;
     }
 
     /**
