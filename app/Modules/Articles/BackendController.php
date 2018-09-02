@@ -3,6 +3,7 @@
 namespace App\Modules\Articles;
 
 use App\Modules\Articles\Events\ArticleCreated;
+use App\Modules\Articles\Events\ArticleUpdated;
 use Carbon\Carbon;
 use App\Model\Article;
 use App\Model\Categories;
@@ -122,6 +123,8 @@ class BackendController extends ModuleEngine
         $article = $this->articles->whereSlug($slug);
 
         $this->save($request, $article);
+
+        event(new ArticleUpdated($article));
 
         return redirect()->route('admin.articles.index');
     }
