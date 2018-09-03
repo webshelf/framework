@@ -54,10 +54,10 @@ class CategoryController extends ModuleEngine
      */
     public function destroy(string $slug)
     {
-        $category = Categories::query()->where('slug', $slug)->first();
+        $category = Categories::firstWhereSlug($slug);
 
         if (count($category->articles) == 0) {
-            Categories::deleteCategory($slug);
+            $category->delete();
         }
 
         return response()->json(['status' => 'true', 'redirect' => route('admin.articles.categories.index')]);

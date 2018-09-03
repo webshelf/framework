@@ -104,11 +104,10 @@ class Categories extends Model
 
     /**
      * @param string $slug
-     * @return
-     * @throws \Exception
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|null|object
      */
-    public static function deleteCategory(string $slug)
+    public static function firstWhereSlug(string $slug)
     {
-        return Categories::query()->where('slug', $slug)->first()->delete();
+        return Categories::query()->where('slug', '=', $slug)->first();
     }
 }
