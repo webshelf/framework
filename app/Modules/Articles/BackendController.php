@@ -64,7 +64,7 @@ class BackendController extends ModuleEngine
      * Generate a form for editing or creating a model.
      *
      * @param Article $article model to be used.
-     * @return void
+     * @return \Illuminate\Contracts\View\View
      */
     public function form(Article $article)
     {
@@ -87,17 +87,6 @@ class BackendController extends ModuleEngine
 
         // redirect back to articles index.
         return redirect()->route('admin.articles.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -146,31 +135,6 @@ class BackendController extends ModuleEngine
         event(new ArticleDeleted($article));
 
         return response()->json(['status' => 'true', 'redirect' => route('admin.articles.index')]);
-    }
-
-    /**
-     * Category Index.
-     * @param ArticleCategoryRepository $categoryRepository
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function categories(ArticleCategoryRepository $categoryRepository)
-    {
-        return $this->make('categories')->with('categories', $categoryRepository->all());
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function categories_store(Request $request)
-    {
-        $this->validate($request, ['unique:title']);
-
-        $category = new Categories;
-        $category->title = $request['name'];
-        $category->save();
-
-        return redirect()->route('admin.articles.categories.index');
     }
 
     /**

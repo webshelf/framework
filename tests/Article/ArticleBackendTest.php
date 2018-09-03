@@ -16,6 +16,57 @@ class ArticleBackendTest extends TestCase
 
     /**
      * @test
+     */
+    public function index_should_return_an_article_listing()
+    {
+        // the database should have an article.
+        $article = factory('App\Model\Article')->create();
+
+        // so that when a user signs in.
+        $this->signIn();
+
+        // and visits the articles listing.
+        $response = $this->visit('admin/articles');
+
+        // they should see the article in the database on the page.
+        $response->assertSee(ucwords($article->title));
+    }
+
+    /**
+     * @test
+     */
+    public function a_form_can_be_used_to_create_articles()
+    {
+        // when a user signs in.
+        $this->signIn();
+
+        // they can visit a url.
+        $response = $this->visit('admin/articles/create');
+
+        // and see a form.
+        $response->assertSee('<button type="submit" class="btn btn-create">Create Article</button>');
+    }
+
+    /**
+     * @test
+     */
+    public function a_form_can_be_used_to_edit_articles()
+    {
+        // when a user signs in.
+        $this->signIn();
+
+        // looks up an already existing article.
+        $article = factory('App\Model\Article')->create();
+
+        // and attempts to edit.
+        $response = $this->get("admin/articles/{$article->slug}/edit");
+
+        // they should see a form.
+        $response->assertSee('<button type="submit" class="btn btn-create">Edit Article</button>');
+    }
+
+    /**
+     * @test
      * @throws \Exception
      */
     public function a_posted_article_should_fire_an_event_once_saved()

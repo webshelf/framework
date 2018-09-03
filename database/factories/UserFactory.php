@@ -88,7 +88,6 @@ $factory->define(App\Model\Article::class, function (Faker $faker) {
 $factory->define(App\Model\Categories::class, function (Faker $faker) {
     $title = $faker->word;
     $creator = factory('App\Model\Account')->create()->id;
-
     return [
         'title' => $title,
         'status' => $faker->boolean,

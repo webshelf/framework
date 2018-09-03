@@ -67,7 +67,7 @@ class Categories extends Model
     /**
      * Undocumented function.
      *
-     * @return void
+     * @return string
      */
     public function getRouteKeyName()
     {
@@ -100,5 +100,15 @@ class Categories extends Model
     public function editor()
     {
         return $this->belongsTo(Account::class, 'editor_id', 'id');
+    }
+
+    /**
+     * @param string $slug
+     * @return
+     * @throws \Exception
+     */
+    public static function deleteCategory(string $slug)
+    {
+        return Categories::query()->where('slug', $slug)->first()->delete();
     }
 }
