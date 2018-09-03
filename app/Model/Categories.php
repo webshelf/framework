@@ -108,6 +108,6 @@ class Categories extends Model
      */
     public static function firstWhereSlug(string $slug)
     {
-        return Categories::query()->where('slug', '=', $slug)->first();
+        return self::query()->where('slug', '=', $slug)->first();
     }
 }

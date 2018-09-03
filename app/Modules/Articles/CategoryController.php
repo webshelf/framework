@@ -3,14 +3,12 @@
 namespace App\Modules\Articles;
 
 use App\Model\Categories;
+use Illuminate\Http\Request;
 use App\Modules\ModuleEngine;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 
 /**
- * Class CategoryController
- *
- * @package App\Modules\Articles
+ * Class CategoryController.
  */
 class CategoryController extends ModuleEngine
 {
@@ -23,7 +21,7 @@ class CategoryController extends ModuleEngine
      */
     public function index()
     {
-        return $this->make('categories')->with('categories',Categories::all());
+        return $this->make('categories')->with('categories', Categories::all());
     }
 
     /**

@@ -2,19 +2,15 @@
 
 namespace Tests\Article;
 
-use App\Model\Categories;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Model\Categories;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
- * Class ArticleCategoryBackendTest
- *
- * @package Tests\Article
+ * Class ArticleCategoryBackendTest.
  */
 class ArticleCategoryBackendTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**
@@ -33,7 +29,7 @@ class ArticleCategoryBackendTest extends TestCase
 
     /**
      * @test
-     * @var Categories $category
+     * @var Categories
      */
     public function a_category_can_be_created_and_stored()
     {
@@ -71,6 +67,6 @@ class ArticleCategoryBackendTest extends TestCase
 
         $this->delete("admin/articles/categories/{$category->slug}");
 
-        $this->assertDatabaseHas('article_categories', ['title' => $category->title, 'deleted_at' => NULL]);
+        $this->assertDatabaseHas('article_categories', ['title' => $category->title, 'deleted_at' => null]);
     }
 }

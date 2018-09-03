@@ -24,13 +24,13 @@ trait Publishers
         });
 
         static::deleting(function ($model) {
-            if(auth()->check()) {
+            if (auth()->check()) {
                 return $model->setAttribute('editor_id', auth()->id());
             }
         });
 
         static::updating(function ($model) {
-            if(auth()->check()) {
+            if (auth()->check()) {
                 return $model->setAttribute('editor_id', auth()->id());
             }
         });
