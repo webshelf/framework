@@ -67,7 +67,7 @@ class Categories extends Model
     /**
      * Undocumented function.
      *
-     * @return void
+     * @return string
      */
     public function getRouteKeyName()
     {
@@ -100,5 +100,14 @@ class Categories extends Model
     public function editor()
     {
         return $this->belongsTo(Account::class, 'editor_id', 'id');
+    }
+
+    /**
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|null|object
+     */
+    public static function firstWhereSlug(string $slug)
+    {
+        return self::query()->where('slug', '=', $slug)->first();
     }
 }
