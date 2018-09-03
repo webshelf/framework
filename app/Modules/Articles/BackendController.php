@@ -138,22 +138,6 @@ class BackendController extends ModuleEngine
     }
 
     /**
-     * @param int $id
-     * @param ArticleCategoryRepository $categoryRepository
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function categories_destroy(int $id, ArticleCategoryRepository $categoryRepository)
-    {
-        $category = $categoryRepository->whereID($id);
-
-        $category->delete();
-
-        return redirect()->route('admin.articles.categories.index');
-    }
-
-    /**
      * Save the data for the menu to the database.
      *
      * @param Request $request
