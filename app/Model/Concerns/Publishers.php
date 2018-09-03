@@ -14,19 +14,25 @@ trait Publishers
      */
     public static function bootPublishers()
     {
-        if (auth()->check()) {
-            static::creating(function ($model) {
-                $model->setAttribute('creator_id', auth()->id());
-                $model->setAttribute('editor_id', auth()->id());
-            });
+        static::creating(function ($model) {
+            if (auth()->check()) {
+                $model->fill([
+                   'creator_id' => auth()->id(),
+                   'editor_id'  => auth()->id(),
+                ]);
+            }
+        });
 
-            static::deleting(function ($model) {
+        static::deleting(function ($model) {
+            if(auth()->check()) {
                 return $model->setAttribute('editor_id', auth()->id());
-            });
+            }
+        });
 
-            static::updating(function ($model) {
+        static::updating(function ($model) {
+            if(auth()->check()) {
                 return $model->setAttribute('editor_id', auth()->id());
-            });
-        }
+            }
+        });
     }
 }

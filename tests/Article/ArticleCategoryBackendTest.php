@@ -57,4 +57,20 @@ class ArticleCategoryBackendTest extends TestCase
 
         $this->assertDatabaseHas('article_categories', ['title' => $category->title, 'deleted_at' => now()]);
     }
+
+    /**
+     * @test
+     */
+    public function an_category_cannot_be_deleted_when_articles_belong_to_it()
+    {
+        $this->signIn();
+
+        $category = factory('App\Model\Categories')->create();
+
+        factory('App\Model\Article')->create(['category_id'=>$category->id]);
+
+        $this->delete("admin/articles/categories/{$category->slug}");
+
+        $this->assertDatabaseHas('article_categories', ['title' => $category->title, 'deleted_at' => NULL]);
+    }
 }
