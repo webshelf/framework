@@ -15,7 +15,7 @@ class RequiresRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if (! account()->hasRole($role)) {
+        if (! account()->hasRole(ucfirst($role))) {
             return redirect()->route('dashboard')->withErrors(['error' => 'You do not have permission to use the requested resource.']);
         }
 
