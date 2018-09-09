@@ -3,15 +3,12 @@
 namespace App\Modules\Metrics\Models;
 
 /**
- * Trait Clicks
+ * Trait Clicks.
  *
- * @property integer $clicks
- *
- * @package App\Modules\Metrics\Models
+ * @property int $clicks
  */
 class Clicks extends \Illuminate\Database\Eloquent\Model
 {
-
     /**
      * The table associated with the model.
      *

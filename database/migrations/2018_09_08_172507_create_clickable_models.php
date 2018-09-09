@@ -13,12 +13,12 @@ class CreateClickableModels extends Migration
      */
     public function up()
     {
-        Schema::create('metric_clicks', function(Blueprint $table) {
-           $table->integer('id');
-           $table->unsignedInteger('clickable_id');
-           $table->string('clickable_type');
-           $table->integer('clicks');
-           $table->timestamp('created_at');
+        Schema::create('metric_clicks', function (Blueprint $table) {
+            $table->integer('id');
+            $table->unsignedInteger('clickable_id');
+            $table->string('clickable_type');
+            $table->integer('clicks');
+            $table->timestamp('created_at');
         });
 
         // Schema::create('metric_views', function(Blueprint $table) {

@@ -2,14 +2,14 @@
 
 namespace App\Model;
 
-use App\Modules\Metrics\ClickableTrait;
-use App\Modules\Metrics\Models\Clicks;
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
 use App\Model\Concerns\Publishers;
 use Illuminate\Support\Collection;
 use App\Model\Concerns\ActivityFeed;
+use App\Modules\Metrics\Models\Clicks;
+use App\Modules\Metrics\ClickableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
