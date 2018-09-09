@@ -53,11 +53,7 @@
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
-                @auth
-                    <a href="{{ url('/index') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                @endauth
+                @extends("webpage::navigation")
             </div>
         @endif
 

@@ -12,7 +12,7 @@
     {{-- Normal page loading meta tags. --}}
     <title>@yield("webpage.title", $webpage->title())</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="keywords" value="@yield('webpage.keywords', $webpage->keywords())">
+    <meta name="keywords" value=``"@yield('webpage.keywords', $webpage->keywords())">
     <meta name="description" value="@yield('webpage.description', $webpage->description())">
 
     {{-- Favicon Image Icon --}}
@@ -23,10 +23,12 @@
 
     {{-- Styles --}}
     <link href="{{ mix('assets/frontend.css') }}" rel="stylesheet">
+    <!-- <link href="{{ mix('assets/modules.css') }}" rel="stylesheet"> -->
     @stack("styles")
 
     {{-- Scripts --}}
     <script src="{{ mix('assets/frontend.js') }}"></script>
+    <script src="{{ mix('assets/modules.js') }}"></script>
     @stack("scripts")
 
     {{-- Google analytics tracking --}}

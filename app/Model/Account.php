@@ -236,7 +236,7 @@ class Account extends Authenticatable
     public function hasRole($role)
     {
         if (is_string($role)) {
-            $class = sprintf('App\Classes\Roles\%s', $role);
+            $class = sprintf('App\Classes\Roles\%s', ucfirst($role));
 
             return $this->hasRole(app()->make($class));
         }

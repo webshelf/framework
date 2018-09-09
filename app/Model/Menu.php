@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Modules\Metrics\ClickableTrait;
+use App\Modules\Metrics\Models\Clicks;
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use App\Classes\Interfaces\Linker;
@@ -31,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
  * @property Page $page
  * @property Menu $children
  *
+ * @property Clicks $clicks
+ *
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -39,6 +43,7 @@ class Menu extends Model implements Linker
 {
     /*
      * Laravel Deleting.
+     *
      * @ https://laravel.com/docs/5.5/eloquent#soft-deleting
      */
     use SoftDeletes;
@@ -51,7 +56,7 @@ class Menu extends Model implements Linker
     /*
      * Log the author and editor of the model
      *
-     * @ Webshelf framework 5.6
+     * @ Webshelf framework 5.1
      */
     use Publishers;
     /*
@@ -60,6 +65,12 @@ class Menu extends Model implements Linker
      * @ https://laravel.com/docs/5.3/scout#installation
      */
     use Searchable;
+    /*
+     * Clickable Model Trait for metric tracking.
+     *
+     * @ Webshelf Framework 5.3.1
+     */
+    use ClickableTrait;
 
     /**
      * Status if current menu.
@@ -175,5 +186,16 @@ class Menu extends Model implements Linker
     public function name()
     {
         return $this->title;
+    }
+
+    /**
+     * Get the first menu with the title name.
+     *
+     * @param string $title
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|null|object
+     */
+    public static function firstByTitle(string $title)
+    {
+        return self::query()->where('title', $title)->first();
     }
 }

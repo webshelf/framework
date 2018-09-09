@@ -10,10 +10,13 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 mix.js('resources/assets/js/frontend.js', 'public/assets/')
     .sass('resources/assets/sass/frontend.scss', 'public/assets/')
     .version();
+
+// Lets combine the module assets to the output frontend.js so its loaded as one location.
+mix.combine(['app/Modules/*/Assets/*.js'], 'public/assets/modules.js');
+mix.combine(['app/Modules/*/Assets/*.css'], 'public/assets/modules.css');
 
 /*
 |--------------------------------------------------------------------------
