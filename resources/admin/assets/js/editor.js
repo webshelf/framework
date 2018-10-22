@@ -21,28 +21,36 @@ function elFinderBrowser (field_name, url, type, win) {
 tinymce.init({
     branding: false,
     selector: '.editor',
+    theme: 'modern',
+    height: 500,
+    content_css: '/assets/frontend.css',
+
+    // or finally, add your padding directly
+    content_style: "body {margin: 20px; background: white;}",
 
     file_browser_callback : elFinderBrowser,
 
-    plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools"
-    ],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+    image_advtab: true,
 });
 
+
+// is this even used:?
+// @todo remove?
 tinymce.init({
     branding: false,
     selector: '.page-editor',
+    theme: 'modern',
+    height: 500,
     content_css: '/assets/frontend.css',
+
+    // or finally, add your padding directly
+    content_style: "body {margin: 20px; background: white;}",
 
     file_browser_callback : elFinderBrowser,
 
-    plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools"
-    ],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+    image_advtab: true,
 });

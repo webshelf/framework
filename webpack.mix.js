@@ -11,9 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
+// version allows us to keep the page up to date on the client.
 mix.js('resources/assets/js/frontend.js', 'public/assets/')
-    .sass('resources/assets/sass/frontend.scss', 'public/assets/')
-    .version();
+    .sass('resources/assets/sass/frontend.scss', 'public/assets/');
 
 /*
 |--------------------------------------------------------------------------
@@ -35,5 +35,7 @@ mix.copyDirectory('resources/admin/images', 'public/images');
 
 mix
     .js('resources/admin/assets/js/backend.js', 'public/assets/')
-    .sass('resources/admin/assets/sass/backend.scss', 'public/assets/')
-    .version();
+    .sass('resources/admin/assets/sass/backend.scss', 'public/assets/');
+
+// The editor requires a non version sample of the asset frontend.
+// mix.sass('resources/assets/sass/frontend.scss', 'public/assets/editor_style.css');
