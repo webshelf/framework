@@ -26,7 +26,7 @@ tinymce.init({
     content_css: '/assets/frontend.css',
 
     // or finally, add your padding directly
-    content_style: "body {margin: 20px; background: white;}",
+    content_style: "body {margin: 20px; background: white;} img {max-width:100%; height:auto;}",
 
     file_browser_callback : elFinderBrowser,
 

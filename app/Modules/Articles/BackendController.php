@@ -204,7 +204,7 @@ class BackendController extends ModuleEngine
         $article->setAttribute('content', $request['content']);
         $article->setAttribute('category_id', $request['category_id']);
         $article->setAttribute('status', $request['status']);
-        $article->setAttribute('featured_img', $request['image']);
+        $article->setAttribute('featured_img', str_slug($request['image']));
 
         // 09/05/2018 $publish_date without time.
         $publish_date = $request['publish_date'] ? Carbon::parse($request['publish_date']) : null;

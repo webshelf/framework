@@ -24,7 +24,7 @@
         "pc-bootstrap4-datetimepicker": "^4.17.50",
         "popper.js": "^1.14.4",
         "sortablejs": "^1.7.0",
-        "tinymce": "^4.8.3",
+        "tinymce": "^4.8.4",
         "vue": "^2.5.17",
         "wowjs": "^1.1.3"
     },
