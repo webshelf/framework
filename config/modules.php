@@ -40,7 +40,7 @@ return [
 
     'articles' => [
         'title' => 'Articles',
-        'enabled' => false,
+        'enabled' => true,
         'icon' => 'fas fa-glasses',
         'version' => '1.0',
         'url' => 'admin/articles',

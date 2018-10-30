@@ -8,6 +8,9 @@ use App\Model\Categories;
 use Illuminate\Http\Request;
 use App\Modules\ModuleEngine;
 use App\Classes\Repositories\ArticleRepository;
+use App\Modules\Articles\Events\ArticleCreated;
+use App\Modules\Articles\Events\ArticleDeleted;
+use App\Modules\Articles\Events\ArticleUpdated;
 use App\Classes\Repositories\ArticleCategoryRepository;
 
 /**
@@ -61,7 +64,7 @@ class BackendController extends ModuleEngine
      * Generate a form for editing or creating a model.
      *
      * @param Article $article model to be used.
-     * @return void
+     * @return \Illuminate\Contracts\View\View
      */
     public function form(Article $article)
     {
@@ -78,21 +81,12 @@ class BackendController extends ModuleEngine
     public function store(Request $request)
     {
         // use the global save function.
-        $this->save($request, new Article);
+        $article = $this->save($request, new Article);
+
+        event(new ArticleCreated($article));
 
         // redirect back to articles index.
         return redirect()->route('admin.articles.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -120,6 +114,8 @@ class BackendController extends ModuleEngine
 
         $this->save($request, $article);
 
+        event(new ArticleUpdated($article));
+
         return redirect()->route('admin.articles.index');
     }
 
@@ -136,48 +132,9 @@ class BackendController extends ModuleEngine
 
         $article->delete();
 
+        event(new ArticleDeleted($article));
+
         return response()->json(['status' => 'true', 'redirect' => route('admin.articles.index')]);
-    }
-
-    /**
-     * Category Index.
-     * @param ArticleCategoryRepository $categoryRepository
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function categories(ArticleCategoryRepository $categoryRepository)
-    {
-        return $this->make('categories')->with('categories', $categoryRepository->all());
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function categories_store(Request $request)
-    {
-        $this->validate($request, ['unique:title']);
-
-        $category = new Categories;
-        $category->title = $request['name'];
-        $category->save();
-
-        return redirect()->route('admin.articles.categories.index');
-    }
-
-    /**
-     * @param int $id
-     * @param ArticleCategoryRepository $categoryRepository
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function categories_destroy(int $id, ArticleCategoryRepository $categoryRepository)
-    {
-        $category = $categoryRepository->whereID($id);
-
-        $category->delete();
-
-        return redirect()->route('admin.articles.categories.index');
     }
 
     /**
@@ -185,7 +142,7 @@ class BackendController extends ModuleEngine
      *
      * @param Request $request
      * @param Article $article
-     * @return bool
+     * @return Article
      * @internal param Article $menu
      */
     public function save(Request $request, Article $article)
@@ -215,6 +172,8 @@ class BackendController extends ModuleEngine
         $article->setAttribute('unpublish_date', $unpublish_date);
 
         // save the article as an audit.
-        return $article->save();
+        $article->save();
+
+        return $article;
     }
 }

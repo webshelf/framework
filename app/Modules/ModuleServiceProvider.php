@@ -44,7 +44,7 @@ class ModuleServiceProvider extends ServiceProvider
         foreach (config('modules') as $key => $module) {
             $namespace = sprintf('App\Modules\%s', $module['title']);
 
-            if (config("modules.{$key}.enabled")) {
+            if (config("modules.{$key}.enabled") || app()->runningUnitTests()) {
                 $backendRoute = base_path(sprintf('app/Modules/%s/Routes/backend.php', $module['title']));
                 if (file_exists($backendRoute)) {
                     Route::middleware(['web', 'auth', 'gateway'])->namespace($namespace)->group($backendRoute);

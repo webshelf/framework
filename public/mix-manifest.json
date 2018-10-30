@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
     "/assets/backend.js": "/assets/backend.js",
     "/assets/frontend.js": "/assets/frontend.js",
     "/assets/frontend.css": "/assets/frontend.css",
     "/assets/backend.css": "/assets/backend.css"
 }
+=======
+    "/assets/backend.js": "/assets/backend.js?id=316e0c5a5a24607e4ea0",
+    "/assets/frontend.js": "/assets/frontend.js?id=49f7246436891e3f47cc",
+    "/assets/frontend.css": "/assets/frontend.css?id=088b8ef5ba320563750c",
+    "/assets/backend.css": "/assets/backend.css?id=aaff7d70e828dedf4903"
+}
+>>>>>>> 6636686222887d162a20bd025a208394ba200faa

@@ -5,11 +5,10 @@ namespace Tests\Article;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ArticleResponseTest extends TestCase
+class ArticleFrontendTest extends TestCase
 {
     /*
      * Provide fake content
@@ -26,18 +25,6 @@ class ArticleResponseTest extends TestCase
      * @var \Faker\Generator
      */
     protected $faker;
-
-    /**
-     * Setup the testing for this test.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        Route::middleware('web', 'auth', 'gateway')->group(base_path('app/Modules/Articles/Routes/backend.php'));
-
-        Route::middleware('web')->namespace('App\Modules\Articles')->group(base_path('app/Modules/Articles/Routes/frontend.php'));
-    }
 
     /**
      * @test

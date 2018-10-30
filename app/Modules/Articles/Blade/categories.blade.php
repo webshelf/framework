@@ -19,7 +19,7 @@
         <div class="searchbar" style="background-color: white">
             <div class="text form-row">
                 <div class="col">
-                    <input type="text" name="name" class="form-control" placeholder="Enter Category Name" required>
+                    <input type="text" name="title" class="form-control" placeholder="Enter Category Name" required>
                 </div>
             </div>
             <div class="ml-2">
@@ -29,8 +29,6 @@
     </form>
 
     <div class="webshelf-table">
-
-        <?php /** @var App\Mo $category */ ?>
 
         @foreach($categories as $category)
             <div class="row">
@@ -46,11 +44,7 @@
 
                 <div class="console">
                     <ul class="list-unstyled">
-                        {{--<li>{!! css()->link->edit(route('admin.articles.edit', $article->slug)) !!}</li>--}}
-                        {{--<li>{!! css()->status->sitemap($article->sitemap) !!}</li>--}}
-                        {{--<li>{!! css()->status->status($article->status) !!}</li>--}}
-                        <li>{!! css()->link->destroy(route('admin.articles.categories.destroy', $category->id)) !!}</li>
-                        {{--<li>{!! css()->link->view(url($article->route())) !!}</li>--}}
+                        <li><a href="{{ route('admin.articles.categories.destroy', $category->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this category?" data-method="delete">Delete</a></li>
                     </ul>
                 </div>
 
