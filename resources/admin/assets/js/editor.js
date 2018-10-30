@@ -26,7 +26,7 @@ tinymce.init({
     content_css: '/assets/frontend.css',
 
     // or finally, add your padding directly
-    content_style: "body {margin: 20px; background: white;} img {max-width:100%; height:auto;}",
+    content_style: "body {margin: 20px; background: white; color: #212529; min-width: initial;} img {max-width:100%; height:auto;} h1,h2,h3,h4,h5,h6 { color: rgb(51, 51, 51);}",
 
     file_browser_callback : elFinderBrowser,
 
@@ -46,7 +46,7 @@ tinymce.init({
     content_css: '/assets/frontend.css',
 
     // or finally, add your padding directly
-    content_style: "body {margin: 20px; background: white;}",
+    content_style: "body {margin: 20px; background: white; color: #212529; min-width: initial;} img {max-width:100%; height:auto;} h1,h2,h3,h4,h5,h6 { color: rgb(51, 51, 51);}",
 
     file_browser_callback : elFinderBrowser,
 
