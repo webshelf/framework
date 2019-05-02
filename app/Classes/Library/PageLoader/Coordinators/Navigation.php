@@ -8,9 +8,9 @@
 
 namespace App\Classes\Library\PageLoader\Coordinators;
 
-use App\Classes\Breadcrumbs;
 use App\Model\Menu;
 use App\Model\Page;
+use App\Classes\Breadcrumbs;
 use Illuminate\Support\Collection;
 
 /**

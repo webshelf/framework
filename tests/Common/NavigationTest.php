@@ -5,9 +5,7 @@ namespace Tests;
 use App\Model\Menu;
 
 /**
- * Class NavigationTest
- *
- * @package Tests
+ * Class NavigationTest.
  */
 class NavigationTest extends TestCase
 {
@@ -33,9 +31,8 @@ class NavigationTest extends TestCase
         $submenu2 = factory(Menu::class)->create(['order' => 1, 'title' => 'submenu2', 'parent_id' => $parent]);
 
         // Menus should be returned based on its order from the relationship query.
-        foreach ($parent->children as $index => $submenu)
-        {
-            $this->assertEquals($index+1, $submenu->order);
+        foreach ($parent->children as $index => $submenu) {
+            $this->assertEquals($index + 1, $submenu->order);
         }
     }
 }
