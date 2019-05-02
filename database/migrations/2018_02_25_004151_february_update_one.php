@@ -1,9 +1,9 @@
 <?php
 
 use App\Model\Categories;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class FebruaryUpdateOne extends Migration
 {
@@ -32,7 +32,6 @@ class FebruaryUpdateOne extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
 
         Categories::create(['slug' => 'general', 'title' => 'General', 'status' => true, 'editor_id' => 1, 'creator_id' => 1]);
 

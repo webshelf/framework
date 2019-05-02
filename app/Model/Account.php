@@ -8,12 +8,12 @@
 
 namespace App\Model;
 
-use App\Classes\Roles\Exceptions\InvalidRoleType;
-use App\Classes\Roles\Interfaces\RoleInterface;
-use App\Model\Concerns\ActivityFeed;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Model\Concerns\ActivityFeed;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Classes\Roles\Interfaces\RoleInterface;
+use App\Classes\Roles\Exceptions\InvalidRoleType;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
