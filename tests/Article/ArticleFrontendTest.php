@@ -3,9 +3,9 @@
 namespace Tests\Article;
 
 use Carbon\Carbon;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class ArticleFrontendTest extends TestCase
 {
@@ -46,7 +46,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get($article->path());
 
-        $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($article->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -73,7 +73,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('articles');
 
-        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -88,7 +88,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('articles/'.$category->slug);
 
-        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -102,7 +102,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('/articles/search?query='.$article->title);
 
-        $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($article->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -114,7 +114,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('/articles/search?query='.$unpublished->title);
 
-        $response->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -131,6 +131,6 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('/articles/creator/'.$account->username);
 
-        $response->assertSee($article->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($article->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 }

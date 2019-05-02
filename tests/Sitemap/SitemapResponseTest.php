@@ -2,10 +2,10 @@
 
 namespace Tests\Sitemap;
 
-use Carbon\Carbon;
-use Tests\TestCase;
 use App\Modules\Pages\Model\PageOptions;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 /**
  * Class SitemapResponseTest.
@@ -22,7 +22,7 @@ class SitemapResponseTest extends TestCase
      */
     public function it_creates_a_sitemap()
     {
-        $this->get('/sitemap.xml')->assertHeader('Content-type', 'text/xml; charset=UTF-8')->assertOk();
+        $this->get('/sitemap.xml')->assertHeader('Content-type', 'text/xml; charset=UTF-8')->assertStatus(200);
     }
 
     /**

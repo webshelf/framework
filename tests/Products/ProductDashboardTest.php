@@ -2,9 +2,9 @@
 
 namespace Tests\Products;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
 
 class ProductDashboardTest extends TestCase
 {
@@ -26,6 +26,6 @@ class ProductDashboardTest extends TestCase
             $response->assertSee($module['title']);
         }
 
-        $response->assertOk();
+        $response->assertStatus(200);
     }
 }
