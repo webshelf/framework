@@ -1,9 +1,9 @@
 <?php
 
-use App\Classes\Roles\Administrator;
-use App\Modules\Pages\Model\PageOptions;
-use App\Modules\Pages\Model\PageTypes;
 use Faker\Generator as Faker;
+use App\Classes\Roles\Administrator;
+use App\Modules\Pages\Model\PageTypes;
+use App\Modules\Pages\Model\PageOptions;
 
 /*
 |--------------------------------------------------------------------------
