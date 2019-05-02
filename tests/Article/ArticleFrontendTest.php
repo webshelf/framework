@@ -46,7 +46,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get($article->path());
 
-        $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($article->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -73,7 +73,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('articles');
 
-        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -88,7 +88,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('articles/'.$category->slug);
 
-        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($collection->random()->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -102,7 +102,7 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('/articles/search?query='.$article->title);
 
-        $response->assertSee($article->title)->assertViewIs('articles')->assertOk();
+        $response->assertSee($article->title)->assertViewIs('articles')->assertStatus(200);
     }
 
     /**
@@ -114,21 +114,23 @@ class ArticleFrontendTest extends TestCase
 
         $response = $this->get('/articles/search?query='.$unpublished->title);
 
-        $response->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+        $response->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
     }
 
-//    /**
-//     * @test
-//     */
-//    public function view_all_articles_by_creator_on_the_frontpage_except_unpublished()
-//    {
-//        $account = factory('App\Model\Account')->create();
-//
-//        $article = factory('App\Model\Article')->create(['creator_id' => $account->id]);
-//        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
-//
-//        $response = $this->get('/articles/creator/'.$account->username);
-//
-//        $response->assertSee($article->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
-//    }
+    /**
+     * @test
+     */
+    public function view_all_articles_by_creator_on_the_frontpage_except_unpublished()
+    {
+        $this->markTestSkipped('Cannot query empty instance [App/Model/Categories]');
+
+        $account = factory('App\Model\Account')->create();
+
+        $article = factory('App\Model\Article')->create(['creator_id' => $account->id]);
+        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
+
+        $response = $this->get('/articles/creator/'.$account->username);
+
+        $response->assertSee($article->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertStatus(200);
+    }
 }

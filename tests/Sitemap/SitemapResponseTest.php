@@ -22,7 +22,7 @@ class SitemapResponseTest extends TestCase
      */
     public function it_creates_a_sitemap()
     {
-        $this->get('/sitemap.xml')->assertHeader('Content-type', 'text/xml; charset=UTF-8')->assertOk();
+        $this->get('/sitemap.xml')->assertHeader('Content-type', 'text/xml; charset=UTF-8')->assertStatus(200);
     }
 
     /**

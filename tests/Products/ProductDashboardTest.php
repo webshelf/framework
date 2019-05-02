@@ -26,6 +26,6 @@ class ProductDashboardTest extends TestCase
             $response->assertSee($module['title']);
         }
 
-        $response->assertOk();
+        $response->assertStatus(200);
     }
 }
