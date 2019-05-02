@@ -27,6 +27,7 @@ build:
         before:
             - chmod -R 777 storage
             - chmod -R 777 bootstrap/cache
+            - touch database/database.sqlite
             - npm run production
         override:
             -
