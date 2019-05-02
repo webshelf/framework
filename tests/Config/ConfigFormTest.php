@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Model\Configuration;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
@@ -19,7 +20,7 @@ class ConfigFormTest extends TestCase
      */
     public function settings_module_can_save_a_value()
     {
-        factory('App\Model\Configuration')->create(['key' => 'unit.name']);
+        factory(Configuration::class)->create(['key' => 'unit.name']);
 
         $this->post('/admin/settings/update', ['setting'=> ['unit.name' => 'PHP Unit Test']]);
 

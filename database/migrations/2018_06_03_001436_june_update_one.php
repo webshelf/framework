@@ -21,8 +21,8 @@ class JuneUpdateOne extends Migration
             // $table->renameColumn('seo_description', 'description');
             // $table->renameColumn('seo_keywords', 'keywords');
 
-            $table->binary('option')->after('views');
-            $table->binary('type')->after('views');
+            $table->binary('option')->after('views')->nullable();
+            $table->binary('type')->after('views')->nullable();
 
             // $table->dropColumn('editable');
             // $table->dropColumn('special');

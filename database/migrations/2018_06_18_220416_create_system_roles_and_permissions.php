@@ -2,8 +2,6 @@
 
 use App\Model\Role;
 use App\Model\Account;
-use App\Model\Article;
-use App\Model\Categories;
 use App\Classes\Roles\Developer;
 use App\Classes\StringGenerator;
 use Illuminate\Support\Facades\Schema;
@@ -21,11 +19,6 @@ class CreateSystemRolesAndPermissions extends Migration
     public function up()
     {
         Schema::table('accounts', function (Blueprint $table) {
-            $table->dropColumn('role_id');
-        });
-
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->unsignedInteger('role_id')->after('verified');
             $table->integer('login_count')->default(0);
         });
 
@@ -72,23 +65,12 @@ class CreateSystemRolesAndPermissions extends Migration
 
         (new Developer)->apply(Account::first());
 
-        $category = Categories::firstOrCreate([
-            'title' => 'General',
-            'status' => true,
-        ]);
-
-        foreach (Article::all() as $article) {
-            if (! $article->category) {
-                $article->category->save($category);
-            }
-        }
-
         Schema::table('article_categories', function (Blueprint $table) {
-            $table->string('slug')->default('general')->after('id');
+            $table->string('slug')->after('id')->change();
         });
 
         // Update indexing for model searching. (Laravel Scout)
-        \Illuminate\Support\Facades\Artisan::call('scout:mysql-index');
+        Artisan::call('scout:mysql-index');
 
         Schema::table('accounts', function (Blueprint $table) {
             $table->string('username')->after('id')->default(str_slug(Faker\Factory::create()->userName));

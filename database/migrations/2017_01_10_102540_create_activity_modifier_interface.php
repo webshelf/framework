@@ -14,6 +14,9 @@ class CreateActivityModifierInterface extends Migration
     {
         \Schema::table('pages', function (Blueprint $table) {
             $table->dropColumn('publisher_id');
+        });
+
+        \Schema::table('pages', function (Blueprint $table) {
             $table->unsignedInteger('creator_id')->default(1)->after('editable');
             $table->unsignedInteger('editor_id')->default(1)->after('creator_id');
         });

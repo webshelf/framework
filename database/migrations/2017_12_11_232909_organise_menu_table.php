@@ -16,15 +16,41 @@ class OrganiseMenuTable extends Migration
     {
         Schema::table('menus', function (Blueprint $table) {
             $table->dropColumn('slug');
-            $table->dropColumn('icon');
+        });
 
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn('icon');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('link', 'hyperlink');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('page_id', 'page_id');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('menu_id', 'parent_id');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('order_id', 'order');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('required', 'lock');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('enabled', 'status');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('editor_id', 'editor_id');
+        });
+
+        Schema::table('menus', function (Blueprint $table) {
             $table->renameColumn('creator_id', 'creator_id');
         });
 

@@ -4,6 +4,7 @@
 /public/storage
 /public/.tmb/
 /public/packages/
+/database/database.sqlite
 /storage/*.key
 /storage/google
 /vendor
