@@ -117,18 +117,20 @@ class ArticleFrontendTest extends TestCase
         $response->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
     }
 
-//    /**
-//     * @test
-//     */
-//    public function view_all_articles_by_creator_on_the_frontpage_except_unpublished()
-//    {
-//        $account = factory('App\Model\Account')->create();
-//
-//        $article = factory('App\Model\Article')->create(['creator_id' => $account->id]);
-//        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
-//
-//        $response = $this->get('/articles/creator/'.$account->username);
-//
-//        $response->assertSee($article->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
-//    }
+    /**
+     * @test
+     */
+    public function view_all_articles_by_creator_on_the_frontpage_except_unpublished()
+    {
+        $this->markTestSkipped('Cannot query empty instance [App/Model/Categories]');
+
+        $account = factory('App\Model\Account')->create();
+
+        $article = factory('App\Model\Article')->create(['creator_id' => $account->id]);
+        $unpublished = factory('App\Model\Article')->create(['unpublish_date' => Carbon::now()]);
+
+        $response = $this->get('/articles/creator/'.$account->username);
+
+        $response->assertSee($article->title)->assertDontSee($unpublished->title)->assertViewIs('articles')->assertOk();
+    }
 }
