@@ -2,10 +2,10 @@
 
 namespace Tests\Sitemap;
 
-use App\Modules\Pages\Model\PageOptions;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Modules\Pages\Model\PageOptions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
  * Class SitemapResponseTest.
