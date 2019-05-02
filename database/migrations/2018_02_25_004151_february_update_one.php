@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Model\Categories;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class FebruaryUpdateOne extends Migration
 {
@@ -15,8 +16,25 @@ class FebruaryUpdateOne extends Migration
     {
         Schema::table('plugins', function (Blueprint $table) {
             $table->dropColumn('version');
+        });
+
+        Schema::table('plugins', function (Blueprint $table) {
             $table->dropColumn('icon');
         });
+
+        Schema::create('article_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug');
+            $table->string('title');
+            $table->boolean('status')->default(1);
+            $table->integer('editor_id');
+            $table->integer('creator_id');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+
+        Categories::create(['slug' => 'general', 'title' => 'General', 'status' => true, 'editor_id' => 1, 'creator_id' => 1]);
 
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
@@ -26,20 +44,10 @@ class FebruaryUpdateOne extends Migration
             $table->string('featured_img')->nullable();
             $table->integer('views')->default(0);
             $table->integer('sitemap')->default(1);
-            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('category_id')->default(1);
             $table->integer('editor_id');
             $table->integer('creator_id');
             $table->boolean('status')->default(1);
-            $table->softDeletes();
-            $table->timestamps();
-        });
-
-        Schema::create('article_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->boolean('status')->default(1);
-            $table->integer('editor_id');
-            $table->integer('creator_id');
             $table->softDeletes();
             $table->timestamps();
         });

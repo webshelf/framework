@@ -1,11 +1,11 @@
 <?php
 
 use App\Model\Page;
-use App\Modules\Pages\Model\PageTypes;
-use Illuminate\Support\Facades\Schema;
 use App\Modules\Pages\Model\PageOptions;
-use Illuminate\Database\Schema\Blueprint;
+use App\Modules\Pages\Model\PageTypes;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class JuneUpdateOne extends Migration
 {
@@ -21,8 +21,8 @@ class JuneUpdateOne extends Migration
             // $table->renameColumn('seo_description', 'description');
             // $table->renameColumn('seo_keywords', 'keywords');
 
-            $table->binary('option')->after('views');
-            $table->binary('type')->after('views');
+            $table->binary('option')->after('views')->nullable();
+            $table->binary('type')->after('views')->nullable();
 
             // $table->dropColumn('editable');
             // $table->dropColumn('special');

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateActivityModifierInterface extends Migration
 {
@@ -14,6 +14,9 @@ class CreateActivityModifierInterface extends Migration
     {
         \Schema::table('pages', function (Blueprint $table) {
             $table->dropColumn('publisher_id');
+        });
+
+        \Schema::table('pages', function (Blueprint $table) {
             $table->unsignedInteger('creator_id')->default(1)->after('editable');
             $table->unsignedInteger('editor_id')->default(1)->after('creator_id');
         });

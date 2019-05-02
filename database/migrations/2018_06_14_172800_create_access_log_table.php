@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAccessLogTable extends Migration
 {
@@ -23,7 +23,13 @@ class CreateAccessLogTable extends Migration
 
         Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn('ip_address');
+        });
+
+        Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn('login_count');
+        });
+
+        Schema::table('accounts', function (Blueprint $table) {
             $table->string('surname')->nullable()->change();
         });
     }

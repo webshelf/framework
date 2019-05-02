@@ -2,17 +2,18 @@
 
 namespace Tests;
 
-use Mockery;
-use Faker\Factory;
-use App\Model\Account;
 use App\Exceptions\Handler;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Mockery;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    use RefreshDatabase;
 
     protected function setUp()
     {

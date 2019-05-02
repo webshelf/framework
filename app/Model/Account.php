@@ -8,12 +8,12 @@
 
 namespace App\Model;
 
-use Carbon\Carbon;
-use App\Model\Concerns\ActivityFeed;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Classes\Roles\Interfaces\RoleInterface;
 use App\Classes\Roles\Exceptions\InvalidRoleType;
+use App\Classes\Roles\Interfaces\RoleInterface;
+use App\Model\Concerns\ActivityFeed;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -204,7 +204,7 @@ class Account extends Authenticatable
      */
     public function articles()
     {
-        return $this->hasMany('App\Model\Article', 'creator_id')->latest('created_at');
+        return $this->hasMany(Article::class, 'creator_id', 'id');
     }
 
     /**

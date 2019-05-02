@@ -1,6 +1,7 @@
 <?php
 
 use App\Classes\Roles\Administrator;
+use App\Model\Categories;
 use App\Modules\Pages\Model\PageOptions;
 use App\Modules\Pages\Model\PageTypes;
 use Faker\Generator as Faker;
@@ -18,7 +19,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Model\Account::class, function (Faker $faker) {
     return [
-        'username' => $faker->userName,
         'forename' => $faker->firstName,
         'surname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
@@ -75,7 +75,7 @@ $factory->define(App\Model\Article::class, function (Faker $faker) {
         'unpublish_date' => null,
         'views' => $faker->numberBetween(100, 9999),
         'sitemap' => true,
-        'category_id' => factory('App\Model\Categories')->create()->id,
+        'category_id' => factory(Categories::class)->create()->id,
         'editor_id' => $creator->id,
         'creator_id' => $creator->id,
         'status' => true,
