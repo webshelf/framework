@@ -1,13 +1,13 @@
 <?php
 
+use App\Model\Role;
+use App\Model\Account;
 use App\Classes\Roles\Developer;
 use App\Classes\StringGenerator;
-use App\Model\Account;
-use App\Model\Role;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateSystemRolesAndPermissions extends Migration
 {
@@ -75,7 +75,6 @@ class CreateSystemRolesAndPermissions extends Migration
         Schema::table('accounts', function (Blueprint $table) {
             $table->string('username')->after('id')->default(str_slug(Faker\Factory::create()->userName));
         });
-
 
         foreach (Account::all() as $account) {
             $account->update(['username' => StringGenerator::stripEmail($account->email)]);
