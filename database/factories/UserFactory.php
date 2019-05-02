@@ -1,9 +1,9 @@
 <?php
 
-use Faker\Generator as Faker;
 use App\Classes\Roles\Administrator;
-use App\Modules\Pages\Model\PageTypes;
 use App\Modules\Pages\Model\PageOptions;
+use App\Modules\Pages\Model\PageTypes;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +98,16 @@ $factory->define(App\Model\Categories::class, function (Faker $faker) {
         'deleted_at' => null,
         'created_at' => $faker->dateTimeBetween('-12 months'),
         'updated_at' => $faker->dateTimeBetween('-5 months'),
+    ];
+});
+
+$factory->define(\App\Model\Menu::class, function (Faker $faker) {
+    return [
+        'title' => $faker->word,
+        'target' => $faker->randomElement(['_self', '_blank']),
+        'status' => true,
+        'lock' => false,
+        'page_id' => factory(\App\Model\Page::class)->create()->getKey(),
     ];
 });
 

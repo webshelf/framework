@@ -8,9 +8,9 @@
 
 namespace App\Classes\Library\PageLoader\Coordinators;
 
+use App\Classes\Breadcrumbs;
 use App\Model\Menu;
 use App\Model\Page;
-use App\Classes\Breadcrumbs;
 use Illuminate\Support\Collection;
 
 /**
@@ -68,18 +68,17 @@ class Navigation
             foreach ($menu->children as $submenu) {
                 if ($this->isCurrent($submenu)) {
                     $this->setActiveMenu($submenu);
-
                     break;
                 }
             }
 
             if ($this->hasActiveMenu()) {
                 $menu->active = true;
-
                 break;
-            } elseif ($this->isCurrent($menu)) {
-                $this->setActiveMenu($menu);
+            }
 
+            if ($this->isCurrent($menu)) {
+                $this->setActiveMenu($menu);
                 break;
             }
         }

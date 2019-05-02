@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <p>{!!  $webpage->content() !!}</p>
+        <p>{!! $webpage->content() !!}</p>
         {{ debugVar($webpage) }}
     </div>
 
