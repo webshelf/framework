@@ -13,7 +13,7 @@ use App\Model\Link;
 use App\Model\Menu;
 use Illuminate\Http\Request;
 use App\Modules\ModuleEngine;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\RedirectResponse;
 use App\Classes\Repositories\LinkRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
@@ -80,13 +80,11 @@ class BackendController extends ModuleEngine
      * External or Internal Hyperlinks and connections.
      *
      * @param Menu $menu
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request, Menu $menu)
     {
-        $request->validate(['title' => 'min:3|max:255|unique:menus,title,NULL,id,deleted_at,NULL|required']);
-
         $this->save($request, $menu);
 
         return redirect()->route('admin.navigation.index');
@@ -125,8 +123,6 @@ class BackendController extends ModuleEngine
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['title' => ['min:3|max:255|required', Rule::unique('menus')->ignore($id)]]);
-
         $menu = $this->menus->whereID($id);
 
         $this->save($request, $menu);
@@ -185,7 +181,9 @@ class BackendController extends ModuleEngine
      */
     private function save(Request $request, Menu $menu)
     {
-        $this->validate($request, ['title => required|min:3|max:255']);
+        $this->validate($request, [
+            'title' => 'min:3|max:255|required|unique:menus,title,NULL,id,deleted_at,NULL',
+        ]);
 
         DB::transaction(function () use ($request, $menu) {
             if ($request['linkable_object']) {

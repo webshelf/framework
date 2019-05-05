@@ -7,7 +7,7 @@ use App\Model\Menu;
 /**
  * Class NavigationTest.
  */
-class NavigationTest extends TestCase
+class NavigationModelTest extends TestCase
 {
     /**
      * @test
