@@ -2,20 +2,17 @@
 
 namespace Tests\Modules;
 
+use Carbon\Carbon;
 use App\Model\Menu;
 use App\Model\Page;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
- * Class NavigationBackendTest
- *
- * @package Tests\Modules
+ * Class NavigationBackendTest.
  */
 class NavigationBackendTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**
@@ -67,5 +64,4 @@ class NavigationBackendTest extends TestCase
         // assert the database has the changed details.
         $this->assertDatabaseHas('menus', ['title' => 'foo', 'id' => $current_menu->getKey()]);
     }
-
 }

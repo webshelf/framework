@@ -8,15 +8,15 @@
 
 namespace App\Modules\Navigation;
 
+use DB;
+use App\Model\Link;
+use App\Model\Menu;
+use Illuminate\Http\Request;
+use App\Modules\ModuleEngine;
+use Illuminate\Http\RedirectResponse;
 use App\Classes\Repositories\LinkRepository;
 use App\Classes\Repositories\MenuRepository;
 use App\Classes\Repositories\PageRepository;
-use App\Model\Link;
-use App\Model\Menu;
-use App\Modules\ModuleEngine;
-use DB;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class Controller.
@@ -182,7 +182,7 @@ class BackendController extends ModuleEngine
     private function save(Request $request, Menu $menu)
     {
         $this->validate($request, [
-            'title' => 'min:3|max:255|required|unique:menus,title,NULL,id,deleted_at,NULL'
+            'title' => 'min:3|max:255|required|unique:menus,title,NULL,id,deleted_at,NULL',
         ]);
 
         DB::transaction(function () use ($request, $menu) {
