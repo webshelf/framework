@@ -1,4 +1,5 @@
 import Axios from "axios";
+import iziToast from "izitoast";
 
 $(document).ready(function () {
 
@@ -17,10 +18,16 @@ $(document).ready(function () {
             Axios.post(url,{_method: 'delete'})
                 .then(function (response) {
                     element.closest('.row').hide();
-                    // console.log(response);
+                    iziToast.success({
+                        title: 'OK',
+                        message: 'Successfully removed this record!',
+                    });
                 })
                 .catch(function (error) {
-                    // console.log(error);
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'Could not remove this record!',
+                    });
                 });
         }
 
