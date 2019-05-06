@@ -98,7 +98,7 @@ return [
         'enabled' => true,
         'icon'  => 'fas fa-globe',
         'version' => '1.0',
-        'url'   => 'admin/sitemap',
+        'url'   => 'sitemap.xml',
         'role'  => 'developer',
     ],
 
