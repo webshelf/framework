@@ -240,7 +240,10 @@ header {
 
             li {
               flex: 1;
-              a{
+              display: flex;
+              a, button {
+                flex: 1;
+                cursor: pointer;
                 color: #2e2e2e;
                 display: -webkit-box;
                 display: -ms-flexbox;

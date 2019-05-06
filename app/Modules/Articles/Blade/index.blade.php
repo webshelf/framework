@@ -50,7 +50,9 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ route('admin.articles.edit', $article->slug) }}">Edit</a></li>
                         @if ($article->isPublished()) <li><a href="{{ url($article->route()) }}">View</a></li> @endif
-                        <li><a href="{{ route('admin.articles.destroy', $article->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this article?" data-method="delete">Delete</a></li>
+                        <li>
+                            <button href="{{ route('admin.articles.destroy', $article->slug) }}" data-type="deletion" data-confirm="Are you sure you want to delete this article?">Delete</button>
+                        </li>
                     </ul>
                 </div>
 

@@ -26,7 +26,7 @@ require('./datetime');
 require('./search-tables');
 
 // alerts for deleting stuff.
-require('./alerts');
+require('./user-actions');
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
