@@ -55,7 +55,7 @@
 
             <div class="stats">
                 <div class="timestamp">
-                    Last Logged IP: {{ optional(AccessLog::latestAttemptFrom($account))->ip_address ?? 'Never' }}
+                    Last Logged IP: {{ optional(\App\Model\AccessLog::latestAttemptFrom($account))->ip_address ?? 'Never' }}
                 </div>
                 <div class="views">
                     Last Login: {{ optional($account->last_login)->diffForHumans() ?? 'Never' }}

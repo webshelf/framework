@@ -259,11 +259,11 @@ class Account extends Authenticatable
     {
         if (is_string($role)) {
             $class = sprintf('App\Classes\Roles\%s', $role);
-
             return $this->setRole(app()->make($class));
         }
 
         if ($role instanceof RoleInterface) {
+            $role->apply($this);
             return $role->apply($this);
         }
 

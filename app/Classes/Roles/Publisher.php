@@ -26,7 +26,7 @@ class Publisher implements RoleInterface
      */
     public function apply(Account $account)
     {
-        return $account->update(['role_id' => self::$key]);
+        return $account->setAttribute('role_id', self::$key);
     }
 
     /**
