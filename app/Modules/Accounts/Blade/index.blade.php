@@ -1,6 +1,6 @@
 @extends('dashboard::frame')
 
-<?php use App\Model\AccessLog; ?>
+<?php  ?>
 
 @section('title')
     Account Management
@@ -47,7 +47,9 @@
             <div class="console">
                 <ul class="list-unstyled">
                     <li><a href="{{ route('admin.accounts.edit', $account->id) }}">Edit</a></li>
-                    <li><a href="{{ route('admin.accounts.destroy', $account->id) }}" data-type="alert" data-confirm="Are you sure you want to remove this account?" data-method="delete">Remove</a></li>
+                    <li>
+                        <button href="{{ route('admin.accounts.destroy', $account->id) }}" data-type="deletion" data-confirm="Are you sure you want to remove this account?">Remove</button>
+                    </li>
                 </ul>
             </div>
 

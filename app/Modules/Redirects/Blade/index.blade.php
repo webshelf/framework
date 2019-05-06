@@ -44,7 +44,9 @@
                 <div class="console">
                     <ul class="list-unstyled">
                         <li><a href="{{ route('admin.redirects.edit', ['name' => $redirect->id]) }}">Edit</a></li>
-                        <li><a href="{{ route('admin.redirects.destroy', ['menu' => $redirect->id]) }}" data-type="alert" data-confirm="Are you sure you want to remove this menu?" data-method="delete">Remove</a></li>
+                        <li>
+                            <button href="{{ route('admin.redirects.destroy', ['menu' => $redirect->id]) }}" data-type="deletion" data-confirm="Are you sure you want to remove this menu?">Remove</button>
+                        </li>
                     </ul>
                 </div>
 

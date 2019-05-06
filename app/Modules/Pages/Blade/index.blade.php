@@ -69,7 +69,7 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ route('admin.pages.edit', $page->slug) }}">Edit</a></li>
                         <li><a href="{{ url($page->route()) }}">View</a></li>
-                        <li><a href="{{ route('admin.pages.destroy', $page->slug) }}" data-type="alert" data-confirm="Are you sure you want to delete this page?" data-method="delete">Delete</a></li>
+                        <li><button href="{{ route('admin.pages.destroy', $page->slug) }}" data-type="deletion" data-confirm="Are you sure you want to delete this page?">Delete</button></li>
                     </ul>
                 </div>
 
