@@ -8,7 +8,7 @@ return [
         'icon' => 'fas fa-box',
         'version' => '1.0',
         'url' => 'admin/products',
-        'role' => 'publisher',
+        'role' => 'developer',
     ],
 
     'navigation' => [

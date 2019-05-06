@@ -264,6 +264,8 @@ class Account extends Authenticatable
         }
 
         if ($role instanceof RoleInterface) {
+            $role->apply($this);
+
             return $role->apply($this);
         }
 

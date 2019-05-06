@@ -40,7 +40,7 @@ class ArticleRepository extends BaseRepository
      */
     public function all()
     {
-        return $this->model->withoutGlobalScope('public')->all();
+        return $this->model->all();
     }
 
     public function whereSitemappable()

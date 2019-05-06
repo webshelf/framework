@@ -13,10 +13,10 @@ class AccountRoleTest extends TestCase
      */
     public function a_developer_obtains_role_of_administrator()
     {
-        $developer = factory('App\Model\Account')->make();
+        $account = factory('App\Model\Account')->make();
 
-        $developer->setRole(new Developer);
+        $account->setRole(new Developer);
 
-        $this->assertTrue($developer->hasRole(new Administrator));
+        $this->assertTrue($account->hasRole(new Administrator));
     }
 }

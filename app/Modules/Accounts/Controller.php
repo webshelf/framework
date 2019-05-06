@@ -159,10 +159,11 @@ class Controller extends ModuleEngine
             $account->password = $request->input('password');
         }
 
-        $account->save();
-
         // assign the role from the request.
         $account->setRole($request->input('role'));
+
+        // save the new account.
+        $account->save();
 
         // return the data that was created.
         return $account;
