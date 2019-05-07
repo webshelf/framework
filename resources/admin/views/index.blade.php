@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <?php use App\Model\AccessLog; ?>
+    <?php  ?>
 
     <div class="dashboard">
             <div class="panel" id="welcome">
@@ -53,21 +53,25 @@
 
                         @foreach ($activities as $activity)
 
-                        <div class="row">
+                            @if ($activity->causer && $activity->subject)
+
+                                <div class="row">
 
                                 <span class="avatar-radius-50">
                                     <img src="{{ $activity->causer->avatar }}" alt="{{ $activity->causer->fullName() }} Image">
                                 </span>
 
-                                <div class="event">
-                                    <div class="title">{{ $activity->causer->fullName() }}</span> {{ $activity->description }} {{ ucfirst($activity->subject->table) }}</div>
-                                    <div class="description">Activity Logged @ {{ $activity->created_at }}</div>
+                                    <div class="event">
+                                        <div class="title">{{ $activity->causer->fullName() }} {{ $activity->description }} {{ ucfirst($activity->subject->table) }}</div>
+                                        <div class="description">Activity Logged @ {{ $activity->created_at }}</div>
+                                    </div>
+
+                                    <div class="details">
+                                        {{ $activity->created_at->diffForHumans() }}
+                                    </div>
                                 </div>
-        
-                                <div class="details">
-                                    {{ $activity->created_at->diffForHumans() }}
-                                </div>
-                        </div>
+
+                            @endif
 
                         @endforeach
 
