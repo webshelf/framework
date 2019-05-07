@@ -11,7 +11,7 @@
         
                 <p>Welcome back to Webshelf CMS, Your last sign in was</p>
         
-                <p class="last-login">{{  AccessLog::latestAttemptFrom(account())->created_at->format('D, M dS, Y, H:i') }}</p>
+                <p class="last-login">{{  \App\Model\AccessLog::latestAttemptFrom(account())->created_at->format('D, M dS, Y, H:i') }}</p>
         
                 <a href="https://github.com/webshelf/framework/issues">View Platform Issue Tracker</a>
         
